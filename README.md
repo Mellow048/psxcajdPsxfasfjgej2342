@@ -52,6 +52,19 @@ Open <http://localhost:8000/> in a WebGL 2 browser. No build, installation, micr
 
 Scene templates and resources are owned by one episode. Only referenced models are loaded; all shots are prepared before playback to avoid network waits at cuts. Geometry/materials/textures are shared between clones. Disposal deduplicates shared GPU resources, releases skeletons and mixers, and clears audio buffers on successful replacement. Very large packs (notably Pizzeria) can take significant GPU memory: prefer named props and short episodes, or optimize large source packs before deploying on mobile. Selecting one GLB mesh still downloads the whole GLB.
 
+## Music and voice
+
+The two demo episodes use the auditioned US-English narrator, each in one continuous take. Their `voiceover` files take precedence over offline synthesis. For new prose, remove `voiceover`: the keyless fallback now uses the masculine RMS voice at a quicker default pace. The offline voice is not a clone of the auditioned voice.
+
+**Neon Current** is an original 128 BPM synth score: syncopated bass, FM plucks, kick, snare and lightly swung hats. The Python standard library synthesizes all instruments and wraps the echo tails into an eight-bar loop. No samples, pip packages or music service are required.
+
+```sh
+python3 scripts/score.py                          # reproduce episodes/neon-current.wav
+python3 scripts/score.py episodes/remix.wav --bpm 136 --seed 23
+```
+
+Use `"music": {"track":"episodes/neon-current.wav","volume":0.26}` in a script. Music loops on the episode clock (including after scrubs), automatically dips under dialogue, and ends with a short fade. Set volume to zero to silence it. This mix is used by both the editor and GitHub rendering.
+
 ## Inventory and checks
 
 ```sh
@@ -59,7 +72,7 @@ python3 scripts/catalog.py  # refresh catalog + raw inventory after importing as
 npm test                    # Node 18+; no dependencies
 ```
 
-Inspect new rig families before reusing clips: name matching is **not** general IK or cross-species retargeting. See the guide for the exact keys supported by this checkout. Imported DAE, Blender and backup files are inventoried for authors, not runtime formats. `SoundEffects/` was absent; current cues are synthesized. Legacy missing external texture references fall back to a neutral checker; GLBs have embedded textures and are preferred. Asset licenses are not inferred from the folder names; verify publishing rights to supplied packs separately. Vendored Three.js retains its license. Text-only narration uses bundled CMU Flite (English SLT) in a worker; no API key or network service. It loads a ~14 MB compressed engine on first synthesis. `voiceover` bypasses that download. Both playback and export decode and schedule one full take, independent of captions, cuts and timed prop events. For a human performance, supply a recorded take rather than changing subtitle timings. See `vendor/flite/` for licenses. To bake the same synthesized WAV ahead of time: `npm run narrate -- episodes/night-window.json my-take.wav`.
+Inspect new rig families before reusing clips: name matching is **not** general IK or cross-species retargeting. See the guide for the exact keys supported by this checkout. Imported DAE, Blender and backup files are inventoried for authors, not runtime formats. `SoundEffects/` was absent; current cues are synthesized. Legacy missing external texture references fall back to a neutral checker; GLBs have embedded textures and are preferred. Asset licenses are not inferred from the folder names; verify publishing rights to supplied packs separately. Vendored Three.js retains its license. Text-only narration uses bundled CMU Flite (US English RMS, 1.08× pace) in a worker; no API key or network service. It loads a ~14 MB compressed engine on first synthesis. `voiceover` bypasses that download. Both playback and export decode and schedule one full take, independent of captions, cuts and timed prop events. For a human performance, supply a recorded take rather than changing subtitle timings. See `vendor/flite/` for licenses. To bake the same synthesized WAV ahead of time: `npm run narrate -- episodes/night-window.json my-take.wav`.
 
 Visit `http://localhost:8000/tests/browser.html` for automated WebGL integration checks (deterministic seeking, real rigs/prop selection, failed reload rollback and stable GPU counts).
 

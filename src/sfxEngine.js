@@ -1,7 +1,11 @@
 import { SFX_MANIFEST } from "./config.js";
+import { bedAutomation } from "./musicBed.js";
+import { DEFAULT_SPEECH_RATE } from "./voiceProfile.js";
 const voiceKey = (e) =>
   e.voiceover ||
-  (e.narration ? `tts:${e.speechRate ?? 1}:${e.narration}` : null);
+  (e.narration
+    ? `tts:${e.speechRate ?? DEFAULT_SPEECH_RATE}:${e.narration}`
+    : null);
 export class SfxEngine {
   constructor() {
     this.nodes = new Set();
@@ -45,9 +49,11 @@ export class SfxEngine {
       this.buffers.set(voiceKey(e), await this.ctx.decodeAudioData(wav));
     }
     for (const url of new Set(
-      [e.voiceover, ...e.shots.map((s) => SFX_MANIFEST[s.sfx])].filter(
-        (v) => v && v !== "synth",
-      ),
+      [
+        e.voiceover,
+        e.music?.track,
+        ...e.shots.map((s) => SFX_MANIFEST[s.sfx]),
+      ].filter((v) => v && v !== "synth"),
     ))
       await this.buffer(url);
     const take = this.buffers.get(voiceKey(e));
@@ -76,6 +82,26 @@ export class SfxEngine {
     n.buffer = b;
     this.track(n, this.ctx.createGain());
     n.start(when, offset);
+  }
+  musicBed(music, voice, now, offset, end) {
+    const volume = music.volume ?? 0.26,
+      duration = end - offset;
+    if (volume === 0 || duration <= 0) return;
+    const buffer = this.buffers.get(music.track);
+    if (!buffer?.duration)
+      throw Error("Music was not prepared: " + music.track);
+    const n = this.ctx.createBufferSource(),
+      gain = this.ctx.createGain();
+    n.buffer = buffer;
+    n.loop = true;
+    gain.gain.setValueCurveAtTime(
+      bedAutomation(volume, offset, end, voice),
+      now,
+      duration,
+    );
+    this.track(n, gain);
+    n.start(now, offset % buffer.duration);
+    n.stop(now + duration);
   }
   tone(key, when) {
     const c = this.ctx,
@@ -118,7 +144,9 @@ export class SfxEngine {
       }
       t += s.duration;
     }
-    if (e.beat)
+    if (e.music)
+      this.musicBed(e.music, this.buffers.get(voiceKey(e)), now, offset, t);
+    if (e.beat && !e.music)
       for (let i = Math.ceil(offset / 0.5) * 0.5; i < t; i += 0.5)
         this.tone("beat", now + i - offset);
   }

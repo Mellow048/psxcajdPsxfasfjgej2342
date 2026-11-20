@@ -12,6 +12,11 @@ const obj = (v) => v && typeof v === "object" && !Array.isArray(v),
   num = Number.isFinite,
   vec = (v) => Array.isArray(v) && v.length === 3 && v.every(num),
   has = (o, k) => typeof k === "string" && Object.hasOwn(o, k);
+const audioPath = (v) =>
+  str(v) &&
+  /^[\w /.-]+\.(wav|ogg|mp3|m4a)$/i.test(v) &&
+  !v.startsWith("/") &&
+  !v.includes("..");
 export function validate(e) {
   let at = "episode";
   const check = (v, msg) => {
@@ -23,7 +28,10 @@ export function validate(e) {
       check(list.split(" ").includes(k), "unknown field " + k);
   };
   if (Array.isArray(e)) e = { version: 3, title: "Untitled Short", shots: e };
-  keys(e, "version title series narration voiceover speechRate beat shots");
+  keys(
+    e,
+    "version title series narration voiceover speechRate beat music shots",
+  );
   check(e.version === 3 && str(e.title), "version: 3 and a title required");
   check(e.series === undefined || str(e.series), "invalid series");
   check(
@@ -38,13 +46,21 @@ export function validate(e) {
     "narration must be prose (1–6000 characters); use voiceover for a recording",
   );
   check(
-    e.voiceover === undefined ||
-      (str(e.voiceover) &&
-        /^[\w /.-]+\.(wav|ogg|mp3|m4a)$/i.test(e.voiceover) &&
-        !e.voiceover.startsWith("/") &&
-        !e.voiceover.includes("..")),
+    e.voiceover === undefined || audioPath(e.voiceover),
     "voiceover must be a relative audio file",
   );
+  if (e.music !== undefined) {
+    keys(e.music, "track volume");
+    check(
+      audioPath(e.music.track),
+      "music.track must be a relative audio file",
+    );
+    check(
+      e.music.volume === undefined ||
+        (num(e.music.volume) && e.music.volume >= 0 && e.music.volume <= 1),
+      "music.volume must be 0–1",
+    );
+  }
   check(
     e.speechRate === undefined ||
       (num(e.speechRate) && e.speechRate >= 0.75 && e.speechRate <= 1.5),

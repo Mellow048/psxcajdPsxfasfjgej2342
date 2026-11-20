@@ -6,7 +6,8 @@ import {
   ConsoleStdout,
   PreopenDirectory,
 } from "../vendor/flite/wasi/index.js";
-export async function synthesizeTake(module, text, rate = 1) {
+import { DEFAULT_SPEECH_RATE, OFFLINE_VOICE } from "./voiceProfile.js";
+export async function synthesizeTake(module, text, rate = DEFAULT_SPEECH_RATE) {
   const wav = new File([]),
     errors = [];
   const script = new File(
@@ -15,7 +16,7 @@ export async function synthesizeTake(module, text, rate = 1) {
   const args = [
     "flite",
     "-voice",
-    "slt",
+    OFFLINE_VOICE,
     "--setf",
     `duration_stretch=${1 / rate}`,
     "-f",
@@ -45,7 +46,7 @@ export async function synthesizeTake(module, text, rate = 1) {
     throw Error(`Narration synthesis failed: ${errors.join(" ") || status}`);
   return wav.data.slice().buffer;
 }
-export function renderNarration(text, rate = 1) {
+export function renderNarration(text, rate = DEFAULT_SPEECH_RATE) {
   const worker = new Worker(new URL("./narrationWorker.js", import.meta.url), {
     type: "module",
   });

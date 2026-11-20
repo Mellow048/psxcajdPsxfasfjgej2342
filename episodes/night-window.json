@@ -2,7 +2,7 @@
   "title": "Why windows become mirrors at night",
   "version": 3,
   "series": "Everyday optics",
-  "beat": true,
+  "beat": false,
   "narration": "Why does this window turn into a mirror after dark? The glass hasn't changed at all. Two paths of light reach your eyes at the same time. Light from outside passes through the pane, while some of the light inside your room bounces back. By day, the view outside is so much brighter that your reflection almost disappears. But after sunset the street gets dark, and the lamp behind you still lights your face. Now the reflection wins. That's you looking back from the glass! Switch off the lamp and watch yourself fade. Same window, completely different balance of light.",
   "shots": [
     {
@@ -24,29 +24,34 @@
       ],
       "captions": [
         {
-          "time": 0.224,
+          "time": 0.14,
           "text": "Why does",
           "highlight": "does"
         },
         {
-          "time": 0.678,
+          "time": 0.55,
           "text": "this window",
           "highlight": "window"
         },
         {
-          "time": 1.282,
+          "time": 1.05,
           "text": "turn into",
           "highlight": "turn"
         },
         {
-          "time": 1.759,
+          "time": 1.49,
           "text": "a mirror",
           "highlight": "mirror"
         },
         {
-          "time": 2.157,
+          "time": 1.79,
           "text": "after dark?",
           "highlight": "after"
+        },
+        {
+          "time": 3.0,
+          "text": "The glass",
+          "highlight": "glass"
         }
       ],
       "sfx": "whoosh",
@@ -71,24 +76,24 @@
       "props": [],
       "captions": [
         {
-          "time": 0.001,
-          "text": "The glass",
-          "highlight": "glass"
-        },
-        {
-          "time": 0.554,
+          "time": 0.17,
           "text": "hasn't changed",
           "highlight": "changed"
         },
         {
-          "time": 1.405,
+          "time": 0.79,
           "text": "at all.",
           "highlight": "all."
         },
         {
-          "time": 2.211,
+          "time": 1.6,
           "text": "Two paths",
           "highlight": "paths"
+        },
+        {
+          "time": 2.08,
+          "text": "of light",
+          "highlight": "light"
         }
       ],
       "sfx": "click",
@@ -125,28 +130,28 @@
       "captions": [
         {
           "time": 0.0,
-          "text": "Two paths",
-          "highlight": "paths"
-        },
-        {
-          "time": 0.561,
           "text": "of light",
           "highlight": "light"
         },
         {
-          "time": 0.948,
+          "time": 0.493,
           "text": "reach your eyes",
           "highlight": "reach"
         },
         {
-          "time": 1.707,
+          "time": 1.223,
           "text": "at the",
           "highlight": "the"
         },
         {
-          "time": 1.912,
+          "time": 1.363,
           "text": "same time.",
           "highlight": "time."
+        },
+        {
+          "time": 2.473,
+          "text": "Light from outside",
+          "highlight": "outside"
         }
       ],
       "sfx": "riser",
@@ -188,21 +193,16 @@
       "captions": [
         {
           "time": 0.0,
-          "text": "same time.",
-          "highlight": "time."
-        },
-        {
-          "time": 0.21,
           "text": "Light from outside",
           "highlight": "outside"
         },
         {
-          "time": 1.158,
+          "time": 0.47,
           "text": "passes through",
           "highlight": "through"
         },
         {
-          "time": 1.746,
+          "time": 1.22,
           "text": "the pane,",
           "highlight": "pane,"
         }
@@ -264,17 +264,17 @@
           "highlight": "pane,"
         },
         {
-          "time": 0.343,
+          "time": 0.3,
           "text": "while some",
           "highlight": "while"
         },
         {
-          "time": 0.77,
+          "time": 0.7,
           "text": "of the light",
           "highlight": "light"
         },
         {
-          "time": 1.31,
+          "time": 1.13,
           "text": "inside your room",
           "highlight": "inside"
         }
@@ -324,19 +324,14 @@
       "props": [],
       "captions": [
         {
-          "time": 0.145,
+          "time": 0.0,
           "text": "bounces back.",
           "highlight": "bounces"
         },
         {
-          "time": 1.364,
+          "time": 1.23,
           "text": "By day,",
           "highlight": "day,"
-        },
-        {
-          "time": 1.96,
-          "text": "the view outside",
-          "highlight": "outside"
         }
       ],
       "sfx": "click",
@@ -377,23 +372,23 @@
       "captions": [
         {
           "time": 0.0,
+          "text": "By day,",
+          "highlight": "day,"
+        },
+        {
+          "time": 0.34,
           "text": "the view outside",
           "highlight": "outside"
         },
         {
-          "time": 0.723,
+          "time": 1.21,
           "text": "is so much",
           "highlight": "much"
         },
         {
-          "time": 1.301,
+          "time": 1.81,
           "text": "brighter that",
           "highlight": "brighter"
-        },
-        {
-          "time": 1.91,
-          "text": "your reflection",
-          "highlight": "reflection"
         }
       ],
       "sfx": "riser",
@@ -423,11 +418,16 @@
       "captions": [
         {
           "time": 0.0,
+          "text": "brighter that",
+          "highlight": "brighter"
+        },
+        {
+          "time": 0.55,
           "text": "your reflection",
           "highlight": "reflection"
         },
         {
-          "time": 0.648,
+          "time": 1.26,
           "text": "almost disappears.",
           "highlight": "disappears."
         }
@@ -455,17 +455,22 @@
       "props": [],
       "captions": [
         {
-          "time": 0.002,
+          "time": 0.0,
+          "text": "almost disappears.",
+          "highlight": "disappears."
+        },
+        {
+          "time": 0.473,
           "text": "But after sunset",
           "highlight": "sunset"
         },
         {
-          "time": 1.011,
+          "time": 1.553,
           "text": "the street",
           "highlight": "street"
         },
         {
-          "time": 1.397,
+          "time": 1.943,
           "text": "gets dark,",
           "highlight": "dark,"
         }
@@ -514,22 +519,27 @@
       ],
       "captions": [
         {
-          "time": 0.007,
+          "time": 0.0,
+          "text": "gets dark,",
+          "highlight": "dark,"
+        },
+        {
+          "time": 0.657,
           "text": "and the lamp",
           "highlight": "lamp"
         },
         {
-          "time": 0.602,
+          "time": 1.117,
           "text": "behind you",
           "highlight": "behind"
         },
         {
-          "time": 1.074,
+          "time": 1.557,
           "text": "still lights",
           "highlight": "lights"
         },
         {
-          "time": 1.816,
+          "time": 2.027,
           "text": "your face.",
           "highlight": "face."
         }
@@ -557,19 +567,19 @@
       "props": [],
       "captions": [
         {
-          "time": 0.133,
+          "time": 0.0,
+          "text": "your face.",
+          "highlight": "face."
+        },
+        {
+          "time": 0.4,
           "text": "Now the",
           "highlight": "Now"
         },
         {
-          "time": 0.486,
+          "time": 0.78,
           "text": "reflection wins.",
           "highlight": "reflection"
-        },
-        {
-          "time": 1.864,
-          "text": "That's you",
-          "highlight": "That's"
         }
       ],
       "sfx": "riser",
@@ -609,24 +619,19 @@
       "props": [],
       "captions": [
         {
-          "time": 0.0,
+          "time": 0.12,
           "text": "That's you",
           "highlight": "That's"
         },
         {
-          "time": 0.327,
+          "time": 1.21,
           "text": "looking back",
           "highlight": "looking"
         },
         {
-          "time": 1.052,
+          "time": 1.7,
           "text": "from the glass!",
           "highlight": "glass!"
-        },
-        {
-          "time": 2.216,
-          "text": "Switch off",
-          "highlight": "Switch"
         }
       ],
       "sfx": "click",
@@ -661,28 +666,28 @@
       "captions": [
         {
           "time": 0.0,
+          "text": "from the glass!",
+          "highlight": "glass!"
+        },
+        {
+          "time": 0.61,
           "text": "Switch off",
           "highlight": "Switch"
         },
         {
-          "time": 0.506,
+          "time": 1.23,
           "text": "the lamp",
           "highlight": "lamp"
         },
         {
-          "time": 0.995,
+          "time": 1.92,
           "text": "and watch",
           "highlight": "watch"
         },
         {
-          "time": 1.448,
+          "time": 2.33,
           "text": "yourself fade.",
           "highlight": "yourself"
-        },
-        {
-          "time": 2.901,
-          "text": "Same window,",
-          "highlight": "window,"
         }
       ],
       "sfx": "whoosh",
@@ -708,17 +713,17 @@
       "props": [],
       "captions": [
         {
-          "time": 0.0,
+          "time": 0.11,
           "text": "Same window,",
           "highlight": "window,"
         },
         {
-          "time": 0.366,
+          "time": 1.15,
           "text": "completely different",
           "highlight": "completely"
         },
         {
-          "time": 1.451,
+          "time": 1.97,
           "text": "balance of light.",
           "highlight": "balance"
         }
@@ -737,5 +742,10 @@
       "cameraMotion": "orbit_drift"
     }
   ],
-  "speechRate": 1
+  "speechRate": 1,
+  "voiceover": "episodes/night-window-voice.wav",
+  "music": {
+    "track": "episodes/neon-current.wav",
+    "volume": 0.26
+  }
 }

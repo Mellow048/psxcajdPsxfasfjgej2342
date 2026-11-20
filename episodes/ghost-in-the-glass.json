@@ -2,7 +2,7 @@
   "version": 3,
   "title": "The ghost in the glass",
   "series": "Optical illusions",
-  "beat": true,
+  "beat": false,
   "narration": "See that ghost floating on stage? There's a real actor, but they're hiding off to one side. An angled pane of glass sits between you and the stage. Light up the hidden actor and the glass reflects some of that light toward your eyes. You can still see through the pane, so the reflection appears to float in the scene. That's Pepper's ghost. Now, where's the actor?",
   "shots": [
     {
@@ -24,14 +24,19 @@
       "props": [],
       "captions": [
         {
-          "time": 0.159,
+          "time": 0.14,
           "text": "See that ghost",
           "highlight": "ghost"
         },
         {
-          "time": 0.924,
+          "time": 0.97,
           "text": "floating on stage?",
           "highlight": "floating"
+        },
+        {
+          "time": 2.34,
+          "text": "There's a",
+          "highlight": "There's"
         }
       ],
       "sfx": "whoosh",
@@ -55,24 +60,24 @@
       "props": [],
       "captions": [
         {
-          "time": 0.09,
-          "text": "There's a",
-          "highlight": "There's"
-        },
-        {
-          "time": 0.359,
+          "time": 0.05,
           "text": "real actor,",
           "highlight": "actor,"
         },
         {
-          "time": 1.476,
+          "time": 1.19,
           "text": "but they're hiding",
           "highlight": "they're"
         },
         {
-          "time": 2.245,
+          "time": 1.79,
           "text": "off to",
           "highlight": "off"
+        },
+        {
+          "time": 2.03,
+          "text": "one side.",
+          "highlight": "side."
         }
       ],
       "sfx": "click",
@@ -98,22 +103,22 @@
       ],
       "captions": [
         {
-          "time": 0.135,
+          "time": 0.0,
           "text": "one side.",
           "highlight": "side."
         },
         {
-          "time": 1.149,
+          "time": 0.52,
           "text": "An angled pane",
           "highlight": "angled"
         },
         {
-          "time": 1.896,
+          "time": 1.31,
           "text": "of glass",
           "highlight": "glass"
         },
         {
-          "time": 2.394,
+          "time": 2.05,
           "text": "sits between",
           "highlight": "between"
         }
@@ -148,24 +153,24 @@
       ],
       "captions": [
         {
-          "time": 0.0,
-          "text": "sits between",
-          "highlight": "between"
-        },
-        {
-          "time": 0.697,
+          "time": 0.14,
           "text": "you and",
           "highlight": "you"
         },
         {
-          "time": 0.98,
+          "time": 0.48,
           "text": "the stage.",
           "highlight": "stage."
         },
         {
-          "time": 2.138,
+          "time": 1.55,
           "text": "Light up",
           "highlight": "Light"
+        },
+        {
+          "time": 1.93,
+          "text": "the hidden actor",
+          "highlight": "hidden"
         }
       ],
       "sfx": "click",
@@ -197,24 +202,24 @@
       ],
       "captions": [
         {
-          "time": 0.096,
-          "text": "the hidden actor",
-          "highlight": "hidden"
-        },
-        {
-          "time": 0.826,
+          "time": 0.19,
           "text": "and the glass",
           "highlight": "glass"
         },
         {
-          "time": 1.46,
+          "time": 1.25,
           "text": "reflects some",
           "highlight": "reflects"
         },
         {
-          "time": 2.301,
+          "time": 1.9,
           "text": "of that light",
           "highlight": "light"
+        },
+        {
+          "time": 2.37,
+          "text": "toward your eyes.",
+          "highlight": "toward"
         }
       ],
       "sfx": "whoosh",
@@ -261,23 +266,23 @@
       "captions": [
         {
           "time": 0.0,
-          "text": "of that light",
-          "highlight": "light"
-        },
-        {
-          "time": 0.37,
           "text": "toward your eyes.",
           "highlight": "toward"
         },
         {
-          "time": 1.787,
+          "time": 1.06,
           "text": "You can",
           "highlight": "You"
         },
         {
-          "time": 2.165,
+          "time": 1.32,
           "text": "still see",
           "highlight": "still"
+        },
+        {
+          "time": 1.77,
+          "text": "through the pane,",
+          "highlight": "through"
         }
       ],
       "sfx": "click",
@@ -312,23 +317,23 @@
       "captions": [
         {
           "time": 0.0,
-          "text": "still see",
-          "highlight": "still"
-        },
-        {
-          "time": 0.231,
           "text": "through the pane,",
           "highlight": "through"
         },
         {
-          "time": 1.051,
+          "time": 0.35,
           "text": "so the reflection",
           "highlight": "reflection"
         },
         {
-          "time": 2.094,
+          "time": 1.12,
           "text": "appears to float",
           "highlight": "appears"
+        },
+        {
+          "time": 1.91,
+          "text": "in the scene.",
+          "highlight": "scene."
         }
       ],
       "sfx": "riser",
@@ -354,18 +359,18 @@
       "captions": [
         {
           "time": 0.0,
-          "text": "appears to float",
-          "highlight": "appears"
-        },
-        {
-          "time": 0.523,
           "text": "in the scene.",
           "highlight": "scene."
         },
         {
-          "time": 1.425,
+          "time": 0.49,
           "text": "That's Pepper's ghost.",
           "highlight": "Pepper's"
+        },
+        {
+          "time": 2.08,
+          "text": "Now,",
+          "highlight": "Now,"
         }
       ],
       "sfx": "click",
@@ -392,16 +397,11 @@
       "captions": [
         {
           "time": 0.0,
-          "text": "That's Pepper's ghost.",
-          "highlight": "Pepper's"
-        },
-        {
-          "time": 0.436,
           "text": "Now,",
           "highlight": "Now,"
         },
         {
-          "time": 0.94,
+          "time": 0.36,
           "text": "where's the actor?",
           "highlight": "where's"
         }
@@ -411,5 +411,9 @@
     }
   ],
   "speechRate": 1,
-  "voiceover": "episodes/ghost-narration.wav"
+  "voiceover": "episodes/ghost-narration.wav",
+  "music": {
+    "track": "episodes/neon-current.wav",
+    "volume": 0.26
+  }
 }

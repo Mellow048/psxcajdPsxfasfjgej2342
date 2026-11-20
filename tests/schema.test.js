@@ -61,7 +61,10 @@ test("rig inventory records actual parents, imported clips and empty FBX exclusi
 });
 
 test("v3 shot contract: inclusive bounds, shorthand, strict cut and pop keys", () => {
-  const shot = structuredClone(demo.shots[0]);
+  const shot = {
+    ...structuredClone(demo.shots[0]),
+    captions: [{ time: 0, text: "Test cut" }],
+  };
   for (const duration of [2, 3.5])
     assert.equal(validate([{ ...shot, duration }]).shots[0].duration, duration);
   for (const duration of [1.999, 3.51, 35])

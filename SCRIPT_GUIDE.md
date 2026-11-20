@@ -46,7 +46,7 @@ Return **only valid JSON**. The timestamps and sentences above are a storyboard,
   "version": 3,
   "title": "The second face",
   "series": "Everyday optics",
-  "beat": true,
+  "music": {"track":"episodes/neon-current.wav","volume":0.26},
   "narration": "Whose face is in the window? It's yours. Light bounces back.",
   "shots": [
     {
@@ -85,8 +85,9 @@ Unknown fields, unknown keys, malformed vectors, and unsupported durations are r
 |---|---|
 | `version`, `title`, `shots` | Object form requires integer `3`, a nonempty title and an array of 1–60 shots. Do not specify total duration: sum the shots. |
 | `series`, `beat` | Optional display string and boolean (default false). `beat` adds a quiet pulse; it is not a cut SFX. |
+| `music` | Optional `{ "track":"episodes/neon-current.wav", "volume":0.26 }`. Local audio path, linear volume 0–1. The track loops from episode zero, ducks under dialogue, fades out, and replaces `beat` when both are present. Never place the music cue on each shot. |
 | `narration` | Optional English prose: one natural sentence or a paragraph, up to 6,000 characters. Write it **once at episode level**. The entire text goes to the offline voice in one request, yielding one WAV/AudioBuffer. A sentence may cross a cut. Never insert punctuation just to make a caption break. |
-| `voiceover`, `speechRate` | Optional supplied local `.wav`, `.ogg`, `.mp3` or `.m4a` recording (no absolute path, URL scheme or `..`). It overrides TTS. Remove `voiceover` to hear edits to the prose. `speechRate` is 0.75–1.5 (default 1), only for generated speech. No text and no file = no narrator. Overlong takes are reported, not chopped mid-sentence. |
+| `voiceover`, `speechRate` | Optional supplied local `.wav`, `.ogg`, `.mp3` or `.m4a` recording (no absolute path, URL scheme or `..`). It overrides TTS. Remove `voiceover` to hear edits to the prose. `speechRate` is 0.75–1.5 (default 1.08), only for generated speech. No text and no file = no narrator. Overlong takes are reported, not chopped mid-sentence. |
 
 | Shot field | Contract |
 |---|---|
