@@ -3,6 +3,8 @@ import {
   SFX_MANIFEST as sounds,
   SCENE_PRESETS as stages,
   CAMERAS,
+  CAMERA_MOTIONS,
+  ICONS,
   MOTIONS,
 } from "./config.js";
 const obj = (v) => v && typeof v === "object" && !Array.isArray(v),
@@ -20,9 +22,9 @@ export function validate(e) {
     for (const k of Object.keys(o))
       check(list.split(" ").includes(k), "unknown field " + k);
   };
-  if (Array.isArray(e)) e = { version: 2, title: "Untitled Short", shots: e };
-  keys(e, "version title series narration beat shots");
-  check(e.version === 2 && str(e.title), "version: 2 and a title required");
+  if (Array.isArray(e)) e = { version: 3, title: "Untitled Short", shots: e };
+  keys(e, "version title series narration voiceover speechRate beat shots");
+  check(e.version === 3 && str(e.title), "version: 3 and a title required");
   check(e.series === undefined || str(e.series), "invalid series");
   check(
     e.beat === undefined || typeof e.beat === "boolean",
@@ -31,10 +33,22 @@ export function validate(e) {
   check(
     e.narration === undefined ||
       (str(e.narration) &&
-        /^[\w /.-]+\.(wav|ogg|mp3|m4a)$/i.test(e.narration) &&
-        !e.narration.startsWith("/") &&
-        !e.narration.includes("..")),
-    "narration must be a relative audio file",
+        e.narration.length <= 6000 &&
+        !/\.(wav|ogg|mp3|m4a)$/i.test(e.narration.trim())),
+    "narration must be prose (1–6000 characters); use voiceover for a recording",
+  );
+  check(
+    e.voiceover === undefined ||
+      (str(e.voiceover) &&
+        /^[\w /.-]+\.(wav|ogg|mp3|m4a)$/i.test(e.voiceover) &&
+        !e.voiceover.startsWith("/") &&
+        !e.voiceover.includes("..")),
+    "voiceover must be a relative audio file",
+  );
+  check(
+    e.speechRate === undefined ||
+      (num(e.speechRate) && e.speechRate >= 0.75 && e.speechRate <= 1.5),
+    "speechRate must be 0.75–1.5",
   );
   check(
     Array.isArray(e.shots) && e.shots.length > 0 && e.shots.length <= 60,
@@ -44,7 +58,7 @@ export function validate(e) {
     at = `shot ${i + 1}`;
     keys(
       s,
-      "title duration stage cameraPreset distance angle pan focus actors props captions sfx",
+      "title duration stage cameraPreset cameraMotion events distance angle pan focus actors props captions sfx",
     );
     check(str(s.title), "missing title");
     check(
@@ -56,6 +70,10 @@ export function validate(e) {
     );
     check(has(stages, s.stage), "unknown stage");
     check(CAMERAS.includes(s.cameraPreset), "unknown cameraPreset");
+    check(
+      CAMERA_MOTIONS.includes(s.cameraMotion),
+      "cameraMotion is required: " + CAMERA_MOTIONS.join(", "),
+    );
     check(has(sounds, s.sfx), "unknown cut sfx");
     check(
       s.distance === undefined ||
@@ -100,7 +118,57 @@ export function validate(e) {
         }
       }
     }
-    check(ids.size, "add an actor or prop");
+    check(
+      s.events === undefined ||
+        (Array.isArray(s.events) && s.events.length <= 24),
+      "events must be an array of at most 24 spawns",
+    );
+    const hasSubject = ids.size > 0;
+    for (const ev of s.events ?? []) {
+      check(obj(ev) && ev.type === "spawn_prop", "expected spawn_prop event");
+      const arrow = ev.asset === "3D_Arrow";
+      keys(
+        ev,
+        "id type time asset size sfx " +
+          (arrow ? "from to travel" : "icon position"),
+      );
+      check(str(ev.id) && !ids.has(ev.id), "missing or duplicate event id");
+      ids.add(ev.id);
+      check(
+        num(ev.time) && ev.time >= 0 && ev.time < s.duration,
+        "spawn time outside shot",
+      );
+      check(
+        ["pop", "whoosh"].includes(ev.sfx),
+        "spawn sfx must be pop or whoosh",
+      );
+      check(
+        ev.size === undefined || (num(ev.size) && ev.size > 0 && ev.size <= 4),
+        "invalid prop size",
+      );
+      if (arrow) {
+        check(
+          vec(ev.from) && vec(ev.to) && ev.from.some((v, i) => v !== ev.to[i]),
+          "arrow needs distinct from and to vectors",
+        );
+        check(
+          num(ev.travel) &&
+            ev.travel > 0 &&
+            ev.time + ev.travel <= s.duration + 1e-8,
+          "arrow travel must finish within shot",
+        );
+      } else
+        check(
+          ev.asset === "Floating_Icon" &&
+            ICONS.includes(ev.icon) &&
+            vec(ev.position),
+          "expected a Floating_Icon with icon and position",
+        );
+    }
+    check(
+      hasSubject || s.events?.some((ev) => ev.time === 0),
+      "add a subject or spawn at zero",
+    );
     check(
       s.focus === undefined || vec(s.focus) || ids.has(s.focus),
       "invalid focus",
@@ -111,14 +179,10 @@ export function validate(e) {
     );
     let last = -1;
     for (const c of s.captions) {
-      keys(c, "at text highlight");
+      keys(c, "time text highlight");
       check(
-        num(c.at) &&
-          c.at > last &&
-          c.at >= 0 &&
-          c.at < s.duration &&
-          (last !== -1 || c.at === 0),
-        "captions must start at 0 and increase within shot",
+        num(c.time) && c.time > last && c.time >= 0 && c.time < s.duration,
+        "caption times must increase within shot",
       );
       check(
         str(c.text) && c.text.trim().split(/\s+/).length <= 3,
@@ -129,7 +193,7 @@ export function validate(e) {
           (str(c.highlight) && c.text.includes(c.highlight)),
         "highlight must be a substring",
       );
-      last = c.at;
+      last = c.time;
     }
   }
   return e;

@@ -126,6 +126,109 @@ try {
     r.pipeline.target.width === 180 && r.pipeline.target.height === 320,
     "low-res PSX buffer in use",
   );
+  // Check every rig/motion pair with stationary subjects, not just changed pixels.
+  const { CAMERAS, CAMERA_MOTIONS } = await import("../src/config.js");
+  for (const cameraPreset of CAMERAS)
+    for (const cameraMotion of CAMERA_MOTIONS) {
+      const s = { ...repeat, cameraPreset, cameraMotion },
+        d = r.director,
+        target = r.focus.set(0, 1, 0),
+        observer = r.frames[0].items[0];
+      observer.node.position.set(-0.3, 0, 0.8);
+      d.pose(s, 0, target, 0, observer);
+      for (let tick = 1; tick <= 120; tick++) {
+        let pos = d.camera.position.clone(),
+          q = d.camera.quaternion.clone();
+        d.pose(s, tick / 60, target, 0, observer);
+        if (
+          pos.distanceToSquared(d.camera.position) < 1e-12 &&
+          q.angleTo(d.camera.quaternion) < 1e-6
+        )
+          throw Error(
+            `Camera stalled: ${cameraPreset}/${cameraMotion} at ${tick}`,
+          );
+      }
+    }
+  assert(
+    true,
+    "every camera setup/motion pair keeps moving on successive ticks",
+  );
+  const ev = {
+    type: "spawn_prop",
+    asset: "3D_Arrow",
+    id: "beam",
+    time: 0.5,
+    from: [0, 1, 0],
+    to: [1, 1.5, 0],
+    travel: 1,
+    size: 1,
+    sfx: "pop",
+  };
+  const props = {
+    ...repeat,
+    focus: "beam",
+    events: [
+      ev,
+      {
+        type: "spawn_prop",
+        asset: "Floating_Icon",
+        id: "symbol",
+        time: 0.2,
+        position: [0, 1, 0],
+        icon: "Moon",
+        sfx: "whoosh",
+      },
+    ],
+  };
+  await r.load([props]);
+  const [beam, icon] = r.frames[0].spawns;
+  assert(
+    !beam.node.visible && !icon.node.visible,
+    "spawns hidden before their timestamp",
+  );
+  r.seek(0.5);
+  assert(
+    beam.node.visible && beam.node.scale.x === 0,
+    "arrow starts exactly on cue",
+  );
+  r.seek(0.65);
+  assert(
+    beam.node.scale.x > 1 && beam.node.position.x > 0,
+    "3D arrow overshoots and travels",
+  );
+  const spin = icon.node.rotation.y;
+  r.seek(1.5);
+  assert(
+    beam.node.scale.x === 1 &&
+      beam.node.position.x === 1 &&
+      spin !== icon.node.rotation.y,
+    "arrow arrives; icon keeps spinning",
+  );
+  r.seek(0.25);
+  assert(
+    !beam.node.visible && icon.node.visible,
+    "backward scrub reconstructs event visibility",
+  );
+  const { SfxEngine } = await import("../src/sfxEngine.js");
+  const a = new SfxEngine();
+  a.ctx = new OfflineAudioContext(1, 48000, 48000);
+  const spoken = {
+    narration: "Two paths reach your eyes.",
+    shots: [{ duration: 3.5, sfx: "click" }],
+  };
+  await a.prepareBuffers(spoken);
+  const buffer = [...a.buffers.values()][0];
+  assert(
+    buffer.duration > 1 && buffer.duration < 3.5,
+    "browser worker returns one decodable speech take",
+  );
+  spoken.shots[0].captions = [{ time: 0.7, text: "unrelated" }];
+  await a.prepareBuffers(spoken);
+  assert(
+    a.buffers.size === 1 && [...a.buffers.values()][0] === buffer,
+    "caption edits do not regenerate voice",
+  );
+  a.dispose();
   report.textContent += "\nAll checks passed.";
   report.dataset.result = "pass";
 } catch (e) {

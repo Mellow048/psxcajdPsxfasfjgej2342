@@ -13,6 +13,29 @@ export class CameraDirector {
   camera = new T.PerspectiveCamera(42, 9 / 16, 0.05, 100);
   focus = new T.Vector3();
   offset = new T.Vector3();
+  // Analytic integration of motion over elapsed shot time. Runs on every sample,
+  // including the shoulder/whip rigs. No accumulated deltas to lose on seeks.
+  move(mode, t, u) {
+    const c = this.camera;
+    if (mode === "orbit_drift") {
+      const q = this.orbit.setFromAxisAngle(this.up, 0.24 * u);
+      c.position.sub(this.focus).applyQuaternion(q).add(this.focus);
+      c.quaternion.premultiply(q);
+    } else if (mode === "handheld_bob") {
+      c.translateX(0.075 * u);
+      c.rotateX(0.025 * Math.sin(3.8 * t));
+      c.rotateY(0.033 * Math.cos(3.8 * t));
+    } else {
+      const delta =
+        mode === "slow_push"
+          ? -Math.min(0.5, c.position.distanceTo(this.focus) * 0.42)
+          : 0.5;
+      c.translateZ(delta * u);
+    }
+    return c;
+  }
+  orbit = new T.Quaternion();
+  up = new T.Vector3(0, 1, 0);
   pose(s, t, target, index, actor) {
     const c = this.camera,
       u = t / s.duration,
@@ -29,16 +52,16 @@ export class CameraDirector {
       roll = 0;
     switch (s.cameraPreset) {
       case "wide_orbit":
-        a += side * (-0.48 + 0.98 * u);
+        a += side * (-0.42 + 0.55 * u);
         h += 0.4 + 0.18 * u;
         break;
       case "dutch_tilt_push":
-        d *= 1.05 - 0.38 * u;
+        d *= 0.95;
         roll = side * (0.24 - 0.13 * u);
         a += side * (0.24 + 0.18 * u);
         break;
       case "macro_closeup":
-        d *= 0.62 - 0.13 * u;
+        d *= 0.62;
         a += side * (-0.19 + 0.44 * u);
         h = 0.08;
         break;
@@ -57,7 +80,7 @@ export class CameraDirector {
             Math.cos(bearing) * d * 0.37 - side * Math.sin(bearing) * 0.39;
           c.position.y += 0.13 + 0.09 * u;
           c.lookAt(this.focus);
-          return c;
+          return this.move(s.cameraMotion, t, u);
         }
         a += side * (0.66 + 0.17 * u);
         h = 0.6;
@@ -88,6 +111,6 @@ export class CameraDirector {
       );
     c.lookAt(this.focus);
     c.rotateZ(roll);
-    return c;
+    return this.move(s.cameraMotion, t, u);
   }
 }

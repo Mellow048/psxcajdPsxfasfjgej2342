@@ -74,3 +74,11 @@ export const MOTIONS = [
   "float_spin",
   "pop_in",
 ];
+
+export const CAMERA_MOTIONS = [
+  "slow_push",
+  "slow_pull",
+  "orbit_drift",
+  "handheld_bob",
+];
+export const ICONS = ["Sun", "Moon", "Lightbulb", "Eyeball"];

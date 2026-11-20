@@ -1,10 +1,10 @@
 # Cutframe · PSX Informative Shorts Studio
 
-Cutframe is a static Three.js r170 editor for making vertical educational videos from JSON. The studio opens with **Why windows become mirrors at night**, a 35-second v2 episode with fourteen hard cuts and shot-local performances. The alternate **The ghost in the glass** episode explains Pepper’s ghost in nine 2.5-second shots, with original sets, an uploaded Halloween actor, a synthesized narrator, and cut cues. [Watch the archived v1 WebM](episodes/ghost-in-the-glass.webm) or [open its JSON](episodes/ghost-in-the-glass.json).
+Cutframe is a static Three.js r170 editor for making vertical educational videos from JSON. The studio opens with **Why windows become mirrors at night**, a 35-second v3 episode with fourteen hard cuts and shot-local performances. The alternate **The ghost in the glass** episode explains Pepper’s ghost in nine 2.5-second shots, with original sets, an uploaded Halloween actor, a synthesized narrator, and cut cues. [Watch the archived v1 WebM](episodes/ghost-in-the-glass.webm) or [open its JSON](episodes/ghost-in-the-glass.json).
 
 ## Render on GitHub — no local GPU required
 
-1. Add a script under `episodes/` (see [the writing guide](SCRIPT_GUIDE.md)). If it needs speech, include a synced narration track and reference it in the JSON. Without one, the engine exports captions, beat and cut sounds only.
+1. Add a script under `episodes/` (see [the writing guide](SCRIPT_GUIDE.md)). For speech, write a sentence or paragraph in episode-level `narration`, or set `voiceover` to one recording. With neither, the engine exports captions, beat and SFX only.
 2. In **Actions → Render a Short → Run workflow**, choose `main` and enter the episode path. The default is [Why windows become mirrors at night](episodes/night-window.json): **35 seconds, 14 cuts, 1,050 frames** with a timed voiceover.
 3. Open the completed run and download its **short-…** artifact. Unzip the **540×960, 30 fps H.264/AAC MP4**. GitHub retains these downloads for 30 days; save a copy for publishing. For a permanent download, tick **Also publish a durable GitHub Release download** on a manual `main` run. Rendering does not commit binaries back to the repo or publish to a social platform.
 
@@ -42,7 +42,7 @@ Open <http://localhost:8000/> in a WebGL 2 browser. No build, installation, micr
 
 | Module | Responsibility |
 |---|---|
-| `config`, generated `catalog`, `schema` | Render defaults, dimensions, manifests, mini-set fixtures and strict v2 shot validation |
+| `config`, generated `catalog`, `schema` | Render defaults, dimensions, manifests, mini-set fixtures and strict v3 shot validation |
 | `assetLoader`, `animationLibrary` | GLB/FBX loading, texture-path repair, floor-centered normalization, skeleton cloning, rootless quaternion clips and procedural motion |
 | `stages`, `cameraDirector` | Seeded scenic geometry, subject props, preset motion and shot framing |
 | `psxShader` | Post-skinning clip-space grid snap, affine diffuse UV interpolation, nearest sampling, low-res target, display-space Bayer dither and 5:5:5 quantization |
@@ -59,7 +59,7 @@ python3 scripts/catalog.py  # refresh catalog + raw inventory after importing as
 npm test                    # Node 18+; no dependencies
 ```
 
-Inspect new rig families before reusing clips: name matching is **not** general IK or cross-species retargeting. See the guide for the exact keys supported by this checkout. Imported DAE, Blender and backup files are inventoried for authors, not runtime formats. `SoundEffects/` was absent; current cues are synthesized. Legacy missing external texture references fall back to a neutral checker; GLBs have embedded textures and are preferred. Asset licenses are not inferred from the folder names; verify publishing rights to supplied packs separately. Vendored Three.js retains its license. The demo’s short robotic voice track was synthesized with meSpeak/eSpeak, not copied from a reference video.
+Inspect new rig families before reusing clips: name matching is **not** general IK or cross-species retargeting. See the guide for the exact keys supported by this checkout. Imported DAE, Blender and backup files are inventoried for authors, not runtime formats. `SoundEffects/` was absent; current cues are synthesized. Legacy missing external texture references fall back to a neutral checker; GLBs have embedded textures and are preferred. Asset licenses are not inferred from the folder names; verify publishing rights to supplied packs separately. Vendored Three.js retains its license. Text-only narration uses bundled CMU Flite (English SLT) in a worker; no API key or network service. It loads a ~14 MB compressed engine on first synthesis. `voiceover` bypasses that download. Both playback and export decode and schedule one full take, independent of captions, cuts and timed prop events. For a human performance, supply a recorded take rather than changing subtitle timings. See `vendor/flite/` for licenses. To bake the same synthesized WAV ahead of time: `npm run narrate -- episodes/night-window.json my-take.wav`.
 
 Visit `http://localhost:8000/tests/browser.html` for automated WebGL integration checks (deterministic seeking, real rigs/prop selection, failed reload rollback and stable GPU counts).
 

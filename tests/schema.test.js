@@ -19,7 +19,7 @@ test("shipped episode covers all five camera modes and exactly 1,350 ticks", () 
     new Set(demo.shots.map((s) => s.cameraPreset)),
     new Set(CAMERAS),
   );
-  assert.ok(fs.existsSync(demo.narration));
+  assert.ok(fs.existsSync(demo.voiceover));
 });
 for (const [name, mutate] of Object.entries({
   duration: (s) => (s.duration = 1.9),
@@ -60,7 +60,7 @@ test("rig inventory records actual parents, imported clips and empty FBX exclusi
   assert.ok(!MODELS["quequis_house.quequis_house_props.fbx"]);
 });
 
-test("v2 shot contract: inclusive bounds, shorthand, strict cut and pop keys", () => {
+test("v3 shot contract: inclusive bounds, shorthand, strict cut and pop keys", () => {
   const shot = structuredClone(demo.shots[0]);
   for (const duration of [2, 3.5])
     assert.equal(validate([{ ...shot, duration }]).shots[0].duration, duration);
@@ -75,7 +75,9 @@ test("v2 shot contract: inclusive bounds, shorthand, strict cut and pop keys", (
   assert.throws(() => validate([{ ...shot, sfx: undefined }]), /cut sfx/);
   assert.throws(
     () =>
-      validate([{ ...shot, captions: [{ at: 0, text: "This is too long" }] }]),
+      validate([
+        { ...shot, captions: [{ time: 0, text: "This is too long" }] },
+      ]),
     /1–3 words/,
   );
   const noAction = structuredClone(shot);
@@ -95,4 +97,45 @@ test("writer guide JSON and both shipped scripts validate", () => {
     35,
   );
   assert.equal(night.shots.length, 14);
+});
+test("motion, narration and spawn contracts are checked before loading assets", () => {
+  const make = () => structuredClone(demo);
+  for (const mutate of [
+    (s) => delete s.cameraMotion,
+    (s) => (s.cameraMotion = "tripod"),
+    (s) => (s.events = [{ type: "unknown" }]),
+    (s) => (s.captions[0] = { at: 0, text: "early" }),
+  ]) {
+    const e = make();
+    mutate(e.shots[0]);
+    assert.throws(() => validate(e), /shot 1/);
+  }
+  const arrow = {
+    id: "event",
+    type: "spawn_prop",
+    asset: "3D_Arrow",
+    time: 0.5,
+    travel: 1,
+    from: [0, 0, 0],
+    to: [1, 0, 0],
+    sfx: "pop",
+  };
+  for (const bad of [
+    { travel: 5 },
+    { time: -1 },
+    { to: [0, 0, 0] },
+    { sfx: "silent" },
+    { asset: "Floating_Icon", icon: "Mars" },
+    { id: demo.shots[0].actors[0].id },
+  ]) {
+    const e = make();
+    e.shots[0].events = [{ ...arrow, ...bad }];
+    assert.throws(() => validate(e), /shot 1/);
+  }
+  for (const bad of [
+    { narration: "episodes/test.wav" },
+    { voiceover: "../escape.wav" },
+    { speechRate: 0 },
+  ])
+    assert.throws(() => validate({ ...make(), ...bad }), /episode:/);
 });

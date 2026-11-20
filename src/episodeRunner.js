@@ -4,6 +4,7 @@ import { validate } from "./schema.js";
 import { Pipeline, patchTree } from "./psxShader.js";
 import { AssetLoader } from "./assetLoader.js";
 import { bindPerformance, pose } from "./animationLibrary.js";
+import { createSpawn, sampleSpawn } from "./comedyProps.js";
 import { stage } from "./stages.js";
 import { CameraDirector } from "./cameraDirector.js";
 import { composite } from "./captionEngine.js";
@@ -30,7 +31,7 @@ export class EpisodeRunner {
     let end = 0;
     try {
       for (const s of e.shots) {
-        const f = { ...stage(s.stage), items: [], start: end };
+        const f = { ...stage(s.stage), items: [], spawns: [], start: end };
         frames.push(f);
         end += Math.round(s.duration * CONFIG.hz);
         for (const d of SCENE_PRESETS[s.stage].layout ?? []) {
@@ -60,6 +61,11 @@ export class EpisodeRunner {
               mixer: bindPerformance(image, clip, def.motion, take),
             });
           }
+        }
+        for (const ev of s.events ?? []) {
+          const spawn = createSpawn(ev);
+          f.spawns.push(spawn);
+          f.scene.add(spawn.node);
         }
         patchTree(f.scene);
       }
@@ -100,16 +106,23 @@ export class EpisodeRunner {
       s = this.episode.shots[this.index],
       t = (this.tick - f.start) / CONFIG.hz;
     for (const i of f.items) pose(i, t);
+    for (const spawn of f.spawns) sampleSpawn(spawn, t);
     f.dust.rotation.y = t * 0.08;
     f.dust.position.y = 0.08 * Math.sin(t);
     if (typeof s.focus === "string") {
       const o = f.items.find((i) => i.def.id === s.focus);
-      this.focus.copy(o.node.position);
-      this.focus.y +=
-        (o.def.height ?? 1.6) *
-        (s.cameraPreset === "macro_closeup" && s.actors?.includes(o.def)
-          ? 0.87
-          : 0.51);
+      if (!o)
+        this.focus.copy(
+          f.spawns.find((p) => p.ev.id === s.focus).node.position,
+        );
+      else {
+        this.focus.copy(o.node.position);
+        this.focus.y +=
+          (o.def.height ?? 1.6) *
+          (s.cameraPreset === "macro_closeup" && s.actors?.includes(o.def)
+            ? 0.87
+            : 0.51);
+      }
     } else this.focus.fromArray(s.focus ?? [0, 1, 0]);
     this.director.pose(s, t, this.focus, this.index, f.observer);
   }

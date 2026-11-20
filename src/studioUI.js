@@ -207,6 +207,7 @@ export class StudioUI {
         text,
         el("span", "duration", s.duration + "s"),
       );
+      b.title = `${s.cameraPreset} · ${s.cameraMotion} · ${(s.events ?? []).length} prop spawns`;
       b.onclick = () => this.jump(i);
       list.append(b);
       const seg = el("span", "seg", pad(i + 1) + "  " + s.title);

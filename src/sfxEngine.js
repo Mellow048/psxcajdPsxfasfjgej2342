@@ -1,4 +1,7 @@
 import { SFX_MANIFEST } from "./config.js";
+const voiceKey = (e) =>
+  e.voiceover ||
+  (e.narration ? `tts:${e.speechRate ?? 1}:${e.narration}` : null);
 export class SfxEngine {
   constructor() {
     this.nodes = new Set();
@@ -32,12 +35,29 @@ export class SfxEngine {
   }
   async prepare(e) {
     await this.ready();
+    await this.prepareBuffers(e);
+  }
+  async prepareBuffers(e) {
+    // The offline encoder calls the exact same take preparation as Play.
+    if (e.narration && !e.voiceover && !this.buffers.has(voiceKey(e))) {
+      const { renderNarration } = await import("./narration.js");
+      const wav = await renderNarration(e.narration, e.speechRate);
+      this.buffers.set(voiceKey(e), await this.ctx.decodeAudioData(wav));
+    }
     for (const url of new Set(
-      [e.narration, ...e.shots.map((s) => SFX_MANIFEST[s.sfx])].filter(
+      [e.voiceover, ...e.shots.map((s) => SFX_MANIFEST[s.sfx])].filter(
         (v) => v && v !== "synth",
       ),
     ))
       await this.buffer(url);
+    const take = this.buffers.get(voiceKey(e));
+    if (
+      take &&
+      take.duration > e.shots.reduce((sum, s) => sum + s.duration, 0) + 0.1
+    )
+      throw Error(
+        `Narration lasts ${take.duration.toFixed(1)}s and would be cut off. Shorten the prose, extend the edit, or raise speechRate for synthesized speech.`,
+      );
   }
   track(node, gain) {
     node.connect(gain);
@@ -62,6 +82,7 @@ export class SfxEngine {
       n = c.createOscillator(),
       g = c.createGain();
     const [a, b, len, vol, type] = {
+      pop: [760, 240, 0.105, 0.2, "sine"],
       click: [1650, 210, 0.085, 0.23, "triangle"],
       whoosh: [1600, 110, 0.19, 0.19, "triangle"],
       riser: [260, 1250, 0.23, 0.105, "sawtooth"],
@@ -81,7 +102,7 @@ export class SfxEngine {
     this.stop();
     const now = this.ctx.currentTime;
     this.origin = now - offset;
-    if (e.narration) this.sample(e.narration, now, offset);
+    if (voiceKey(e)) this.sample(voiceKey(e), now, offset);
     let t = 0;
     for (const s of e.shots) {
       if (t >= offset - 1e-6) {
@@ -89,6 +110,11 @@ export class SfxEngine {
         SFX_MANIFEST[s.sfx] === "synth"
           ? this.tone(s.sfx, when)
           : this.sample(SFX_MANIFEST[s.sfx], when);
+      }
+      for (const ev of s.events ?? []) {
+        const at = t + ev.time;
+        if (at >= offset - 1e-6)
+          this.tone(ev.sfx, now + Math.max(0, at - offset));
       }
       t += s.duration;
     }
@@ -115,6 +141,6 @@ export class SfxEngine {
     this.stop();
     this.buffers.clear();
     this.dest?.stream.getTracks().forEach((t) => t.stop());
-    this.ctx?.close();
+    this.ctx?.close?.();
   }
 }

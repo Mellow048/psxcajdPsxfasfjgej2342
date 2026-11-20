@@ -1,5 +1,14 @@
 # PSX Informative Shorts - Scripting Guide
 
+## Rule 1: Continuous Natural Audio
+NEVER break a single sentence into multiple audio generation events. Write the `narration` field as one full, natural sentence so the TTS flows perfectly. Use a `captions` array with exact timestamps to pop the text on screen word-by-word while the continuous audio plays.
+
+## Rule 2: Constant Camera Motion
+A shot must never be still. Every single shot block in your JSON must include a `cameraMotion` value (`slow_push`, `slow_pull`, `orbit_drift`, `handheld_bob`).
+
+## Rule 3: 3D Explainer Props
+Don't just have the character point at a blank wall. Use the `spawn_prop` event to throw spinning, glowing 3D assets on screen (e.g., a glowing sun, bouncing 3D arrows showing light paths, a spinning eyeball). Sync these prop spawns with a `pop` or `whoosh` sound effect.
+
 ## The 3-Second Rule
 
 DO NOT write long, continuous scenes. The human brain loses focus after 3 seconds without a visual change. Break your educational concepts into rapid 2-3 second `shots`.
@@ -30,24 +39,26 @@ DO NOT write long, continuous scenes. The human brain loses focus after 3 second
 
 Return **only valid JSON**. The timestamps and sentences above are a storyboard, not engine fields. Treat “three seconds” as this studio's editing rule, not a biological attention limit. Give each shot one new piece of visual evidence. Hook in the first two seconds, establish the ordinary explanation, reveal the surprising mechanism, demonstrate a test and loop back to the hook. Verify factual claims. Say each line aloud before locking timing.
 
-**Write a `shots` array.** For a named or narrated episode, wrap it in a version-2 object as below. A bare JSON array of shot objects also runs (untitled, no narration or beat). Never use `scenes`, a global camera timeline, or one long track. Every shot is a new cast, set, camera setup, and local clock. The editor and batch renderer enforce the same rules. Use [the full 35-second sample](episodes/night-window.json) to see 14 cuts timed to one voice track.
+**Write a `shots` array.** For a named or narrated episode, wrap it in a version-3 object as below. A bare JSON array of shot objects also runs (untitled, no narration or beat). Never use `scenes`, a global camera timeline, or one long track. Every shot is a new cast, set, camera setup, and local clock. The editor and batch renderer enforce the same rules. Use [the full 35-second sample](episodes/night-window.json) to see 14 cuts timed to one voice track.
 
 ```json
 {
-  "version": 2,
+  "version": 3,
   "title": "The second face",
   "series": "Everyday optics",
   "beat": true,
+  "narration": "Whose face is in the window? It's yours. Light bounces back.",
   "shots": [
     {
       "title": "Recognition",
       "duration": 2.5,
       "stage": "house_corner",
       "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
       "focus": "host",
       "distance": 2.7,
       "actors": [{"id":"host","asset":"male.character_01","motion":"thinking"}],
-      "captions": [{"at":0,"text":"Whose face?","highlight":"face?"},{"at":1.1,"text":"Look closer."}],
+      "captions": [{"time":0,"text":"Whose face is","highlight":"face"},{"time":1.1,"text":"in the window?"}],
       "sfx": "riser"
     },
     {
@@ -55,9 +66,11 @@ Return **only valid JSON**. The timestamps and sentences above are a storyboard,
       "duration": 2.5,
       "stage": "window_night",
       "cameraPreset": "over_shoulder",
+      "cameraMotion": "orbit_drift",
+      "events": [{"type":"spawn_prop","id":"bounce","asset":"3D_Arrow","time":0.45,"from":[0.4,1.1,0],"to":[-0.3,1.3,0.75],"travel":0.95,"size":0.5,"sfx":"whoosh"}],
       "focus": [-0.3,1.35,-0.9],
       "actors": [{"id":"host","asset":"male.character_01","motion":"pointing","position":[-0.3,0,0.9],"yaw":2.9}],
-      "captions": [{"at":0,"text":"It's yours."},{"at":1.1,"text":"Light bounces back.","highlight":"bounces"}],
+      "captions": [{"time":0,"text":"It's yours."},{"time":1.1,"text":"Light bounces back.","highlight":"bounces"}],
       "sfx": "click"
     }
   ]
@@ -70,18 +83,20 @@ Unknown fields, unknown keys, malformed vectors, and unsupported durations are r
 
 | Episode field | Contract |
 |---|---|
-| `version`, `title`, `shots` | Object form requires integer `2`, a nonempty title and an array of 1–60 shots. Do not specify total duration: sum the shots. |
+| `version`, `title`, `shots` | Object form requires integer `3`, a nonempty title and an array of 1–60 shots. Do not specify total duration: sum the shots. |
 | `series`, `beat` | Optional display string and boolean (default false). `beat` adds a quiet pulse; it is not a cut SFX. |
-| `narration` | Optional local WAV/OGG/MP3/M4A path, e.g. `episodes/night-window.wav`, relative to the server root. Supply the file. No absolute paths, URLs or `..`. One full-episode track starts at zero. Caption text does not synthesize speech. |
+| `narration` | Optional English prose: one natural sentence or a paragraph, up to 6,000 characters. Write it **once at episode level**. The entire text goes to the offline voice in one request, yielding one WAV/AudioBuffer. A sentence may cross a cut. Never insert punctuation just to make a caption break. |
+| `voiceover`, `speechRate` | Optional supplied local `.wav`, `.ogg`, `.mp3` or `.m4a` recording (no absolute path, URL scheme or `..`). It overrides TTS. Remove `voiceover` to hear edits to the prose. `speechRate` is 0.75–1.5 (default 1), only for generated speech. No text and no file = no narrator. Overlong takes are reported, not chopped mid-sentence. |
 
 | Shot field | Contract |
 |---|---|
-| `title`, `stage`, `cameraPreset`, `sfx` | Required. Nonempty title and exact keys below. Start the next clause on the cut; SFX is scheduled at that exact boundary. |
+| `title`, `stage`, `cameraPreset`, `cameraMotion`, `sfx` | Required. Nonempty title and exact keys below. Start the next clause on the cut; SFX is scheduled at that exact boundary. |
 | `duration` | **2.0–3.5 inclusive on a 1/60-second tick.** Prefer 2, 2.25, 2.5 or 3; reserve 3.5 for a reveal that needs reading time. No crossfades or gaps. |
-| `actors`, `props` | Arrays; at least one subject across both. Put the speaker/observer first in `actors`. A diagram cut can have only props. |
+| `actors`, `props` | Arrays; at least one subject across both, or a spawn at `time:0`. Put the speaker/observer first in `actors`. A diagram cut can have only props. |
 | `focus` | Subject ID **in this shot** or `[x,y,z]`, default `[0,1,0]`. For an over-shoulder or whip, target the object being observed, not the first actor. Macro on a named actor aims at face height. |
 | `distance`, `angle`, `pan` | Optional base camera radius 0.3–40, base azimuth in radians, and lateral whip span for a prop-only whip. Presets apply their own framing. |
-| `captions` | Nonempty array. First `at` must be 0; subsequent `at` values strictly increase and stay below duration. Each `text` is **1–3 words**. Optional `highlight` is an exact case-sensitive substring, including punctuation where needed. Pops are centered with an outline and shadow. Keep words short enough to read. |
+| `events` | Optional array of up to 24 timed `spawn_prop` events. Event IDs are unique across this shot’s actors, props and events. See the forms below. |
+| `captions` | Nonempty array. Each `time` is local to this shot, nonnegative, strictly increasing and below duration. No text is shown before the first timestamp. Each `text` is **1–3 words**. Optional `highlight` is an exact case-sensitive substring, including punctuation where needed. Pops are centered with an outline and shadow. Keep words short enough to read. |
 
 | Subject field | Contract |
 |---|---|
@@ -103,17 +118,27 @@ Unknown fields, unknown keys, malformed vectors, and unsupported durations are r
 
 Every cut changes the lens immediately, even for consecutive uses of the same preset. Prefer **different evidence** over merely changing lenses. Choose `whoosh` for a transfer, `click` for a switch/reveal, or `riser` for suspense. There is no silent cut key. Previewing a paused scrub is silent; playing and exporting use scheduled audio.
 
+### Layer movement over composition
+
+`cameraPreset` chooses the lens and staging. `cameraMotion` is a separate required movement across the whole shot, even after a whip lands: `slow_push` dollies in approximately half a unit (less in extreme closeups), `slow_pull` dollies out, `orbit_drift` arcs around focus, `handheld_bob` adds subtle pitch/yaw sway and lateral drift. All are sampled from shot-local time rather than accumulated draw frames. An event ID may be the `focus`; before its spawn time the camera aims at its starting position.
+
+### Timed prop events (not static asset keys)
+
+- **Direction:** `{"type":"spawn_prop","id":"ray","time":0.3,"asset":"3D_Arrow","from":[-0.6,1,0],"to":[0.5,1.4,0.4],"travel":1.2,"size":0.65,"sfx":"whoosh"}`. Distinct 3D endpoints; positive travel in seconds; arrival must be within this shot. It faces the direction of travel and holds at B.
+- **Concept:** `{"type":"spawn_prop","id":"day","time":0.12,"asset":"Floating_Icon","icon":"Sun","position":[0.5,1.4,0],"size":0.65,"sfx":"pop"}`. Use exactly `Sun`, `Moon`, `Lightbulb`, or `Eyeball`. Icons spin and bob after arrival.
+- Each appears at shot-local `time`, scales **0 → 1.2 → 1**, and persists until the next cut. `size` is optional, default 0.65, max 4. Both types require `sfx:"pop"` or `"whoosh"`; the **shot** still needs its own cut cue. Place events on stressed words. Avoid putting the most important detail directly behind the caption.
+
 ### Sets, props and look
 
 - `window_day` / `window_night`: matched demonstration sets with a window opening at Z=0. Position actors on the room side (positive Z); their mirrored performances behind the glass are faint by day and stronger by night. Do not add a second `pane` here.
 - `house_corner`: furnished Quequis house interior. `optics_lab`: diagram grid. `backstage`: curtains and riser. `graveyard`: cemetery. `void`: sparse demonstration floor. Stage does not persist between shots.
 - Built-in subjects: `sheet`, `pane`, `lamp`, `eye`, `arrow`, `rays`, `label`. `rays` illustrates reflection, not straight-through transmission. For other objects use the verified inventory below.
 - Default look: 160×240 clip-space snap grid, 180×320 scene buffer, nearest sampling, affine diffuse UVs, 4×4 Bayer dithering and 5:5:5 RGB. The scene is enlarged to 540×960 **before** caption compositing. Adjust the look in the inspector or `CONFIG.psx`, not in JSON.
-- For TTS or recorded voice, absolute cue time is **sum of previous shot durations + caption `at`**. Treat a longer spoken sentence as several timed pops. Never split an existing audio track by simply guessing its new cut points.
+- For TTS or recorded voice, absolute cue time is **sum of previous shot durations + caption `time`**. Treat a longer spoken sentence as several timed pops. Never split an existing audio track by simply guessing its new cut points.
 
-### Migrating a v1 script
+### Migrating older scripts
 
-Set `version:2`, rename `scenes` to `shots`, choose a legal lens and cue for every shot, split long captions, replace `talk_gesture`/`point`/`shock` with `talking`/`pointing`/`shocked`, then validate in **Edit JSON → Apply episode**. Durations outside the allowed range must be rewritten, not silently clamped. Scrub the last tick of one shot and the first of the next. Play through with audio before export.
+For v2: set `version:3`, add `cameraMotion` to every shot, rename caption `at` to `time`, and move any audio filename from `narration` to `voiceover`. Write prose in `narration`. Audition the **whole take first**, then place caption and event times. For v1, also rename `scenes` to `shots`, choose a legal lens and cue for every shot, split long captions, replace `talk_gesture`/`point`/`shock` with `talking`/`pointing`/`shocked`, then validate in **Edit JSON → Apply episode**. Durations outside the allowed range must be rewritten, not silently clamped. Scrub the last tick of one shot and the first of the next. Play through with audio before export.
 
 ## Inspected assets and rig compatibility
 

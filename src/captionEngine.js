@@ -31,7 +31,11 @@ export function composite(ctx, image, episode, s, index, t) {
     ctx.lineTo(x, y + b * 16);
     ctx.stroke();
   }
-  const c = s.captions.findLast((c) => c.at <= t) ?? s.captions[0];
+  const c = s.captions.findLast((c) => c.time <= t);
+  if (!c) {
+    ctx.restore();
+    return;
+  }
   const words = c.text.trim().split(/\s+/);
   ctx.font = "900 54px Arial, sans-serif";
   const lines = [];
@@ -45,7 +49,8 @@ export function composite(ctx, image, episode, s, index, t) {
   }
   lines.push(line);
   ctx.translate(270, 480 - ((lines.length - 1) * 59) / 2);
-  const k = 1 - 0.24 * Math.exp(-16 * (t - c.at)) * Math.cos(26 * (t - c.at));
+  const k =
+    1 - 0.24 * Math.exp(-16 * (t - c.time)) * Math.cos(26 * (t - c.time));
   ctx.scale(k, k);
   ctx.textBaseline = "middle";
   ctx.lineJoin = "round";
