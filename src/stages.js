@@ -1,3 +1,4 @@
+import { casinoRoom } from "./casinoRoom.js";
 import * as T from "three";
 import { blizzard } from "./Evolutionary_Explainer/blizzard.js";
 import { SCENE_PRESETS } from "./config.js";
@@ -408,6 +409,7 @@ export function stage(name) {
   s.add(key);
   let weather = null;
   if (name === "blizzard") weather = blizzard(s);
+  else if (name === "casino_room") casinoRoom(s);
   else if (p.reflection) windowRoom(s, name === "window_night");
   else if (name === "graveyard") cemetery(s);
   else {

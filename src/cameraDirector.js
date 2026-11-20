@@ -46,6 +46,20 @@ export class CameraDirector {
       c.fov = lens;
       c.updateProjectionMatrix();
     }
+    if (s.pov) {
+      const turn = Math.min(1, t / 0.36),
+        kick = 1 - Math.exp(-8 * t);
+      c.position.fromArray(s.pov.eye);
+      c.position.y += 0.014 * Math.sin(5 * t);
+      if (s.pov.whipFrom)
+        this.focus.lerp(
+          this.offset.fromArray(s.pov.whipFrom),
+          1 - turn * turn * (3 - 2 * turn),
+        );
+      c.lookAt(this.focus);
+      c.translateZ((s.pov.recoil ?? 0) * kick);
+      return this.move(s.cameraMotion, t, u);
+    }
     let d = s.distance ?? 4.1,
       a = s.angle ?? 0,
       h = 0.22,

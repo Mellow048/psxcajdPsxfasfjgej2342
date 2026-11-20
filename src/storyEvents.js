@@ -10,7 +10,11 @@ export const storyKey = (ev) => STORY_KEYS.find((k) => Object.hasOwn(ev, k));
 export function validateStoryEvent(ev, key, shot, { check, keys, vec }) {
   const label = (v, n) =>
     typeof v === "string" && v.trim().length > 0 && v.length <= n;
-  const positioned = key === "spawn_mass" || key === "show_whiteboard";
+  const positioned =
+    key === "spawn_mass" ||
+    key === "show_whiteboard" ||
+    key === "show_phone" ||
+    key === "show_tv";
   keys(ev, `${key} time sfx duration${positioned ? " position" : ""}`);
   check(
     Number.isFinite(ev.time) && ev.time >= 0 && ev.time < shot.duration,
@@ -22,9 +26,17 @@ export function validateStoryEvent(ev, key, shot, { check, keys, vec }) {
     "visual event duration exceeds shot",
   );
   check(
-    ["pop", "click", "ding", "whoosh", "ui_pop", "whoosh_fast"].includes(
-      ev.sfx,
-    ),
+    [
+      "pop",
+      "click",
+      "ding",
+      "whoosh",
+      "ui_pop",
+      "whoosh_fast",
+      "cash_register",
+      "heavy_thud",
+      "buzzer",
+    ].includes(ev.sfx),
     "visual event requires a synthesized cue",
   );
   check(
@@ -33,10 +45,10 @@ export function validateStoryEvent(ev, key, shot, { check, keys, vec }) {
   );
   const v = ev[key];
   if (key === "show_phone" || key === "show_tv") {
-    keys(v, v?.app === "bank" ? "app balance" : "app avatar");
+    keys(v, v?.app === "bank" ? "app balance debit" : "app avatar");
     check(
       v.app === "bank"
-        ? label(v.balance, 18)
+        ? label(v.balance, 18) && (v.debit === undefined || label(v.debit, 20))
         : v.app === "video_call" && v.avatar === "guru",
       "expected bank balance or guru video call",
     );
@@ -49,7 +61,8 @@ export function validateStoryEvent(ev, key, shot, { check, keys, vec }) {
       "invalid reveal window",
     );
     check(
-      v.prop === "casino_chip" && v.formation === "grid_wall",
+      v.prop === "casino_chip" &&
+        ["grid_wall", "table_tower"].includes(v.formation),
       "unknown mass prop or formation",
     );
     check(
@@ -103,17 +116,30 @@ export function validateStoryEvent(ev, key, shot, { check, keys, vec }) {
     );
   }
   if (key === "show_graph") {
-    keys(v, "label start end drawTime unit");
+    keys(v, "label start end drawTime unit lossStreak cueAt");
     check(
       label(v.label, 32) && (v.unit === undefined || label(v.unit, 5)),
       "invalid graph label or unit",
     );
     check(
       [v.start, v.end].every(
-        (x) => Number.isFinite(x) && x >= 0.0001 && x <= 1e12,
+        (x) =>
+          Number.isFinite(x) && x >= (v.lossStreak ? 0 : 0.0001) && x <= 1e12,
       ) && v.start !== v.end,
       "exponential graph needs unequal positive endpoints",
     );
+    check(
+      v.cueAt === undefined || v.cueAt === "end",
+      "invalid graph cue timing",
+    );
+    if (v.lossStreak !== undefined)
+      check(
+        Number.isInteger(v.lossStreak) &&
+          v.lossStreak >= 1 &&
+          v.lossStreak <= 24 &&
+          v.start > v.end,
+        "invalid doubling loss streak",
+      );
     check(
       Number.isFinite(v.drawTime) && v.drawTime > 0 && v.drawTime <= life,
       "invalid graph drawTime",

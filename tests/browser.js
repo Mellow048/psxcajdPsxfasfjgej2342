@@ -229,7 +229,7 @@ try {
     "caption edits do not regenerate voice",
   );
   a.dispose();
-  const story = await (await fetch("episodes/chip-math.json")).json();
+  const story = await (await fetch("episodes/escalation-lab.json")).json();
   await r.load(story);
   r.seek(0);
   assert(!r.frames[0].visuals[0].node.visible, "screen hidden before its cue");

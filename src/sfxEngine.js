@@ -1,11 +1,8 @@
 import { MUSIC_PRESETS, SFX_MANIFEST } from "./config.js";
 import { bedAutomation } from "./musicBed.js";
-import { DEFAULT_SPEECH_RATE } from "./voiceProfile.js";
+import { takeRate } from "./voiceProfile.js";
 const voiceKey = (e) =>
-  e.voiceover ||
-  (e.narration
-    ? `tts:${e.speechRate ?? DEFAULT_SPEECH_RATE}:${e.narration}`
-    : null);
+  e.voiceover || (e.narration ? `tts:${takeRate(e)}:${e.narration}` : null);
 export class SfxEngine {
   constructor() {
     this.nodes = new Set();
@@ -45,7 +42,7 @@ export class SfxEngine {
     // The offline encoder calls the exact same take preparation as Play.
     if (e.narration && !e.voiceover && !this.buffers.has(voiceKey(e))) {
       const { renderNarration } = await import("./narration.js");
-      const wav = await renderNarration(e.narration, e.speechRate);
+      const wav = await renderNarration(e.narration, takeRate(e));
       this.buffers.set(voiceKey(e), await this.ctx.decodeAudioData(wav));
     }
     for (const url of new Set(
@@ -104,6 +101,12 @@ export class SfxEngine {
     n.stop(now + duration);
   }
   tone(key, when) {
+    if (key === "cash_register") {
+      this.tone("tooth", when);
+      this.tone("ding", when + 0.04);
+      this.tone("octave", when + 0.085);
+      return;
+    }
     if (key === "ratchet") {
       for (let i = 0; i < 6; i++) this.tone("tooth", when + i * 0.075);
       return;
@@ -118,6 +121,7 @@ export class SfxEngine {
       n = c.createOscillator(),
       g = c.createGain();
     const [a, b, len, vol, type] = {
+      heavy_thud: [128, 34, 0.31, 0.46, "triangle"],
       tooth: [920, 290, 0.029, 0.14, "square"],
       buzzer: [154, 95, 0.24, 0.14, "sawtooth"],
       ping: [1080, 1050, 0.16, 0.15, "sine"],
@@ -158,7 +162,10 @@ export class SfxEngine {
           : this.sample(SFX_MANIFEST[s.sfx], when);
       }
       for (const ev of s.events ?? []) {
-        const at = t + ev.time;
+        const at =
+          t +
+          ev.time +
+          (ev.show_graph?.cueAt === "end" ? ev.show_graph.drawTime : 0);
         if (at >= offset - 1e-6) {
           const when = now + Math.max(0, at - offset);
           this.tone(ev.sfx, when);

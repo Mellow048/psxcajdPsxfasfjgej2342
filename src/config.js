@@ -7,6 +7,7 @@ export const CONFIG = {
   psx: { grid: 160, gridHeight: 240, affine: 1, dither: 1, scale: 1 / 3 },
 };
 export const SCENE_PRESETS = {
+  casino_room: { color: 0x432737, fog: 0x4c2b39 },
   blizzard: { color: 0x8999b1, fog: 0xb5c9d9 },
   graveyard: { color: 0x716691, fog: 0x706088 },
   backstage: { color: 0x342842, fog: 0x40304c },
@@ -55,6 +56,7 @@ export const ASSET_MANIFEST = {
   ...Object.fromEntries(BUILTINS.map((k) => [k, { builtin: true, clips: [] }])),
 };
 export const MUSIC_PRESETS = {
+  tense_heartbeat: { track: "episodes/tense-heartbeat.wav", volume: 0.44 },
   synthwave_tense: {
     track: "episodes/synthwave-tense.wav",
     volume: 0.34,

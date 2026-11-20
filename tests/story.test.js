@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { validate } from "../src/schema.js";
 import { SfxEngine } from "../src/sfxEngine.js";
-const demo = JSON.parse(readFileSync("episodes/chip-math.json"));
+const demo = JSON.parse(readFileSync("episodes/escalation-lab.json"));
 test("story demo and TV variant validate; bounds and topology fail during authoring", () => {
   validate(demo);
   const tv = structuredClone(demo.shots[1]);
@@ -41,4 +41,25 @@ test("story cues are scheduled at event onset, never replayed by a late seek", (
   heard.length = 0;
   a.start({ shots: [demo.shots[3]] }, 0.3);
   assert.deepEqual(heard, []);
+});
+test("casino POV: grounded tower and buzzer precisely on the last loss", () => {
+  const e = validate(JSON.parse(readFileSync("episodes/chip-math.json")));
+  assert.ok(
+    e.shots.every(
+      (s) => s.stage === "casino_room" && s.pov.eye && s.cameraMotion,
+    ),
+  );
+  const tower = e.shots[2].events[0];
+  assert.equal(tower.position[1], 0.9);
+  assert.equal(tower.spawn_mass.count, 1000);
+  const s = e.shots[3],
+    ev = s.events[0],
+    g = ev.show_graph;
+  assert.equal(g.start - g.end, 10 * (2 ** g.lossStreak - 1));
+  const a = new SfxEngine(),
+    cues = [];
+  a.ctx = { currentTime: 0 };
+  a.tone = (key, when) => cues.push([key, when]);
+  a.start({ shots: [s] }, 0.5);
+  assert.deepEqual(cues, [["buzzer", ev.time + g.drawTime - 0.5]]);
 });

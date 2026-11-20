@@ -8,11 +8,26 @@ export function createMass(ev) {
     rows = Math.ceil(count / cols),
     gap = 0.104;
   const geometry = new T.CylinderGeometry(0.049, 0.049, 0.019, 16);
-  geometry.rotateX(Math.PI / 2);
+  const tower = ev.spawn_mass.formation === "table_tower";
+  if (!tower) geometry.rotateX(Math.PI / 2);
   const pos = geometry.attributes.position,
     uv = geometry.attributes.uv;
   for (let i = 0; i < pos.count; i++)
-    uv.setXY(i, 0.5 + pos.getX(i) * 10, 0.5 + pos.getY(i) * 10);
+    uv.setXY(
+      i,
+      0.5 + pos.getX(i) * 10,
+      0.5 + (tower ? pos.getZ(i) : pos.getY(i)) * 10,
+    );
+  if (tower) {
+    for (let i = 0; i < pos.count; i++)
+      if (Math.abs(geometry.attributes.normal.getY(i)) < 0.5) {
+        uv.setXY(
+          i,
+          0.5 + 0.39 * Math.cos(i * 0.81),
+          0.5 + 0.39 * Math.sin(i * 0.81),
+        );
+      }
+  }
   const material = canvasFace(64, 64, (c) => {
     c.fillStyle = "#fff2d3";
     c.fillRect(0, 0, 64, 64);
@@ -46,6 +61,22 @@ export function createMass(ev) {
       (row - (rows - 1) / 2) * gap,
       0.012 * Math.cos(col * 0.48),
     );
+    if (tower) {
+      // Nested 5×5, 3×3 and single stacks. The first 800, next 180 and
+      // final 20 chips in the demo occupy contiguous layers starting at y=0.
+      const n = i < 800 ? 5 : i < 980 ? 3 : 1,
+        j = i - (i < 800 ? 0 : i < 980 ? 800 : 980),
+        base = i < 800 ? 0 : i < 980 ? 32 : 52;
+      matrix.makeTranslation(
+        ((j % n) - (n - 1) / 2) * gap,
+        (base + Math.floor(j / (n * n)) + 0.5) * 0.019,
+        ((Math.floor(j / n) % n) - (n - 1) / 2) * gap,
+      );
+      node.setColorAt(
+        i,
+        new T.Color(Math.floor(j / (n * n)) % 4 === 0 ? 0x9b4359 : 0xffe3bc),
+      );
+    }
     node.setMatrixAt(i, matrix);
   }
   node.instanceMatrix.needsUpdate = true;
@@ -56,6 +87,15 @@ export function createMass(ev) {
     sample(t) {
       const age = t - ev.time;
       node.visible = age >= 0 && age < (ev.duration ?? Infinity);
+      if (tower) {
+        const impact = Math.max(0, age);
+        node.scale.set(
+          1,
+          1 - 0.15 * Math.exp(-12 * impact) * Math.cos(20 * impact),
+          1,
+        );
+        return;
+      }
       node.rotation.y = 0.045 * Math.sin(age * 2);
       // All chips exist on the cue frame. Optional pull-back starts close enough
       // to read the markings, then reveals the scale using one parent transform.

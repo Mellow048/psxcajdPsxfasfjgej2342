@@ -37,7 +37,7 @@ export function validate(e) {
   if (Array.isArray(e)) e = { version: 3, title: "Untitled Short", shots: e };
   keys(
     e,
-    "version title series narration voiceover speechRate beat music bgMusic shots",
+    "version title series narration voiceover speechRate narratorStyle beat music bgMusic shots",
   );
   check(e.version === 3 && str(e.title), "version: 3 and a title required");
   check(e.series === undefined || str(e.series), "invalid series");
@@ -55,6 +55,10 @@ export function validate(e) {
   check(
     e.voiceover === undefined || audioPath(e.voiceover),
     "voiceover must be a relative audio file",
+  );
+  check(
+    e.narratorStyle === undefined || e.narratorStyle === "urgent",
+    "invalid narratorStyle",
   );
   if (e.bgMusic !== undefined)
     check(
@@ -88,7 +92,7 @@ export function validate(e) {
     at = `shot ${i + 1}`;
     keys(
       s,
-      "title duration stage cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook",
+      "title duration stage pov cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook",
     );
     if (s.matchHook !== undefined)
       check(
@@ -125,6 +129,19 @@ export function validate(e) {
         (num(s.distance) && s.distance >= 0.3 && s.distance <= 40),
       "invalid distance",
     );
+    if (s.pov !== undefined) {
+      keys(s.pov, "eye whipFrom recoil");
+      check(vec(s.pov.eye) && vec(s.focus), "POV needs eye and focus vectors");
+      check(
+        s.pov.whipFrom === undefined || vec(s.pov.whipFrom),
+        "invalid whip origin",
+      );
+      check(
+        s.pov.recoil === undefined ||
+          (num(s.pov.recoil) && s.pov.recoil >= 0 && s.pov.recoil <= 3),
+        "invalid pullback",
+      );
+    }
     for (const k of ["angle", "pan"])
       check(s[k] === undefined || num(s[k]), "invalid " + k);
     const ids = new Set();
@@ -184,7 +201,7 @@ export function validate(e) {
         (Array.isArray(s.events) && s.events.length <= 24),
       "events must be an array of at most 24 spawns",
     );
-    const hasSubject = ids.size > 0;
+    const hasSubject = ids.size > 0 || s.stage === "casino_room";
     for (const ev of s.events ?? []) {
       check(obj(ev), "invalid event");
       const story = storyKey(ev);

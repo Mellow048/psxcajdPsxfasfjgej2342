@@ -42,6 +42,7 @@ function paintApp(c, w, h, app) {
     text(c, app.balance, 16, y + 58, 57, fg, "bold", w - 32);
     c.fillStyle = mint;
     c.fillRect(20, y + 76, 54, 5);
+    if (app.debit) text(c, app.debit, 20, y + 119, 29, "#ffac9e");
     text(c, "CASH ACCOUNT   /   01", 20, h - 69, 16, "#a9d3bd");
     c.fillStyle = "#b8ed87";
     c.fillRect(18, h - 48, w - 36, 30);
@@ -167,6 +168,14 @@ export function createScreen(ev) {
       const age = t - ev.time;
       node.visible = age >= 0 && age < (ev.duration ?? Infinity);
       if (!node.visible) return;
+      if (ev.position) {
+        const scale = phone ? 0.67 : 0.84;
+        node.scale.setScalar(scale);
+        node.position.fromArray(ev.position);
+        node.rotation.set(phone ? -Math.PI / 2 : 0, 0, 0);
+        node.position.y += scale * (phone ? 0.0375 : 0.67);
+        return;
+      }
       const pop = 1 - Math.exp(-13 * age) * Math.cos(17 * age),
         depth = 1.25,
         span = 2 * Math.tan((camera.fov * Math.PI) / 360) * depth;

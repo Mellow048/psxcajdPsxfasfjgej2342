@@ -116,7 +116,11 @@ export function drawGraph(c, ev, t) {
     lo = Math.min(g.start, g.end),
     hi = Math.max(g.start, g.end);
   const value = (p) =>
-    Math.exp(Math.log(g.start) + (Math.log(g.end) - Math.log(g.start)) * p);
+    g.lossStreak
+      ? g.start -
+        ((g.start - g.end) * (2 ** (g.lossStreak * p) - 1)) /
+          (2 ** g.lossStreak - 1)
+      : Math.exp(Math.log(g.start) + (Math.log(g.end) - Math.log(g.start)) * p);
   const py = (p) => y + h * (1 - (value(p) - lo) / (hi - lo));
   c.save();
   c.fillStyle = "rgba(17,31,39,.94)";
@@ -157,8 +161,8 @@ export function drawGraph(c, ev, t) {
   c.fill();
   c.font = "16px monospace";
   c.fillStyle = "#bfcebe";
-  c.fillText("START", x, 478);
+  c.fillText(g.lossStreak ? "OPEN" : "START", x, 478);
   c.textAlign = "right";
-  c.fillText("FINISH", x + w, 478);
+  c.fillText(g.lossStreak ? `${g.lossStreak} LOSSES` : "FINISH", x + w, 478);
   c.restore();
 }

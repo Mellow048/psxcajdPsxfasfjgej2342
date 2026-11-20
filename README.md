@@ -83,6 +83,6 @@ Additional browser acceptance: load the demo; test all shots and seek backward; 
 
 Open `/?episode=episodes/pallas_cat.json` for **Pallas Cat: Cold Build** (17 seconds). The reusable morph and diegetic UI modules live under [`src/Evolutionary_Explainer/`](src/Evolutionary_Explainer/). The actor, mountain stage, weather, pupil atlas and studded UI are all generated locally. See the [script guide](SCRIPT_GUIDE.md#evolutionary-explainer-build-a-loadout) for event keys, durations, and sound cues. To encode the demo, use `npm run render -- episodes/pallas_cat.json` with the renderer prerequisites above, or select this episode path in the Render a Short workflow.
 
-### Escalation demo: The shrinking stack
+### Escalation demo: Ten bucks on red
 
-Open `/?episode=episodes/chip-math.json` to see bank and video-call screens, a 1,000-chip instanced wall, a camera move onto a branching whiteboard, and an animated exponential balance graph. The [timeline reference](SCRIPT_GUIDE.md#escalation-timeline-screen--scale--diagram--graph) covers these JSON events and the TV variant. Render it with `npm run render -- episodes/chip-math.json` or select that path in GitHub Actions.
+Open `/?episode=episodes/chip-math.json` for a four-shot first-person Martingale warning: casino felt, a guru call, an instanced chip tower and a bankroll crash. The previous wall/whiteboard demo remains at `episodes/escalation-lab.json`. The [timeline reference](SCRIPT_GUIDE.md#escalation-timeline-screen--scale--diagram--graph) covers these JSON events and the TV variant. Render it with `npm run render -- episodes/chip-math.json` or select that path in GitHub Actions.

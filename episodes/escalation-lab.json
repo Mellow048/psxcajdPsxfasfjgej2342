@@ -1,0 +1,286 @@
+{
+  "version": 3,
+  "title": "The shrinking stack",
+  "series": "Field Study / Risk",
+  "narration": "Your balance is two thousand, five hundred sixty-five dollars. A guru says, double it. Picture a thousand chips. Now follow one chip: win or lose. Lose half, then half again. That curve is your balance.",
+  "voiceover": "episodes/escalation-lab-voice.wav",
+  "music": {
+    "track": "episodes/synthwave-tense.wav",
+    "volume": 0.22
+  },
+  "shots": [
+    {
+      "title": "Open the ledger",
+      "duration": 3.5,
+      "stage": "optics_lab",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "distance": 3.9,
+      "angle": 0,
+      "focus": [0, 1.2, 0],
+      "sfx": "whoosh_fast",
+      "events": [
+        {
+          "time": 0.12,
+          "sfx": "ui_pop",
+          "show_phone": {
+            "app": "bank",
+            "balance": "$2,565"
+          }
+        }
+      ],
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "Your balance is",
+          "highlight": "balance"
+        },
+        {
+          "time": 0.58,
+          "text": "two thousand,",
+          "highlight": "thousand,"
+        },
+        {
+          "time": 1.76,
+          "text": "five hundred",
+          "highlight": "hundred"
+        },
+        {
+          "time": 2.23,
+          "text": "sixty-five dollars.",
+          "highlight": "sixty-five"
+        }
+      ],
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "position": [-0.38, 0, 0],
+          "height": 1.65,
+          "motion": "talking",
+          "motionSfx": "click"
+        }
+      ]
+    },
+    {
+      "title": "Incoming pitch",
+      "duration": 2.3,
+      "stage": "optics_lab",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_pull",
+      "distance": 3.9,
+      "angle": 0,
+      "focus": [0, 1.2, 0],
+      "sfx": "whoosh_fast",
+      "events": [
+        {
+          "time": 0.08,
+          "sfx": "ding",
+          "show_phone": {
+            "app": "video_call",
+            "avatar": "guru"
+          }
+        }
+      ],
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.27,
+          "text": "A guru says,",
+          "highlight": "says,"
+        },
+        {
+          "time": 1.47,
+          "text": "double it.",
+          "highlight": "double"
+        }
+      ],
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "position": [-0.38, 0, 0],
+          "height": 1.65,
+          "motion": "talking",
+          "motionSfx": "click"
+        }
+      ]
+    },
+    {
+      "title": "Count the wall",
+      "duration": 2.2,
+      "stage": "optics_lab",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "distance": 6.6,
+      "angle": 0.25,
+      "focus": [0, 2.05, 0],
+      "sfx": "whoosh_fast",
+      "events": [
+        {
+          "time": 0,
+          "sfx": "pop",
+          "spawn_mass": {
+            "prop": "casino_chip",
+            "count": 1000,
+            "formation": "grid_wall",
+            "reveal": 1.3
+          }
+        }
+      ],
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.25,
+          "text": "Picture",
+          "highlight": "Picture"
+        },
+        {
+          "time": 0.67,
+          "text": "a thousand",
+          "highlight": "thousand"
+        },
+        {
+          "time": 1.25,
+          "text": "chips.",
+          "highlight": "chips."
+        }
+      ]
+    },
+    {
+      "title": "Follow one chip",
+      "duration": 2.8,
+      "stage": "optics_lab",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "handheld_bob",
+      "distance": 3.9,
+      "angle": 0,
+      "focus": [0, 1.2, 0],
+      "sfx": "whoosh_fast",
+      "events": [
+        {
+          "time": 0.2,
+          "sfx": "whoosh_fast",
+          "position": [1.4, 1.5, -0.4],
+          "show_whiteboard": {
+            "title": "ONE CHIP / TWO PATHS",
+            "transition": 0.55,
+            "nodes": [
+              {
+                "id": "bet",
+                "kind": "step",
+                "label": "PLAY",
+                "x": 0.5,
+                "y": 0
+              },
+              {
+                "id": "up",
+                "kind": "win",
+                "label": "WIN",
+                "x": 0.12,
+                "y": 0.85
+              },
+              {
+                "id": "down",
+                "kind": "loss",
+                "label": "LOSS",
+                "x": 0.88,
+                "y": 0.85
+              }
+            ],
+            "edges": [
+              ["bet", "up"],
+              ["bet", "down"]
+            ]
+          }
+        }
+      ],
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.2,
+          "text": "Now follow",
+          "highlight": "follow"
+        },
+        {
+          "time": 0.72,
+          "text": "one chip:",
+          "highlight": "chip:"
+        },
+        {
+          "time": 1.66,
+          "text": "win or lose.",
+          "highlight": "lose."
+        }
+      ],
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "position": [-0.38, 0, 0],
+          "height": 1.65,
+          "motion": "pointing",
+          "motionSfx": "click"
+        }
+      ]
+    },
+    {
+      "title": "Halve twice",
+      "duration": 3.5,
+      "stage": "optics_lab",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "distance": 3.9,
+      "angle": 0,
+      "focus": [0, 1.2, 0],
+      "sfx": "whoosh_fast",
+      "events": [
+        {
+          "time": 0.1,
+          "sfx": "ding",
+          "show_graph": {
+            "label": "Balance / two halvings",
+            "start": 2565,
+            "end": 641.25,
+            "unit": "$",
+            "drawTime": 2.1
+          }
+        }
+      ],
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.18,
+          "text": "Lose half,",
+          "highlight": "half,"
+        },
+        {
+          "time": 1.05,
+          "text": "then half again.",
+          "highlight": "again."
+        },
+        {
+          "time": 2.19,
+          "text": "That curve",
+          "highlight": "curve"
+        },
+        {
+          "time": 2.68,
+          "text": "is your balance.",
+          "highlight": "balance."
+        }
+      ],
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "position": [-0.38, 0, 0],
+          "height": 1.65,
+          "motion": "talking",
+          "motionSfx": "click"
+        }
+      ]
+    }
+  ]
+}
