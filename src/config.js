@@ -7,6 +7,7 @@ export const CONFIG = {
   psx: { grid: 160, gridHeight: 240, affine: 1, dither: 1, scale: 1 / 3 },
 };
 export const SCENE_PRESETS = {
+  blizzard: { color: 0x8999b1, fog: 0xb5c9d9 },
   graveyard: { color: 0x716691, fog: 0x706088 },
   backstage: { color: 0x342842, fog: 0x40304c },
   optics_lab: { color: 0x203646, fog: 0x284453 },
@@ -40,6 +41,7 @@ export const SCENE_PRESETS = {
   },
 };
 export const BUILTINS = [
+  "evo_cat",
   "sheet",
   "pane",
   "lamp",
@@ -81,6 +83,8 @@ export const MOTIONS = [
   "pointing",
   "cup_hands",
   "thinking",
+  "shiver",
+  "grumpy",
   "shocked",
   "float_spin",
   "pop_in",

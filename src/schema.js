@@ -1,4 +1,9 @@
 import {
+  MORPHS,
+  UI_CUES,
+  MORPH_CUES,
+} from "./Evolutionary_Explainer/contracts.js";
+import {
   ASSET_MANIFEST as assets,
   SFX_MANIFEST as sounds,
   SCENE_PRESETS as stages,
@@ -80,7 +85,7 @@ export function validate(e) {
     at = `shot ${i + 1}`;
     keys(
       s,
-      "title duration stage cameraPreset cameraMotion events distance angle pan focus actors props captions sfx matchHook",
+      "title duration stage cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook",
     );
     if (s.matchHook !== undefined)
       check(
@@ -92,6 +97,11 @@ export function validate(e) {
           s.cameraPreset === e.shots[0].cameraPreset,
         "matchHook needs final shot with opening stage, focus and rig",
       );
+    check(
+      s.captionPosition === undefined ||
+        ["center", "lower"].includes(s.captionPosition),
+      "invalid captionPosition",
+    );
     check(str(s.title), "missing title");
     check(
       num(s.duration) &&
@@ -118,12 +128,23 @@ export function validate(e) {
     for (const k of ["actors", "props"]) {
       check(s[k] === undefined || Array.isArray(s[k]), k + " must be an array");
       for (const d of s[k] ?? []) {
-        keys(d, "id asset height yaw position motion motionSfx mesh clip text");
+        keys(
+          d,
+          "id asset height yaw position motion motionSfx mesh clip text traits",
+        );
         check(
           d.motionSfx === undefined ||
             ["ui_pop", "click", "ding"].includes(d.motionSfx),
           "invalid motion cue",
         );
+        if (d.traits !== undefined)
+          check(
+            k === "actors" &&
+              d.asset === "evo_cat" &&
+              Array.isArray(d.traits) &&
+              d.traits.every((tr) => has(MORPHS, tr)),
+            "invalid starting traits",
+          );
         check(str(d.id) && !ids.has(d.id), "missing or duplicate subject id");
         ids.add(d.id);
         check(has(assets, d.asset), "unknown asset " + d.asset);
@@ -162,7 +183,52 @@ export function validate(e) {
     );
     const hasSubject = ids.size > 0;
     for (const ev of s.events ?? []) {
-      check(obj(ev) && ev.type === "spawn_prop", "expected spawn_prop event");
+      check(obj(ev), "invalid event");
+      if ("apply_morph" in ev || "texture_swap" in ev || "spawn_ui" in ev) {
+        const ui = "spawn_ui" in ev,
+          swap = "texture_swap" in ev,
+          key = ui ? "spawn_ui" : swap ? "texture_swap" : "apply_morph",
+          name = ev[key];
+        keys(
+          ev,
+          `${key} time sfx ` + (ui ? "position size" : "target duration"),
+        );
+        check(
+          num(ev.time) && ev.time >= 0 && ev.time < s.duration,
+          "event time outside shot",
+        );
+        if (ui) {
+          check(
+            has(UI_CUES, name) && ev.sfx === UI_CUES[name] && vec(ev.position),
+            "invalid UI panel, position or cue",
+          );
+          check(
+            ev.size === undefined ||
+              (num(ev.size) && ev.size > 0 && ev.size <= 4),
+            "invalid UI size",
+          );
+        } else {
+          check(
+            has(MORPHS, name) &&
+              swap === (MORPHS[name] === "texture_swap") &&
+              ev.sfx === MORPH_CUES[name],
+            "invalid morph or cue",
+          );
+          check(
+            s.actors?.some((d) => d.id === ev.target && d.asset === "evo_cat"),
+            "missing compatible morph target",
+          );
+          check(
+            num(ev.duration) &&
+              ev.duration >= 0.5 &&
+              ev.duration <= 1 &&
+              ev.time + ev.duration <= s.duration,
+            "morph needs 0.5–1s within shot",
+          );
+        }
+        continue;
+      }
+      check(ev.type === "spawn_prop", "expected spawn_prop event");
       const kind = ev.spawn_prop ?? ev.asset,
         stream = kind === "particle_stream_yellow",
         bulb = kind === "3D_Lightbulb",

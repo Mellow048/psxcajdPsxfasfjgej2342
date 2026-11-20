@@ -1,4 +1,5 @@
 import * as T from "three";
+import { blizzard } from "./Evolutionary_Explainer/blizzard.js";
 import { SCENE_PRESETS } from "./config.js";
 const basic = (c) => new T.MeshBasicMaterial({ color: c }),
   lit = (c) => new T.MeshLambertMaterial({ color: c, flatShading: true });
@@ -405,7 +406,9 @@ export function stage(name) {
   const key = new T.DirectionalLight(0xffe6c7, 2);
   key.position.set(-3, 6, 3);
   s.add(key);
-  if (p.reflection) windowRoom(s, name === "window_night");
+  let weather = null;
+  if (name === "blizzard") weather = blizzard(s);
+  else if (p.reflection) windowRoom(s, name === "window_night");
   else if (name === "graveyard") cemetery(s);
   else {
     const back = name === "backstage";
@@ -450,5 +453,5 @@ export function stage(name) {
     new T.PointsMaterial({ color: 0xffe9bb, size: 0.018 }),
   );
   s.add(dust);
-  return { scene: s, dust };
+  return { scene: s, dust, weather };
 }

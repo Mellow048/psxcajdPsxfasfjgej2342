@@ -48,7 +48,10 @@ export function composite(ctx, image, episode, s, index, t) {
     } else line = test;
   }
   lines.push(line);
-  ctx.translate(270, 480 - ((lines.length - 1) * 59) / 2);
+  ctx.translate(
+    270,
+    (s.captionPosition === "lower" ? 750 : 480) - ((lines.length - 1) * 59) / 2,
+  );
   const k =
     1 - 0.24 * Math.exp(-16 * (t - c.time)) * Math.cos(26 * (t - c.time));
   ctx.scale(k, k);

@@ -78,3 +78,7 @@ Inspect new rig families before reusing clips: name matching is **not** general 
 Visit `http://localhost:8000/tests/browser.html` for automated WebGL integration checks (deterministic seeking, real rigs/prop selection, failed reload rollback and stable GPU counts).
 
 Additional browser acceptance: load the demo; test all shots and seek backward; change/reset the look; apply invalid then valid JSON; load a named GLB prop and a Mixamo character clip; export with the speakers muted and verify video, burned-in captions and audio. Renderer warnings about source FBX weights being reduced to four are expected; they are not missing files or shader errors.
+
+### Evolutionary Explainer
+
+Open `/?episode=episodes/pallas_cat.json` for **Pallas Cat: Cold Build** (17 seconds). The reusable morph and diegetic UI modules live under [`src/Evolutionary_Explainer/`](src/Evolutionary_Explainer/). The actor, mountain stage, weather, pupil atlas and studded UI are all generated locally. See the [script guide](SCRIPT_GUIDE.md#evolutionary-explainer-build-a-loadout) for event keys, durations, and sound cues. To encode the demo, use `npm run render -- episodes/pallas_cat.json` with the renderer prerequisites above, or select this episode path in the Render a Short workflow.

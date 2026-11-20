@@ -1,0 +1,338 @@
+{
+  "version": 3,
+  "title": "Pallas Cat: Cold Build",
+  "series": "Evolutionary Explainer / Loadout 01",
+  "narration": "Cold enough for this cat? That starter build won't cut it in a blizzard. Let's spend some stat points! Equip a thick winter coat. Short legs and low ears give it a squat silhouette. Check the eyes: round pupils instead of slits! Add one spectacular scowl. Meet the Pallas cat. But is it…",
+  "voiceover": "episodes/pallas-cat-voice.wav",
+  "music": {
+    "track": "episodes/synthwave-tense.wav",
+    "volume": 0.21
+  },
+  "shots": [
+    {
+      "title": "Starter build",
+      "duration": 2,
+      "stage": "blizzard",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "distance": 3.65,
+      "angle": 0.58,
+      "focus": [0, 0.8, 0.06],
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "cat",
+          "asset": "evo_cat",
+          "height": 1.7,
+          "motion": "shiver",
+          "motionSfx": "click",
+          "traits": []
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.11,
+          "text": "Cold enough",
+          "highlight": "enough"
+        },
+        {
+          "time": 0.85,
+          "text": "for this cat?",
+          "highlight": "this"
+        }
+      ],
+      "captionPosition": "lower"
+    },
+    {
+      "title": "Cold check: denied",
+      "duration": 3,
+      "stage": "blizzard",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "handheld_bob",
+      "distance": 4.8,
+      "angle": 0.26,
+      "focus": [0, 0.96, 0.09],
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "cat",
+          "asset": "evo_cat",
+          "height": 1.7,
+          "motion": "shiver",
+          "motionSfx": "click",
+          "traits": []
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.14,
+          "text": "That starter build",
+          "highlight": "starter"
+        },
+        {
+          "time": 0.68,
+          "text": "won't cut it",
+          "highlight": "won't"
+        },
+        {
+          "time": 0.98,
+          "text": "in a blizzard.",
+          "highlight": "blizzard."
+        },
+        {
+          "time": 1.73,
+          "text": "Let's spend",
+          "highlight": "Let's"
+        },
+        {
+          "time": 2.09,
+          "text": "some stat points!",
+          "highlight": "points!"
+        }
+      ],
+      "events": [
+        {
+          "spawn_ui": "red_x",
+          "time": 0.14,
+          "position": [0, 1.98, 0.23],
+          "size": 0.86,
+          "sfx": "buzzer"
+        }
+      ],
+      "captionPosition": "lower"
+    },
+    {
+      "title": "Insulation +1",
+      "duration": 2,
+      "stage": "blizzard",
+      "cameraPreset": "whip_pan_to_prop",
+      "cameraMotion": "slow_push",
+      "distance": 4.85,
+      "angle": 1.25,
+      "focus": [0, 0.8, -0.03],
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "cat",
+          "asset": "evo_cat",
+          "height": 1.7,
+          "motion": "idle_breathe",
+          "motionSfx": "click",
+          "traits": []
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.27,
+          "text": "Equip a",
+          "highlight": "Equip"
+        },
+        {
+          "time": 0.7,
+          "text": "thick winter coat.",
+          "highlight": "winter"
+        }
+      ],
+      "events": [
+        {
+          "apply_morph": "thick_fur",
+          "time": 0.7,
+          "duration": 0.76,
+          "target": "cat",
+          "sfx": "pop"
+        },
+        {
+          "spawn_ui": "stat_upgrade",
+          "time": 1.46,
+          "position": [0, 1.72, 0.23],
+          "size": 0.74,
+          "sfx": "level_up"
+        }
+      ],
+      "captionPosition": "lower"
+    },
+    {
+      "title": "Low silhouette",
+      "duration": 3,
+      "stage": "blizzard",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "distance": 3.45,
+      "angle": 0.69,
+      "focus": [0, 0.72, 0.06],
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "cat",
+          "asset": "evo_cat",
+          "height": 1.7,
+          "motion": "idle_breathe",
+          "motionSfx": "click",
+          "traits": ["thick_fur"]
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.13,
+          "text": "Short legs",
+          "highlight": "Short"
+        },
+        {
+          "time": 0.8,
+          "text": "and low ears",
+          "highlight": "ears"
+        },
+        {
+          "time": 1.5,
+          "text": "give it a",
+          "highlight": "give"
+        },
+        {
+          "time": 1.76,
+          "text": "squat silhouette.",
+          "highlight": "silhouette."
+        }
+      ],
+      "events": [
+        {
+          "apply_morph": "short_legs_flat_ears",
+          "time": 0.13,
+          "duration": 0.9,
+          "target": "cat",
+          "sfx": "ratchet"
+        }
+      ],
+      "captionPosition": "lower"
+    },
+    {
+      "title": "Inspect the pupils",
+      "duration": 3,
+      "stage": "blizzard",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "distance": 4.9,
+      "angle": 0.16,
+      "focus": [0, 0.91, 0.7],
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "cat",
+          "asset": "evo_cat",
+          "height": 1.7,
+          "motion": "idle_breathe",
+          "motionSfx": "click",
+          "traits": ["thick_fur", "short_legs_flat_ears"]
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.12,
+          "text": "Check the eyes:",
+          "highlight": "Check"
+        },
+        {
+          "time": 1.23,
+          "text": "round pupils",
+          "highlight": "pupils"
+        },
+        {
+          "time": 2.08,
+          "text": "instead of slits!",
+          "highlight": "instead"
+        }
+      ],
+      "events": [
+        {
+          "texture_swap": "round_pupils",
+          "time": 1.23,
+          "duration": 0.7,
+          "target": "cat",
+          "sfx": "ping"
+        }
+      ],
+      "captionPosition": "lower"
+    },
+    {
+      "title": "Resting cat face",
+      "duration": 2,
+      "stage": "blizzard",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_pull",
+      "distance": 3,
+      "angle": 0.17,
+      "focus": [0, 0.85, 0.38],
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "cat",
+          "asset": "evo_cat",
+          "height": 1.7,
+          "motion": "grumpy",
+          "motionSfx": "click",
+          "traits": ["thick_fur", "short_legs_flat_ears", "round_pupils"]
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.18,
+          "text": "Add one",
+          "highlight": "Add"
+        },
+        {
+          "time": 0.6,
+          "text": "spectacular scowl.",
+          "highlight": "spectacular"
+        }
+      ],
+      "captionPosition": "lower"
+    },
+    {
+      "title": "Species unlocked",
+      "duration": 2,
+      "stage": "blizzard",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_pull",
+      "distance": 3.75,
+      "angle": 0.49,
+      "focus": [0, 0.86, 0.08],
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "cat",
+          "asset": "evo_cat",
+          "height": 1.7,
+          "motion": "grumpy",
+          "motionSfx": "click",
+          "traits": ["thick_fur", "short_legs_flat_ears", "round_pupils"]
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.19,
+          "text": "Meet the",
+          "highlight": "Meet"
+        },
+        {
+          "time": 0.47,
+          "text": "Pallas cat.",
+          "highlight": "Pallas"
+        },
+        {
+          "time": 1.62,
+          "text": "But is it…",
+          "highlight": "But"
+        }
+      ],
+      "events": [
+        {
+          "spawn_ui": "PALLAS CAT text",
+          "time": 0.18,
+          "position": [0, 1.69, 0.23],
+          "size": 0.99,
+          "sfx": "level_up"
+        }
+      ],
+      "captionPosition": "lower"
+    }
+  ]
+}

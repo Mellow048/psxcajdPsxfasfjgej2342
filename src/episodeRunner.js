@@ -9,6 +9,8 @@ import { stage } from "./stages.js";
 import { CameraDirector } from "./cameraDirector.js";
 import { composite } from "./captionEngine.js";
 import { SfxEngine } from "./sfxEngine.js";
+import { bindMorphs } from "./Evolutionary_Explainer/morphEngine.js";
+import { createStatUI, sampleStatUI } from "./Evolutionary_Explainer/statUI.js";
 export class EpisodeRunner {
   constructor(canvas) {
     canvas.width = CONFIG.width;
@@ -31,7 +33,13 @@ export class EpisodeRunner {
     let end = 0;
     try {
       for (const s of e.shots) {
-        const f = { ...stage(s.stage), items: [], spawns: [], start: end };
+        const f = {
+          ...stage(s.stage),
+          items: [],
+          spawns: [],
+          panels: [],
+          start: end,
+        };
         frames.push(f);
         end += Math.round(s.duration * CONFIG.hz);
         for (const d of SCENE_PRESETS[s.stage].layout ?? []) {
@@ -45,7 +53,13 @@ export class EpisodeRunner {
           f.scene.add(node);
           const item = { def, node };
           const { clip, take } = await loader.performanceSource(def, node);
-          item.mixer = bindPerformance(node, clip, def.motion, take);
+          if (def.asset === "evo_cat")
+            item.morph = bindMorphs(
+              node,
+              def.traits,
+              (s.events ?? []).filter((ev) => ev.target === def.id),
+            );
+          else item.mixer = bindPerformance(node, clip, def.motion, take);
           if (!f.observer && s.actors?.includes(def)) f.observer = item;
           f.items.push(item);
           const opacity = SCENE_PRESETS[s.stage].reflection;
@@ -58,11 +72,26 @@ export class EpisodeRunner {
             f.items.push({
               node: image,
               def,
-              mixer: bindPerformance(image, clip, def.motion, take),
+              ...(def.asset === "evo_cat"
+                ? {
+                    morph: bindMorphs(
+                      image,
+                      def.traits,
+                      (s.events ?? []).filter((ev) => ev.target === def.id),
+                    ),
+                  }
+                : { mixer: bindPerformance(image, clip, def.motion, take) }),
             });
           }
         }
         for (const ev of s.events ?? []) {
+          if (ev.apply_morph || ev.texture_swap) continue;
+          if (ev.spawn_ui) {
+            const panel = createStatUI(ev);
+            f.panels.push(panel);
+            f.scene.add(panel.node);
+            continue;
+          }
           const spawn = createSpawn(ev);
           f.spawns.push(spawn);
           f.scene.add(spawn.node);
@@ -106,7 +135,11 @@ export class EpisodeRunner {
       s = this.episode.shots[this.index],
       t = (this.tick - f.start) / CONFIG.hz;
     const rigTime = s.matchHook ? s.duration - t : t;
-    for (const i of f.items) pose(i, rigTime);
+    for (const i of f.items) {
+      pose(i, rigTime);
+      i.morph?.(rigTime, i.def.motion);
+    }
+    f.weather?.(rigTime);
     for (const spawn of f.spawns) sampleSpawn(spawn, t);
     f.dust.rotation.y = rigTime * 0.08;
     f.dust.position.y = 0.08 * Math.sin(rigTime);
@@ -142,6 +175,7 @@ export class EpisodeRunner {
         f.observer,
       );
     } else this.director.pose(s, t, this.focus, this.index, f.observer);
+    for (const panel of f.panels) sampleStatUI(panel, t, this.director.camera);
   }
   draw() {
     const f = this.frames[this.index];

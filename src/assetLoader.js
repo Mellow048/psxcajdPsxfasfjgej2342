@@ -5,6 +5,7 @@ import { clone } from "three/addons/utils/SkeletonUtils.js";
 import { ASSET_MANIFEST } from "./config.js";
 import { TEXTURES } from "./catalog.js";
 import { patchTree } from "./psxShader.js";
+import { makeCat } from "./Evolutionary_Explainer/catRig.js";
 import { makeProp } from "./stages.js";
 const leaf = (s) => s.replaceAll("\\", "/").split("/").pop().toLowerCase();
 const byName = new Map();
@@ -126,6 +127,13 @@ export class AssetLoader {
     return { clip, take: false };
   }
   async instance(def) {
+    if (def.asset === "evo_cat") {
+      const model = makeCat(),
+        node = new T.Group();
+      model.scale.setScalar((def.height ?? 1.7) / 1.7);
+      node.add(model);
+      return patchTree(node);
+    }
     const model =
       def.asset === "label"
         ? makeProp("label", def.text)

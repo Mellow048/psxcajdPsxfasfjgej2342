@@ -192,3 +192,12 @@ The brief provided the following **literal slots**, not transcripts, footage, ti
 ### Window loop recipe
 
 The window episode uses `bgMusic: "synthwave_tense"` instead of `music`: three whole 180 BPM loops in 24 seconds, without an outro fade. All cuts use `whoosh_fast`. Set `motionSfx` on a subject for the start of its shot-local performance. In a `spawn_prop` event, `spawn_prop` names the asset (older `asset` syntax also works). `particle_stream_yellow` sends successive beads from `from` to `to` in `travel` seconds, optionally reflecting at `via`. `3D_Lightbulb` takes `position`, `animation: "pulse"`, a spawn `sfx` and `animationSfx: "click"`. `ui_pop` and `ding` are available as spawn cues. `cup_hands` brings the actor's hands up to shield the glass. For a final whip into the opening pose, duplicate the opening set, subject, focus and rig on the last shot and set `matchHook: true`. Cut the take on the pickup, not after the repeated hook.
+
+### Evolutionary Explainer: build a loadout
+
+Open `/?episode=episodes/pallas_cat.json` for the 17-second example. The framework uses an original procedural `evo_cat` actor; it doesn't assume that arbitrary imported skeletons have feline leg or ear bones. `shiver` and `grumpy` are its special performances. These are visual analogies for real traits, not changes an individual animal undergoes in its lifetime.
+
+- Each shot gets a fresh rig. On the actor set `traits` to an array of **already equipped** upgrades. Don't put the new upgrade there until the *following* shot. This makes a direct seek equivalent to playing from zero.
+- Put `{ "time": 0.3, "target": "cat", "apply_morph": "thick_fur", "duration": 0.8, "sfx": "pop" }` in `events` to ease a mesh morph target from 0 to 1. `short_legs_flat_ears` uses `ratchet` and scales leg and ear bones. `{ "time": 1, "target": "cat", "texture_swap": "round_pupils", "duration": 0.7, "sfx": "ping" }` animates the eye texture through nine frames. Morph windows must last 0.5–1.0 s and finish before the cut.
+- A diegetic panel event takes `spawn_ui`, `time`, world-space `position`, optional `size`, and `sfx`. Pairs: `red_x` / `buzzer`, `stat_upgrade` / `level_up`, `PALLAS CAT text` / `level_up`. The panel turns toward the moving lens and is part of the captured frame. Captions remain on their own timeline.
+- Keep the cut whoosh on the **shot** and the effect cue on the **event**. Don't cut the audio when a trait changes. The demo uses one spoken take across all seven shots and ends “But is it…” → “Cold enough for this cat?”

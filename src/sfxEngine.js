@@ -104,10 +104,25 @@ export class SfxEngine {
     n.stop(now + duration);
   }
   tone(key, when) {
+    if (key === "ratchet") {
+      for (let i = 0; i < 6; i++) this.tone("tooth", when + i * 0.075);
+      return;
+    }
+    if (key === "level_up") {
+      ["ping", "fifth", "octave"].forEach((k, i) =>
+        this.tone(k, when + i * 0.065),
+      );
+      return;
+    }
     const c = this.ctx,
       n = c.createOscillator(),
       g = c.createGain();
     const [a, b, len, vol, type] = {
+      tooth: [920, 290, 0.029, 0.14, "square"],
+      buzzer: [154, 95, 0.24, 0.14, "sawtooth"],
+      ping: [1080, 1050, 0.16, 0.15, "sine"],
+      fifth: [1575, 1575, 0.14, 0.11, "sine"],
+      octave: [2100, 2100, 0.19, 0.09, "sine"],
       whoosh_fast: [2100, 125, 0.09, 0.115, "sawtooth"],
       ui_pop: [620, 980, 0.062, 0.125, "sine"],
       ding: [1710, 1650, 0.16, 0.1, "sine"],
