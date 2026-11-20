@@ -97,9 +97,9 @@ test("writer guide JSON and both shipped scripts validate", () => {
   );
   assert.equal(
     night.shots.reduce((n, s) => n + Math.round(s.duration * 60), 0) / 60,
-    32,
+    24,
   );
-  assert.equal(night.shots.length, 14);
+  assert.equal(night.shots.length, 11);
   assert.equal(night.bgMusic, "synthwave_tense");
   assert.ok(
     night.shots.every(
@@ -110,9 +110,18 @@ test("writer guide JSON and both shipped scripts validate", () => {
         [...(s.actors ?? []), ...(s.props ?? [])].every((a) => a.motionSfx),
     ),
   );
+  assert.ok(
+    night.shots
+      .flatMap((s) => s.events ?? [])
+      .every((ev) => ["pop", "ding", "click"].includes(ev.sfx)),
+  );
+  assert.doesNotMatch(night.narration, /hands|peel/i);
+  assert.ok(
+    !night.shots.some((s) => s.actors?.some((a) => a.motion === "cup_hands")),
+  );
   assert.deepEqual(night.shots.at(-1).actors, night.shots[0].actors);
   assert.ok(night.shots.at(-1).matchHook);
-  assert.match(night.narration, /^Why does .*And that is exactly…$/);
+  assert.match(night.narration, /^Why does .*and that is exactly…$/);
 });
 test("motion, narration and spawn contracts are checked before loading assets", () => {
   const make = () => structuredClone(demo);

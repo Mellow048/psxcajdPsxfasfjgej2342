@@ -12,11 +12,11 @@ RATE = 24000
 TAU = 2 * pi
 
 
-def compose(bpm=128, seed=17, tense=False):
+def compose(bpm=128, seed=17, tense=False, bars=8):
     rng = Random(seed)
     # Round only the final sample positions so the downbeat never drifts.
     beat = RATE * 60 / bpm
-    n = round(32 * beat)
+    n = round(bars * 4 * beat)
     bus = array('f', [0]) * n
 
     def add(pos, sample):
@@ -64,9 +64,9 @@ def compose(bpm=128, seed=17, tense=False):
         # F# pedal against a descending minor line. Fast gated octaves and a
         # four-on-the-floor pulse leave the middle register for the narrator.
         chords = [(42,(66,69,73,76)),(42,(64,68,71,76)),(38,(62,66,69,73)),(37,(61,65,68,71))]
-    for bar in range(8):
+    for bar in range(bars):
         down = 4*bar
-        root, voices = chords[bar % 4]
+        root, voices = chords[3 if bar == bars-1 else bar % 4]
         for when in ((0,1,2,3) if tense else (0, 2.5 if bar % 2 else 2)):
             drum(down+when, 'kick', .48)
         for when in (1,3):
@@ -80,7 +80,7 @@ def compose(bpm=128, seed=17, tense=False):
                 note(down+k/2+.24,root+12+(7 if k in (3,7) else 0),.20,.20,'keys')
         for k, when in enumerate((.53,1.78,2.53)):
             note(down+when, voices[(bar+k)%4], .65, .17, 'keys')
-        if bar in (3,7):
+        if bar % 4 == 3 or bar == bars-1:
             note(down+3.25, voices[2]+12, .35, .1, 'keys')
             note(down+3.75, voices[0]+12, .38, .09, 'keys')
     peak = max(abs(x) for x in bus)
@@ -96,14 +96,15 @@ def main():
     parser.add_argument('--bpm', type=int, default=128)
     parser.add_argument('--seed', type=int, default=17, help='Drum noise seed')
     parser.add_argument('--tense', action='store_true', help='Driving minor-key synthwave arrangement')
+    parser.add_argument('--bars', type=int, choices=(6,8), default=8)
     args = parser.parse_args()
     if not 60 <= args.bpm <= 200:
         parser.error('--bpm must be 60–200')
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with wave.open(str(args.output), 'wb') as dest:
         dest.setparams((1, 2, RATE, 0, 'NONE', 'not compressed'))
-        dest.writeframes(compose(args.bpm, args.seed,args.tense))
-    print(f'{args.output}: 8 bars at {args.bpm} BPM ({32*60/args.bpm:g} seconds)')
+        dest.writeframes(compose(args.bpm, args.seed,args.tense,args.bars))
+    print(f'{args.output}: {args.bars} bars at {args.bpm} BPM ({args.bars*4*60/args.bpm:g} seconds)')
 
 
 if __name__ == '__main__':
