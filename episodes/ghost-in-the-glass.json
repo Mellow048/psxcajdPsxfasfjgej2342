@@ -1,0 +1,321 @@
+{
+  "version": 1,
+  "title": "The ghost in the glass",
+  "series": "Optical illusions",
+  "beat": true,
+  "scenes": [
+    {
+      "title": "The apparition",
+      "duration": 2.5,
+      "stage": "graveyard",
+      "cameraPreset": "slow_push",
+      "distance": 5.25,
+      "focus": [0, 1.19, 0],
+      "actors": [
+        {
+          "id": "ghost",
+          "asset": "sheet",
+          "motion": "idle_breathe",
+          "height": 1.8,
+          "position": [0, 0.28, 0]
+        }
+      ],
+      "props": [],
+      "captions": [
+        {
+          "at": 0,
+          "text": "See this ghost?",
+          "highlight": "ghost?"
+        },
+        {
+          "at": 1.15,
+          "text": "It isn’t there.",
+          "highlight": "there."
+        }
+      ],
+      "sfx": "whoosh"
+    },
+    {
+      "title": "Behind the curtain",
+      "duration": 2.5,
+      "stage": "backstage",
+      "cameraPreset": "whip_pan",
+      "distance": 4.15,
+      "focus": "performer",
+      "actors": [
+        {
+          "id": "performer",
+          "asset": "halloween.character_ghost",
+          "motion": "talk_gesture",
+          "height": 1.75
+        }
+      ],
+      "props": [],
+      "captions": [
+        {
+          "at": 0,
+          "text": "A hidden actor",
+          "highlight": "hidden"
+        },
+        {
+          "at": 1.15,
+          "text": "stands offstage.",
+          "highlight": "offstage."
+        }
+      ],
+      "sfx": "pop",
+      "pan": 0.38
+    },
+    {
+      "title": "Angled glass",
+      "duration": 2.5,
+      "stage": "optics_lab",
+      "cameraPreset": "orbit_drift",
+      "distance": 3.8,
+      "focus": "glass",
+      "actors": [],
+      "props": [
+        {
+          "id": "glass",
+          "asset": "pane",
+          "motion": "idle_breathe",
+          "height": 1.65,
+          "yaw": -0.55
+        }
+      ],
+      "captions": [
+        {
+          "at": 0,
+          "text": "An angled pane",
+          "highlight": "angled"
+        },
+        {
+          "at": 1.15,
+          "text": "splits the stage.",
+          "highlight": "stage."
+        }
+      ],
+      "sfx": "riser"
+    },
+    {
+      "title": "Light the actor",
+      "duration": 2.5,
+      "stage": "backstage",
+      "cameraPreset": "fast_push",
+      "distance": 4.4,
+      "focus": [0, 0.95, 0],
+      "actors": [
+        {
+          "id": "performer",
+          "asset": "halloween.character_ghost",
+          "motion": "talk_gesture",
+          "height": 1.75,
+          "position": [-0.46, 0, -0.4]
+        }
+      ],
+      "props": [
+        {
+          "id": "lamp",
+          "asset": "lamp",
+          "motion": "pop_in",
+          "height": 1.35,
+          "position": [0.5, 0, 0.15]
+        }
+      ],
+      "captions": [
+        {
+          "at": 0,
+          "text": "Light the actor.",
+          "highlight": "Light"
+        },
+        {
+          "at": 1.15,
+          "text": "Keep their room dark.",
+          "highlight": "dark."
+        }
+      ],
+      "sfx": "tick"
+    },
+    {
+      "title": "The reflection",
+      "duration": 2.5,
+      "stage": "optics_lab",
+      "cameraPreset": "cutaway_macro",
+      "distance": 4.2,
+      "focus": [0, 0.8, 0],
+      "actors": [],
+      "props": [
+        {
+          "id": "glass",
+          "asset": "pane",
+          "motion": "idle_breathe",
+          "height": 1.65,
+          "yaw": -0.55
+        },
+        {
+          "id": "beam",
+          "asset": "rays",
+          "motion": "pop_in",
+          "height": 1.25,
+          "position": [-0.28, 0, 0.48]
+        }
+      ],
+      "captions": [
+        {
+          "at": 0,
+          "text": "Glass reflects",
+          "highlight": "reflects"
+        },
+        {
+          "at": 1.15,
+          "text": "some of that light.",
+          "highlight": "light."
+        }
+      ],
+      "sfx": "whoosh"
+    },
+    {
+      "title": "The sightline",
+      "duration": 2.5,
+      "stage": "optics_lab",
+      "cameraPreset": "handheld_bob",
+      "distance": 3.7,
+      "focus": [0, 0.85, 0],
+      "actors": [],
+      "props": [
+        {
+          "id": "eye",
+          "asset": "eye",
+          "motion": "float_spin",
+          "height": 0.98,
+          "position": [-0.38, 0.39, 0.1]
+        },
+        {
+          "id": "glass",
+          "asset": "pane",
+          "motion": "idle_breathe",
+          "height": 1.15,
+          "yaw": -0.55,
+          "position": [0.45, 0, -0.4]
+        }
+      ],
+      "captions": [
+        {
+          "at": 0,
+          "text": "But you still see",
+          "highlight": "see"
+        },
+        {
+          "at": 1.15,
+          "text": "through the glass.",
+          "highlight": "glass."
+        }
+      ],
+      "sfx": "pop"
+    },
+    {
+      "title": "Two worlds",
+      "duration": 2.5,
+      "stage": "backstage",
+      "cameraPreset": "dutch_tilt_zoom",
+      "distance": 4.65,
+      "focus": [0, 1, 0],
+      "actors": [
+        {
+          "id": "ghost",
+          "asset": "sheet",
+          "motion": "idle_breathe",
+          "height": 1.8,
+          "position": [0, 0.19, -0.5]
+        }
+      ],
+      "props": [
+        {
+          "id": "glass",
+          "asset": "pane",
+          "motion": "idle_breathe",
+          "height": 1.45,
+          "yaw": -0.55,
+          "position": [0.4, 0, 0.3]
+        }
+      ],
+      "captions": [
+        {
+          "at": 0,
+          "text": "Both images",
+          "highlight": "images"
+        },
+        {
+          "at": 1.15,
+          "text": "reach your eyes.",
+          "highlight": "eyes."
+        }
+      ],
+      "sfx": "riser"
+    },
+    {
+      "title": "Pepper’s ghost",
+      "duration": 2.5,
+      "stage": "graveyard",
+      "cameraPreset": "orbit_drift",
+      "distance": 4.65,
+      "focus": [0, 1.25, 0],
+      "actors": [
+        {
+          "id": "ghost",
+          "asset": "sheet",
+          "motion": "float_spin",
+          "height": 1.8,
+          "position": [0, 0.28, 0]
+        }
+      ],
+      "props": [],
+      "captions": [
+        {
+          "at": 0,
+          "text": "One floating figure.",
+          "highlight": "floating"
+        },
+        {
+          "at": 1.15,
+          "text": "Pepper’s ghost.",
+          "highlight": "ghost."
+        }
+      ],
+      "sfx": "tick"
+    },
+    {
+      "title": "The loop",
+      "duration": 2.5,
+      "stage": "graveyard",
+      "cameraPreset": "slow_push",
+      "distance": 4.8,
+      "focus": [0, 1.28, 0],
+      "actors": [
+        {
+          "id": "ghost",
+          "asset": "sheet",
+          "motion": "idle_breathe",
+          "height": 1.8,
+          "position": [0, 0.28, 0],
+          "yaw": -0.25
+        }
+      ],
+      "props": [],
+      "captions": [
+        {
+          "at": 0,
+          "text": "Look again.",
+          "highlight": "again."
+        },
+        {
+          "at": 1.15,
+          "text": "Where is the actor?",
+          "highlight": "actor?"
+        }
+      ],
+      "sfx": "whoosh"
+    }
+  ],
+  "narration": "episodes/ghost-narration.wav"
+}

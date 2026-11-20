@@ -1,0 +1,53 @@
+name: Render a Short
+run-name: "Render · ${{ inputs.episode || 'episodes/night-window.json' }}"
+on:
+  pull_request:
+    branches: [main]
+    paths: ['.github/workflows/render.yml', 'scripts/render.*', 'src/**', 'episodes/**', 'package*.json', 'vendor/**']
+  workflow_dispatch:
+    inputs:
+      episode:
+        description: 'Repository episode JSON path'
+        required: true
+        default: episodes/night-window.json
+        type: string
+permissions:
+  contents: read
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      EPISODE: ${{ inputs.episode || 'episodes/night-window.json' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci && npm test
+      - name: Prepare encoder and browser
+        run: |
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq && sudo apt-get install -y ffmpeg
+          fi
+          echo "CHROME_BIN=$(command -v google-chrome)" >> "$GITHUB_ENV"
+          google-chrome --version
+      - name: Render exact frames and audio on the runner
+        run: npm run render -- "$EPISODE"
+      - name: Verify MP4 tracks, cadence and duration
+        run: node scripts/verify-render.mjs "$EPISODE"
+      - uses: actions/upload-artifact@v4
+        id: upload
+        with:
+          name: short-${{ github.run_id }}-${{ github.run_attempt }}
+          path: render-output/*.mp4
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
+      - name: Link download
+        env:
+          DOWNLOAD: ${{ steps.upload.outputs.artifact-url }}
+        run: printf '[Download the rendered MP4 (zipped)](%s)\n' "$DOWNLOAD" >> "$GITHUB_STEP_SUMMARY"
