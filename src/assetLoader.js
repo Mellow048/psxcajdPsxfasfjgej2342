@@ -24,6 +24,7 @@ export function release(roots) {
   }
   for (const root of roots)
     root?.traverse((o) => {
+      if (o.isInstancedMesh) free(o); // release instance buffers as well as the shared geometry
       free(o.geometry);
       free(o.skeleton);
       for (const m of [].concat(o.material || [])) {

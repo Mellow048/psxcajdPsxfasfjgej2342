@@ -1,3 +1,4 @@
+import { drawGraph } from "./dataViz.js";
 // Composite the print graphics and subtitles into the recorded canvas itself.
 export function composite(ctx, image, episode, s, index, t) {
   const w = ctx.canvas.width,
@@ -31,6 +32,7 @@ export function composite(ctx, image, episode, s, index, t) {
     ctx.lineTo(x, y + b * 16);
     ctx.stroke();
   }
+  for (const ev of s.events ?? []) if (ev.show_graph) drawGraph(ctx, ev, t);
   const c = s.captions.findLast((c) => c.time <= t);
   if (!c) {
     ctx.restore();

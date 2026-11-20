@@ -1,3 +1,6 @@
+import { createScreen } from "./uiDirector.js";
+import { createMass } from "./particleEscalation.js";
+import { createBoard } from "./dataViz.js";
 import * as T from "three";
 import { CONFIG, SCENE_PRESETS } from "./config.js";
 import { validate } from "./schema.js";
@@ -38,6 +41,8 @@ export class EpisodeRunner {
           items: [],
           spawns: [],
           panels: [],
+          boards: [],
+          visuals: [],
           start: end,
         };
         frames.push(f);
@@ -85,6 +90,22 @@ export class EpisodeRunner {
           }
         }
         for (const ev of s.events ?? []) {
+          if (ev.show_graph) continue; // Composited behind subtitles by captionEngine.
+          if (
+            ev.show_whiteboard ||
+            ev.spawn_mass ||
+            ev.show_phone ||
+            ev.show_tv
+          ) {
+            const v = ev.show_whiteboard
+              ? createBoard(ev)
+              : ev.spawn_mass
+                ? createMass(ev)
+                : createScreen(ev);
+            (ev.show_whiteboard ? f.boards : f.visuals).push(v);
+            f.scene.add(v.node);
+            continue;
+          }
           if (ev.apply_morph || ev.texture_swap) continue;
           if (ev.spawn_ui) {
             const panel = createStatUI(ev);
@@ -175,6 +196,9 @@ export class EpisodeRunner {
         f.observer,
       );
     } else this.director.pose(s, t, this.focus, this.index, f.observer);
+    // Resolve camera handoffs before positioning camera-relative props.
+    for (const v of f.boards) v.sample(t, this.director.camera);
+    for (const v of f.visuals) v.sample(t, this.director.camera);
     for (const panel of f.panels) sampleStatUI(panel, t, this.director.camera);
   }
   draw() {

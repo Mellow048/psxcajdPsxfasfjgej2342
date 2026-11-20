@@ -201,3 +201,16 @@ Open `/?episode=episodes/pallas_cat.json` for the 17-second example. The framewo
 - Put `{ "time": 0.3, "target": "cat", "apply_morph": "thick_fur", "duration": 0.8, "sfx": "pop" }` in `events` to ease a mesh morph target from 0 to 1. `short_legs_flat_ears` uses `ratchet` and scales leg and ear bones. `{ "time": 1, "target": "cat", "texture_swap": "round_pupils", "duration": 0.7, "sfx": "ping" }` animates the eye texture through nine frames. Morph windows must last 0.5–1.0 s and finish before the cut.
 - A diegetic panel event takes `spawn_ui`, `time`, world-space `position`, optional `size`, and `sfx`. Pairs: `red_x` / `buzzer`, `stat_upgrade` / `level_up`, `PALLAS CAT text` / `level_up`. The panel turns toward the moving lens and is part of the captured frame. Captions remain on their own timeline.
 - Keep the cut whoosh on the **shot** and the effect cue on the **event**. Don't cut the audio when a trait changes. The demo uses one spoken take across all seven shots and ends “But is it…” → “Cold enough for this cat?”
+
+### Escalation timeline: screen → scale → diagram → graph
+
+[`episodes/chip-math.json`](episodes/chip-math.json) is a complete, renderable example. Place each operation in a shot's `events` array with **shot-local** `time`, mandatory `sfx`, and optional `duration` (visible until the cut when omitted). Fields inside each operation describe its content. Existing actors and the required `cameraMotion` keep running. These event types are visual layers, not subject IDs: use `focus: [x,y,z]` for a wall, or let a board steer the lens.
+
+| Event | Authoring contract |
+|---|---|
+| `show_phone`, `show_tv` | `{"app":"bank","balance":"$2,565"}` or `{"app":"video_call","avatar":"guru"}`. The device slides into camera space. A local HTML canvas paints the app onto its physical face; no DOM overlays, remote images or arbitrary HTML execution. |
+| `spawn_mass` | `{"prop":"casino_chip","count":1000,"formation":"grid_wall","reveal":1.3}`. Up to 4,096 chips per event; one instanced draw. Optional `reveal` pulls the whole wall back from a magnified view over that many seconds. Optional **event-level** `position` sets its world-space center. |
+| `show_whiteboard` | Supply `title`, `nodes` (`id`, `label`, `kind`: `step`/`win`/`loss`, normalized `x`/`y`), and directed `edges` such as `[["play","win"],["play","lose"]]`. Space nodes apart. Up to 12 nodes and 24 edges. Event `position` locates the board. `transition` (default 0.42s) eases the moving camera onto the board and back when a duration is specified. Sequence rather than overlap two board handoffs. |
+| `show_graph` | `{"label":"Balance","unit":"$","start":2565,"end":641.25,"drawTime":2}`. Draws an **exponential interpolation** between unequal positive endpoints, not a plot of historical transactions. The curve and current value appear in the recorded canvas, below captions in draw order. Use `captionPosition:"lower"` to keep both readable. |
+
+The episode budget is 96 escalation events / 32,768 instances. An invalid count, missing cue, unknown edge endpoint or overlong animation fails validation before GPU allocation. All reveals use absolute shot time and share the regular playback, capture and offline render paths.

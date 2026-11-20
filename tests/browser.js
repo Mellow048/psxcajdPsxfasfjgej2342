@@ -229,6 +229,45 @@ try {
     "caption edits do not regenerate voice",
   );
   a.dispose();
+  const story = await (await fetch("episodes/chip-math.json")).json();
+  await r.load(story);
+  r.seek(0);
+  assert(!r.frames[0].visuals[0].node.visible, "screen hidden before its cue");
+  r.seek(0.5);
+  const device = r.frames[0].visuals[0].node;
+  assert(
+    device.visible &&
+      device.children.some((o) => o.material.map?.isCanvasTexture),
+    "phone face is captured WebGL geometry",
+  );
+  const wall = r.frames[2].visuals[0].node;
+  assert(
+    wall.isInstancedMesh && wall.count === 1000 && wall.children.length === 0,
+    "one instanced mesh contains all thousand chips",
+  );
+  for (const seconds of [6.25, 8.52, 12.4]) {
+    r.seek(seconds);
+    const still = r.ctx.canvas.toDataURL();
+    r.seek(0.1);
+    r.seek(seconds);
+    assert(
+      r.ctx.canvas.toDataURL() === still,
+      `wall, board or graph reproduces pixels at ${seconds}s`,
+    );
+  }
+  const tv = structuredClone(story.shots[1]);
+  const event = tv.events[0];
+  event.show_tv = event.show_phone;
+  delete event.show_phone;
+  event.duration = 0.6;
+  await r.load([tv]);
+  r.seek(0.35);
+  assert(
+    r.frames[0].visuals[0].node.visible,
+    "TV video call is visible inside its window",
+  );
+  r.seek(1);
+  assert(!r.frames[0].visuals[0].node.visible, "TV exits at the authored time");
   report.textContent += "\nAll checks passed.";
   report.dataset.result = "pass";
 } catch (e) {

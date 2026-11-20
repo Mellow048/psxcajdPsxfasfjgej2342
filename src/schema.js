@@ -1,3 +1,4 @@
+import { storyKey, validateStoryEvent } from "./storyEvents.js";
 import {
   MORPHS,
   UI_CUES,
@@ -81,6 +82,8 @@ export function validate(e) {
     Array.isArray(e.shots) && e.shots.length > 0 && e.shots.length <= 60,
     "expected 1–60 shots",
   );
+  let storyCount = 0,
+    instanceCount = 0;
   for (const [i, s] of e.shots.entries()) {
     at = `shot ${i + 1}`;
     keys(
@@ -184,6 +187,17 @@ export function validate(e) {
     const hasSubject = ids.size > 0;
     for (const ev of s.events ?? []) {
       check(obj(ev), "invalid event");
+      const story = storyKey(ev);
+      if (story) {
+        validateStoryEvent(ev, story, s, { check, keys, vec });
+        storyCount++;
+        instanceCount += ev.spawn_mass?.count ?? 0;
+        check(
+          storyCount <= 96 && instanceCount <= 32768,
+          "episode exceeds visual resource budget",
+        );
+        continue;
+      }
       if ("apply_morph" in ev || "texture_swap" in ev || "spawn_ui" in ev) {
         const ui = "spawn_ui" in ev,
           swap = "texture_swap" in ev,
