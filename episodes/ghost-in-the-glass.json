@@ -1,14 +1,15 @@
 {
-  "version": 1,
+  "version": 2,
   "title": "The ghost in the glass",
   "series": "Optical illusions",
   "beat": true,
-  "scenes": [
+  "narration": "episodes/ghost-narration.wav",
+  "shots": [
     {
       "title": "The apparition",
       "duration": 2.5,
       "stage": "graveyard",
-      "cameraPreset": "slow_push",
+      "cameraPreset": "wide_orbit",
       "distance": 5.25,
       "focus": [0, 1.19, 0],
       "actors": [
@@ -23,7 +24,7 @@
       "props": [],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "See this ghost?",
           "highlight": "ghost?"
         },
@@ -39,21 +40,21 @@
       "title": "Behind the curtain",
       "duration": 2.5,
       "stage": "backstage",
-      "cameraPreset": "whip_pan",
+      "cameraPreset": "macro_closeup",
       "distance": 4.15,
       "focus": "performer",
       "actors": [
         {
           "id": "performer",
           "asset": "halloween.character_ghost",
-          "motion": "talk_gesture",
+          "motion": "talking",
           "height": 1.75
         }
       ],
       "props": [],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "A hidden actor",
           "highlight": "hidden"
         },
@@ -63,14 +64,14 @@
           "highlight": "offstage."
         }
       ],
-      "sfx": "pop",
+      "sfx": "click",
       "pan": 0.38
     },
     {
       "title": "Angled glass",
       "duration": 2.5,
       "stage": "optics_lab",
-      "cameraPreset": "orbit_drift",
+      "cameraPreset": "whip_pan_to_prop",
       "distance": 3.8,
       "focus": "glass",
       "actors": [],
@@ -85,7 +86,7 @@
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "An angled pane",
           "highlight": "angled"
         },
@@ -101,14 +102,14 @@
       "title": "Light the actor",
       "duration": 2.5,
       "stage": "backstage",
-      "cameraPreset": "fast_push",
+      "cameraPreset": "over_shoulder",
       "distance": 4.4,
       "focus": [0, 0.95, 0],
       "actors": [
         {
           "id": "performer",
           "asset": "halloween.character_ghost",
-          "motion": "talk_gesture",
+          "motion": "talking",
           "height": 1.75,
           "position": [-0.46, 0, -0.4]
         }
@@ -124,23 +125,27 @@
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Light the actor.",
           "highlight": "Light"
         },
         {
           "at": 1.15,
-          "text": "Keep their room dark.",
+          "text": "Keep their"
+        },
+        {
+          "at": 1.825,
+          "text": "room dark.",
           "highlight": "dark."
         }
       ],
-      "sfx": "tick"
+      "sfx": "click"
     },
     {
       "title": "The reflection",
       "duration": 2.5,
       "stage": "optics_lab",
-      "cameraPreset": "cutaway_macro",
+      "cameraPreset": "macro_closeup",
       "distance": 4.2,
       "focus": [0, 0.8, 0],
       "actors": [],
@@ -162,13 +167,17 @@
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Glass reflects",
           "highlight": "reflects"
         },
         {
           "at": 1.15,
-          "text": "some of that light.",
+          "text": "some of"
+        },
+        {
+          "at": 1.825,
+          "text": "that light.",
           "highlight": "light."
         }
       ],
@@ -178,7 +187,7 @@
       "title": "The sightline",
       "duration": 2.5,
       "stage": "optics_lab",
-      "cameraPreset": "handheld_bob",
+      "cameraPreset": "wide_orbit",
       "distance": 3.7,
       "focus": [0, 0.85, 0],
       "actors": [],
@@ -201,8 +210,12 @@
       ],
       "captions": [
         {
-          "at": 0,
-          "text": "But you still see",
+          "at": 0.0,
+          "text": "But you"
+        },
+        {
+          "at": 0.575,
+          "text": "still see",
           "highlight": "see"
         },
         {
@@ -211,13 +224,13 @@
           "highlight": "glass."
         }
       ],
-      "sfx": "pop"
+      "sfx": "click"
     },
     {
       "title": "Two worlds",
       "duration": 2.5,
       "stage": "backstage",
-      "cameraPreset": "dutch_tilt_zoom",
+      "cameraPreset": "dutch_tilt_push",
       "distance": 4.65,
       "focus": [0, 1, 0],
       "actors": [
@@ -241,7 +254,7 @@
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Both images",
           "highlight": "images"
         },
@@ -257,7 +270,7 @@
       "title": "Pepper’s ghost",
       "duration": 2.5,
       "stage": "graveyard",
-      "cameraPreset": "orbit_drift",
+      "cameraPreset": "whip_pan_to_prop",
       "distance": 4.65,
       "focus": [0, 1.25, 0],
       "actors": [
@@ -272,7 +285,7 @@
       "props": [],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "One floating figure.",
           "highlight": "floating"
         },
@@ -282,13 +295,13 @@
           "highlight": "ghost."
         }
       ],
-      "sfx": "tick"
+      "sfx": "click"
     },
     {
       "title": "The loop",
       "duration": 2.5,
       "stage": "graveyard",
-      "cameraPreset": "slow_push",
+      "cameraPreset": "macro_closeup",
       "distance": 4.8,
       "focus": [0, 1.28, 0],
       "actors": [
@@ -304,18 +317,21 @@
       "props": [],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Look again.",
           "highlight": "again."
         },
         {
           "at": 1.15,
-          "text": "Where is the actor?",
+          "text": "Where is"
+        },
+        {
+          "at": 1.825,
+          "text": "the actor?",
           "highlight": "actor?"
         }
       ],
       "sfx": "whoosh"
     }
-  ],
-  "narration": "episodes/ghost-narration.wav"
+  ]
 }

@@ -1,17 +1,17 @@
 {
   "title": "Why windows become mirrors at night",
-  "version": 1,
+  "version": 2,
   "series": "Everyday optics",
   "beat": true,
   "narration": "episodes/night-window.wav",
-  "scenes": [
+  "shots": [
     {
       "title": "The midnight mirror",
       "duration": 2.5,
       "stage": "house_corner",
-      "cameraPreset": "slow_push",
-      "distance": 4.7,
-      "focus": [0, 1, 0],
+      "cameraPreset": "macro_closeup",
+      "distance": 2.7,
+      "focus": "presenter",
       "props": [
         {
           "id": "glass",
@@ -19,58 +19,51 @@
           "motion": "idle_breathe",
           "height": 2.25,
           "yaw": -0.32,
-          "position": [0, 0.08, 0]
-        },
-        {
-          "id": "person",
-          "asset": "male.character_01",
-          "motion": "idle_breathe",
-          "height": 1.55,
-          "position": [0, 0, -0.55]
+          "position": [1.22, 0.1, -1.72]
         }
       ],
       "captions": [
         {
-          "at": 0,
-          "text": "A window by day.",
+          "at": 0.0,
+          "text": "A window"
+        },
+        {
+          "at": 0.59,
+          "text": "by day.",
           "highlight": "day."
         },
         {
           "at": 1.18,
-          "text": "A mirror by night?",
+          "text": "A mirror"
+        },
+        {
+          "at": 1.84,
+          "text": "by night?",
           "highlight": "night?"
         }
       ],
-      "sfx": "pop"
+      "sfx": "whoosh",
+      "actors": [
+        {
+          "id": "presenter",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [0, 0, 0.32],
+          "motion": "thinking"
+        }
+      ]
     },
     {
       "title": "Same pane",
       "duration": 2.5,
-      "stage": "optics_lab",
-      "cameraPreset": "whip_pan",
-      "distance": 4.7,
-      "focus": [0, 1, 0],
-      "props": [
-        {
-          "id": "glass",
-          "asset": "pane",
-          "motion": "idle_breathe",
-          "height": 1.8,
-          "yaw": -0.32,
-          "position": [0, 0.08, 0]
-        },
-        {
-          "id": "tag",
-          "asset": "label",
-          "motion": "idle_breathe",
-          "text": "SAME GLASS",
-          "height": 0.23,
-          "position": [0, 0.5, 0.45]
-        }
-      ],
+      "stage": "window_day",
+      "cameraPreset": "whip_pan_to_prop",
+      "distance": 3.5,
+      "focus": [0, 1.27, 0],
+      "props": [],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "The glass itself",
           "highlight": "itself"
         },
@@ -80,16 +73,26 @@
           "highlight": "changed."
         }
       ],
-      "sfx": "whoosh",
-      "pan": 0.32
+      "sfx": "click",
+      "pan": 0.32,
+      "actors": [
+        {
+          "id": "presenter",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.32, 0, 0.92],
+          "motion": "shocked",
+          "yaw": 2.94
+        }
+      ]
     },
     {
       "title": "Two paths",
       "duration": 2.5,
       "stage": "void",
-      "cameraPreset": "cutaway_macro",
+      "cameraPreset": "dutch_tilt_push",
       "distance": 4.7,
-      "focus": [0, 1, 0],
+      "focus": "glass",
       "props": [
         {
           "id": "glass",
@@ -109,7 +112,7 @@
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Two light paths",
           "highlight": "paths"
         },
@@ -119,24 +122,17 @@
           "highlight": "eyes."
         }
       ],
-      "sfx": "tick"
+      "sfx": "riser",
+      "actors": []
     },
     {
       "title": "Through the glass",
       "duration": 2.5,
-      "stage": "optics_lab",
-      "cameraPreset": "orbit_drift",
-      "distance": 4.7,
-      "focus": [0, 1, 0],
+      "stage": "window_day",
+      "cameraPreset": "over_shoulder",
+      "distance": 3.5,
+      "focus": [0, 1.27, 0],
       "props": [
-        {
-          "id": "glass",
-          "asset": "pane",
-          "motion": "idle_breathe",
-          "height": 1.8,
-          "yaw": -0.32,
-          "position": [0, 0.08, 0]
-        },
         {
           "id": "light",
           "asset": "arrow",
@@ -148,7 +144,7 @@
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Light from outside",
           "highlight": "outside"
         },
@@ -158,22 +154,32 @@
           "highlight": "through."
         }
       ],
-      "sfx": "riser"
+      "sfx": "click",
+      "actors": [
+        {
+          "id": "presenter",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.32, 0, 0.92],
+          "motion": "pointing",
+          "yaw": 2.94
+        }
+      ]
     },
     {
       "title": "Back into the room",
       "duration": 2.5,
       "stage": "house_corner",
-      "cameraPreset": "fast_push",
+      "cameraPreset": "wide_orbit",
       "distance": 4.7,
-      "focus": [0, 1, 0],
+      "focus": "lamp",
       "props": [
         {
           "id": "lamp",
           "asset": "lamp",
           "motion": "idle_breathe",
           "height": 1.2,
-          "position": [-0.52, 0, 0.35]
+          "position": [0.65, 0, 0.38]
         },
         {
           "id": "glass",
@@ -186,7 +192,7 @@
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Some indoor light",
           "highlight": "light"
         },
@@ -196,15 +202,24 @@
           "highlight": "back."
         }
       ],
-      "sfx": "pop"
+      "sfx": "whoosh",
+      "actors": [
+        {
+          "id": "presenter",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.64, 0, 0.5],
+          "motion": "pointing"
+        }
+      ]
     },
     {
       "title": "Both at once",
       "duration": 2.5,
       "stage": "optics_lab",
-      "cameraPreset": "handheld_bob",
+      "cameraPreset": "macro_closeup",
       "distance": 4.7,
-      "focus": [0, 1, 0],
+      "focus": "eye",
       "props": [
         {
           "id": "eye",
@@ -223,7 +238,7 @@
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Your eye receives",
           "highlight": "receives"
         },
@@ -233,15 +248,16 @@
           "highlight": "once."
         }
       ],
-      "sfx": "whoosh"
+      "sfx": "click",
+      "actors": []
     },
     {
       "title": "Daylight wins",
       "duration": 2.5,
       "stage": "optics_lab",
-      "cameraPreset": "dutch_tilt_zoom",
+      "cameraPreset": "dutch_tilt_push",
       "distance": 4.7,
-      "focus": [0, 1, 0],
+      "focus": "lamp",
       "props": [
         {
           "id": "lamp",
@@ -261,7 +277,7 @@
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "By day, outside",
           "highlight": "outside"
         },
@@ -271,35 +287,20 @@
           "highlight": "brighter."
         }
       ],
-      "sfx": "tick"
+      "sfx": "riser",
+      "actors": []
     },
     {
       "title": "A faint second image",
       "duration": 2.5,
-      "stage": "house_corner",
-      "cameraPreset": "slow_push",
-      "distance": 4.7,
-      "focus": [0, 1, 0],
-      "props": [
-        {
-          "id": "glass",
-          "asset": "pane",
-          "motion": "idle_breathe",
-          "height": 1.8,
-          "yaw": -0.32,
-          "position": [0, 0.08, 0]
-        },
-        {
-          "id": "person",
-          "asset": "male.character_01",
-          "motion": "idle_breathe",
-          "height": 1.55,
-          "position": [0, 0, -0.55]
-        }
-      ],
+      "stage": "window_day",
+      "cameraPreset": "wide_orbit",
+      "distance": 3.5,
+      "focus": [0, 1.27, 0],
+      "props": [],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "The room’s reflection",
           "highlight": "reflection"
         },
@@ -309,28 +310,29 @@
           "highlight": "out."
         }
       ],
-      "sfx": "riser"
+      "sfx": "click",
+      "actors": [
+        {
+          "id": "presenter",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.32, 0, 0.92],
+          "motion": "pointing",
+          "yaw": 2.94
+        }
+      ]
     },
     {
       "title": "After sunset",
       "duration": 2.5,
-      "stage": "graveyard",
-      "cameraPreset": "whip_pan",
-      "distance": 4.7,
-      "focus": [0, 1, 0],
-      "props": [
-        {
-          "id": "glass",
-          "asset": "pane",
-          "motion": "idle_breathe",
-          "height": 1.8,
-          "yaw": -0.32,
-          "position": [0, 0.08, 0]
-        }
-      ],
+      "stage": "window_night",
+      "cameraPreset": "dutch_tilt_push",
+      "distance": 3.5,
+      "focus": [0, 1.27, 0],
+      "props": [],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "After sunset,",
           "highlight": "sunset,"
         },
@@ -340,35 +342,38 @@
           "highlight": "darker."
         }
       ],
-      "sfx": "pop",
-      "pan": 0.32
+      "sfx": "whoosh",
+      "pan": 0.32,
+      "actors": [
+        {
+          "id": "presenter",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.32, 0, 0.92],
+          "motion": "thinking",
+          "yaw": 2.94
+        }
+      ]
     },
     {
       "title": "Lights on inside",
       "duration": 2.5,
-      "stage": "house_corner",
-      "cameraPreset": "cutaway_macro",
-      "distance": 4.7,
-      "focus": [0, 1, 0],
+      "stage": "window_night",
+      "cameraPreset": "whip_pan_to_prop",
+      "distance": 3.5,
+      "focus": "lamp",
       "props": [
         {
           "id": "lamp",
           "asset": "lamp",
           "motion": "idle_breathe",
           "height": 1.2,
-          "position": [-0.52, 0, 0.35]
-        },
-        {
-          "id": "person",
-          "asset": "male.character_01",
-          "motion": "idle_breathe",
-          "height": 1.55,
-          "position": [0, 0, -0.55]
+          "position": [0.8, 0, 0.8]
         }
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Inside, your lamp",
           "highlight": "lamp"
         },
@@ -378,15 +383,25 @@
           "highlight": "you."
         }
       ],
-      "sfx": "whoosh"
+      "sfx": "click",
+      "actors": [
+        {
+          "id": "presenter",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.62, 0, 0.95],
+          "motion": "shocked",
+          "yaw": 2.94
+        }
+      ]
     },
     {
       "title": "The balance flips",
       "duration": 2.5,
       "stage": "optics_lab",
-      "cameraPreset": "orbit_drift",
+      "cameraPreset": "macro_closeup",
       "distance": 4.7,
-      "focus": [0, 1, 0],
+      "focus": "rays",
       "props": [
         {
           "id": "rays",
@@ -406,7 +421,7 @@
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Now the reflection",
           "highlight": "reflection"
         },
@@ -416,36 +431,25 @@
           "highlight": "dominate."
         }
       ],
-      "sfx": "tick"
+      "sfx": "riser",
+      "actors": []
     },
     {
       "title": "The face in the pane",
       "duration": 2.5,
-      "stage": "house_corner",
-      "cameraPreset": "fast_push",
-      "distance": 4.7,
-      "focus": [0, 1, 0],
-      "props": [
-        {
-          "id": "person",
-          "asset": "male.character_01",
-          "motion": "idle_breathe",
-          "height": 1.55,
-          "position": [0, 0, -0.55]
-        },
-        {
-          "id": "glass",
-          "asset": "pane",
-          "motion": "idle_breathe",
-          "height": 1.8,
-          "yaw": -0.32,
-          "position": [0, 0.08, 0]
-        }
-      ],
+      "stage": "window_night",
+      "cameraPreset": "over_shoulder",
+      "distance": 3.5,
+      "focus": [-0.32, 1.35, -0.92],
+      "props": [],
       "captions": [
         {
-          "at": 0,
-          "text": "That face in glass?",
+          "at": 0.0,
+          "text": "That face"
+        },
+        {
+          "at": 0.59,
+          "text": "in glass?",
           "highlight": "glass?"
         },
         {
@@ -454,35 +458,37 @@
           "highlight": "light."
         }
       ],
-      "sfx": "riser"
+      "sfx": "click",
+      "actors": [
+        {
+          "id": "presenter",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.32, 0, 0.92],
+          "motion": "thinking",
+          "yaw": 2.94
+        }
+      ]
     },
     {
       "title": "Run the experiment",
       "duration": 2.5,
-      "stage": "backstage",
-      "cameraPreset": "handheld_bob",
-      "distance": 4.7,
-      "focus": [0, 1, 0],
+      "stage": "window_night",
+      "cameraPreset": "dutch_tilt_push",
+      "distance": 3.5,
+      "focus": "lamp",
       "props": [
         {
           "id": "lamp",
           "asset": "lamp",
           "motion": "idle_breathe",
           "height": 1.2,
-          "position": [-0.52, 0, 0.35]
-        },
-        {
-          "id": "glass",
-          "asset": "pane",
-          "motion": "idle_breathe",
-          "height": 1.8,
-          "yaw": -0.32,
-          "position": [0, 0.08, 0]
+          "position": [0.8, 0, 0.8]
         }
       ],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Dim the room.",
           "highlight": "room."
         },
@@ -492,35 +498,29 @@
           "highlight": "fades."
         }
       ],
-      "sfx": "pop"
+      "sfx": "whoosh",
+      "actors": [
+        {
+          "id": "presenter",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.62, 0, 0.95],
+          "motion": "thinking",
+          "yaw": 2.94
+        }
+      ]
     },
     {
       "title": "Nothing switched",
       "duration": 2.5,
-      "stage": "optics_lab",
-      "cameraPreset": "dutch_tilt_zoom",
-      "distance": 4.7,
-      "focus": [0, 1, 0],
-      "props": [
-        {
-          "id": "glass",
-          "asset": "pane",
-          "motion": "idle_breathe",
-          "height": 1.8,
-          "yaw": -0.32,
-          "position": [0, 0.08, 0]
-        },
-        {
-          "id": "eye",
-          "asset": "eye",
-          "motion": "idle_breathe",
-          "height": 0.7,
-          "position": [0.18, 0.65, -0.6]
-        }
-      ],
+      "stage": "window_night",
+      "cameraPreset": "wide_orbit",
+      "distance": 3.5,
+      "focus": [0, 1.27, 0],
+      "props": [],
       "captions": [
         {
-          "at": 0,
+          "at": 0.0,
           "text": "Same window.",
           "highlight": "window."
         },
@@ -530,7 +530,17 @@
           "highlight": "balance."
         }
       ],
-      "sfx": "whoosh"
+      "sfx": "click",
+      "actors": [
+        {
+          "id": "presenter",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.32, 0, 0.92],
+          "motion": "talking",
+          "yaw": 2.94
+        }
+      ]
     }
   ]
 }

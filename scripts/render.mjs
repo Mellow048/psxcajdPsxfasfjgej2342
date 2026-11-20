@@ -26,7 +26,7 @@ if (!/^episodes\/[a-zA-Z0-9_/-]+\.json$/.test(file))
   throw Error("Expected episodes/name.json");
 const episode = validate(JSON.parse(await readFile(file, "utf8")));
 const frames = Math.ceil(
-  (episode.scenes.reduce((n, s) => n + Math.round(s.duration * CONFIG.hz), 0) *
+  (episode.shots.reduce((n, s) => n + Math.round(s.duration * CONFIG.hz), 0) *
     CONFIG.fps) /
     CONFIG.hz,
 );
@@ -109,7 +109,7 @@ try {
     audio.bus.gain.value = 0.65;
     audio.bus.connect(ctx.destination);
     const urls = new Set(
-      [e.narration, ...e.scenes.map((s) => SFX_MANIFEST[s.sfx])].filter(
+      [e.narration, ...e.shots.map((s) => SFX_MANIFEST[s.sfx])].filter(
         (u) => u && u !== "synth",
       ),
     );

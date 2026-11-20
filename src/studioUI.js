@@ -106,7 +106,8 @@ export class StudioUI {
     const root = $("sliders");
     root.replaceChildren();
     for (const [key, title, min, max, step, fmt] of [
-      ["grid", "Vertex snap grid", 0, 360, 10, (v) => (v ? v + " px" : "Off")],
+      ["grid", "Snap grid width", 0, 360, 10, (v) => (v ? v + " px" : "Off")],
+      ["gridHeight", "Snap grid height", 80, 480, 10, (v) => v + " px"],
       [
         "affine",
         "Affine warping",
@@ -126,9 +127,9 @@ export class StudioUI {
       [
         "scale",
         "Render scale",
-        0.25,
+        1 / 6,
         1,
-        0.05,
+        "any",
         (v) => Math.round(v * 100) + "%",
       ],
     ]) {
@@ -160,11 +161,12 @@ export class StudioUI {
   async load(json) {
     const r = this.r;
     await r.load(json);
+    json = r.episode;
     r.onframe = null;
     $("title").textContent = json.title;
     $("series").textContent = json.series ?? "Custom episode";
-    const n = json.scenes.length;
-    $("quantity").textContent = n + " scenes";
+    const n = json.shots.length;
+    $("quantity").textContent = n + " shots";
     $("length").textContent = r.duration + " seconds";
     $("count").textContent = pad(n);
     $("seqinfo").textContent = n + " cuts · 60 Hz sequence";
@@ -178,7 +180,7 @@ export class StudioUI {
     thumb.width = 100;
     thumb.height = 76;
     const tx = thumb.getContext("2d");
-    for (const [i, s] of json.scenes.entries()) {
+    for (const [i, s] of json.shots.entries()) {
       r.seek(r.frames[i].start / 60 + 0.3);
       const pic = r.pipeline.renderer.domElement;
       tx.imageSmoothingEnabled = false;

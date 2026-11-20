@@ -336,6 +336,66 @@ function cemetery(s) {
     );
   }
 }
+// Reusable demonstration set: a real opening, a skyline and a fixed glass plane
+// at Z=0. The wall masks the virtual actor staged behind the glass.
+function windowRoom(s, night) {
+  const trim = lit(night ? 0x735649 : 0xb98d65),
+    wall = lit(night ? 0x4a4258 : 0xb9a899);
+  box(s, 20, 0.12, 16, lit(0x59505b), 0, -0.07, 4);
+  for (const x of [-5.65, 5.65]) box(s, 8.7, 7, 0.18, wall, x, 2.8, 0);
+  box(s, 2.65, 2, 0.18, wall, 0, -0.81, 0);
+  box(s, 2.65, 4, 0.18, wall, 0, 4.52, 0);
+  for (const x of [-1.32, 1.32]) box(s, 0.095, 2.43, 0.2, trim, x, 1.36, 0.04);
+  for (const y of [0.19, 2.52]) box(s, 2.75, 0.11, 0.25, trim, 0, y, 0.04);
+  box(s, 0.04, 2.28, 0.06, trim, 0.57, 1.36, 0);
+  const glass = new T.MeshBasicMaterial({
+    color: night ? 0x819ab8 : 0xc7e8ff,
+    opacity: night ? 0.055 : 0.13,
+    transparent: true,
+    depthWrite: false,
+  });
+  box(s, 2.6, 2.3, 0.01, glass, 0, 1.36, 0);
+  const r = rand(113);
+  for (let i = -9; i < 10; i++) {
+    const h = 0.65 + r() * 2.1;
+    box(
+      s,
+      0.73,
+      h,
+      0.6,
+      basic(night ? 0x27324a : 0x7991a0),
+      i * 0.8,
+      h / 2,
+      -4.7,
+    );
+    for (let j = 0.3; j < h - 0.08; j += 0.36)
+      for (const x of [-0.16, 0.16])
+        if (r() > 0.25)
+          box(
+            s,
+            0.13,
+            0.13,
+            0.02,
+            basic(night ? 0xe3c490 : 0xc2d8de),
+            i * 0.8 + x,
+            j,
+            -4.38,
+          );
+  }
+  mesh(
+    s,
+    new T.CircleGeometry(0.35, 16),
+    basic(night ? 0xfce8ba : 0xffdb91),
+    1.3,
+    3.12,
+    -6.5,
+  );
+  if (night) {
+    const light = new T.PointLight(0xffc186, 9, 8);
+    light.position.set(-1.4, 1.6, 1.6);
+    s.add(light);
+  }
+}
 export function stage(name) {
   const s = new T.Scene(),
     p = SCENE_PRESETS[name];
@@ -345,7 +405,8 @@ export function stage(name) {
   const key = new T.DirectionalLight(0xffe6c7, 2);
   key.position.set(-3, 6, 3);
   s.add(key);
-  if (name === "graveyard") cemetery(s);
+  if (p.reflection) windowRoom(s, name === "window_night");
+  else if (name === "graveyard") cemetery(s);
   else {
     const back = name === "backstage";
     box(s, 25, 0.16, 24, lit(back ? 0x50374c : 0x2b3546), 0, -0.1, -3);

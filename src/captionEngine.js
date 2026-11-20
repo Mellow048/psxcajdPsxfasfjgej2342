@@ -44,12 +44,12 @@ export function composite(ctx, image, episode, s, index, t) {
     } else line = test;
   }
   lines.push(line);
-  ctx.translate(270, Math.min(694, 762 - (lines.length - 1) * 59));
-  const k = 0.96 + 0.04 * Math.min(1, (t - c.at) * 12);
+  ctx.translate(270, 480 - ((lines.length - 1) * 59) / 2);
+  const k = 1 - 0.24 * Math.exp(-16 * (t - c.at)) * Math.cos(26 * (t - c.at));
   ctx.scale(k, k);
   ctx.textBaseline = "middle";
   ctx.lineJoin = "round";
-  ctx.lineWidth = 8;
+  ctx.lineWidth = 11;
   let offset = 0;
   for (const [i, l] of lines.entries()) {
     const size = ctx.measureText(l).width,
@@ -58,8 +58,12 @@ export function composite(ctx, image, episode, s, index, t) {
     ctx.scale(scale, 1);
     let x = -size / 2;
     const y = i * 59;
-    ctx.strokeStyle = "#212136";
+    ctx.strokeStyle = "#09090d";
+    ctx.shadowColor = "#000";
+    ctx.shadowOffsetY = 5;
+    ctx.shadowBlur = 3;
     ctx.strokeText(l, x, y);
+    ctx.shadowColor = "transparent";
     for (const ch of l.split(" ")) {
       let hit = false;
       if (c.highlight) {

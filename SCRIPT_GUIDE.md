@@ -1,114 +1,119 @@
-# Write a Cutframe episode — instructions for scriptwriting agents
+# PSX Informative Shorts - Scripting Guide
 
-**Your deliverable is one valid JSON object, not JavaScript, a storyboard, or prose.** Use schema version 1. Start from [`episodes/ghost-in-the-glass.json`](episodes/ghost-in-the-glass.json), a working 22.5-second example. No engine edits are needed for a new episode. Use a real model key from the list below or a built-in prop; never invent a filename, clip, sound, shader, camera or stage.
+## The 3-Second Rule
 
-## Write the reveal before the hook
+DO NOT write long, continuous scenes. The human brain loses focus after 3 seconds without a visual change. Break your educational concepts into rapid 2-3 second `shots`.
 
-Choose **one** surprising, verifiable fact you can demonstrate with the available objects. Write the takeaway in one sentence. Decide what the viewer ought to notice in the final frame. Then build the hook around the mistaken intuition that frame corrects. Check claims, quantities, causality and safety against reliable sources before recording; a counterintuitive title is not evidence.
+## Bad Example vs. Good Example (The Window/Mirror Effect)
 
-- **0–2 seconds: pattern interrupt.** Ask the weird question or show the apparently impossible result immediately. Start the first *shot* at 0; the hook must land before second 2 even if that shot lasts 2.5 seconds. No greeting, logo intro, throat clearing or promise to explain later.
-- **One clause, one visual job, one 2–3 second shot.** Translate “it reflects” into a pane and a beam, not another shot of someone talking. Cut between a wide demonstration, an offstage angle, a macro detail and the observer’s viewpoint. Each scene requires a moving camera, moving subject and a cut cue. Start the next clause on the cut.
-- **Escalate, then resolve.** Hook → quick context → missing ingredient → weird detail → changed viewpoint → unexpected takeaway → loop. A second shot should answer one question and open a narrower one. A close-up is most useful when it reveals something the previous angle concealed.
-- **Speak for the cut.** At normal narration speed aim for about 5–8 words in a 2.5-second shot. Split the sentence into two caption pops. Aim for 2–4 words per pop, **hard maximum five**. Prefer concrete nouns and verbs. Highlight one curiosity word or a short contiguous phrase, not everything. Leave room for a breath; shorten a line instead of squeezing it into a tenth of a second.
-- **Loop with new understanding.** Return to the original framing and ask the viewer to locate the now-explained detail. Do not spend the last two seconds on a generic call to action.
+**BAD SCRIPTING (Do not do this):**
 
-### Demo pacing map (these are the shipped shots)
+- Camera pushes in slowly for 35 seconds.
 
-| Time | Visual change | What the cut teaches |
-|---|---|---|
-| 0–2.5 | Push toward a sheet ghost in a moonlit cemetery | Present the apparent impossibility first. |
-| 2.5–5 | Whip backstage to the uploaded ghost performer | Reveal the hidden subject. |
-| 5–7.5 | Orbit a framed pane | Isolate the optical element. |
-| 7.5–10 | Push from the stage lights to the actor | Show which part must be illuminated. |
-| 10–12.5 | Macro view of the ray diagram | Trace the reflected light. |
-| 12.5–15 | Cut to an eye beside the pane | Explain that the background remains visible. |
-| 15–17.5 | Tilt into the superimposed figures | Combine both paths in one view. |
-| 17.5–20 | Orbit the apparition again | Name the illusion *after* the explanation. |
-| 20–22.5 | Return to the opening subject | Ask where the real actor is; the first shot reads differently now. |
+- Character stands perfectly still.
 
-## Smallest useful script
+- Narration reads: "A window by day. A mirror by night? The glass itself has not changed. Two light paths reach your eyes..."
 
-This complete one-shot test is valid JSON. For a finished Short, expand it to 8–10 distinct shots and roughly 20–25 seconds.
+*(Result: Viewers scroll away instantly).*
+
+**GOOD SCRIPTING (Viral Formatting):**
+
+- **Shot 1 (0:00-0:02):** `macro_closeup` on the character's face. Aggressive vertex wobble. Character is doing a `thinking` animation. Narration: "Why do windows turn into mirrors at night?"
+
+- **Shot 2 (0:02-0:04):** `whip_pan_to_prop`. Camera violently pans to a bright window with sunlight blasting through. SFX: *Whoosh*. Narration: "The glass never changes."
+
+- **Shot 3 (0:04-0:06):** `dutch_tilt_push`. Room goes dark, a lamp clicks on, bouncing light off the glass. Character points at the glass (`pointing` animation). Narration: "It's all about light paths."
+
+- **Shot 4 (0:06-0:08):** `over_shoulder`. We see the character's reflection clearly in the dark glass. SFX: *Click*. Narration: "Your lamp drowns out the outside dark."
+
+## Deliverable for a writing agent
+
+Return **only valid JSON**. The timestamps and sentences above are a storyboard, not engine fields. Treat “three seconds” as this studio's editing rule, not a biological attention limit. Give each shot one new piece of visual evidence. Hook in the first two seconds, establish the ordinary explanation, reveal the surprising mechanism, demonstrate a test and loop back to the hook. Verify factual claims. Say each line aloud before locking timing.
+
+**Write a `shots` array.** For a named or narrated episode, wrap it in a version-2 object as below. A bare JSON array of shot objects also runs (untitled, no narration or beat). Never use `scenes`, a global camera timeline, or one long track. Every shot is a new cast, set, camera setup, and local clock. The editor and batch renderer enforce the same rules. Use [the full 35-second sample](episodes/night-window.json) to see 14 cuts timed to one voice track.
 
 ```json
 {
-  "version": 1,
-  "title": "Look through the ghost",
-  "series": "Optics",
+  "version": 2,
+  "title": "The second face",
+  "series": "Everyday optics",
   "beat": true,
-  "scenes": [
+  "shots": [
     {
-      "title": "The false image",
+      "title": "Recognition",
       "duration": 2.5,
-      "stage": "optics_lab",
-      "cameraPreset": "orbit_drift",
-      "distance": 4.3,
-      "focus": "performer",
-      "actors": [{"id":"performer","asset":"sheet","motion":"idle_breathe","height":1.6,"position":[0,0.2,-0.3]}],
-      "props": [{"id":"pane","asset":"pane","motion":"pop_in","height":1.3,"position":[0.45,0,0.1],"yaw":-0.5}],
-      "captions": [{"at":0,"text":"One ghost?","highlight":"ghost?"},{"at":1.1,"text":"Two light paths.","highlight":"Two"}],
-      "sfx": "whoosh"
+      "stage": "house_corner",
+      "cameraPreset": "macro_closeup",
+      "focus": "host",
+      "distance": 2.7,
+      "actors": [{"id":"host","asset":"male.character_01","motion":"thinking"}],
+      "captions": [{"at":0,"text":"Whose face?","highlight":"face?"},{"at":1.1,"text":"Look closer."}],
+      "sfx": "riser"
+    },
+    {
+      "title": "Behind the shoulder",
+      "duration": 2.5,
+      "stage": "window_night",
+      "cameraPreset": "over_shoulder",
+      "focus": [-0.3,1.35,-0.9],
+      "actors": [{"id":"host","asset":"male.character_01","motion":"pointing","position":[-0.3,0,0.9],"yaw":2.9}],
+      "captions": [{"at":0,"text":"It's yours."},{"at":1.1,"text":"Light bounces back.","highlight":"bounces"}],
+      "sfx": "click"
     }
   ]
 }
 ```
 
-## Exact schema, units and defaults
+## Strict field reference
 
-JSON only: double quotes, no trailing commas or comments. Unknown fields are rejected. All times are **seconds**, not milliseconds or frame numbers. Arrays have parentheses-free JSON syntax. IDs live only within their shot: repeat subject definitions across cuts. The engine never assumes scene 2 inherits scene 1’s actors.
+Unknown fields, unknown keys, malformed vectors, and unsupported durations are rejected. All coordinates and numeric fields must be finite. Times are **seconds**, not frame numbers.
 
 | Episode field | Contract |
 |---|---|
-| `version`, `title`, `scenes` | Required: integer `1`, nonempty string, array of 1–60 shots. Duration is the sum; there is no separate runtime field. |
-| `series` | Optional display string. |
-| `beat` | Optional boolean, default false. Subtle synthesized pulse every half second. |
-| `narration` | Optional relative same-origin `.wav`, `.ogg`, `.mp3` or `.m4a` file (no `..`, leading `/` or URL scheme). One full-episode track, starting at episode second 0, e.g. `episodes/ghost-narration.wav`. Browser must support decoding that format. |
+| `version`, `title`, `shots` | Object form requires integer `2`, a nonempty title and an array of 1–60 shots. Do not specify total duration: sum the shots. |
+| `series`, `beat` | Optional display string and boolean (default false). `beat` adds a quiet pulse; it is not a cut SFX. |
+| `narration` | Optional local WAV/OGG/MP3/M4A path, e.g. `episodes/night-window.wav`, relative to the server root. Supply the file. No absolute paths, URLs or `..`. One full-episode track starts at zero. Caption text does not synthesize speech. |
 
-| Scene field | Contract |
+| Shot field | Contract |
 |---|---|
-| `title`, `stage`, `cameraPreset`, `sfx` | Required: nonempty shot name and exact keys below. The SFX fires at the shot start. |
-| `duration` | Required number from 2.0 through 3.0 inclusive on a 1/60 s boundary. Prefer 2, 2.25, 2.5, 2.75 or 3. |
-| `actors`, `props` | Optional arrays of the **same subject schema**. At least one subject total. The distinction is editorial; either list accepts model or procedural keys. |
-| `focus` | Optional subject `id` (track its approximate mid-height) or fixed `[x,y,z]` target, default `[0,1,0]`. For separated subjects use a point between them. |
-| `distance` | Optional camera radius 0.3–40 studio units, default 4.8. Start at 4–5 for a 1.6-unit subject. A macro preset tightens this further. |
-| `angle`, `pan` | Optional finite numbers. `angle` is base camera azimuth in radians (0 looks from +Z). `pan` is the horizontal sweep half-width for `whip_pan` in world units, default 0.85. |
-| `captions` | Required nonempty array of `{ "at": 0, "text": "Look here.", "highlight": "here." }`. First `at` **must be 0**. All later markers strictly increase and are less than this shot’s duration. Text stays until the next marker/cut. Highlight optional, exact case-sensitive substring; include punctuation if useful. |
+| `title`, `stage`, `cameraPreset`, `sfx` | Required. Nonempty title and exact keys below. Start the next clause on the cut; SFX is scheduled at that exact boundary. |
+| `duration` | **2.0–3.5 inclusive on a 1/60-second tick.** Prefer 2, 2.25, 2.5 or 3; reserve 3.5 for a reveal that needs reading time. No crossfades or gaps. |
+| `actors`, `props` | Arrays; at least one subject across both. Put the speaker/observer first in `actors`. A diagram cut can have only props. |
+| `focus` | Subject ID **in this shot** or `[x,y,z]`, default `[0,1,0]`. For an over-shoulder or whip, target the object being observed, not the first actor. Macro on a named actor aims at face height. |
+| `distance`, `angle`, `pan` | Optional base camera radius 0.3–40, base azimuth in radians, and lateral whip span for a prop-only whip. Presets apply their own framing. |
+| `captions` | Nonempty array. First `at` must be 0; subsequent `at` values strictly increase and stay below duration. Each `text` is **1–3 words**. Optional `highlight` is an exact case-sensitive substring, including punctuation where needed. Pops are centered with an outline and shadow. Keep words short enough to read. |
 
 | Subject field | Contract |
 |---|---|
-| `id`, `asset`, `motion` | Required nonempty ID unique across both lists in this shot, a registered asset key, and one procedural motion key. |
-| `height` | Positive normalized height in studio units, default 1.6. Imported bounding box is floor-centered before motion. A whole map should be much larger than an actor. |
-| `position`, `yaw` | Optional `[x,y,z]` (right, up, toward starting camera), default `[0,0,0]`; yaw in radians around Y, default 0. Position is the normalized **base**, not model center. |
-| `mesh` | Optional exact source node name for one static object inside a model pack. Example: `"asset":"metro_psx.metro","mesh":"subway_car"`. See `models[path].meshes` in the inventory. Omit on skinned characters; extracting just their mesh can detach their rig. |
-| `clip` | Optional `{ "name":"mixamo.com" }` for an embedded clip, or `{ "asset":"male.character_01", "name":"mixamo.com" }` to borrow it from that source. Case-sensitive. A clip is independent of `motion`: root micro-motion continues. |
-| `text` | Optional **only** with `asset:"label"`, 1–24 characters, default `NOTE`. For callouts try height 0.22 and motion `pop_in`. This is a 3D sign, not a burned-in subtitle. |
+| `id`, `asset` | Required nonempty ID (unique within shot) and an exact asset key. No invented file paths. |
+| `motion` | Optional, default **`idle_breathe`**. For rigged actors: `talking`, `pointing`, `thinking`, `shocked`, `idle_breathe`. For props use `float_spin`, `pop_in` or `idle_breathe`. Motion restarts on the cut. |
+| `height`, `position`, `yaw` | Optional positive normalized height (default 1.6), floor-centered `[x,y,z]` (default origin), and heading in radians (default 0). Y is up; +Z faces the default camera. |
+| `clip` | Optional `{"name":"mixamo.com"}` or `{"asset":"female.character_female_02","name":"mixamo.com"}`. Name a real embedded take on a compatible rig. Only bone quaternions transfer, never root position. A moving explicit take wins. Otherwise the engine tries an embedded clip named for the motion, then a registered Mixamo donor under `Assets/Animations/<motion>.fbx` on compatible humanoids. When neither exists, it directs the upper body over the anonymous FBX base. To install a licensed donor, add the file and rerun `python3 scripts/catalog.py`; do not write a nonexistent donor into JSON. |
+| `mesh`, `text` | Optional exact source mesh name for extracting a static object from a pack; leave unset on a skinned actor. `text` is only for `asset:"label"`, 1–24 characters. A floating sign is not a subtitle. |
 
-**Audio authoring:** derive TTS timing from `sum(previous durations) + caption.at`. Record/generate narration separately and add its relative file path. Captions are timing markers, not a browser speech-synthesis request; without narration the cut sounds and optional beat still play. No generated filename can create a missing audio file. Trim a voiceover to the episode length. Preview after backward seeks and listen to the last word before every cut.
+### Five camera setups; three cut cues
 
-## Capability dictionary
-
-### Stages
-
-| Key | Picture |
+| `cameraPreset` | Choose it when… |
 |---|---|
-| `graveyard` | Seeded moonlit cemetery with fence, trees, headstones and atmospheric particles. |
-| `backstage` | Curtain-lined theater floor and low riser. |
-| `optics_lab` | Cool diagram stage with calibration grid. |
-| `void` | Dark, sparsely dressed demo floor. Add models/diagrams. |
-| `house_corner` | Interior mini-set furnished with the actual Quequis house pack’s Armchair, Table and Painting. |
+| `macro_closeup` | An expression or detail **is** the evidence. Use a named actor for a face or a named prop for an inspection. |
+| `whip_pan_to_prop` | Attention transfers from the first actor to `focus` early in the shot. With no actor it starts laterally offset. |
+| `dutch_tilt_push` | A twist warrants a canted push into the reveal. |
+| `over_shoulder` | The viewer should see what the first actor sees. Place the actor between the camera and a separate target. Without an actor this is an oblique inspection angle. |
+| `wide_orbit` | Relative positions matter; show the whole demonstration with a moving arc. |
 
-For other maps create a `void` shot and place the map or a named submesh in `props`. Set `height`, `position`, `focus` and `distance` explicitly. There is no automatic navmesh or guarantee a camera is inside the intended room. Use the monitor to scout the shot before writing a close-up.
+Every cut changes the lens immediately, even for consecutive uses of the same preset. Prefer **different evidence** over merely changing lenses. Choose `whoosh` for a transfer, `click` for a switch/reveal, or `riser` for suspense. There is no silent cut key. Previewing a paused scrub is silent; playing and exporting use scheduled audio.
 
-### Moving camera presets
+### Sets, props and look
 
-`slow_push` gentle dolly; `fast_push` more aggressive approach; `orbit_drift` lateral arc; `handheld_bob` swaying handheld; `whip_pan` rapid left-to-right sweep **within** the shot (place subjects on either side of `focus`); `dutch_tilt_zoom` rolling push; `cutaway_macro` tighter rotating inspection. There is no `static` preset. Scene boundaries are hard cuts, not dissolves.
+- `window_day` / `window_night`: matched demonstration sets with a window opening at Z=0. Position actors on the room side (positive Z); their mirrored performances behind the glass are faint by day and stronger by night. Do not add a second `pane` here.
+- `house_corner`: furnished Quequis house interior. `optics_lab`: diagram grid. `backstage`: curtains and riser. `graveyard`: cemetery. `void`: sparse demonstration floor. Stage does not persist between shots.
+- Built-in subjects: `sheet`, `pane`, `lamp`, `eye`, `arrow`, `rays`, `label`. `rays` illustrates reflection, not straight-through transmission. For other objects use the verified inventory below.
+- Default look: 160×240 clip-space snap grid, 180×320 scene buffer, nearest sampling, affine diffuse UVs, 4×4 Bayer dithering and 5:5:5 RGB. The scene is enlarged to 540×960 **before** caption compositing. Adjust the look in the inspector or `CONFIG.psx`, not in JSON.
+- For TTS or recorded voice, absolute cue time is **sum of previous shot durations + caption `at`**. Treat a longer spoken sentence as several timed pops. Never split an existing audio track by simply guessing its new cut points.
 
-### Animation and cues
+### Migrating a v1 script
 
-- Subject `motion`: `idle_breathe`, `talk_gesture`, `point`, `shock`, `float_spin`, `pop_in`. All retain micro-motion. Talk/point also rotate a recognized arm when not driven by a clip. Root tilt is the fallback on a prop without bones. For repeated spins, each shot restarts the local clock.
-- Built-in prop/actor keys: `sheet` (stylized ghost), `pane` (glass diagram), `lamp`, `eye`, `arrow`, `rays`, `label`. Example: `{"id":"direction","asset":"arrow","motion":"pop_in","height":0.35,"position":[0.5,1,0]}`.
-- SFX: `whoosh`, `pop`, `riser`, `tick`. These are synthesized cues, not files. No `SoundEffects/` was supplied. `beat` is an episode boolean, **not** a cut cue. No music track names, camera shake commands, arbitrary shader scripts or narration prompts.
-- 9:16, 540×960 output; 60 Hz motion; 30 fps capture request. Default scene buffer 270×480, snap grid 180×320. Inspector supports grid width (0 = off), affine warp 0–100%, Bayer intensity 0–100%, render scale 25–100%. Turning dither off leaves the 15-bit palette in place. Fog uses each stage’s palette. Display/UI graphics are composited after upscaling; monitors, thumbnails and recorder share the same scene renderer.
+Set `version:2`, rename `scenes` to `shots`, choose a legal lens and cue for every shot, split long captions, replace `talk_gesture`/`point`/`shock` with `talking`/`pointing`/`shocked`, then validate in **Edit JSON → Apply episode**. Durations outside the allowed range must be rewritten, not silently clamped. Scrub the last tick of one shot and the first of the next. Play through with audio before export.
 
 ## Inspected assets and rig compatibility
 
@@ -157,11 +162,3 @@ The brief provided the following **literal slots**, not transcripts, footage, ti
 **Why the title can hook:** it promises a cost to a supposedly useful power. Lead with the visible contradiction rather than a definition. **Original timing exercise:** 0–2.5s: close on an eye and pose the question. 2.5–5s: cut to an object between a source and detector. 5–7.5s: rotate to reveal their relative positions. 7.5–10s: replace the wide stage with a labeled diagram of what is measured. Let each next cut remove one misconception; return to the eye for the payoff. Verify the physics: an eye seeing transmitted X-rays is not itself an X-ray emitter. The `rays` prop in this engine illustrates *reflection*; do not reuse its bent path as a diagram of transmission. Use `arrow` and `label` instead. No skull, X-ray machine or medical diagnosis is implied by these props.
 
 **When transcripts arrive:** preserve the supplied wording, log each observed cut with its actual timestamp, and distinguish spoken words from on-screen text. Analyze the first unanswered question, the visual evidence on each cut, the information withheld until the payoff and the final-to-first-frame loop. Never retrofit invented timestamps to an unseen video.
-
-## Before handing a script to the studio
-
-1. Read the hook aloud. Does the concrete question land before 2s? Can every later beat be drawn with a registered object?
-2. Sum shot durations; keep every individual duration in range. Give every shot an explicit motion preset, cut cue, at least one subject and a caption at 0.
-3. Check case-sensitive asset/mesh/clip keys and per-shot IDs. Use only supported fields. A keyword highlight must actually occur in the text.
-4. Time narration against the cut marks, not just total length. Supply the audio file if referencing one. Audition in the target browser.
-5. Paste into **Edit JSON → Apply episode**. Jump through each shot to inspect scale, framing, overlap, caption length and loop. Export from the foreground tab. If an asset dominates memory, pick a smaller pack or a procedural diagram; the JSON validator does not promise every combination fits every device.

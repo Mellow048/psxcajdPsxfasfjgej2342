@@ -98,6 +98,33 @@ export class AssetLoader {
     }
     return this.clipCache.get(key);
   }
+  async performanceSource(def, node) {
+    const action = def.motion ?? "idle_breathe";
+    let request = def.clip;
+    if (!request) {
+      const named = ASSET_MANIFEST[def.asset].clips.find(
+        (n) => n.toLowerCase() === action,
+      );
+      if (named) request = { name: named };
+      else if (node.getObjectByName("mixamorigHips")) {
+        // Optional licensed Mixamo donations: after cataloging, a matching
+        // Assets/Animations/<action>.fbx can drive every compatible actor.
+        const key = "animations." + action,
+          name = ASSET_MANIFEST[key]?.clips[0];
+        if (name) request = { asset: key, name };
+      }
+    }
+    if (request) {
+      const clips = await this.clipsFor(request.asset ?? def.asset);
+      const clip = clips.find((c) => c.name === request.name);
+      if (!clip) throw Error("Missing animation clip: " + request.name);
+      return { clip, take: true };
+    }
+    const clip = ASSET_MANIFEST[def.asset].clips.length
+      ? (await this.clipsFor(def.asset))[0]
+      : null;
+    return { clip, take: false };
+  }
   async instance(def) {
     const model =
       def.asset === "label"
@@ -128,6 +155,28 @@ export class AssetLoader {
       -center.z * factor,
     );
     return patchTree(normalized);
+  }
+  async reflectedInstance(def, opacity) {
+    const node = await this.instance(def),
+      copies = new Map();
+    const tint = (original) => {
+      if (!copies.has(original)) {
+        const m = original.clone();
+        delete m.userData.psx;
+        m.transparent = true;
+        m.opacity = opacity;
+        m.depthWrite = false;
+        copies.set(original, m);
+      }
+      return copies.get(original);
+    };
+    node.traverse((o) => {
+      if (o.material)
+        o.material = Array.isArray(o.material)
+          ? o.material.map(tint)
+          : tint(o.material);
+    });
+    return patchTree(node);
   }
   dispose(stages = []) {
     release([...this.roots, ...stages]);

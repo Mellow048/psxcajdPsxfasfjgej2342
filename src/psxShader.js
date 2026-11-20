@@ -3,14 +3,16 @@ import { CONFIG } from "./config.js";
 const grid = { value: new T.Vector2() },
   affine = { value: 0 };
 export function patch(m) {
-  if (!m || m.userData.psx || m.isShaderMaterial) return;
-  for (const v of Object.values(m))
+  if (!m || m.userData.psx) return;
+  const uniformTextures = Object.values(m.uniforms ?? {}).map((u) => u.value);
+  for (const v of [...Object.values(m), ...uniformTextures])
     if (v?.isTexture) {
       v.magFilter = v.minFilter = T.NearestFilter;
       v.generateMipmaps = false;
       v.anisotropy = 1;
       v.needsUpdate = true;
     }
+  if (m.isShaderMaterial) return; // Custom shaders own their vertex layout.
   m.userData.psx = true;
   m.onBeforeCompile = (s) => {
     Object.assign(s.uniforms, { psxGrid: grid, affine });
@@ -19,7 +21,12 @@ export function patch(m) {
       s.vertexShader.replace(
         "#include <project_vertex>",
         `#include <project_vertex>
-  if(psxGrid.x>0. && gl_Position.w>0.){gl_Position.xy=(floor((gl_Position.xy/gl_Position.w*.5+.5)*psxGrid+.5)/psxGrid*2.-1.)*gl_Position.w;}
+  // Skinning and projection are complete. Round screen-space vertices, not UVs
+  // or object coordinates, and preserve the original clip-space w for depth.
+  if (psxGrid.x > 0.0 && psxGrid.y > 0.0 && gl_Position.w > 0.0) {
+    vec2 pixel = (0.5 * gl_Position.xy / gl_Position.w + 0.5) * psxGrid;
+    gl_Position.xy = (2.0 * floor(pixel + 0.5) / psxGrid - 1.0) * gl_Position.w;
+  }
   #ifdef USE_MAP
    affineUV=vec3(vMapUv*gl_Position.w,gl_Position.w);
   #endif`,
@@ -48,7 +55,8 @@ export class Pipeline {
       alpha: false,
       preserveDrawingBuffer: false,
     });
-    this.target = new T.WebGLRenderTarget(270, 480, {
+    this.target = new T.WebGLRenderTarget(1, 1, {
+      generateMipmaps: false,
       minFilter: T.NearestFilter,
       magFilter: T.NearestFilter,
     });
@@ -75,10 +83,10 @@ export class Pipeline {
     const p = CONFIG.psx,
       w = 9 * Math.round((CONFIG.width * p.scale) / 9),
       h = (w / 9) * 16;
-    grid.value.set(p.grid, (p.grid * 16) / 9);
+    grid.value.set(p.grid, p.gridHeight);
     affine.value = p.affine;
     this.quad.material.uniforms.dither.value = p.dither;
-    if (this.renderer.domElement.width !== w) {
+    if (this.target.width !== w || this.target.height !== h) {
       this.renderer.setSize(w, h, false);
       this.target.setSize(w, h);
     }

@@ -1,6 +1,6 @@
 # Cutframe · PSX Informative Shorts Studio
 
-Cutframe is a static Three.js r170 editor for making vertical educational videos from JSON. The included **The ghost in the glass** episode explains Pepper’s ghost in nine 2.5-second shots, with original sets, an uploaded Halloween actor, a synthesized narrator, and cut cues. [Watch the finished 30 fps WebM](episodes/ghost-in-the-glass.webm) or [open its JSON](episodes/ghost-in-the-glass.json).
+Cutframe is a static Three.js r170 editor for making vertical educational videos from JSON. The studio opens with **Why windows become mirrors at night**, a 35-second v2 episode with fourteen hard cuts and shot-local performances. The alternate **The ghost in the glass** episode explains Pepper’s ghost in nine 2.5-second shots, with original sets, an uploaded Halloween actor, a synthesized narrator, and cut cues. [Watch the archived v1 WebM](episodes/ghost-in-the-glass.webm) or [open its JSON](episodes/ghost-in-the-glass.json).
 
 ## Render on GitHub — no local GPU required
 
@@ -33,7 +33,7 @@ Open <http://localhost:8000/> in a WebGL 2 browser. No build, installation, micr
 ## Make another episode
 
 1. Give [SCRIPT_GUIDE.md](SCRIPT_GUIDE.md) to the writer. [Verified inventory](docs/asset-inventory.json) includes raw mesh names, FBX bone parents and embedded clip names.
-2. Choose **Edit JSON**. Paste a script or **Open JSON**, then **Apply episode**. Structural errors identify the scene; an invalid replacement leaves the last working episode loaded. **Save JSON** downloads the editor contents; nothing is silently written to disk.
+2. Choose **Edit JSON**. Paste a script or **Open JSON**, then **Apply episode**. Structural errors identify the shot; an invalid replacement leaves the last working episode loaded. **Save JSON** downloads the editor contents; nothing is silently written to disk.
 3. Or put your script under `episodes/` and open `/?episode=episodes/my-short.json`. Referenced narration and assets must also be served by this static server, not just present on the client’s disk.
 4. Click a shot, scrub the timeline, or press Space to preview. Inspector changes are live, session-only look overrides; defaults live in `src/config.js`. Muting affects speakers only.
 5. **Export WebM** renders the entire current episode from zero in real time, with captions burned in and the mixed narration/beat/cues in the audio track. Keep the tab visible. Export requires `captureStream`, Web Audio and a WebM-capable MediaRecorder (Chromium recommended). VP9/Opus is preferred; VP8/Opus is the fallback. Cancel discards that recording. Output is 540×960 at a requested 30 fps; actual capture cadence depends on device load. This is not an offline frame-accurate encoder.
@@ -42,7 +42,7 @@ Open <http://localhost:8000/> in a WebGL 2 browser. No build, installation, micr
 
 | Module | Responsibility |
 |---|---|
-| `config`, generated `catalog`, `schema` | Render defaults, dimensions, manifests, mini-set fixtures and strict v1 validation |
+| `config`, generated `catalog`, `schema` | Render defaults, dimensions, manifests, mini-set fixtures and strict v2 shot validation |
 | `assetLoader`, `animationLibrary` | GLB/FBX loading, texture-path repair, floor-centered normalization, skeleton cloning, rootless quaternion clips and procedural motion |
 | `stages`, `cameraDirector` | Seeded scenic geometry, subject props, preset motion and shot framing |
 | `psxShader` | Post-skinning clip-space grid snap, affine diffuse UV interpolation, nearest sampling, low-res target, display-space Bayer dither and 5:5:5 quantization |

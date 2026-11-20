@@ -5,7 +5,7 @@ const runner = new EpisodeRunner(document.getElementById("preview")),
 ui.lock(true);
 const file =
   new URLSearchParams(location.search).get("episode") ??
-  "episodes/ghost-in-the-glass.json";
+  "episodes/night-window.json";
 if (!/^episodes\/[\w ./-]+\.json$/.test(file) || file.includes(".."))
   throw Error("Use an episode path under episodes/");
 const res = await fetch(file);

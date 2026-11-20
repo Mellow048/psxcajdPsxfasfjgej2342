@@ -20,8 +20,9 @@ export function validate(e) {
     for (const k of Object.keys(o))
       check(list.split(" ").includes(k), "unknown field " + k);
   };
-  keys(e, "version title series narration beat scenes");
-  check(e.version === 1 && str(e.title), "version: 1 and a title required");
+  if (Array.isArray(e)) e = { version: 2, title: "Untitled Short", shots: e };
+  keys(e, "version title series narration beat shots");
+  check(e.version === 2 && str(e.title), "version: 2 and a title required");
   check(e.series === undefined || str(e.series), "invalid series");
   check(
     e.beat === undefined || typeof e.beat === "boolean",
@@ -36,11 +37,11 @@ export function validate(e) {
     "narration must be a relative audio file",
   );
   check(
-    Array.isArray(e.scenes) && e.scenes.length > 0 && e.scenes.length <= 60,
-    "expected 1–60 scenes",
+    Array.isArray(e.shots) && e.shots.length > 0 && e.shots.length <= 60,
+    "expected 1–60 shots",
   );
-  for (const [i, s] of e.scenes.entries()) {
-    at = `scene ${i + 1}`;
+  for (const [i, s] of e.shots.entries()) {
+    at = `shot ${i + 1}`;
     keys(
       s,
       "title duration stage cameraPreset distance angle pan focus actors props captions sfx",
@@ -49,9 +50,9 @@ export function validate(e) {
     check(
       num(s.duration) &&
         s.duration >= 2 &&
-        s.duration <= 3 &&
+        s.duration <= 3.5 &&
         Math.abs(s.duration * 60 - Math.round(s.duration * 60)) < 1e-6,
-      "duration must be 2–3s on a 60 Hz tick",
+      "duration must be 2–3.5s on a 60 Hz tick",
     );
     check(has(stages, s.stage), "unknown stage");
     check(CAMERAS.includes(s.cameraPreset), "unknown cameraPreset");
@@ -71,7 +72,10 @@ export function validate(e) {
         check(str(d.id) && !ids.has(d.id), "missing or duplicate subject id");
         ids.add(d.id);
         check(has(assets, d.asset), "unknown asset " + d.asset);
-        check(MOTIONS.includes(d.motion), "unknown motion");
+        check(
+          d.motion === undefined || MOTIONS.includes(d.motion),
+          "unknown motion",
+        );
         check(
           d.position === undefined || vec(d.position),
           "position must be [x,y,z]",
@@ -114,11 +118,11 @@ export function validate(e) {
           c.at >= 0 &&
           c.at < s.duration &&
           (last !== -1 || c.at === 0),
-        "captions must start at 0 and increase within scene",
+        "captions must start at 0 and increase within shot",
       );
       check(
-        str(c.text) && c.text.trim().split(/\s+/).length <= 5,
-        "use 1–5 words per caption",
+        str(c.text) && c.text.trim().split(/\s+/).length <= 3,
+        "use 1–3 words per caption",
       );
       check(
         c.highlight === undefined ||

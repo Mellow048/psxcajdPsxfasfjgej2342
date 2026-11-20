@@ -4,13 +4,15 @@ export const CONFIG = {
   height: 960,
   fps: 30,
   hz: 60,
-  psx: { grid: 180, affine: 0.85, dither: 0.65, scale: 0.5 },
+  psx: { grid: 160, gridHeight: 240, affine: 1, dither: 1, scale: 1 / 3 },
 };
 export const SCENE_PRESETS = {
   graveyard: { color: 0x716691, fog: 0x706088 },
   backstage: { color: 0x342842, fog: 0x40304c },
   optics_lab: { color: 0x203646, fog: 0x284453 },
   void: { color: 0x262433, fog: 0x2c2939 },
+  window_day: { color: 0x92bada, fog: 0xa8c3d9, reflection: 0.1 },
+  window_night: { color: 0x172642, fog: 0x27304b, reflection: 0.68 },
   house_corner: {
     color: 0x554759,
     fog: 0x685662,
@@ -51,26 +53,24 @@ export const ASSET_MANIFEST = {
   ...Object.fromEntries(BUILTINS.map((k) => [k, { builtin: true, clips: [] }])),
 };
 export const SFX_MANIFEST = {
-  pop: "synth",
   whoosh: "synth",
   riser: "synth",
-  tick: "synth",
+  click: "synth",
   ...Object.fromEntries(SOUNDS.map((p) => [p, p])),
 };
 export const CAMERAS = [
-  "slow_push",
-  "fast_push",
-  "orbit_drift",
-  "handheld_bob",
-  "whip_pan",
-  "dutch_tilt_zoom",
-  "cutaway_macro",
+  "wide_orbit",
+  "dutch_tilt_push",
+  "macro_closeup",
+  "over_shoulder",
+  "whip_pan_to_prop",
 ];
 export const MOTIONS = [
   "idle_breathe",
-  "talk_gesture",
-  "point",
-  "shock",
+  "talking",
+  "pointing",
+  "thinking",
+  "shocked",
   "float_spin",
   "pop_in",
 ];

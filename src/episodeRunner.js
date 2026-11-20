@@ -3,7 +3,7 @@ import { CONFIG, SCENE_PRESETS } from "./config.js";
 import { validate } from "./schema.js";
 import { Pipeline, patchTree } from "./psxShader.js";
 import { AssetLoader } from "./assetLoader.js";
-import { bindClip, pose } from "./animationLibrary.js";
+import { bindPerformance, pose } from "./animationLibrary.js";
 import { stage } from "./stages.js";
 import { CameraDirector } from "./cameraDirector.js";
 import { composite } from "./captionEngine.js";
@@ -29,7 +29,7 @@ export class EpisodeRunner {
       frames = [];
     let end = 0;
     try {
-      for (const s of e.scenes) {
+      for (const s of e.shots) {
         const f = { ...stage(s.stage), items: [], start: end };
         frames.push(f);
         end += Math.round(s.duration * CONFIG.hz);
@@ -43,18 +43,23 @@ export class EpisodeRunner {
           const node = await loader.instance(def);
           f.scene.add(node);
           const item = { def, node };
-          if (def.clip) {
-            const clips = await loader.clipsFor(def.clip.asset ?? def.asset);
-            item.mixer = bindClip(
-              clips.find((c) => c.name === def.clip.name),
-              node,
-            );
-          }
-          node.traverse((o) => {
-            if (o.isBone && /(rightarm|r_shoulder)$/i.test(o.name))
-              item.arm = { bone: o, rest: o.quaternion.clone() };
-          });
+          const { clip, take } = await loader.performanceSource(def, node);
+          item.mixer = bindPerformance(node, clip, def.motion, take);
+          if (!f.observer && s.actors?.includes(def)) f.observer = item;
           f.items.push(item);
+          const opacity = SCENE_PRESETS[s.stage].reflection;
+          if (opacity && s.actors?.includes(def)) {
+            const mirror = new T.Group();
+            mirror.scale.z = -1;
+            f.scene.add(mirror);
+            const image = await loader.reflectedInstance(def, opacity);
+            mirror.add(image);
+            f.items.push({
+              node: image,
+              def,
+              mixer: bindPerformance(image, clip, def.motion, take),
+            });
+          }
         }
         patchTree(f.scene);
       }
@@ -92,7 +97,7 @@ export class EpisodeRunner {
   sample() {
     this.index = this.frames.findLastIndex((f) => f.start <= this.tick);
     const f = this.frames[this.index],
-      s = this.episode.scenes[this.index],
+      s = this.episode.shots[this.index],
       t = (this.tick - f.start) / CONFIG.hz;
     for (const i of f.items) pose(i, t);
     f.dust.rotation.y = t * 0.08;
@@ -100,9 +105,13 @@ export class EpisodeRunner {
     if (typeof s.focus === "string") {
       const o = f.items.find((i) => i.def.id === s.focus);
       this.focus.copy(o.node.position);
-      this.focus.y += (o.def.height ?? 1.6) * 0.51;
+      this.focus.y +=
+        (o.def.height ?? 1.6) *
+        (s.cameraPreset === "macro_closeup" && s.actors?.includes(o.def)
+          ? 0.87
+          : 0.51);
     } else this.focus.fromArray(s.focus ?? [0, 1, 0]);
-    this.director.pose(s, t, this.focus);
+    this.director.pose(s, t, this.focus, this.index, f.observer);
   }
   draw() {
     const f = this.frames[this.index];
@@ -110,7 +119,7 @@ export class EpisodeRunner {
       this.ctx,
       this.pipeline.render(f.scene, this.director.camera),
       this.episode,
-      this.episode.scenes[this.index],
+      this.episode.shots[this.index],
       this.index,
       (this.tick - f.start) / CONFIG.hz,
     );

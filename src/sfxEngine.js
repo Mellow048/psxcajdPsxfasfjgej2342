@@ -33,7 +33,7 @@ export class SfxEngine {
   async prepare(e) {
     await this.ready();
     for (const url of new Set(
-      [e.narration, ...e.scenes.map((s) => SFX_MANIFEST[s.sfx])].filter(
+      [e.narration, ...e.shots.map((s) => SFX_MANIFEST[s.sfx])].filter(
         (v) => v && v !== "synth",
       ),
     ))
@@ -62,17 +62,16 @@ export class SfxEngine {
       n = c.createOscillator(),
       g = c.createGain();
     const [a, b, len, vol, type] = {
-      pop: [650, 120, 0.12, 0.17, "sine"],
-      whoosh: [150, 800, 0.17, 0.055, "triangle"],
-      riser: [170, 640, 0.29, 0.065, "sawtooth"],
-      tick: [900, 560, 0.06, 0.07, "sine"],
+      click: [1650, 210, 0.085, 0.23, "triangle"],
+      whoosh: [1600, 110, 0.19, 0.19, "triangle"],
+      riser: [260, 1250, 0.23, 0.105, "sawtooth"],
       beat: [96, 41, 0.15, 0.13, "sine"],
     }[key];
     n.type = type;
     n.frequency.setValueAtTime(a, when);
     n.frequency.exponentialRampToValueAtTime(b, when + len);
     g.gain.setValueAtTime(0.0001, when);
-    g.gain.exponentialRampToValueAtTime(vol, when + 0.016);
+    g.gain.exponentialRampToValueAtTime(vol, when + 0.005);
     g.gain.exponentialRampToValueAtTime(0.0001, when + len);
     this.track(n, g);
     n.start(when);
@@ -84,7 +83,7 @@ export class SfxEngine {
     this.origin = now - offset;
     if (e.narration) this.sample(e.narration, now, offset);
     let t = 0;
-    for (const s of e.scenes) {
+    for (const s of e.shots) {
       if (t >= offset - 1e-6) {
         const when = now + Math.max(0, t - offset);
         SFX_MANIFEST[s.sfx] === "synth"
