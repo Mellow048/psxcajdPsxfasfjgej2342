@@ -1,4 +1,4 @@
-import { SFX_MANIFEST } from "./config.js";
+import { MUSIC_PRESETS, SFX_MANIFEST } from "./config.js";
 import { bedAutomation } from "./musicBed.js";
 import { DEFAULT_SPEECH_RATE } from "./voiceProfile.js";
 const voiceKey = (e) =>
@@ -51,7 +51,7 @@ export class SfxEngine {
     for (const url of new Set(
       [
         e.voiceover,
-        e.music?.track,
+        (MUSIC_PRESETS[e.bgMusic] ?? e.music)?.track,
         ...e.shots.map((s) => SFX_MANIFEST[s.sfx]),
       ].filter((v) => v && v !== "synth"),
     ))
@@ -95,7 +95,7 @@ export class SfxEngine {
     n.buffer = buffer;
     n.loop = true;
     gain.gain.setValueCurveAtTime(
-      bedAutomation(volume, offset, end, voice),
+      bedAutomation(volume, offset, end, voice, music.seamless),
       now,
       duration,
     );
@@ -108,6 +108,9 @@ export class SfxEngine {
       n = c.createOscillator(),
       g = c.createGain();
     const [a, b, len, vol, type] = {
+      whoosh_fast: [2100, 125, 0.09, 0.115, "sawtooth"],
+      ui_pop: [620, 980, 0.062, 0.125, "sine"],
+      ding: [1710, 1650, 0.16, 0.1, "sine"],
       pop: [760, 240, 0.105, 0.2, "sine"],
       click: [1650, 210, 0.085, 0.23, "triangle"],
       whoosh: [1600, 110, 0.19, 0.19, "triangle"],
@@ -133,20 +136,26 @@ export class SfxEngine {
     for (const s of e.shots) {
       if (t >= offset - 1e-6) {
         const when = now + Math.max(0, t - offset);
+        for (const def of [...(s.actors ?? []), ...(s.props ?? [])])
+          if (def.motionSfx) this.tone(def.motionSfx, when);
         SFX_MANIFEST[s.sfx] === "synth"
           ? this.tone(s.sfx, when)
           : this.sample(SFX_MANIFEST[s.sfx], when);
       }
       for (const ev of s.events ?? []) {
         const at = t + ev.time;
-        if (at >= offset - 1e-6)
-          this.tone(ev.sfx, now + Math.max(0, at - offset));
+        if (at >= offset - 1e-6) {
+          const when = now + Math.max(0, at - offset);
+          this.tone(ev.sfx, when);
+          if (ev.animationSfx) this.tone(ev.animationSfx, when);
+        }
       }
       t += s.duration;
     }
-    if (e.music)
-      this.musicBed(e.music, this.buffers.get(voiceKey(e)), now, offset, t);
-    if (e.beat && !e.music)
+    const music = MUSIC_PRESETS[e.bgMusic] ?? e.music;
+    if (music)
+      this.musicBed(music, this.buffers.get(voiceKey(e)), now, offset, t);
+    if (e.beat && !music)
       for (let i = Math.ceil(offset / 0.5) * 0.5; i < t; i += 0.5)
         this.tone("beat", now + i - offset);
   }

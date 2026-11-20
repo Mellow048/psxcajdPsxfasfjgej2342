@@ -1,11 +1,11 @@
 # Cutframe · PSX Informative Shorts Studio
 
-Cutframe is a static Three.js r170 editor for making vertical educational videos from JSON. The studio opens with **Why windows become mirrors at night**, a 35-second v3 episode with fourteen hard cuts and shot-local performances. The alternate **The ghost in the glass** episode explains Pepper’s ghost in nine 2.5-second shots, with original sets, an uploaded Halloween actor, a synthesized narrator, and cut cues. [Watch the archived v1 WebM](episodes/ghost-in-the-glass.webm) or [open its JSON](episodes/ghost-in-the-glass.json).
+Cutframe is a static Three.js r170 editor for making vertical educational videos from JSON. The studio opens with **Why windows become mirrors at night**, a 32-second v3 episode with fourteen hard cuts and shot-local performances. The alternate **The ghost in the glass** episode explains Pepper’s ghost in nine 2.5-second shots, with original sets, an uploaded Halloween actor, a synthesized narrator, and cut cues. [Watch the archived v1 WebM](episodes/ghost-in-the-glass.webm) or [open its JSON](episodes/ghost-in-the-glass.json).
 
 ## Render on GitHub — no local GPU required
 
 1. Add a script under `episodes/` (see [the writing guide](SCRIPT_GUIDE.md)). For speech, write a sentence or paragraph in episode-level `narration`, or set `voiceover` to one recording. With neither, the engine exports captions, beat and SFX only.
-2. In **Actions → Render a Short → Run workflow**, choose `main` and enter the episode path. The default is [Why windows become mirrors at night](episodes/night-window.json): **35 seconds, 14 cuts, 1,050 frames** with a timed voiceover.
+2. In **Actions → Render a Short → Run workflow**, choose `main` and enter the episode path. The default is [Why windows become mirrors at night](episodes/night-window.json): **32 seconds, 14 cuts, 960 frames** with a timed voiceover.
 3. Open the completed run and download its **short-…** artifact. Unzip the **540×960, 30 fps H.264/AAC MP4**. GitHub retains these downloads for 30 days; save a copy for publishing. For a permanent download, tick **Also publish a durable GitHub Release download** on a manual `main` run. Rendering does not commit binaries back to the repo or publish to a social platform.
 
 The Linux runner uses the vendored Three.js modules, Chrome software WebGL, an offline audio mix, and FFmpeg. It samples exact frame times rather than recording a live screen, so a slow runner takes longer without dropping video frames. `ffprobe` checks the streams, resolution, frame count and duration before upload. Framework/episode pull requests exercise the default Short too.
@@ -59,6 +59,7 @@ The two demo episodes use the auditioned US-English narrator, each in one contin
 **Neon Current** is an original 128 BPM synth score: syncopated bass, FM plucks, kick, snare and lightly swung hats. The Python standard library synthesizes all instruments and wraps the echo tails into an eight-bar loop. No samples, pip packages or music service are required.
 
 ```sh
+python3 scripts/score.py episodes/synthwave-tense.wav --bpm 180 --tense
 python3 scripts/score.py                          # reproduce episodes/neon-current.wav
 python3 scripts/score.py episodes/remix.wav --bpm 136 --seed 23
 ```

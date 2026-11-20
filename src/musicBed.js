@@ -20,7 +20,7 @@ function dialogueProfile(voice) {
   profiles.set(voice, levels);
   return levels;
 }
-export function bedAutomation(volume, offset, end, voice) {
+export function bedAutomation(volume, offset, end, voice, seamless = false) {
   const levels = voice ? dialogueProfile(voice) : null,
     duration = end - offset;
   const curve = new Float32Array(Math.max(2, Math.ceil(duration / STEP) + 1));
@@ -34,7 +34,10 @@ export function bedAutomation(volume, offset, end, voice) {
     curve[i] =
       volume *
       duck *
-      Math.max(0, Math.min(1, (t - offset) / 0.045, (end - t) / 0.32));
+      (seamless && offset === 0
+        ? 1
+        : Math.max(0, Math.min(1, (t - offset) / 0.045))) *
+      (seamless ? 1 : Math.max(0, Math.min(1, (end - t) / 0.32)));
   }
   return curve;
 }

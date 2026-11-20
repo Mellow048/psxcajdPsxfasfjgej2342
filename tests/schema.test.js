@@ -96,10 +96,23 @@ test("writer guide JSON and both shipped scripts validate", () => {
     JSON.parse(fs.readFileSync("episodes/night-window.json", "utf8")),
   );
   assert.equal(
-    night.shots.reduce((n, s) => n + s.duration, 0),
-    35,
+    night.shots.reduce((n, s) => n + Math.round(s.duration * 60), 0) / 60,
+    32,
   );
   assert.equal(night.shots.length, 14);
+  assert.equal(night.bgMusic, "synthwave_tense");
+  assert.ok(
+    night.shots.every(
+      (s) =>
+        s.duration >= 2 &&
+        s.duration <= 2.5 &&
+        s.sfx === "whoosh_fast" &&
+        [...(s.actors ?? []), ...(s.props ?? [])].every((a) => a.motionSfx),
+    ),
+  );
+  assert.deepEqual(night.shots.at(-1).actors, night.shots[0].actors);
+  assert.ok(night.shots.at(-1).matchHook);
+  assert.match(night.narration, /^Why does .*And that is exactly…$/);
 });
 test("motion, narration and spawn contracts are checked before loading assets", () => {
   const make = () => structuredClone(demo);

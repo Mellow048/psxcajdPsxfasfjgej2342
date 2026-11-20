@@ -105,10 +105,11 @@ export class EpisodeRunner {
     const f = this.frames[this.index],
       s = this.episode.shots[this.index],
       t = (this.tick - f.start) / CONFIG.hz;
-    for (const i of f.items) pose(i, t);
+    const rigTime = s.matchHook ? s.duration - t : t;
+    for (const i of f.items) pose(i, rigTime);
     for (const spawn of f.spawns) sampleSpawn(spawn, t);
-    f.dust.rotation.y = t * 0.08;
-    f.dust.position.y = 0.08 * Math.sin(t);
+    f.dust.rotation.y = rigTime * 0.08;
+    f.dust.position.y = 0.08 * Math.sin(rigTime);
     if (typeof s.focus === "string") {
       const o = f.items.find((i) => i.def.id === s.focus);
       if (!o)
@@ -124,7 +125,23 @@ export class EpisodeRunner {
             : 0.51);
       }
     } else this.focus.fromArray(s.focus ?? [0, 1, 0]);
-    this.director.pose(s, t, this.focus, this.index, f.observer);
+    if (s.matchHook) {
+      // Reverse the opening setup and whip through the final approach; the
+      // terminal pose, lens and skeletal phase are exactly the hook at t=0.
+      const hook = this.episode.shots[0],
+        sweep = Math.min(1, rigTime / 0.65);
+      this.director.pose(
+        {
+          ...hook,
+          angle: (hook.angle ?? 0) + 0.95 * sweep * sweep * (3 - 2 * sweep),
+          cameraMotion: s.cameraMotion,
+        },
+        rigTime,
+        this.focus,
+        0,
+        f.observer,
+      );
+    } else this.director.pose(s, t, this.focus, this.index, f.observer);
   }
   draw() {
     const f = this.frames[this.index];

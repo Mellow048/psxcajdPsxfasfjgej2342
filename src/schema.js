@@ -5,6 +5,7 @@ import {
   CAMERAS,
   CAMERA_MOTIONS,
   ICONS,
+  MUSIC_PRESETS,
   MOTIONS,
 } from "./config.js";
 const obj = (v) => v && typeof v === "object" && !Array.isArray(v),
@@ -30,7 +31,7 @@ export function validate(e) {
   if (Array.isArray(e)) e = { version: 3, title: "Untitled Short", shots: e };
   keys(
     e,
-    "version title series narration voiceover speechRate beat music shots",
+    "version title series narration voiceover speechRate beat music bgMusic shots",
   );
   check(e.version === 3 && str(e.title), "version: 3 and a title required");
   check(e.series === undefined || str(e.series), "invalid series");
@@ -49,6 +50,11 @@ export function validate(e) {
     e.voiceover === undefined || audioPath(e.voiceover),
     "voiceover must be a relative audio file",
   );
+  if (e.bgMusic !== undefined)
+    check(
+      has(MUSIC_PRESETS, e.bgMusic) && !e.music,
+      "unknown bgMusic or conflicting music settings",
+    );
   if (e.music !== undefined) {
     keys(e.music, "track volume");
     check(
@@ -74,8 +80,18 @@ export function validate(e) {
     at = `shot ${i + 1}`;
     keys(
       s,
-      "title duration stage cameraPreset cameraMotion events distance angle pan focus actors props captions sfx",
+      "title duration stage cameraPreset cameraMotion events distance angle pan focus actors props captions sfx matchHook",
     );
+    if (s.matchHook !== undefined)
+      check(
+        s.matchHook === true &&
+          i === e.shots.length - 1 &&
+          i > 0 &&
+          s.stage === e.shots[0].stage &&
+          s.focus === e.shots[0].focus &&
+          s.cameraPreset === e.shots[0].cameraPreset,
+        "matchHook needs final shot with opening stage, focus and rig",
+      );
     check(str(s.title), "missing title");
     check(
       num(s.duration) &&
@@ -102,7 +118,12 @@ export function validate(e) {
     for (const k of ["actors", "props"]) {
       check(s[k] === undefined || Array.isArray(s[k]), k + " must be an array");
       for (const d of s[k] ?? []) {
-        keys(d, "id asset height yaw position motion mesh clip text");
+        keys(d, "id asset height yaw position motion motionSfx mesh clip text");
+        check(
+          d.motionSfx === undefined ||
+            ["ui_pop", "click", "ding"].includes(d.motionSfx),
+          "invalid motion cue",
+        );
         check(str(d.id) && !ids.has(d.id), "missing or duplicate subject id");
         ids.add(d.id);
         check(has(assets, d.asset), "unknown asset " + d.asset);
@@ -142,11 +163,21 @@ export function validate(e) {
     const hasSubject = ids.size > 0;
     for (const ev of s.events ?? []) {
       check(obj(ev) && ev.type === "spawn_prop", "expected spawn_prop event");
-      const arrow = ev.asset === "3D_Arrow";
+      const kind = ev.spawn_prop ?? ev.asset,
+        stream = kind === "particle_stream_yellow",
+        bulb = kind === "3D_Lightbulb",
+        arrow = kind === "3D_Arrow";
+      check(!(ev.spawn_prop && ev.asset), "choose spawn_prop or asset");
       keys(
         ev,
-        "id type time asset size sfx " +
-          (arrow ? "from to travel" : "icon position"),
+        "id type time asset spawn_prop size sfx " +
+          (stream
+            ? "from via to travel"
+            : arrow
+              ? "from to travel"
+              : bulb
+                ? "position animation animationSfx"
+                : "icon position"),
       );
       check(str(ev.id) && !ids.has(ev.id), "missing or duplicate event id");
       ids.add(ev.id);
@@ -155,14 +186,22 @@ export function validate(e) {
         "spawn time outside shot",
       );
       check(
-        ["pop", "whoosh"].includes(ev.sfx),
-        "spawn sfx must be pop or whoosh",
+        ["pop", "whoosh", "ui_pop", "ding", "click"].includes(ev.sfx),
+        "invalid spawn sfx",
       );
       check(
         ev.size === undefined || (num(ev.size) && ev.size > 0 && ev.size <= 4),
         "invalid prop size",
       );
-      if (arrow) {
+      if (bulb) {
+        check(
+          vec(ev.position) &&
+            ev.animation === "pulse" &&
+            ev.animationSfx === "click",
+          "bulb requires position and a click-cued pulse",
+        );
+      } else if (arrow || stream) {
+        check(ev.via === undefined || vec(ev.via), "invalid stream bend");
         check(
           vec(ev.from) && vec(ev.to) && ev.from.some((v, i) => v !== ev.to[i]),
           "arrow needs distinct from and to vectors",
@@ -175,7 +214,7 @@ export function validate(e) {
         );
       } else
         check(
-          ev.asset === "Floating_Icon" &&
+          kind === "Floating_Icon" &&
             ICONS.includes(ev.icon) &&
             vec(ev.position),
           "expected a Floating_Icon with icon and position",

@@ -102,7 +102,17 @@ function icon(root, kind) {
 }
 export function createSpawn(ev) {
   const node = new T.Group(),
-    arrow = ev.asset === "3D_Arrow";
+    kind = ev.spawn_prop ?? ev.asset,
+    arrow = kind === "3D_Arrow";
+  if (kind === "particle_stream_yellow") {
+    const geo = new T.OctahedronGeometry(0.075),
+      mat = luminous(0xffdf2d, 1.3);
+    const from = new T.Vector3(...ev.from),
+      to = new T.Vector3(...ev.to),
+      via = ev.via ? new T.Vector3(...ev.via) : null;
+    for (let i = 0; i < 12; i++) part(node, geo, mat);
+    return { node, ev, from, to, via, stream: true };
+  }
   if (arrow) {
     const warm = luminous(0xffaa41, 0.65);
     part(node, new T.CylinderGeometry(0.105, 0.105, 0.55, 6), warm, 0, -0.14);
@@ -120,7 +130,7 @@ export function createSpawn(ev) {
       0,
       -0.34,
     );
-  } else icon(node, ev.icon);
+  } else icon(node, kind === "3D_Lightbulb" ? "Lightbulb" : ev.icon);
   const from = new T.Vector3().fromArray(arrow ? ev.from : ev.position),
     to = arrow ? new T.Vector3().fromArray(ev.to) : null;
   if (arrow)
@@ -142,7 +152,7 @@ export function createSpawn(ev) {
   node.add(shell);
   return { node, ev, from, to };
 }
-export function sampleSpawn({ node, ev, from, to }, shotTime) {
+export function sampleSpawn({ node, ev, from, to, via, stream }, shotTime) {
   const t = shotTime - ev.time;
   node.position.copy(from);
   node.visible = t >= 0;
@@ -157,7 +167,30 @@ export function sampleSpawn({ node, ev, from, to }, shotTime) {
         ? 1 + 0.2 * (1 - (t - 0.14) / 0.18) ** 2
         : 1;
   node.scale.setScalar((ev.size ?? 0.65) * pop);
-  if (to) {
+  if (stream) {
+    // Each photon enters at A and crosses the pane in world space; a bend
+    // models the reflected route. No random state to unwind on a seek.
+    node.position.set(0, 0, 0);
+    node.scale.setScalar(1);
+    node.children.forEach((p, i) => {
+      const absolute = t / ev.travel - i / 12,
+        q = ((absolute % 1) + 1) % 1;
+      p.visible = absolute >= 0;
+      if (!via) p.position.lerpVectors(from, to, q);
+      else if (q < 0.5) p.position.lerpVectors(from, via, q * 2);
+      else p.position.lerpVectors(via, to, (q - 0.5) * 2);
+      p.position.y += 0.04 * Math.sin(q * 11 + i);
+      p.rotation.y = q * 6;
+      p.scale.setScalar(
+        (ev.size ?? 1) * pop * (0.7 + 0.3 * Math.sin(i * 3) ** 2),
+      );
+    });
+  } else if (ev.animation === "pulse") {
+    const pulse = (1 + Math.sin(t * Math.PI * 4)) / 2;
+    node.scale.multiplyScalar(0.94 + 0.2 * pulse);
+    node.children[0].material.emissiveIntensity = 0.55 + 1.15 * pulse;
+    node.rotation.y = t * 0.8;
+  } else if (to) {
     const q = Math.min(1, t / ev.travel);
     node.position.lerp(to, q * q * (3 - 2 * q));
   } else {

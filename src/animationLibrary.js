@@ -91,6 +91,10 @@ function gestureTracks(bones, action, period) {
         upper = [-0.22, -0.7, 0.72];
         lower = [0.42, 0.89, 0.08 + 0.07 * w];
       }
+      if (action === "cup_hands") {
+        upper = [side * 0.57, 0.16 + 0.09 * w, 0.76];
+        lower = [-side * 0.56, 0.82, 0.13];
+      }
       if (action === "shocked") {
         upper = [side * 0.88, 0.34 + 0.18 * w, 0.2];
         lower = [side * 0.28, 0.84, 0.35];

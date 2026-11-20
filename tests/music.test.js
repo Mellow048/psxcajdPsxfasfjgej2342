@@ -4,7 +4,7 @@ import fs from "node:fs";
 import { bedAutomation } from "../src/musicBed.js";
 import { SfxEngine } from "../src/sfxEngine.js";
 import { validate } from "../src/schema.js";
-const demo = JSON.parse(fs.readFileSync("episodes/night-window.json"));
+const demo = JSON.parse(fs.readFileSync("episodes/ghost-in-the-glass.json"));
 test("Python score is the shipped 8-bar PCM loop and music keys validate", () => {
   const wav = fs.readFileSync(demo.music.track);
   assert.equal(wav.toString("ascii", 0, 4), "RIFF");

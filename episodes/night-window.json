@@ -1,751 +1,748 @@
 {
-  "title": "Why windows become mirrors at night",
   "version": 3,
-  "series": "Everyday optics",
-  "beat": false,
-  "narration": "Why does this window turn into a mirror after dark? The glass hasn't changed at all. Two paths of light reach your eyes at the same time. Light from outside passes through the pane, while some of the light inside your room bounces back. By day, the view outside is so much brighter that your reflection almost disappears. But after sunset the street gets dark, and the lamp behind you still lights your face. Now the reflection wins. That's you looking back from the glass! Switch off the lamp and watch yourself fade. Same window, completely different balance of light.",
+  "title": "Why does this window turn into a mirror?",
+  "series": "Field Study / Optics",
+  "bgMusic": "synthwave_tense",
+  "narration": "Why does this window turn into a mirror at night? Watch the glass. Sunlight shoots straight through it and hits your eyes. From inside, the room light hits your face. Some of that light bounces off the very same glass and comes right back to you. Both pictures are there at once! By day the street is so bright it buries your reflection. After sunset the street goes dark, but your face is still lit. Now your reflection wins. Cup your hands against the glass. Block that room light and the street pops back. Peel your hands away and there's your face again. And that is exactly…",
+  "voiceover": "episodes/night-window-voice.wav",
   "shots": [
     {
-      "title": "The midnight mirror",
-      "duration": 3.25,
-      "stage": "house_corner",
+      "title": "Who put a mirror here?",
+      "duration": 2.4,
+      "stage": "window_night",
       "cameraPreset": "macro_closeup",
-      "distance": 2.7,
-      "focus": "presenter",
-      "props": [
+      "cameraMotion": "slow_push",
+      "distance": 2.55,
+      "angle": 0.12,
+      "focus": "face",
+      "sfx": "whoosh_fast",
+      "actors": [
         {
-          "id": "glass",
-          "asset": "pane",
-          "motion": "idle_breathe",
-          "height": 2.25,
-          "yaw": -0.32,
-          "position": [1.22, 0.1, -1.72]
+          "id": "face",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.17, 0, 0.76],
+          "yaw": 0,
+          "motion": "thinking",
+          "motionSfx": "click"
         }
       ],
       "captions": [
         {
-          "time": 0.14,
+          "time": 0.0,
           "text": "Why does",
           "highlight": "does"
         },
         {
-          "time": 0.55,
+          "time": 0.37,
           "text": "this window",
           "highlight": "window"
         },
         {
-          "time": 1.05,
+          "time": 0.87,
           "text": "turn into",
           "highlight": "turn"
         },
         {
-          "time": 1.49,
+          "time": 1.41,
           "text": "a mirror",
           "highlight": "mirror"
         },
         {
-          "time": 1.79,
-          "text": "after dark?",
-          "highlight": "after"
-        },
-        {
-          "time": 3.0,
-          "text": "The glass",
-          "highlight": "glass"
+          "time": 1.84,
+          "text": "at night?",
+          "highlight": "night?"
         }
-      ],
-      "sfx": "whoosh",
-      "actors": [
-        {
-          "id": "presenter",
-          "asset": "male.character_01",
-          "height": 1.65,
-          "position": [0, 0, 0.32],
-          "motion": "thinking"
-        }
-      ],
-      "cameraMotion": "slow_push"
+      ]
     },
     {
-      "title": "Same pane",
-      "duration": 2.216666666666667,
+      "title": "Catch the sunlight",
+      "duration": 2.1,
       "stage": "window_day",
       "cameraPreset": "whip_pan_to_prop",
-      "distance": 3.5,
-      "focus": [0, 1.27, 0],
-      "props": [],
+      "cameraMotion": "orbit_drift",
+      "distance": 3.35,
+      "angle": 0,
+      "focus": [0.15, 1.61, -0.25],
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "face",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.58, 0, 0.84],
+          "yaw": 2.9,
+          "motion": "pointing",
+          "motionSfx": "click"
+        }
+      ],
+      "events": [
+        {
+          "type": "spawn_prop",
+          "id": "sun",
+          "spawn_prop": "Floating_Icon",
+          "time": 1.14,
+          "sfx": "ding",
+          "icon": "Sun",
+          "position": [0.18, 1.83, -0.6],
+          "size": 0.74
+        }
+      ],
       "captions": [
         {
-          "time": 0.17,
-          "text": "hasn't changed",
-          "highlight": "changed"
+          "time": 0.08,
+          "text": "Watch the glass.",
+          "highlight": "glass."
         },
         {
-          "time": 0.79,
-          "text": "at all.",
-          "highlight": "all."
+          "time": 1.14,
+          "text": "Sunlight shoots",
+          "highlight": "Sunlight"
         },
         {
-          "time": 1.6,
-          "text": "Two paths",
-          "highlight": "paths"
+          "time": 2.09,
+          "text": "straight through it",
+          "highlight": "straight"
+        }
+      ]
+    },
+    {
+      "title": "Follow a photon through the pane",
+      "duration": 2.15,
+      "stage": "optics_lab",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "distance": 3.5,
+      "angle": 0.55,
+      "focus": [0, 1.24, 0],
+      "sfx": "whoosh_fast",
+      "props": [
+        {
+          "id": "pane",
+          "asset": "pane",
+          "height": 1.85,
+          "position": [0, 0.12, 0],
+          "motion": "idle_breathe",
+          "motionSfx": "click"
+        }
+      ],
+      "events": [
+        {
+          "type": "spawn_prop",
+          "id": "photons",
+          "spawn_prop": "particle_stream_yellow",
+          "time": 0,
+          "sfx": "ui_pop",
+          "from": [-0.67, 1.6, -1.9],
+          "to": [0.55, 1.32, 0.9],
+          "travel": 0.68,
+          "size": 1.3
+        },
+        {
+          "type": "spawn_prop",
+          "id": "eyeball",
+          "spawn_prop": "Floating_Icon",
+          "time": 1.37,
+          "sfx": "ding",
+          "icon": "Eyeball",
+          "position": [0.55, 1.32, 0.9],
+          "size": 0.54
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "straight through it",
+          "highlight": "straight"
+        },
+        {
+          "time": 0.97,
+          "text": "and hits",
+          "highlight": "hits"
+        },
+        {
+          "time": 1.4,
+          "text": "your eyes.",
+          "highlight": "eyes."
         },
         {
           "time": 2.08,
-          "text": "of light",
-          "highlight": "light"
-        }
-      ],
-      "sfx": "click",
-      "pan": 0.32,
-      "actors": [
-        {
-          "id": "presenter",
-          "asset": "male.character_01",
-          "height": 1.65,
-          "position": [-0.32, 0, 0.92],
-          "motion": "shocked",
-          "yaw": 2.94
-        }
-      ],
-      "cameraMotion": "orbit_drift"
-    },
-    {
-      "title": "Two paths",
-      "duration": 3.033333333333333,
-      "stage": "void",
-      "cameraPreset": "dutch_tilt_push",
-      "distance": 4.7,
-      "focus": "glass",
-      "props": [
-        {
-          "id": "glass",
-          "asset": "pane",
-          "motion": "idle_breathe",
-          "height": 1.8,
-          "yaw": -0.32,
-          "position": [0, 0.08, 0]
-        }
-      ],
-      "captions": [
-        {
-          "time": 0.0,
-          "text": "of light",
-          "highlight": "light"
-        },
-        {
-          "time": 0.493,
-          "text": "reach your eyes",
-          "highlight": "reach"
-        },
-        {
-          "time": 1.223,
-          "text": "at the",
-          "highlight": "the"
-        },
-        {
-          "time": 1.363,
-          "text": "same time.",
-          "highlight": "time."
-        },
-        {
-          "time": 2.473,
-          "text": "Light from outside",
-          "highlight": "outside"
-        }
-      ],
-      "sfx": "riser",
-      "actors": [],
-      "cameraMotion": "slow_pull",
-      "events": [
-        {
-          "type": "spawn_prop",
-          "id": "incoming",
-          "asset": "3D_Arrow",
-          "time": 0.12,
-          "travel": 0.9,
-          "size": 0.65,
-          "sfx": "whoosh",
-          "from": [-0.68, 1.3, -0.3],
-          "to": [0.16, 0.85, 0.23]
-        },
-        {
-          "type": "spawn_prop",
-          "id": "return",
-          "asset": "3D_Arrow",
-          "time": 1.15,
-          "travel": 0.95,
-          "size": 0.65,
-          "sfx": "whoosh",
-          "from": [0.16, 0.85, 0.23],
-          "to": [-0.5, 1.25, 0.8]
+          "text": "From inside,",
+          "highlight": "inside,"
         }
       ]
     },
     {
-      "title": "Through the glass",
-      "duration": 2.0,
-      "stage": "window_day",
-      "cameraPreset": "over_shoulder",
-      "distance": 3.5,
-      "focus": [0, 1.27, 0],
-      "props": [],
-      "captions": [
-        {
-          "time": 0.0,
-          "text": "Light from outside",
-          "highlight": "outside"
-        },
-        {
-          "time": 0.47,
-          "text": "passes through",
-          "highlight": "through"
-        },
-        {
-          "time": 1.22,
-          "text": "the pane,",
-          "highlight": "pane,"
-        }
-      ],
-      "sfx": "click",
-      "actors": [
-        {
-          "id": "presenter",
-          "asset": "male.character_01",
-          "height": 1.65,
-          "position": [-0.32, 0, 0.92],
-          "motion": "pointing",
-          "yaw": 2.94
-        }
-      ],
-      "cameraMotion": "handheld_bob",
-      "events": [
-        {
-          "type": "spawn_prop",
-          "id": "outside",
-          "asset": "3D_Arrow",
-          "time": 0.32,
-          "travel": 1.65,
-          "size": 0.65,
-          "sfx": "whoosh",
-          "from": [-0.36, 1.24, -1.3],
-          "to": [-0.18, 1.3, 0.72]
-        }
-      ]
-    },
-    {
-      "title": "Back into the room",
-      "duration": 2.0,
-      "stage": "house_corner",
-      "cameraPreset": "wide_orbit",
-      "distance": 4.7,
-      "focus": "lamp",
-      "props": [
-        {
-          "id": "lamp",
-          "asset": "lamp",
-          "motion": "idle_breathe",
-          "height": 1.2,
-          "position": [0.65, 0, 0.38]
-        },
-        {
-          "id": "glass",
-          "asset": "pane",
-          "motion": "idle_breathe",
-          "height": 1.8,
-          "yaw": -0.32,
-          "position": [0, 0.08, 0]
-        }
-      ],
-      "captions": [
-        {
-          "time": 0.0,
-          "text": "the pane,",
-          "highlight": "pane,"
-        },
-        {
-          "time": 0.3,
-          "text": "while some",
-          "highlight": "while"
-        },
-        {
-          "time": 0.7,
-          "text": "of the light",
-          "highlight": "light"
-        },
-        {
-          "time": 1.13,
-          "text": "inside your room",
-          "highlight": "inside"
-        }
-      ],
-      "sfx": "whoosh",
-      "actors": [
-        {
-          "id": "presenter",
-          "asset": "male.character_01",
-          "height": 1.65,
-          "position": [-0.64, 0, 0.5],
-          "motion": "pointing"
-        }
-      ],
+      "title": "Click on the room light",
+      "duration": 2.35,
+      "stage": "window_night",
+      "cameraPreset": "whip_pan_to_prop",
       "cameraMotion": "slow_push",
-      "events": [
+      "distance": 3.1,
+      "angle": 0,
+      "focus": [0.33, 1.5, 0.56],
+      "sfx": "whoosh_fast",
+      "actors": [
         {
-          "type": "spawn_prop",
-          "id": "bulb",
-          "asset": "Floating_Icon",
-          "icon": "Lightbulb",
-          "position": [0.6, 1.52, 0.4],
-          "time": 0.45,
-          "size": 0.48,
-          "sfx": "pop"
-        },
-        {
-          "type": "spawn_prop",
-          "id": "bounce",
-          "asset": "3D_Arrow",
-          "time": 1.26,
-          "travel": 0.72,
-          "size": 0.65,
-          "sfx": "whoosh",
-          "from": [0.4, 0.9, -0.15],
-          "to": [-0.36, 1.15, 0.83]
-        }
-      ]
-    },
-    {
-      "title": "Both at once",
-      "duration": 2.0,
-      "stage": "optics_lab",
-      "cameraPreset": "macro_closeup",
-      "distance": 5.25,
-      "focus": "eye",
-      "props": [],
-      "captions": [
-        {
-          "time": 0.0,
-          "text": "bounces back.",
-          "highlight": "bounces"
-        },
-        {
-          "time": 1.23,
-          "text": "By day,",
-          "highlight": "day,"
+          "id": "face",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.45, 0, 0.7],
+          "yaw": 0,
+          "motion": "pointing",
+          "motionSfx": "click"
         }
       ],
-      "sfx": "click",
-      "actors": [],
-      "cameraMotion": "orbit_drift",
       "events": [
         {
           "type": "spawn_prop",
-          "id": "eye",
-          "asset": "Floating_Icon",
-          "icon": "Eyeball",
-          "position": [0.04, 0.98, 0],
-          "time": 0,
-          "size": 0.98,
-          "sfx": "pop"
-        },
-        {
-          "type": "spawn_prop",
-          "id": "incoming",
-          "asset": "3D_Arrow",
-          "time": 0.62,
-          "travel": 0.98,
-          "size": 0.65,
-          "sfx": "whoosh",
-          "from": [-0.7, 1.56, -0.35],
-          "to": [-0.22, 1.15, 0.32]
-        }
-      ]
-    },
-    {
-      "title": "Daylight wins",
-      "duration": 2.0,
-      "stage": "optics_lab",
-      "cameraPreset": "dutch_tilt_push",
-      "distance": 3.6,
-      "focus": "day",
-      "props": [],
-      "captions": [
-        {
-          "time": 0.0,
-          "text": "By day,",
-          "highlight": "day,"
-        },
-        {
-          "time": 0.34,
-          "text": "the view outside",
-          "highlight": "outside"
-        },
-        {
-          "time": 1.21,
-          "text": "is so much",
-          "highlight": "much"
-        },
-        {
-          "time": 1.81,
-          "text": "brighter that",
-          "highlight": "brighter"
+          "id": "filament",
+          "spawn_prop": "3D_Lightbulb",
+          "time": 0.98,
+          "sfx": "ding",
+          "position": [0.35, 1.55, 0.64],
+          "size": 0.84,
+          "animation": "pulse",
+          "animationSfx": "click"
         }
       ],
-      "sfx": "riser",
-      "actors": [],
-      "cameraMotion": "slow_pull",
-      "events": [
+      "captions": [
         {
-          "type": "spawn_prop",
-          "id": "day",
-          "asset": "Floating_Icon",
-          "icon": "Sun",
-          "position": [0, 1.15, 0],
           "time": 0,
-          "size": 1.52,
-          "sfx": "pop"
+          "text": "From inside,",
+          "highlight": "inside,"
+        },
+        {
+          "time": 0.9,
+          "text": "the room light",
+          "highlight": "light"
+        },
+        {
+          "time": 1.57,
+          "text": "hits your face.",
+          "highlight": "face."
         }
       ]
     },
     {
-      "title": "A faint second image",
-      "duration": 2.316666666666667,
-      "stage": "window_day",
+      "title": "Trace the bounce",
+      "duration": 2.25,
+      "stage": "optics_lab",
       "cameraPreset": "wide_orbit",
-      "distance": 3.5,
-      "focus": [0, 1.27, 0],
-      "props": [],
+      "cameraMotion": "orbit_drift",
+      "distance": 3.7,
+      "angle": 0.4,
+      "focus": [0, 1.18, 0.15],
+      "sfx": "whoosh_fast",
+      "props": [
+        {
+          "id": "pane",
+          "asset": "pane",
+          "height": 1.85,
+          "position": [0, 0.12, 0],
+          "motion": "idle_breathe",
+          "motionSfx": "click"
+        }
+      ],
+      "events": [
+        {
+          "type": "spawn_prop",
+          "id": "photons",
+          "spawn_prop": "particle_stream_yellow",
+          "time": 0.12,
+          "sfx": "ui_pop",
+          "from": [-0.85, 1.45, 1.1],
+          "to": [0.75, 1.34, 1.04],
+          "travel": 0.68,
+          "size": 1.3,
+          "via": [0, 1.1, 0]
+        }
+      ],
       "captions": [
         {
-          "time": 0.0,
-          "text": "brighter that",
-          "highlight": "brighter"
+          "time": 0.13,
+          "text": "Some of",
+          "highlight": "Some"
         },
         {
           "time": 0.55,
-          "text": "your reflection",
-          "highlight": "reflection"
+          "text": "that light",
+          "highlight": "light"
         },
         {
-          "time": 1.26,
-          "text": "almost disappears.",
-          "highlight": "disappears."
-        }
-      ],
-      "sfx": "click",
-      "actors": [
+          "time": 1.01,
+          "text": "bounces off",
+          "highlight": "bounces"
+        },
         {
-          "id": "presenter",
-          "asset": "male.character_01",
-          "height": 1.65,
-          "position": [-0.32, 0, 0.92],
-          "motion": "pointing",
-          "yaw": 2.94
+          "time": 1.6,
+          "text": "the very same",
+          "highlight": "very"
         }
-      ],
-      "cameraMotion": "handheld_bob"
+      ]
     },
     {
-      "title": "After sunset",
-      "duration": 2.2666666666666666,
+      "title": "Return to sender",
+      "duration": 2.15,
       "stage": "window_night",
-      "cameraPreset": "dutch_tilt_push",
-      "distance": 3.5,
-      "focus": [0, 1.27, 0],
-      "props": [],
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_pull",
+      "distance": 3.05,
+      "angle": 0,
+      "focus": [0.12, 1.32, 0],
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "face",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.59, 0, 1],
+          "yaw": 3.05,
+          "motion": "pointing",
+          "motionSfx": "click"
+        }
+      ],
+      "events": [
+        {
+          "type": "spawn_prop",
+          "id": "photons",
+          "spawn_prop": "particle_stream_yellow",
+          "time": 0.13,
+          "sfx": "ui_pop",
+          "from": [-0.55, 1.3, 0.9],
+          "to": [0.4, 1.33, 1.25],
+          "travel": 0.68,
+          "size": 1.3,
+          "via": [0.12, 1.22, 0]
+        }
+      ],
       "captions": [
         {
           "time": 0.0,
-          "text": "almost disappears.",
-          "highlight": "disappears."
+          "text": "glass and",
+          "highlight": "glass"
         },
         {
-          "time": 0.473,
-          "text": "But after sunset",
-          "highlight": "sunset"
+          "time": 0.52,
+          "text": "comes right back",
+          "highlight": "comes"
         },
         {
-          "time": 1.553,
+          "time": 1.28,
+          "text": "to you.",
+          "highlight": "you."
+        },
+        {
+          "time": 1.86,
+          "text": "Both pictures",
+          "highlight": "pictures"
+        }
+      ]
+    },
+    {
+      "title": "One eye, two pictures",
+      "duration": 2.25,
+      "stage": "optics_lab",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_pull",
+      "distance": 4.35,
+      "angle": 0,
+      "focus": [0, 1.23, 0.2],
+      "sfx": "whoosh_fast",
+      "events": [
+        {
+          "type": "spawn_prop",
+          "id": "eyeball",
+          "spawn_prop": "Floating_Icon",
+          "time": 0,
+          "sfx": "ding",
+          "icon": "Eyeball",
+          "position": [0, 1.26, 0.34],
+          "size": 0.9
+        },
+        {
+          "type": "spawn_prop",
+          "id": "photons",
+          "spawn_prop": "particle_stream_yellow",
+          "time": 0.32,
+          "sfx": "ui_pop",
+          "from": [-0.86, 1.55, -1],
+          "to": [0, 1.26, 0.34],
+          "travel": 0.68,
+          "size": 1.3
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "Both pictures",
+          "highlight": "pictures"
+        },
+        {
+          "time": 0.63,
+          "text": "are there",
+          "highlight": "there"
+        },
+        {
+          "time": 1.01,
+          "text": "at once!",
+          "highlight": "once!"
+        },
+        {
+          "time": 1.8,
+          "text": "By day",
+          "highlight": "day"
+        }
+      ]
+    },
+    {
+      "title": "Daylight buries the reflection",
+      "duration": 2.4,
+      "stage": "window_day",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "distance": 3.3,
+      "angle": 0,
+      "focus": [0, 1.33, 0],
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "face",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.64, 0, 0.95],
+          "yaw": 3.1,
+          "motion": "pointing",
+          "motionSfx": "click"
+        }
+      ],
+      "events": [
+        {
+          "type": "spawn_prop",
+          "id": "sun",
+          "spawn_prop": "Floating_Icon",
+          "time": 0.47,
+          "sfx": "ding",
+          "icon": "Sun",
+          "position": [0.42, 1.88, -1.05],
+          "size": 0.75
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.06,
           "text": "the street",
           "highlight": "street"
         },
         {
-          "time": 1.943,
-          "text": "gets dark,",
-          "highlight": "dark,"
+          "time": 0.45,
+          "text": "is so bright",
+          "highlight": "bright"
+        },
+        {
+          "time": 1.12,
+          "text": "it buries",
+          "highlight": "buries"
+        },
+        {
+          "time": 1.55,
+          "text": "your reflection.",
+          "highlight": "reflection."
         }
-      ],
-      "sfx": "whoosh",
-      "pan": 0.32,
+      ]
+    },
+    {
+      "title": "Same street, lights out",
+      "duration": 2.15,
+      "stage": "window_night",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "distance": 3.4,
+      "angle": 0,
+      "focus": [0, 1.4, -0.35],
+      "sfx": "whoosh_fast",
       "actors": [
         {
-          "id": "presenter",
+          "id": "face",
           "asset": "male.character_01",
           "height": 1.65,
-          "position": [-0.32, 0, 0.92],
-          "motion": "thinking",
-          "yaw": 2.94
+          "position": [-0.68, 0, 0.9],
+          "yaw": 3.05,
+          "motion": "shocked",
+          "motionSfx": "click"
         }
       ],
-      "cameraMotion": "slow_push",
       "events": [
         {
           "type": "spawn_prop",
           "id": "moon",
-          "asset": "Floating_Icon",
+          "spawn_prop": "Floating_Icon",
+          "time": 0.31,
+          "sfx": "ding",
           "icon": "Moon",
-          "position": [0.58, 1.84, -0.55],
-          "time": 0.18,
-          "size": 0.7,
-          "sfx": "pop"
+          "position": [0.37, 1.9, -0.75],
+          "size": 0.72
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.02,
+          "text": "After sunset",
+          "highlight": "sunset"
+        },
+        {
+          "time": 0.87,
+          "text": "the street",
+          "highlight": "street"
+        },
+        {
+          "time": 1.25,
+          "text": "goes dark,",
+          "highlight": "dark,"
         }
       ]
     },
     {
-      "title": "Lights on inside",
-      "duration": 2.6166666666666667,
+      "title": "Your face is still lit",
+      "duration": 2.3,
       "stage": "window_night",
-      "cameraPreset": "whip_pan_to_prop",
-      "distance": 3.5,
-      "focus": "lamp",
-      "props": [
-        {
-          "id": "lamp",
-          "asset": "lamp",
-          "motion": "idle_breathe",
-          "height": 1.2,
-          "position": [0.8, 0, 0.8]
-        }
-      ],
-      "captions": [
-        {
-          "time": 0.0,
-          "text": "gets dark,",
-          "highlight": "dark,"
-        },
-        {
-          "time": 0.657,
-          "text": "and the lamp",
-          "highlight": "lamp"
-        },
-        {
-          "time": 1.117,
-          "text": "behind you",
-          "highlight": "behind"
-        },
-        {
-          "time": 1.557,
-          "text": "still lights",
-          "highlight": "lights"
-        },
-        {
-          "time": 2.027,
-          "text": "your face.",
-          "highlight": "face."
-        }
-      ],
-      "sfx": "click",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "handheld_bob",
+      "distance": 3.65,
+      "angle": 0,
+      "focus": "face",
+      "sfx": "whoosh_fast",
       "actors": [
         {
-          "id": "presenter",
+          "id": "face",
           "asset": "male.character_01",
           "height": 1.65,
-          "position": [-0.62, 0, 0.95],
-          "motion": "shocked",
-          "yaw": 2.94
+          "position": [-0.15, 0, 0.7],
+          "yaw": 0,
+          "motion": "talking",
+          "motionSfx": "click"
         }
       ],
-      "cameraMotion": "orbit_drift"
-    },
-    {
-      "title": "The balance flips",
-      "duration": 2.0,
-      "stage": "optics_lab",
-      "cameraPreset": "dutch_tilt_push",
-      "distance": 4.3,
-      "focus": [0, 1.08, 0],
-      "props": [],
-      "captions": [
-        {
-          "time": 0.0,
-          "text": "your face.",
-          "highlight": "face."
-        },
-        {
-          "time": 0.4,
-          "text": "Now the",
-          "highlight": "Now"
-        },
-        {
-          "time": 0.78,
-          "text": "reflection wins.",
-          "highlight": "reflection"
-        }
-      ],
-      "sfx": "riser",
-      "actors": [],
-      "cameraMotion": "slow_pull",
       "events": [
         {
           "type": "spawn_prop",
-          "id": "path",
-          "asset": "3D_Arrow",
-          "time": 0,
-          "travel": 1.25,
-          "size": 0.65,
-          "sfx": "whoosh",
-          "from": [-0.52, 0.82, 0.04],
-          "to": [0.5, 1.25, 0.26]
+          "id": "filament",
+          "spawn_prop": "3D_Lightbulb",
+          "time": 0.27,
+          "sfx": "ding",
+          "position": [0.36, 1.51, 0.72],
+          "size": 0.84,
+          "animation": "pulse",
+          "animationSfx": "click"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.02,
+          "text": "but your face",
+          "highlight": "your"
         },
         {
-          "type": "spawn_prop",
-          "id": "bulb",
-          "asset": "Floating_Icon",
-          "icon": "Lightbulb",
-          "position": [-0.52, 0.87, -0.06],
-          "time": 0.08,
-          "size": 0.75,
-          "sfx": "pop"
+          "time": 0.65,
+          "text": "is still lit.",
+          "highlight": "still"
+        },
+        {
+          "time": 1.64,
+          "text": "Now your",
+          "highlight": "your"
+        },
+        {
+          "time": 2.09,
+          "text": "reflection wins.",
+          "highlight": "reflection"
         }
       ]
     },
     {
-      "title": "The face in the pane",
-      "duration": 2.3,
+      "title": "Put your hands to the glass",
+      "duration": 2.4,
       "stage": "window_night",
       "cameraPreset": "over_shoulder",
-      "distance": 3.5,
-      "focus": [-0.32, 1.35, -0.92],
-      "props": [],
-      "captions": [
-        {
-          "time": 0.12,
-          "text": "That's you",
-          "highlight": "That's"
-        },
-        {
-          "time": 1.21,
-          "text": "looking back",
-          "highlight": "looking"
-        },
-        {
-          "time": 1.7,
-          "text": "from the glass!",
-          "highlight": "glass!"
-        }
-      ],
-      "sfx": "click",
+      "cameraMotion": "orbit_drift",
+      "distance": 2.8,
+      "angle": 0,
+      "focus": [-0.22, 1.35, -0.54],
+      "sfx": "whoosh_fast",
       "actors": [
         {
-          "id": "presenter",
+          "id": "face",
           "asset": "male.character_01",
           "height": 1.65,
-          "position": [-0.32, 0, 0.92],
-          "motion": "thinking",
-          "yaw": 2.94
+          "position": [-0.23, 0, 0.44],
+          "yaw": 3.14,
+          "motion": "cup_hands",
+          "motionSfx": "ui_pop"
         }
       ],
-      "cameraMotion": "handheld_bob"
+      "captions": [
+        {
+          "time": 0,
+          "text": "reflection wins.",
+          "highlight": "reflection"
+        },
+        {
+          "time": 1.01,
+          "text": "Cup your hands",
+          "highlight": "hands"
+        },
+        {
+          "time": 1.83,
+          "text": "against the glass.",
+          "highlight": "against"
+        }
+      ]
     },
     {
-      "title": "Run the experiment",
-      "duration": 3.5,
+      "title": "Shield the pane",
+      "duration": 2.4,
+      "stage": "window_night",
+      "cameraPreset": "whip_pan_to_prop",
+      "cameraMotion": "slow_push",
+      "distance": 2.65,
+      "angle": 0,
+      "focus": [0.02, 1.4, -0.18],
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "face",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.61, 0, 0.45],
+          "yaw": 3.03,
+          "motion": "cup_hands",
+          "motionSfx": "click"
+        }
+      ],
+      "events": [
+        {
+          "type": "spawn_prop",
+          "id": "photons",
+          "spawn_prop": "particle_stream_yellow",
+          "time": 1.52,
+          "sfx": "ui_pop",
+          "from": [-0.5, 1.35, -2],
+          "to": [0.02, 1.35, 0.4],
+          "travel": 0.68,
+          "size": 1.3
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "against the glass.",
+          "highlight": "against"
+        },
+        {
+          "time": 0.45,
+          "text": "Block that",
+          "highlight": "Block"
+        },
+        {
+          "time": 0.92,
+          "text": "room light",
+          "highlight": "light"
+        },
+        {
+          "time": 1.53,
+          "text": "and the street",
+          "highlight": "street"
+        },
+        {
+          "time": 2.08,
+          "text": "pops back.",
+          "highlight": "back."
+        }
+      ]
+    },
+    {
+      "title": "Peel away",
+      "duration": 2.35,
       "stage": "window_night",
       "cameraPreset": "dutch_tilt_push",
-      "distance": 3.5,
-      "focus": "lamp",
-      "props": [
+      "cameraMotion": "slow_pull",
+      "distance": 2.9,
+      "angle": 0,
+      "focus": [-0.19, 1.31, -0.18],
+      "sfx": "whoosh_fast",
+      "actors": [
         {
-          "id": "lamp",
-          "asset": "lamp",
-          "motion": "idle_breathe",
-          "height": 1.2,
-          "position": [0.8, 0, 0.8]
+          "id": "face",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.51, 0, 0.57],
+          "yaw": 3.0,
+          "motion": "shocked",
+          "motionSfx": "ui_pop"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "pops back.",
+          "highlight": "back."
+        },
+        {
+          "time": 0.54,
+          "text": "Peel your",
+          "highlight": "Peel"
+        },
+        {
+          "time": 1.09,
+          "text": "hands away",
+          "highlight": "hands"
+        }
+      ]
+    },
+    {
+      "title": "Back to the hook",
+      "duration": 2.35,
+      "stage": "window_night",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "distance": 2.55,
+      "angle": 0.12,
+      "focus": "face",
+      "sfx": "whoosh_fast",
+      "matchHook": true,
+      "actors": [
+        {
+          "id": "face",
+          "asset": "male.character_01",
+          "height": 1.65,
+          "position": [-0.17, 0, 0.76],
+          "yaw": 0,
+          "motion": "thinking",
+          "motionSfx": "click"
         }
       ],
       "captions": [
         {
           "time": 0.0,
-          "text": "from the glass!",
-          "highlight": "glass!"
+          "text": "and there's",
+          "highlight": "there's"
         },
         {
-          "time": 0.61,
-          "text": "Switch off",
-          "highlight": "Switch"
+          "time": 0.35,
+          "text": "your face again.",
+          "highlight": "again."
         },
         {
-          "time": 1.23,
-          "text": "the lamp",
-          "highlight": "lamp"
+          "time": 1.38,
+          "text": "And that",
+          "highlight": "that"
         },
         {
-          "time": 1.92,
-          "text": "and watch",
-          "highlight": "watch"
-        },
-        {
-          "time": 2.33,
-          "text": "yourself fade.",
-          "highlight": "yourself"
+          "time": 1.68,
+          "text": "is exactly…",
+          "highlight": "exactly…"
         }
-      ],
-      "sfx": "whoosh",
-      "actors": [
-        {
-          "id": "presenter",
-          "asset": "male.character_01",
-          "height": 1.65,
-          "position": [-0.62, 0, 0.95],
-          "motion": "thinking",
-          "yaw": 2.94
-        }
-      ],
-      "cameraMotion": "slow_push"
-    },
-    {
-      "title": "Nothing switched",
-      "duration": 3.5,
-      "stage": "window_night",
-      "cameraPreset": "wide_orbit",
-      "distance": 3.5,
-      "focus": [0, 1.27, 0],
-      "props": [],
-      "captions": [
-        {
-          "time": 0.11,
-          "text": "Same window,",
-          "highlight": "window,"
-        },
-        {
-          "time": 1.15,
-          "text": "completely different",
-          "highlight": "completely"
-        },
-        {
-          "time": 1.97,
-          "text": "balance of light.",
-          "highlight": "balance"
-        }
-      ],
-      "sfx": "click",
-      "actors": [
-        {
-          "id": "presenter",
-          "asset": "male.character_01",
-          "height": 1.65,
-          "position": [-0.32, 0, 0.92],
-          "motion": "talking",
-          "yaw": 2.94
-        }
-      ],
-      "cameraMotion": "orbit_drift"
+      ]
     }
-  ],
-  "speechRate": 1,
-  "voiceover": "episodes/night-window-voice.wav",
-  "music": {
-    "track": "episodes/neon-current.wav",
-    "volume": 0.26
-  }
+  ]
 }

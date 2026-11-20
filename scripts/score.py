@@ -12,7 +12,7 @@ RATE = 24000
 TAU = 2 * pi
 
 
-def compose(bpm=128, seed=17):
+def compose(bpm=128, seed=17, tense=False):
     rng = Random(seed)
     # Round only the final sample positions so the downbeat never drifts.
     beat = RATE * 60 / bpm
@@ -60,10 +60,14 @@ def compose(bpm=128, seed=17):
     # F#m9 – Dmaj7 – Aadd9 – E6. Two passes; a different answer in bars 7–8.
     chords = [(42, (57,61,66,68)), (38, (54,57,61,64)),
               (45, (57,59,61,64)), (40, (56,59,61,64))]
+    if tense:
+        # F# pedal against a descending minor line. Fast gated octaves and a
+        # four-on-the-floor pulse leave the middle register for the narrator.
+        chords = [(42,(66,69,73,76)),(42,(64,68,71,76)),(38,(62,66,69,73)),(37,(61,65,68,71))]
     for bar in range(8):
         down = 4*bar
         root, voices = chords[bar % 4]
-        for when in (0, 2.5 if bar % 2 else 2):
+        for when in ((0,1,2,3) if tense else (0, 2.5 if bar % 2 else 2)):
             drum(down+when, 'kick', .48)
         for when in (1,3):
             drum(down+when, 'snare', .17)
@@ -71,6 +75,9 @@ def compose(bpm=128, seed=17):
             drum(down + k/2 + .035*(k%2), 'hat', .072 if k%2 else .046)
         for when,interval,length in [(0,0,.72),(1.5,7,.33),(2,0,.6),(3.5,12,.35)]:
             note(down+when, root+interval, length, .26, 'bass')
+        if tense:
+            for k in range(8):
+                note(down+k/2+.24,root+12+(7 if k in (3,7) else 0),.20,.20,'keys')
         for k, when in enumerate((.53,1.78,2.53)):
             note(down+when, voices[(bar+k)%4], .65, .17, 'keys')
         if bar in (3,7):
@@ -88,13 +95,14 @@ def main():
     parser.add_argument('output', type=Path, nargs='?', default=Path('episodes/neon-current.wav'))
     parser.add_argument('--bpm', type=int, default=128)
     parser.add_argument('--seed', type=int, default=17, help='Drum noise seed')
+    parser.add_argument('--tense', action='store_true', help='Driving minor-key synthwave arrangement')
     args = parser.parse_args()
     if not 60 <= args.bpm <= 200:
         parser.error('--bpm must be 60–200')
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with wave.open(str(args.output), 'wb') as dest:
         dest.setparams((1, 2, RATE, 0, 'NONE', 'not compressed'))
-        dest.writeframes(compose(args.bpm, args.seed))
+        dest.writeframes(compose(args.bpm, args.seed,args.tense))
     print(f'{args.output}: 8 bars at {args.bpm} BPM ({32*60/args.bpm:g} seconds)')
 
 

@@ -52,7 +52,17 @@ export const ASSET_MANIFEST = {
   ...MODELS,
   ...Object.fromEntries(BUILTINS.map((k) => [k, { builtin: true, clips: [] }])),
 };
+export const MUSIC_PRESETS = {
+  synthwave_tense: {
+    track: "episodes/synthwave-tense.wav",
+    volume: 0.34,
+    seamless: true,
+  },
+};
 export const SFX_MANIFEST = {
+  whoosh_fast: "synth",
+  ui_pop: "synth",
+  ding: "synth",
   whoosh: "synth",
   riser: "synth",
   click: "synth",
@@ -69,6 +79,7 @@ export const MOTIONS = [
   "idle_breathe",
   "talking",
   "pointing",
+  "cup_hands",
   "thinking",
   "shocked",
   "float_spin",
