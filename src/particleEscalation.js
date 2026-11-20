@@ -8,7 +8,8 @@ export function createMass(ev) {
     rows = Math.ceil(count / cols),
     gap = 0.104;
   const geometry = new T.CylinderGeometry(0.049, 0.049, 0.019, 16);
-  const tower = ev.spawn_mass.formation === "table_tower";
+  const bet = ev.spawn_mass.formation === "bet_stack",
+    tower = bet || ev.spawn_mass.formation === "table_tower";
   if (!tower) geometry.rotateX(Math.PI / 2);
   const pos = geometry.attributes.position,
     uv = geometry.attributes.uv;
@@ -72,6 +73,19 @@ export function createMass(ev) {
         (base + Math.floor(j / (n * n)) + 0.5) * 0.019,
         ((Math.floor(j / n) % n) - (n - 1) / 2) * gap,
       );
+      if (bet) {
+        // Twenty $1 chips per column. Each doubled wager occupies twice the
+        // volume and rests on the felt, even when sampled out of sequence.
+        const stacks = Math.ceil(count / 20),
+          width = Math.ceil(Math.sqrt(stacks)),
+          stack = Math.floor(i / 20);
+        matrix.makeTranslation(
+          ((stack % width) - (width - 1) / 2) * gap,
+          ((i % 20) + 0.5) * 0.019,
+          (Math.floor(stack / width) - (Math.ceil(stacks / width) - 1) / 2) *
+            gap,
+        );
+      }
       node.setColorAt(
         i,
         new T.Color(Math.floor(j / (n * n)) % 4 === 0 ? 0x9b4359 : 0xffe3bc),

@@ -37,7 +37,7 @@ export function validate(e) {
   if (Array.isArray(e)) e = { version: 3, title: "Untitled Short", shots: e };
   keys(
     e,
-    "version title series narration voiceover speechRate narratorStyle beat music bgMusic shots",
+    "version title series pacing narration voiceover speechRate narratorStyle beat music bgMusic shots",
   );
   check(e.version === 3 && str(e.title), "version: 3 and a title required");
   check(e.series === undefined || str(e.series), "invalid series");
@@ -86,6 +86,11 @@ export function validate(e) {
     Array.isArray(e.shots) && e.shots.length > 0 && e.shots.length <= 60,
     "expected 1–60 shots",
   );
+  check(
+    e.pacing === undefined || e.pacing === "narrative",
+    "invalid pacing profile",
+  );
+  const maxShot = e.pacing === "narrative" ? 15 : 3.5;
   let storyCount = 0,
     instanceCount = 0;
   for (const [i, s] of e.shots.entries()) {
@@ -100,7 +105,10 @@ export function validate(e) {
           i === e.shots.length - 1 &&
           i > 0 &&
           s.stage === e.shots[0].stage &&
-          s.focus === e.shots[0].focus &&
+          (s.focus === e.shots[0].focus ||
+            (vec(s.focus) &&
+              vec(e.shots[0].focus) &&
+              s.focus.every((v, j) => v === e.shots[0].focus[j]))) &&
           s.cameraPreset === e.shots[0].cameraPreset,
         "matchHook needs final shot with opening stage, focus and rig",
       );
@@ -113,9 +121,9 @@ export function validate(e) {
     check(
       num(s.duration) &&
         s.duration >= 2 &&
-        s.duration <= 3.5 &&
+        s.duration <= maxShot &&
         Math.abs(s.duration * 60 - Math.round(s.duration * 60)) < 1e-6,
-      "duration must be 2–3.5s on a 60 Hz tick",
+      `duration must be 2–${maxShot}s on a 60 Hz tick`,
     );
     check(has(stages, s.stage), "unknown stage");
     check(CAMERAS.includes(s.cameraPreset), "unknown cameraPreset");

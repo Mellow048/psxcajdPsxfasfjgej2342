@@ -62,7 +62,7 @@ export function validateStoryEvent(ev, key, shot, { check, keys, vec }) {
     );
     check(
       v.prop === "casino_chip" &&
-        ["grid_wall", "table_tower"].includes(v.formation),
+        ["grid_wall", "table_tower", "bet_stack"].includes(v.formation),
       "unknown mass prop or formation",
     );
     check(

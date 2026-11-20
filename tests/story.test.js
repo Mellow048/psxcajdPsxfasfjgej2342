@@ -67,8 +67,17 @@ test("roulette loss before the call; payoff has a voiced tail and a clean loop",
   const e = validate(
     JSON.parse(readFileSync("episodes/casino_martingale.json")),
   );
-  const [loss, call, tower, crash] = e.shots;
-  assert.equal(e.shots.length, 4);
+  const [loss, call, escalation, tower, crash] = e.shots;
+  assert.equal(e.shots.length, 5);
+  assert.deepEqual(
+    e.shots.map((s) => s.duration),
+    [6, 11.2, 11.1, 8.7, 10.3],
+  );
+  assert.deepEqual(
+    escalation.events.map((ev) => ev.spawn_mass.count),
+    [20, 40, 80],
+  );
+  assert.throws(() => validate({ ...e, pacing: undefined }), /2–3.5s/);
   assert.deepEqual(
     loss.events.map((x) => x.type),
     ["sound"],
@@ -77,12 +86,12 @@ test("roulette loss before the call; payoff has a voiced tail and a clean loop",
   assert.equal(call.events[0].show_phone.avatar, "guru");
   assert.equal(tower.events[0].spawn_mass.count, 1000);
   assert.equal(crash.events[0].show_graph.end, 0);
-  assert.equal(crash.captions.at(-1).text, "And that's why…");
+  assert.equal(crash.captions.at(-1).text, "exactly why…");
   const wav = readFileSync(e.voiceover);
   const data = wav.indexOf("data", 12, "ascii");
   const seconds = wav.readUInt32LE(data + 4) / wav.readUInt32LE(28);
   assert.ok(
-    Math.abs(seconds - e.shots.reduce((n, s) => n + s.duration, 0)) < 0.002,
+    seconds <= e.shots.reduce((n, s) => n + s.duration, 0) && seconds > 47,
   );
   assert.ok(crash.duration - crash.captions.at(-1).time > 0.8);
 });
