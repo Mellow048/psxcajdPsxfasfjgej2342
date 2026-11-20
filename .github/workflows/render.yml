@@ -11,6 +11,13 @@ on:
         required: true
         default: episodes/night-window.json
         type: string
+      publish:
+        description: 'Also publish a durable GitHub Release download (main only)'
+        type: boolean
+        default: false
+concurrency:
+  group: render-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -30,9 +37,9 @@ jobs:
       - run: npm ci && npm test
       - name: Prepare encoder and browser
         run: |
-          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
-            sudo apt-get update -qq && sudo apt-get install -y ffmpeg
-          fi
+          # Linux tools arrive via npm ci with integrity hashes in the lockfile.
+          echo "$PWD/node_modules/@ffmpeg-installer/linux-x64" >> "$GITHUB_PATH"
+          echo "$PWD/node_modules/@ffprobe-installer/linux-x64" >> "$GITHUB_PATH"
           echo "CHROME_BIN=$(command -v google-chrome)" >> "$GITHUB_ENV"
           google-chrome --version
       - name: Render exact frames and audio on the runner
@@ -51,3 +58,23 @@ jobs:
         env:
           DOWNLOAD: ${{ steps.upload.outputs.artifact-url }}
         run: printf '[Download the rendered MP4 (zipped)](%s)\n' "$DOWNLOAD" >> "$GITHUB_STEP_SUMMARY"
+
+  publish:
+    if: github.event_name == 'workflow_dispatch' && inputs.publish && github.ref == 'refs/heads/main'
+    needs: render
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: short-${{ github.run_id }}-${{ github.run_attempt }}
+          path: export
+      - name: Publish verified video
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "short-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" export/*.mp4 \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "Cutframe · $(basename export/*.mp4 .mp4)" \
+            --notes "Rendered and verified by [GitHub Actions]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)."

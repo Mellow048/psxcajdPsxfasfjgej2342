@@ -6,7 +6,7 @@ Cutframe is a static Three.js r170 editor for making vertical educational videos
 
 1. Add a script under `episodes/` (see [the writing guide](SCRIPT_GUIDE.md)). If it needs speech, include a synced narration track and reference it in the JSON. Without one, the engine exports captions, beat and cut sounds only.
 2. In **Actions → Render a Short → Run workflow**, choose `main` and enter the episode path. The default is [Why windows become mirrors at night](episodes/night-window.json): **35 seconds, 14 cuts, 1,050 frames** with a timed voiceover.
-3. Open the completed run and download its **short-…** artifact. Unzip the **540×960, 30 fps H.264/AAC MP4**. GitHub retains these downloads for 30 days; save a copy for publishing. Rendering does not commit binaries back to the repo or publish to a social platform.
+3. Open the completed run and download its **short-…** artifact. Unzip the **540×960, 30 fps H.264/AAC MP4**. GitHub retains these downloads for 30 days; save a copy for publishing. For a permanent download, tick **Also publish a durable GitHub Release download** on a manual `main` run. Rendering does not commit binaries back to the repo or publish to a social platform.
 
 The Linux runner uses the vendored Three.js modules, Chrome software WebGL, an offline audio mix, and FFmpeg. It samples exact frame times rather than recording a live screen, so a slow runner takes longer without dropping video frames. `ffprobe` checks the streams, resolution, frame count and duration before upload. Framework/episode pull requests exercise the default Short too.
 

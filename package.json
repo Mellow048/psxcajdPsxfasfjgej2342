@@ -8,5 +8,9 @@
   },
   "devDependencies": {
     "puppeteer-core": "25.18.1"
+  },
+  "optionalDependencies": {
+    "@ffmpeg-installer/linux-x64": "4.1.0",
+    "@ffprobe-installer/linux-x64": "5.2.0"
   }
 }
