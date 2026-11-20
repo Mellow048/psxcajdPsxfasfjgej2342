@@ -63,3 +63,26 @@ test("casino POV: grounded tower and buzzer precisely on the last loss", () => {
   a.start({ shots: [s] }, 0.5);
   assert.deepEqual(cues, [["buzzer", ev.time + g.drawTime - 0.5]]);
 });
+test("roulette loss before the call; payoff has a voiced tail and a clean loop", () => {
+  const e = validate(
+    JSON.parse(readFileSync("episodes/casino_martingale.json")),
+  );
+  const [loss, call, tower, crash] = e.shots;
+  assert.equal(e.shots.length, 4);
+  assert.deepEqual(
+    loss.events.map((x) => x.type),
+    ["sound"],
+  );
+  assert.equal(loss.events[0].sfx, "buzzer");
+  assert.equal(call.events[0].show_phone.avatar, "guru");
+  assert.equal(tower.events[0].spawn_mass.count, 1000);
+  assert.equal(crash.events[0].show_graph.end, 0);
+  assert.equal(crash.captions.at(-1).text, "And that's why…");
+  const wav = readFileSync(e.voiceover);
+  const data = wav.indexOf("data", 12, "ascii");
+  const seconds = wav.readUInt32LE(data + 4) / wav.readUInt32LE(28);
+  assert.ok(
+    Math.abs(seconds - e.shots.reduce((n, s) => n + s.duration, 0)) < 0.002,
+  );
+  assert.ok(crash.duration - crash.captions.at(-1).time > 0.8);
+});

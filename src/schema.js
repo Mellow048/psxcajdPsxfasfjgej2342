@@ -204,6 +204,19 @@ export function validate(e) {
     const hasSubject = ids.size > 0 || s.stage === "casino_room";
     for (const ev of s.events ?? []) {
       check(obj(ev), "invalid event");
+      if (ev.type === "sound") {
+        keys(ev, "type time sfx");
+        check(
+          num(ev.time) &&
+            ev.time >= 0 &&
+            ev.time < s.duration &&
+            ["buzzer", "ding", "click", "heavy_thud", "cash_register"].includes(
+              ev.sfx,
+            ),
+          "invalid timed sound",
+        );
+        continue;
+      }
       const story = storyKey(ev);
       if (story) {
         validateStoryEvent(ev, story, s, { check, keys, vec });

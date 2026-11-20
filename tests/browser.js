@@ -240,6 +240,22 @@ try {
       device.children.some((o) => o.material.map?.isCanvasTexture),
     "phone face is captured WebGL geometry",
   );
+  const screenFace = device.children.find(
+    (o) => o.material.map?.isCanvasTexture,
+  );
+  const boardFace = r.frames[3].boards[0].node.children.find(
+    (o) => o.material.map?.isCanvasTexture,
+  );
+  for (const [face, depth] of [
+    [screenFace, 0.075],
+    [boardFace, 0.08],
+  ])
+    assert(
+      face.position.z - depth / 2 >= 0.0099 &&
+        face.material.depthTest &&
+        face.material.polygonOffset,
+      "UI is separated along its normal and still respects occluders",
+    );
   const wall = r.frames[2].visuals[0].node;
   assert(
     wall.isInstancedMesh && wall.count === 1000 && wall.children.length === 0,

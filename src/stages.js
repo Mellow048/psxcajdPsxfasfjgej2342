@@ -409,7 +409,7 @@ export function stage(name) {
   s.add(key);
   let weather = null;
   if (name === "blizzard") weather = blizzard(s);
-  else if (name === "casino_room") casinoRoom(s);
+  else if (name === "casino_room") weather = casinoRoom(s);
   else if (p.reflection) windowRoom(s, name === "window_night");
   else if (name === "graveyard") cemetery(s);
   else {

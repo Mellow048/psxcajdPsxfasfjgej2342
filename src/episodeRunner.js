@@ -106,7 +106,8 @@ export class EpisodeRunner {
             f.scene.add(v.node);
             continue;
           }
-          if (ev.apply_morph || ev.texture_swap) continue;
+          if (ev.type === "sound" || ev.apply_morph || ev.texture_swap)
+            continue;
           if (ev.spawn_ui) {
             const panel = createStatUI(ev);
             f.panels.push(panel);

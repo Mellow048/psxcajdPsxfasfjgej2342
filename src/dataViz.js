@@ -1,5 +1,5 @@
 import * as T from "three";
-import { canvasFace } from "./uiDirector.js";
+import { canvasFace, mountFace } from "./uiDirector.js";
 const clamp = (t) => Math.max(0, Math.min(1, t));
 function diagram(c, w, h, spec) {
   const { nodes, edges, title } = spec;
@@ -72,7 +72,7 @@ export function createBoard(ev) {
     new T.PlaneGeometry(w, h),
     canvasFace(480, 408, (c, x, y) => diagram(c, x, y, board)),
   );
-  face.position.z = 0.042;
+  mountFace(face, 0.08 / 2);
   node.add(face);
   node.position.fromArray(ev.position ?? [0, 1.45, 0]);
   const target = new T.Vector3(),

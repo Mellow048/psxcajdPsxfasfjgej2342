@@ -1,0 +1,220 @@
+{
+  "version": 3,
+  "title": "Your last $10 on red",
+  "series": "POV / Martingale panic",
+  "bgMusic": "tense_heartbeat",
+  "narration": "You just bet your last $10 on red... and lost. But a guru online tells you a guaranteed trick: Just double your bet every time you lose. If you lose 10 times in a row, you aren't just down ten bucks. You're bankrupt, owing over ten grand. And that's why...",
+  "voiceover": "episodes/casino-martingale-voice.wav",
+  "shots": [
+    {
+      "title": "Last chip",
+      "duration": 3.0,
+      "stage": "casino_room",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "handheld_bob",
+      "pov": {
+        "eye": [-0.7, 2.29, 1.0]
+      },
+      "focus": [-0.72, 0.94, 0.16],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "You just bet",
+          "highlight": "just"
+        },
+        {
+          "time": 0.5,
+          "text": "your last",
+          "highlight": "your"
+        },
+        {
+          "time": 0.84,
+          "text": "$10 on red…",
+          "highlight": "red…"
+        },
+        {
+          "time": 2.13,
+          "text": "and lost.",
+          "highlight": "lost."
+        }
+      ],
+      "events": [
+        {
+          "type": "sound",
+          "sfx": "buzzer",
+          "time": 2.28
+        }
+      ]
+    },
+    {
+      "title": "A guaranteed trick?",
+      "duration": 3.5,
+      "stage": "casino_room",
+      "cameraPreset": "whip_pan_to_prop",
+      "cameraMotion": "handheld_bob",
+      "pov": {
+        "eye": [0.04, 1.98, 1.12],
+        "whipFrom": [-1.12, 0.98, -0.16]
+      },
+      "focus": [0.12, 0.94, 0.2],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.15,
+          "text": "But a guru",
+          "highlight": "guru"
+        },
+        {
+          "time": 0.52,
+          "text": "online tells you",
+          "highlight": "online"
+        },
+        {
+          "time": 1.03,
+          "text": "a guaranteed trick:",
+          "highlight": "guaranteed"
+        },
+        {
+          "time": 1.9,
+          "text": "Just double",
+          "highlight": "double"
+        },
+        {
+          "time": 2.32,
+          "text": "your bet",
+          "highlight": "your"
+        },
+        {
+          "time": 2.66,
+          "text": "every time",
+          "highlight": "every"
+        },
+        {
+          "time": 3.02,
+          "text": "you lose.",
+          "highlight": "lose."
+        }
+      ],
+      "events": [
+        {
+          "time": 0.12,
+          "sfx": "ding",
+          "position": [0.12, 0.9, 0.2],
+          "show_phone": {
+            "app": "video_call",
+            "avatar": "guru"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Ten in a row",
+      "duration": 3.2,
+      "stage": "casino_room",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_pull",
+      "pov": {
+        "eye": [0, 1.61, 0.68],
+        "recoil": 1.48
+      },
+      "focus": [0, 1.49, -0.1],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.15,
+          "text": "If you lose",
+          "highlight": "lose"
+        },
+        {
+          "time": 0.58,
+          "text": "10 times",
+          "highlight": "times"
+        },
+        {
+          "time": 1.12,
+          "text": "in a row,",
+          "highlight": "row,"
+        },
+        {
+          "time": 1.88,
+          "text": "you aren't just",
+          "highlight": "aren't"
+        },
+        {
+          "time": 2.27,
+          "text": "down ten bucks.",
+          "highlight": "bucks."
+        }
+      ],
+      "events": [
+        {
+          "time": 0,
+          "sfx": "heavy_thud",
+          "position": [0, 0.9, -0.1],
+          "spawn_mass": {
+            "prop": "casino_chip",
+            "count": 1000,
+            "formation": "table_tower"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Nothing left",
+      "duration": 3.5,
+      "stage": "casino_room",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "handheld_bob",
+      "pov": {
+        "eye": [-0.7, 2.29, 1.0],
+        "whipFrom": [0, 1.45, -0.1]
+      },
+      "focus": [-0.72, 0.94, 0.16],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.14,
+          "text": "You're bankrupt,",
+          "highlight": "bankrupt,"
+        },
+        {
+          "time": 1.18,
+          "text": "owing over",
+          "highlight": "owing"
+        },
+        {
+          "time": 1.57,
+          "text": "ten grand.",
+          "highlight": "grand."
+        },
+        {
+          "time": 2.5,
+          "text": "And that's why…",
+          "highlight": "that's"
+        }
+      ],
+      "events": [
+        {
+          "time": 0.14,
+          "sfx": "buzzer",
+          "show_graph": {
+            "label": "Borrowed stake / remaining",
+            "unit": "$",
+            "start": 10230,
+            "end": 0,
+            "lossStreak": 10,
+            "drawTime": 1.36,
+            "cueAt": "end"
+          },
+          "duration": 2.65
+        }
+      ]
+    }
+  ],
+  "narratorStyle": "urgent"
+}

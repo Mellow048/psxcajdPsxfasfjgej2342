@@ -1,5 +1,18 @@
 import * as T from "three";
 
+// World/local normal clearance, not camera-space depth. Keep depth testing so
+// other props still occlude screens. The small material bias also protects
+// decals at grazing angles after the PSX shader snaps projected vertices.
+export const SURFACE_GAP = 0.01;
+export function mountFace(mesh, frontZ) {
+  mesh.position.z = frontZ + SURFACE_GAP;
+  Object.assign(mesh.material, {
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -2,
+  });
+  return mesh;
+}
 // HTMLCanvasElement UI: local type and vector art only. No DOM overlay or remote
 // avatar to disappear from captureStream / the headless encoder.
 export function canvasFace(width, height, paint) {
@@ -160,7 +173,7 @@ export function createScreen(ev) {
       paintApp(c, w, h, app),
     ),
   );
-  face.position.z = 0.039;
+  mountFace(face, 0.075 / 2);
   node.add(face);
   return {
     node,
@@ -173,7 +186,7 @@ export function createScreen(ev) {
         node.scale.setScalar(scale);
         node.position.fromArray(ev.position);
         node.rotation.set(phone ? -Math.PI / 2 : 0, 0, 0);
-        node.position.y += scale * (phone ? 0.0375 : 0.67);
+        node.position.y += SURFACE_GAP + scale * (phone ? 0.0375 : 0.67);
         return;
       }
       const pop = 1 - Math.exp(-13 * age) * Math.cos(17 * age),
