@@ -2,446 +2,761 @@
   "version": 3,
   "title": "Your last $10 on red",
   "series": "POV / The Martingale",
-  "narration": "You just bet your last ten dollars on red, and lost it all. Is there a way to win it back? A guru online calls it the Martingale. Every time you lose, double your bet. The pitch? Eventually red hits. That win covers every loss, with ten dollars left over. So you scrape together twenty dollars and put it on red. Black. You bet forty. Black again. Now you bet eighty. You lose. You tell yourself red has to be right around the corner. But here is the trap. Roulette has no memory. After nine losses, you've already sunk five thousand one hundred ten dollars into chasing that first ten. Your tenth bet costs five thousand one hundred twenty dollars. Lose that, and ten thousand two hundred thirty dollars are gone. And that is exactly why...",
+  "narration": "You just bet your last ten dollars on red, and lost it all. Is there a mathematical way to win it back? A guru online calls it the Martingale. Every time you lose, double the next bet. His pitch is simple: a single win covers every loss. You even walk away with ten dollars in profit. So you bet twenty. Lose. Bet forty. Lose. Bet eighty. Black again. You're sure red is due, but the wheel doesn't remember you. Look at the stack. Nine losses in a row have already swallowed five thousand one hundred ten dollars. Now the dealer wants five thousand one hundred twenty for a single spin, just to chase the same ten dollars. Lose that tenth bet and your whole bankroll is gone. Ten thousand two hundred thirty dollars, chasing ten. And that is exactly why...",
   "voiceover": "episodes/casino-martingale-voice.wav",
   "shots": [
     {
-      "title": "Last chip",
-      "duration": 6,
+      "title": "The wheel",
+      "duration": 1.8,
       "stage": "casino_room",
-      "cameraPreset": "dutch_tilt_push",
+      "cameraPreset": "macro_closeup",
       "cameraMotion": "slow_push",
-      "pov": {
-        "eye": [-0.62, 2.6, 1.2]
-      },
-      "focus": [-0.72, 0.94, 0.16],
+      "focus": [-0.86, 1.03, -0.35],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
+      "pov": {
+        "eye": [-0.72, 2.47, 0.93]
+      },
       "captions": [
         {
-          "time": 0.14,
+          "time": 0,
           "text": "You just bet",
           "highlight": "just"
         },
         {
-          "time": 0.78,
+          "time": 0.53,
           "text": "your last",
           "highlight": "your"
         },
         {
-          "time": 1.19,
+          "time": 1.04,
           "text": "$10",
           "highlight": "$10"
-        },
-        {
-          "time": 1.81,
-          "text": "on red,",
-          "highlight": "red,"
-        },
-        {
-          "time": 2.73,
-          "text": "and lost",
-          "highlight": "lost"
-        },
-        {
-          "time": 3.26,
-          "text": "it all.",
-          "highlight": "all."
-        },
-        {
-          "time": 4.11,
-          "text": "Is there",
-          "highlight": "there"
-        },
-        {
-          "time": 4.44,
-          "text": "a way",
-          "highlight": "way"
-        },
-        {
-          "time": 4.72,
-          "text": "to win",
-          "highlight": "win"
-        },
-        {
-          "time": 4.98,
-          "text": "it back?",
-          "highlight": "back?"
-        }
-      ],
-      "events": [
-        {
-          "type": "sound",
-          "sfx": "buzzer",
-          "time": 2.91
         }
       ]
     },
     {
-      "title": "The promise: recover every loss",
-      "duration": 11.2,
+      "title": "Your last chip",
+      "duration": 1.7,
       "stage": "casino_room",
       "cameraPreset": "whip_pan_to_prop",
       "cameraMotion": "orbit_drift",
-      "pov": {
-        "eye": [0.04, 1.98, 1.12],
-        "whipFrom": [-1.12, 0.98, -0.16]
-      },
-      "focus": [0.12, 0.94, 0.2],
+      "focus": [-0.44, 0.94, 0.31],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.01,
-          "text": "A guru online",
-          "highlight": "online"
-        },
-        {
-          "time": 0.96,
-          "text": "calls it",
-          "highlight": "calls"
-        },
-        {
-          "time": 1.33,
-          "text": "the Martingale.",
-          "highlight": "Martingale."
-        },
-        {
-          "time": 2.53,
-          "text": "Every time",
-          "highlight": "Every"
-        },
-        {
-          "time": 3.0,
-          "text": "you lose,",
-          "highlight": "lose,"
-        },
-        {
-          "time": 3.72,
-          "text": "double your bet.",
-          "highlight": "double"
-        },
-        {
-          "time": 4.97,
-          "text": "The pitch?",
-          "highlight": "pitch?"
-        },
-        {
-          "time": 6.11,
-          "text": "Eventually red hits.",
-          "highlight": "Eventually"
-        },
-        {
-          "time": 7.61,
-          "text": "That win covers",
-          "highlight": "covers"
-        },
-        {
-          "time": 8.45,
-          "text": "every loss,",
-          "highlight": "every"
-        },
-        {
-          "time": 9.58,
-          "text": "with ten dollars",
-          "highlight": "dollars"
-        },
-        {
-          "time": 10.34,
-          "text": "left over.",
-          "highlight": "over."
-        }
-      ],
+      "pov": {
+        "eye": [-0.41, 1.52, 0.88],
+        "whipFrom": [-0.86, 1.03, -0.35]
+      },
       "events": [
         {
-          "time": 0.12,
-          "sfx": "click",
-          "position": [0.12, 0.9, 0.2],
+          "type": "sound",
+          "time": 0.88,
+          "sfx": "buzzer"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "on red,",
+          "highlight": "red,"
+        },
+        {
+          "time": 0.76,
+          "text": "and lost",
+          "highlight": "lost"
+        },
+        {
+          "time": 1.2,
+          "text": "it all.",
+          "highlight": "all."
+        }
+      ]
+    },
+    {
+      "title": "Can you get it back?",
+      "duration": 2.0,
+      "stage": "casino_room",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [-0.5, 0.91, 0.02],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "angle": -0.28,
+      "distance": 2.45,
+      "captions": [
+        {
+          "time": 0.18,
+          "text": "Is there a",
+          "highlight": "there"
+        },
+        {
+          "time": 0.46,
+          "text": "mathematical way",
+          "highlight": "mathematical"
+        },
+        {
+          "time": 1.17,
+          "text": "to win",
+          "highlight": "win"
+        },
+        {
+          "time": 1.39,
+          "text": "it back?",
+          "highlight": "back?"
+        }
+      ]
+    },
+    {
+      "title": "Incoming pitch",
+      "duration": 2.8,
+      "stage": "casino_room",
+      "cameraPreset": "whip_pan_to_prop",
+      "cameraMotion": "orbit_drift",
+      "focus": [0.31, 0.95, 0.22],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "pov": {
+        "eye": [0.11, 2.12, 1.1],
+        "whipFrom": [-0.44, 0.94, 0.31]
+      },
+      "events": [
+        {
+          "time": 0.14,
+          "sfx": "ding",
+          "position": [0.31, 0.9, 0.22],
           "show_phone": {
             "app": "video_call",
             "avatar": "guru"
           }
         }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "it back?",
+          "highlight": "back?"
+        },
+        {
+          "time": 0.22,
+          "text": "A guru online",
+          "highlight": "online"
+        },
+        {
+          "time": 1.11,
+          "text": "calls it",
+          "highlight": "calls"
+        },
+        {
+          "time": 1.46,
+          "text": "the Martingale.",
+          "highlight": "Martingale."
+        },
+        {
+          "time": 2.69,
+          "text": "Every time",
+          "highlight": "Every"
+        }
       ]
     },
     {
-      "title": "Double, lose, repeat",
-      "duration": 11.1,
+      "title": "Double the stake",
+      "duration": 2.9,
+      "stage": "casino_room",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": [-0.44, 0.94, 0.31],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "pov": {
+        "eye": [-0.35, 1.8, 1.12]
+      },
+      "captions": [
+        {
+          "time": 0,
+          "text": "Every time",
+          "highlight": "Every"
+        },
+        {
+          "time": 0.36,
+          "text": "you lose,",
+          "highlight": "lose,"
+        },
+        {
+          "time": 1.18,
+          "text": "double the",
+          "highlight": "double"
+        },
+        {
+          "time": 1.58,
+          "text": "next bet.",
+          "highlight": "next"
+        },
+        {
+          "time": 2.57,
+          "text": "His pitch",
+          "highlight": "pitch"
+        }
+      ]
+    },
+    {
+      "title": "The promise",
+      "duration": 3.0,
+      "stage": "casino_room",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [0.31, 0.95, 0.22],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "pov": {
+        "eye": [0.93, 1.76, 1.12]
+      },
+      "events": [
+        {
+          "time": 0,
+          "sfx": "ding",
+          "position": [0.31, 0.9, 0.22],
+          "show_phone": {
+            "app": "video_call",
+            "avatar": "guru"
+          }
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.09,
+          "text": "is simple:",
+          "highlight": "simple:"
+        },
+        {
+          "time": 1.12,
+          "text": "a single win",
+          "highlight": "single"
+        },
+        {
+          "time": 1.71,
+          "text": "covers every loss.",
+          "highlight": "covers"
+        }
+      ]
+    },
+    {
+      "title": "Ten ahead?",
+      "duration": 2.8,
+      "stage": "casino_room",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "focus": [-0.44, 0.94, 0.31],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "angle": 0.62,
+      "distance": 2.55,
+      "captions": [
+        {
+          "time": 0,
+          "text": "covers every loss.",
+          "highlight": "covers"
+        },
+        {
+          "time": 0.19,
+          "text": "You even",
+          "highlight": "even"
+        },
+        {
+          "time": 0.57,
+          "text": "walk away",
+          "highlight": "walk"
+        },
+        {
+          "time": 1.05,
+          "text": "with ten dollars",
+          "highlight": "dollars"
+        },
+        {
+          "time": 1.99,
+          "text": "in profit.",
+          "highlight": "profit."
+        }
+      ]
+    },
+    {
+      "title": "Twenty on red",
+      "duration": 2,
       "stage": "casino_room",
       "cameraPreset": "whip_pan_to_prop",
       "cameraMotion": "orbit_drift",
-      "pov": {
-        "eye": [0.02, 1.64, 1.27],
-        "whipFrom": [0.12, 0.94, 0.2]
-      },
-      "focus": [-0.15, 1.09, 0.18],
+      "focus": [-0.15, 1.1, 0.18],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
+      "pov": {
+        "eye": [0.2, 1.62, 0.94],
+        "whipFrom": [0.31, 0.95, 0.22]
+      },
+      "events": [
+        {
+          "type": "spawn_prop",
+          "id": "wager",
+          "spawn_prop": "bet_stack",
+          "time": 1.04,
+          "position": [-0.15, 0.9, 0.18],
+          "count": 20,
+          "sfx": "cash_register"
+        }
+      ],
       "captions": [
         {
-          "time": 0.2,
-          "text": "So you scrape",
-          "highlight": "scrape"
+          "time": 0,
+          "text": "in profit.",
+          "highlight": "profit."
         },
         {
-          "time": 0.83,
-          "text": "together",
-          "highlight": "together"
+          "time": 0.29,
+          "text": "So you bet",
+          "highlight": "you"
         },
         {
-          "time": 1.15,
-          "text": "$20",
-          "highlight": "$20"
+          "time": 1.04,
+          "text": "$20.",
+          "highlight": "$20."
+        }
+      ]
+    },
+    {
+      "title": "Forty on red",
+      "duration": 2,
+      "stage": "casino_room",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": [-0.15, 1.1, 0.18],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "pov": {
+        "eye": [-0.71, 1.65, 1.36]
+      },
+      "events": [
+        {
+          "type": "spawn_prop",
+          "id": "wager",
+          "spawn_prop": "bet_stack",
+          "time": 1.33,
+          "position": [-0.15, 0.9, 0.18],
+          "count": 40,
+          "sfx": "cash_register"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "$20.",
+          "highlight": "$20."
         },
         {
-          "time": 1.82,
-          "text": "and put it",
-          "highlight": "and"
+          "time": 0.21,
+          "text": "Lose.",
+          "highlight": "Lose."
         },
         {
-          "time": 2.19,
-          "text": "on red.",
-          "highlight": "red."
-        },
-        {
-          "time": 3.09,
-          "text": "Black.",
-          "highlight": "Black."
-        },
-        {
-          "time": 3.88,
-          "text": "You bet $40.",
+          "time": 1.07,
+          "text": "Bet $40.",
           "highlight": "$40."
+        }
+      ]
+    },
+    {
+      "title": "Eighty on red",
+      "duration": 2,
+      "stage": "casino_room",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [-0.15, 1.1, 0.18],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "pov": {
+        "eye": [0.37, 1.61, 1.04]
+      },
+      "events": [
+        {
+          "type": "spawn_prop",
+          "id": "wager",
+          "spawn_prop": "bet_stack",
+          "time": 1.33,
+          "position": [-0.15, 0.9, 0.18],
+          "count": 80,
+          "sfx": "cash_register"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0.16,
+          "text": "Lose.",
+          "highlight": "Lose."
         },
         {
-          "time": 4.92,
+          "time": 0.96,
+          "text": "Bet $80.",
+          "highlight": "$80."
+        }
+      ]
+    },
+    {
+      "title": "Black again",
+      "duration": 3,
+      "stage": "casino_room",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
+      "focus": [-0.86, 1.03, -0.35],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "pov": {
+        "eye": [-1.73, 1.98, 0.73]
+      },
+      "captions": [
+        {
+          "time": 0.1,
           "text": "Black again.",
           "highlight": "again."
         },
         {
-          "time": 6.01,
-          "text": "Now you bet",
-          "highlight": "Now"
+          "time": 1.02,
+          "text": "You're sure",
+          "highlight": "You're"
         },
         {
-          "time": 6.51,
-          "text": "$80.",
-          "highlight": "$80."
+          "time": 1.45,
+          "text": "red is due,",
+          "highlight": "due,"
         },
         {
-          "time": 7.15,
-          "text": "You lose.",
-          "highlight": "lose."
+          "time": 2.07,
+          "text": "but the wheel",
+          "highlight": "wheel"
         },
         {
-          "time": 8.25,
-          "text": "You tell yourself",
-          "highlight": "yourself"
-        },
-        {
-          "time": 9.16,
-          "text": "red has to",
-          "highlight": "red"
-        },
-        {
-          "time": 9.8,
-          "text": "be right",
-          "highlight": "right"
-        },
-        {
-          "time": 10.15,
-          "text": "around the corner.",
-          "highlight": "corner."
-        }
-      ],
-      "events": [
-        {
-          "time": 1.15,
-          "duration": 3.0,
-          "position": [-0.15, 0.9, 0.18],
-          "sfx": "click",
-          "spawn_mass": {
-            "prop": "casino_chip",
-            "count": 20,
-            "formation": "bet_stack"
-          }
-        },
-        {
-          "time": 4.15,
-          "duration": 2.36,
-          "position": [-0.15, 0.9, 0.18],
-          "sfx": "click",
-          "spawn_mass": {
-            "prop": "casino_chip",
-            "count": 40,
-            "formation": "bet_stack"
-          }
-        },
-        {
-          "time": 6.51,
-          "duration": 4.59,
-          "position": [-0.15, 0.9, 0.18],
-          "sfx": "click",
-          "spawn_mass": {
-            "prop": "casino_chip",
-            "count": 80,
-            "formation": "bet_stack"
-          }
+          "time": 2.67,
+          "text": "doesn't remember you.",
+          "highlight": "remember"
         }
       ]
     },
     {
-      "title": "The trap: every spin starts over",
-      "duration": 8.7,
+      "title": "The wheel owes you nothing",
+      "duration": 3,
       "stage": "casino_room",
       "cameraPreset": "wide_orbit",
-      "cameraMotion": "handheld_bob",
-      "pov": {
-        "eye": [0, 1.61, 0.68],
-        "recoil": 1.48
-      },
-      "focus": [0, 1.49, -0.1],
+      "cameraMotion": "orbit_drift",
+      "focus": [0, 1.55, -0.1],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.22,
-          "text": "But here is",
-          "highlight": "here"
-        },
-        {
-          "time": 0.61,
-          "text": "the trap.",
-          "highlight": "trap."
-        },
-        {
-          "time": 1.65,
-          "text": "Roulette has",
-          "highlight": "Roulette"
-        },
-        {
-          "time": 2.1,
-          "text": "no memory.",
-          "highlight": "memory."
-        },
-        {
-          "time": 3.23,
-          "text": "After nine losses,",
-          "highlight": "losses,"
-        },
-        {
-          "time": 4.66,
-          "text": "you've already sunk",
-          "highlight": "already"
-        },
-        {
-          "time": 5.34,
-          "text": "$5,110",
-          "highlight": "$5,110"
-        },
-        {
-          "time": 7.07,
-          "text": "into chasing",
-          "highlight": "chasing"
-        },
-        {
-          "time": 7.64,
-          "text": "that first ten.",
-          "highlight": "first"
-        }
-      ],
+      "pov": {
+        "eye": [0, 1.63, 0.7],
+        "recoil": 1.45
+      },
       "events": [
         {
-          "time": 0,
-          "sfx": "heavy_thud",
+          "time": 0.86,
           "position": [0, 0.9, -0.1],
           "spawn_mass": {
             "prop": "casino_chip",
             "count": 1000,
             "formation": "table_tower"
-          }
+          },
+          "sfx": "heavy_thud"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "doesn't remember you.",
+          "highlight": "remember"
+        },
+        {
+          "time": 0.86,
+          "text": "Look at",
+          "highlight": "Look"
+        },
+        {
+          "time": 1.12,
+          "text": "the stack.",
+          "highlight": "stack."
+        },
+        {
+          "time": 1.84,
+          "text": "Nine losses",
+          "highlight": "losses"
+        },
+        {
+          "time": 2.42,
+          "text": "in a row",
+          "highlight": "row"
+        },
+        {
+          "time": 2.83,
+          "text": "have already",
+          "highlight": "already"
         }
       ]
     },
     {
-      "title": "What the tenth spin costs",
-      "duration": 10.3,
+      "title": "Nine losses",
+      "duration": 2.9,
       "stage": "casino_room",
       "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "slow_push",
-      "pov": {
-        "eye": [-0.62, 2.6, 1.2]
-      },
-      "focus": [-0.72, 0.94, 0.16],
+      "focus": [0.31, 0.95, 0.22],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
+      "pov": {
+        "eye": [0.16, 2.05, 1.26]
+      },
+      "events": [
+        {
+          "time": 0,
+          "sfx": "ding",
+          "position": [0.31, 0.9, 0.22],
+          "show_phone": {
+            "app": "bank",
+            "balance": "$5,120",
+            "debit": "−$5,110 LOST"
+          }
+        }
+      ],
       "captions": [
         {
-          "time": 0.18,
-          "text": "Your tenth bet",
+          "time": 0,
+          "text": "have already",
+          "highlight": "already"
+        },
+        {
+          "time": 0.21,
+          "text": "swallowed",
+          "highlight": "swallowed"
+        },
+        {
+          "time": 0.58,
+          "text": "$5,110.",
+          "highlight": "$5,110."
+        },
+        {
+          "time": 2.69,
+          "text": "Now the dealer",
+          "highlight": "dealer"
+        }
+      ]
+    },
+    {
+      "title": "The tenth stake",
+      "duration": 2.9,
+      "stage": "casino_room",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
+      "focus": [0, 1.7, -0.1],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "pov": {
+        "eye": [0.68, 2.17, 1.65]
+      },
+      "events": [
+        {
+          "time": 0,
+          "position": [0, 0.9, -0.1],
+          "spawn_mass": {
+            "prop": "casino_chip",
+            "count": 1000,
+            "formation": "table_tower"
+          },
+          "sfx": "heavy_thud"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "Now the dealer",
+          "highlight": "dealer"
+        },
+        {
+          "time": 0.25,
+          "text": "wants",
+          "highlight": "wants"
+        },
+        {
+          "time": 0.5,
+          "text": "$5,120",
+          "highlight": "$5,120"
+        },
+        {
+          "time": 1.8,
+          "text": "for a",
+          "highlight": "for"
+        },
+        {
+          "time": 1.97,
+          "text": "single spin,",
+          "highlight": "single"
+        }
+      ]
+    },
+    {
+      "title": "Still chasing ten",
+      "duration": 2.8,
+      "stage": "casino_room",
+      "cameraPreset": "whip_pan_to_prop",
+      "cameraMotion": "slow_push",
+      "focus": [-0.44, 0.94, 0.31],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "pov": {
+        "eye": [-0.6, 1.71, 1.13],
+        "whipFrom": [0, 1.55, -0.1]
+      },
+      "captions": [
+        {
+          "time": 0.04,
+          "text": "just to chase",
+          "highlight": "chase"
+        },
+        {
+          "time": 0.55,
+          "text": "the same",
+          "highlight": "same"
+        },
+        {
+          "time": 0.86,
+          "text": "ten dollars.",
+          "highlight": "dollars."
+        },
+        {
+          "time": 1.83,
+          "text": "Lose that",
+          "highlight": "Lose"
+        },
+        {
+          "time": 2.28,
+          "text": "tenth bet",
+          "highlight": "tenth"
+        }
+      ]
+    },
+    {
+      "title": "Bankroll collapses",
+      "duration": 2.7,
+      "stage": "casino_room",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [-0.09, 1.1, 0],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "pov": {
+        "eye": [-0.13, 1.91, 1.2]
+      },
+      "events": [
+        {
+          "time": 0.04,
+          "sfx": "buzzer",
+          "show_graph": {
+            "label": "Bankroll / ten losses",
+            "start": 10230,
+            "end": 0,
+            "lossStreak": 10,
+            "unit": "$",
+            "drawTime": 1.36,
+            "cueAt": "end"
+          }
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "tenth bet",
           "highlight": "tenth"
         },
         {
-          "time": 1.37,
-          "text": "costs",
-          "highlight": "costs"
+          "time": 0.23,
+          "text": "and your whole",
+          "highlight": "whole"
         },
         {
-          "time": 1.77,
-          "text": "$5,120.",
-          "highlight": "$5,120."
+          "time": 0.81,
+          "text": "bankroll is gone.",
+          "highlight": "bankroll"
         },
         {
-          "time": 4.27,
-          "text": "Lose that,",
-          "highlight": "that,"
-        },
+          "time": 2.03,
+          "text": "$10,230",
+          "highlight": "$10,230"
+        }
+      ]
+    },
+    {
+      "title": "Nothing left",
+      "duration": 2.7,
+      "stage": "casino_room",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "focus": [0.31, 0.95, 0.22],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "pov": {
+        "eye": [0.33, 2.05, 1.16]
+      },
+      "events": [
         {
-          "time": 5.64,
-          "text": "and",
-          "highlight": "and"
-        },
+          "time": 0,
+          "sfx": "ding",
+          "position": [0.31, 0.9, 0.22],
+          "show_phone": {
+            "app": "bank",
+            "balance": "$0",
+            "debit": "−$10,230 TOTAL"
+          }
+        }
+      ],
+      "captions": [
         {
-          "time": 5.85,
+          "time": 0,
           "text": "$10,230",
           "highlight": "$10,230"
         },
         {
-          "time": 7.77,
-          "text": "are gone.",
-          "highlight": "gone."
+          "time": 1.57,
+          "text": "chasing ten.",
+          "highlight": "chasing"
+        }
+      ]
+    },
+    {
+      "title": "Back to the wheel",
+      "duration": 2,
+      "stage": "casino_room",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": [-0.86, 1.03, -0.35],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "matchHook": true,
+      "pov": {
+        "eye": [-0.72, 2.47, 0.93],
+        "whipFrom": [0.31, 0.95, 0.22]
+      },
+      "captions": [
+        {
+          "time": 0,
+          "text": "chasing ten.",
+          "highlight": "chasing"
         },
         {
-          "time": 8.64,
+          "time": 0.27,
           "text": "And that is",
           "highlight": "that"
         },
         {
-          "time": 9.12,
+          "time": 0.8,
           "text": "exactly why…",
           "highlight": "exactly"
         }
-      ],
-      "events": [
-        {
-          "time": 0.1,
-          "sfx": "buzzer",
-          "show_graph": {
-            "label": "Bankroll / ten losses",
-            "unit": "$",
-            "start": 10230,
-            "end": 0,
-            "lossStreak": 10,
-            "drawTime": 7.75,
-            "cueAt": "end"
-          },
-          "duration": 8.52
-        }
-      ],
-      "matchHook": true
+      ]
     }
   ],
-  "pacing": "narrative",
+  "pacing": "micro",
   "music": {
     "track": "episodes/casino-room-tone.wav",
     "volume": 0.9

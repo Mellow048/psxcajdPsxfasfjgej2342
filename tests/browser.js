@@ -284,6 +284,23 @@ try {
   );
   r.seek(1);
   assert(!r.frames[0].visuals[0].node.visible, "TV exits at the authored time");
+  const micro = await (await fetch("episodes/casino_martingale.json")).json();
+  await r.load(micro);
+  const worldImage = () =>
+    r.pipeline.render(r.frames[r.index].scene, r.director.camera).toDataURL();
+  r.seek(0);
+  const opening = worldImage();
+  r.seek(45 - 1 / 30);
+  assert(
+    worldImage() === opening,
+    "last encoded 3D wheel frame exactly matches opening (before captions)",
+  );
+  r.seek(18.1);
+  assert(
+    r.frames[7].spawns[0].node.visible &&
+      r.frames[7].spawns[0].node.count === 20,
+    "twenty-chip spawn is visible on the wager cue",
+  );
   report.textContent += "\nAll checks passed.";
   report.dataset.result = "pass";
 } catch (e) {

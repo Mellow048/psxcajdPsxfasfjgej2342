@@ -63,35 +63,62 @@ test("casino POV: grounded tower and buzzer precisely on the last loss", () => {
   a.start({ shots: [s] }, 0.5);
   assert.deepEqual(cues, [["buzzer", ev.time + g.drawTime - 0.5]]);
 });
-test("roulette loss before the call; payoff has a voiced tail and a clean loop", () => {
+test("45-second micro cut: fast hook, accented doubles, and a wheel match", () => {
   const e = validate(
-    JSON.parse(readFileSync("episodes/casino_martingale.json")),
+      JSON.parse(readFileSync("episodes/casino_martingale.json")),
+    ),
+    s = e.shots;
+  assert.equal(s.length, 18);
+  assert.equal(
+    s.reduce((n, q) => n + Math.round(q.duration * 30), 0),
+    1350,
   );
-  const [loss, call, escalation, tower, crash] = e.shots;
-  assert.equal(e.shots.length, 5);
   assert.deepEqual(
-    e.shots.map((s) => s.duration),
-    [6, 11.2, 11.1, 8.7, 10.3],
+    s.slice(0, 3).map((q) => q.duration),
+    [1.8, 1.7, 2],
   );
   assert.deepEqual(
-    escalation.events.map((ev) => ev.spawn_mass.count),
+    s.slice(0, 3).map((q) => q.cameraPreset),
+    ["macro_closeup", "whip_pan_to_prop", "dutch_tilt_push"],
+  );
+  assert.ok(
+    s.every(
+      (q, i) =>
+        q.duration <= 3.2 &&
+        (i < 2 || q.duration >= 2) &&
+        ["slow_push", "orbit_drift"].includes(q.cameraMotion) &&
+        q.sfx === "whoosh_fast",
+    ),
+  );
+  const bets = s.slice(7, 10);
+  assert.deepEqual(
+    bets.map((q) => q.duration),
+    [2, 2, 2],
+  );
+  assert.deepEqual(
+    bets.map((q) => q.events[0].count),
     [20, 40, 80],
   );
-  assert.throws(() => validate({ ...e, pacing: undefined }), /2–3.5s/);
-  assert.deepEqual(
-    loss.events.map((x) => x.type),
-    ["sound"],
-  );
-  assert.equal(loss.events[0].sfx, "buzzer");
-  assert.equal(call.events[0].show_phone.avatar, "guru");
-  assert.equal(tower.events[0].spawn_mass.count, 1000);
-  assert.equal(crash.events[0].show_graph.end, 0);
-  assert.equal(crash.captions.at(-1).text, "exactly why…");
-  const wav = readFileSync(e.voiceover);
-  const data = wav.indexOf("data", 12, "ascii");
-  const seconds = wav.readUInt32LE(data + 4) / wav.readUInt32LE(28);
   assert.ok(
-    seconds <= e.shots.reduce((n, s) => n + s.duration, 0) && seconds > 47,
+    bets.every(
+      (q) =>
+        q.events[0].type === "spawn_prop" &&
+        q.events[0].sfx === "cash_register",
+    ),
   );
-  assert.ok(crash.duration - crash.captions.at(-1).time > 0.8);
+  for (const [i, d] of [
+    [0, 1.6],
+    [2, 1.8],
+    [3, 3.3],
+  ]) {
+    const ep = structuredClone(e);
+    ep.shots[i].duration = d;
+    assert.throws(() => validate(ep), /duration/);
+  }
+  assert.equal(s.at(-1).matchHook, true);
+  assert.deepEqual(s.at(-1).focus, s[0].focus);
+  assert.ok(s.at(-1).pov.whipFrom);
+  const wav = readFileSync(e.voiceover),
+    data = wav.indexOf("data", 12, "ascii");
+  assert.equal(wav.readUInt32LE(data + 4) / wav.readUInt32LE(28), 45);
 });

@@ -156,7 +156,10 @@ export class EpisodeRunner {
     const f = this.frames[this.index],
       s = this.episode.shots[this.index],
       t = (this.tick - f.start) / CONFIG.hz;
-    const rigTime = s.matchHook ? s.duration - t : t;
+    // Map the final *encoded* loop frame, not the unencoded end boundary, to frame zero.
+    const rigTime = s.matchHook
+      ? Math.max(0, s.duration - 1 / CONFIG.fps - t)
+      : t;
     for (const i of f.items) {
       pose(i, rigTime);
       i.morph?.(rigTime, i.def.motion);
@@ -185,6 +188,11 @@ export class EpisodeRunner {
       // terminal pose, lens and skeletal phase are exactly the hook at t=0.
       const hook = this.episode.shots[0],
         sweep = Math.min(1, rigTime / 0.65);
+      if (hook.pov && s.pov?.whipFrom)
+        this.focus.lerp(
+          this.director.offset.fromArray(s.pov.whipFrom),
+          sweep * sweep * (3 - 2 * sweep),
+        );
       this.director.pose(
         {
           ...hook,

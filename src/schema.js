@@ -87,10 +87,11 @@ export function validate(e) {
     "expected 1–60 shots",
   );
   check(
-    e.pacing === undefined || e.pacing === "narrative",
+    e.pacing === undefined || ["narrative", "micro"].includes(e.pacing),
     "invalid pacing profile",
   );
-  const maxShot = e.pacing === "narrative" ? 15 : 3.5;
+  const maxShot =
+    e.pacing === "narrative" ? 15 : e.pacing === "micro" ? 3.2 : 3.5;
   let storyCount = 0,
     instanceCount = 0;
   for (const [i, s] of e.shots.entries()) {
@@ -117,13 +118,14 @@ export function validate(e) {
         ["center", "lower"].includes(s.captionPosition),
       "invalid captionPosition",
     );
+    const minShot = e.pacing === "micro" && i < 2 ? 1.7 : 2;
     check(str(s.title), "missing title");
     check(
       num(s.duration) &&
-        s.duration >= 2 &&
+        s.duration >= minShot &&
         s.duration <= maxShot &&
         Math.abs(s.duration * 60 - Math.round(s.duration * 60)) < 1e-6,
-      `duration must be 2–${maxShot}s on a 60 Hz tick`,
+      `duration must be ${minShot}–${maxShot}s on a 60 Hz tick`,
     );
     check(has(stages, s.stage), "unknown stage");
     check(CAMERAS.includes(s.cameraPreset), "unknown cameraPreset");
@@ -282,6 +284,7 @@ export function validate(e) {
       }
       check(ev.type === "spawn_prop", "expected spawn_prop event");
       const kind = ev.spawn_prop ?? ev.asset,
+        bet = kind === "bet_stack",
         stream = kind === "particle_stream_yellow",
         bulb = kind === "3D_Lightbulb",
         arrow = kind === "3D_Arrow";
@@ -289,13 +292,15 @@ export function validate(e) {
       keys(
         ev,
         "id type time asset spawn_prop size sfx " +
-          (stream
-            ? "from via to travel"
-            : arrow
-              ? "from to travel"
-              : bulb
-                ? "position animation animationSfx"
-                : "icon position"),
+          (bet
+            ? "count position"
+            : stream
+              ? "from via to travel"
+              : arrow
+                ? "from to travel"
+                : bulb
+                  ? "position animation animationSfx"
+                  : "icon position"),
       );
       check(str(ev.id) && !ids.has(ev.id), "missing or duplicate event id");
       ids.add(ev.id);
@@ -304,14 +309,25 @@ export function validate(e) {
         "spawn time outside shot",
       );
       check(
-        ["pop", "whoosh", "ui_pop", "ding", "click"].includes(ev.sfx),
+        (bet
+          ? ["cash_register", "click"]
+          : ["pop", "whoosh", "ui_pop", "ding", "click"]
+        ).includes(ev.sfx),
         "invalid spawn sfx",
       );
       check(
         ev.size === undefined || (num(ev.size) && ev.size > 0 && ev.size <= 4),
         "invalid prop size",
       );
-      if (bulb) {
+      if (bet) {
+        check(
+          vec(ev.position) &&
+            Number.isInteger(ev.count) &&
+            ev.count >= 1 &&
+            ev.count <= 100,
+          "bet_stack needs a position and 1–100 chips",
+        );
+      } else if (bulb) {
         check(
           vec(ev.position) &&
             ev.animation === "pulse" &&

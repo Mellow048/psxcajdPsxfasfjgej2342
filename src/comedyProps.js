@@ -1,3 +1,4 @@
+import { createMass } from "./particleEscalation.js";
 import * as T from "three";
 
 // Geometry, not billboards: the silhouette and shading change with camera angle.
@@ -104,6 +105,17 @@ export function createSpawn(ev) {
   const node = new T.Group(),
     kind = ev.spawn_prop ?? ev.asset,
     arrow = kind === "3D_Arrow";
+  if (kind === "bet_stack") {
+    const mass = createMass({
+      ...ev,
+      spawn_mass: {
+        prop: "casino_chip",
+        formation: "bet_stack",
+        count: ev.count,
+      },
+    });
+    return { ...mass, ev };
+  }
   if (kind === "particle_stream_yellow") {
     const geo = new T.OctahedronGeometry(0.075),
       mat = luminous(0xffdf2d, 1.3);
@@ -152,7 +164,14 @@ export function createSpawn(ev) {
   node.add(shell);
   return { node, ev, from, to };
 }
-export function sampleSpawn({ node, ev, from, to, via, stream }, shotTime) {
+export function sampleSpawn(
+  { node, ev, from, to, via, stream, sample },
+  shotTime,
+) {
+  if (sample) {
+    sample(shotTime);
+    return;
+  }
   const t = shotTime - ev.time;
   node.position.copy(from);
   node.visible = t >= 0;
