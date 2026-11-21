@@ -122,6 +122,40 @@ export function makeProp(key, text = "NOTE") {
     );
     head.rotation.x = Math.PI / 2;
     mesh(p, new T.CircleGeometry(0.29, 10), basic(0xffda93), 0, 1.12, 0.223);
+  } else if (key === "section_eye") {
+    // Sagittal teaching model, open to camera: lens on left, retina on right.
+    const shell = mesh(
+      p,
+      new T.SphereGeometry(0.62, 32, 16, 0, Math.PI),
+      lit(0x243950),
+      0,
+      0.65,
+      -0.04,
+    );
+    shell.rotation.y = Math.PI;
+    shell.material.side = T.DoubleSide;
+    mesh(p, new T.TorusGeometry(0.62, 0.055, 8, 48), lit(0xf7dfae), 0, 0.65, 0);
+    const lens = mesh(
+      p,
+      new T.SphereGeometry(1, 12, 12),
+      lit(0x78ead9),
+      -0.4,
+      0.65,
+      0.045,
+    );
+    lens.scale.set(0.082, 0.245, 0.08);
+    for (let j = -8; j <= 8; j++) {
+      const a = j * 0.1;
+      const cell = mesh(
+        p,
+        new T.CapsuleGeometry(0.03, 0.055, 3, 6),
+        lit(j % 2 ? 0xf28d77 : 0xfad79e),
+        0.55 * Math.cos(a),
+        0.65 + 0.55 * Math.sin(a),
+        0.045,
+      );
+      cell.rotation.z = a - Math.PI / 2;
+    }
   } else if (key === "eye") {
     const e = mesh(
       p,
@@ -410,7 +444,9 @@ export function stage(name) {
   let weather = null;
   if (name === "blizzard") weather = blizzard(s);
   else if (name === "casino_room") weather = casinoRoom(s);
-  else if (p.reflection) windowRoom(s, name === "window_night");
+  else if (name === "signal_dark") {
+    /* The detector POV has no environmental signal. */
+  } else if (p.reflection) windowRoom(s, name === "window_night");
   else if (name === "graveyard") cemetery(s);
   else {
     const back = name === "backstage";
@@ -418,6 +454,35 @@ export function stage(name) {
     const grid = new T.GridHelper(24, 32, 0x677080, 0x495464);
     grid.position.y = 0.005;
     s.add(grid);
+    if (name === "light_gallery") {
+      // A fixed registration target: stripes continue behind the disappearing face.
+      box(s, 12, 5, 0.2, lit(0x1a464c), 0, 2, -2.2);
+      box(s, 3.35, 2.7, 0.11, lit(0xdfaa73), 0, 1.6, -2.04);
+      box(s, 3.22, 2.57, 0.08, basic(0x165862), 0, 1.6, -1.94);
+      mesh(s, new T.CircleGeometry(0.88, 48), basic(0xf87755), 0, 1.7, -1.88);
+      for (let j = 0; j < 9; j++)
+        box(s, 3.18, 0.061, 0.016, basic(0xffdb96), 0, 0.62 + 0.245 * j, -1.83);
+      for (const x of [-2.4, 2.4]) {
+        box(s, 0.32, 4, 0.28, lit(0x102d3d), x, 1.95, -1.85);
+        box(s, 0.033, 3.1, 0.03, basic(0xffc581), x, 2, -1.67);
+      }
+      const plinth = mesh(
+        s,
+        new T.CylinderGeometry(0.84, 0.91, 0.12, 32),
+        lit(0xd49c74),
+        0,
+        0.05,
+        0,
+      );
+      mesh(
+        s,
+        new T.CylinderGeometry(0.83, 0.83, 0.03, 32),
+        lit(0x325868),
+        0,
+        plinth.position.y + 0.072,
+        0,
+      );
+    }
     if (name === "house_corner") {
       box(s, 6, 3, 0.15, lit(0x867888), 0, 1.5, -2.5);
       box(s, 0.15, 3, 6, lit(0x786a79), -2.85, 1.5, 0);
@@ -454,6 +519,6 @@ export function stage(name) {
     spark,
     new T.PointsMaterial({ color: 0xffe9bb, size: 0.018 }),
   );
-  s.add(dust);
+  if (name !== "signal_dark") s.add(dust);
   return { scene: s, dust, weather };
 }

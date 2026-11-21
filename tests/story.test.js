@@ -122,3 +122,23 @@ test("Native-rate micro cut: fast hook, accented doubles, and a wheel match", ()
     data = wav.indexOf("data", 12, "ascii");
   assert.equal(wav.readUInt32LE(data + 4) / wav.readUInt32LE(28), 1270 / 30);
 });
+
+test("invisible: normal rays converge, transparent eye passes rays straight on", () => {
+  const e = validate(JSON.parse(readFileSync("episodes/invisible.json")));
+  const normal = e.shots.find((s) => s.title === "The lens bends the rays");
+  const clear = e.shots.find((s) =>
+    s.props?.some((p) => p.asset === "section_eye" && p.fadeOut),
+  );
+  assert.deepEqual(normal.events[0].to, normal.events[1].to);
+  assert.ok(clear.events.every((r) => !r.via && r.from[1] === r.to[1]));
+  assert.equal(e.shots.at(-1).props.filter((p) => p.asset === "eye").length, 2);
+  for (const range of [
+    [1, 1],
+    [-1, 1],
+    [0, 10],
+  ]) {
+    const bad = structuredClone(e);
+    bad.shots[0].actors[0].fadeOut = range;
+    assert.throws(() => validate(bad), /fadeOut/);
+  }
+});

@@ -92,3 +92,9 @@ Open `/?episode=episodes/pallas_cat.json` for **Pallas Cat: Cold Build** (17 sec
 Open `/?episode=episodes/chip-math.json` for a four-shot first-person Martingale warning: casino felt, a guru call, an instanced chip tower and a bankroll crash. The previous wall/whiteboard demo remains at `episodes/escalation-lab.json`. The [timeline reference](SCRIPT_GUIDE.md#escalation-timeline-screen--scale--diagram--graph) covers these JSON events and the TV variant. Render it with `npm run render -- episodes/chip-math.json` or select that path in GitHub Actions.
 
 The narrative recut, **[Your last $10 on red](episodes/casino_martingale.json)**, opens on the roulette wheel, not the bank app. Try `/?episode=episodes/casino_martingale.json`. The player is the returning `male.character_01` rig. This 42⅓-second narrative uses one native-speed voice take over eighteen micro-shots, including the $20 → $40 → $80 sequence. The losing buzzer is a timed `type: "sound"` event, independent of the cut and captions. The crash graph depicts a $10,230 bankroll, not the original $10 in the player's pocket.
+
+### Field study: What if you could turn invisible?
+
+[Episode JSON](episodes/invisible.json) · Open `/?episode=episodes/invisible.json` in the studio. A 16-shot experiment with a striped registration target, the returning actor and a cutaway eye. It models **perfect transmission of visible light**, not camouflage or a camera-fed cloak. Compare the converging rays that stop at the normal retina with the straight rays that pass through the transparent eye. The final floating eyes are a visual gag about detectors having to interact with light, not a claim that eyes could function detached from nerves or a blood supply.
+
+To export: `npm run render -- episodes/invisible.json`. The continuous voice recording sets the timing. The music stem is reproducible with `python3 scripts/score.py episodes/invisible-score.wav --bpm 112 --seed 40`.

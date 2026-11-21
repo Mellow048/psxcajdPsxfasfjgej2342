@@ -54,9 +54,23 @@ export class EpisodeRunner {
           f.scene.add(fixture);
         }
         for (const def of [...(s.actors ?? []), ...(s.props ?? [])]) {
-          const node = await loader.instance(def);
+          const node = def.fadeOut
+            ? await loader.reflectedInstance(def, 1)
+            : await loader.instance(def);
           f.scene.add(node);
           const item = { def, node };
+          if (def.fadeOut) {
+            const materials = new Set();
+            node.traverse((o) => {
+              for (const m of [].concat(o.material || [])) materials.add(m);
+            });
+            item.fade = (t) => {
+              const [a, b] = def.fadeOut,
+                opacity = 1 - T.MathUtils.smoothstep(t, a, b);
+              node.visible = opacity > 0;
+              for (const m of materials) m.opacity = opacity;
+            };
+          }
           const { clip, take } = await loader.performanceSource(def, node);
           if (def.asset === "evo_cat")
             item.morph = bindMorphs(
@@ -167,6 +181,7 @@ export class EpisodeRunner {
       : t;
     for (const i of f.items) {
       pose(i, rigTime);
+      i.fade?.(rigTime);
       i.morph?.(rigTime, i.def.motion);
     }
     f.weather?.(rigTime);
