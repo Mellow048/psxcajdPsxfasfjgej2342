@@ -2,7 +2,11 @@
 
 Cutframe is a static Three.js r170 editor for making vertical educational videos from JSON. The studio opens with **Why windows become mirrors at night**, a 24-second v3 episode with eleven hard cuts and shot-local performances. The alternate **The ghost in the glass** episode explains Pepper’s ghost in nine 2.5-second shots, with original sets, an uploaded Halloween actor, a synthesized narrator, and cut cues. [Watch the archived v1 WebM](episodes/ghost-in-the-glass.webm) or [open its JSON](episodes/ghost-in-the-glass.json).
 
-## Finished reference short
+## Finished reference shorts
+
+**Start here:** [Agent guide to making a good short](AGENTS.md).
+
+[Watch **Platform Three: What if you could turn invisible?** (MP4)](examples/platform-three/invisible.mp4) · [Editable episode](episodes/invisible.json) · [Score generator](scripts/platform_score.py). The approved 28.4-second subway cut shows how to time a camera reveal and captions to continuous speech without interrupting a sentence.
 
 [Watch **Your last $10 on red** (MP4)](examples/last-ten-on-red/casino_martingale.mp4) · [Editable episode source](episodes/casino_martingale.json) · [Shot breakdown and rebuild instructions](examples/last-ten-on-red/README.md). Use this 42⅓-second short as a starting point for timing a continuous voice take, staging hand-placed bets, and mixing a score beneath dialogue.
 
@@ -92,3 +96,9 @@ Open `/?episode=episodes/pallas_cat.json` for **Pallas Cat: Cold Build** (17 sec
 Open `/?episode=episodes/chip-math.json` for a four-shot first-person Martingale warning: casino felt, a guru call, an instanced chip tower and a bankroll crash. The previous wall/whiteboard demo remains at `episodes/escalation-lab.json`. The [timeline reference](SCRIPT_GUIDE.md#escalation-timeline-screen--scale--diagram--graph) covers these JSON events and the TV variant. Render it with `npm run render -- episodes/chip-math.json` or select that path in GitHub Actions.
 
 The narrative recut, **[Your last $10 on red](episodes/casino_martingale.json)**, opens on the roulette wheel, not the bank app. Try `/?episode=episodes/casino_martingale.json`. The player is the returning `male.character_01` rig. This 42⅓-second narrative uses one native-speed voice take over eighteen micro-shots, including the $20 → $40 → $80 sequence. The losing buzzer is a timed `type: "sound"` event, independent of the cut and captions. The crash graph depicts a $10,230 bankroll, not the original $10 in the player's pocket.
+
+### Field study: What if you could turn invisible?
+
+[Episode JSON](episodes/invisible.json) · Open `/?episode=episodes/invisible.json` in the studio. A 28.4-second subway-platform experiment: 11 moving shots, a scan-line disappearance against passing train windows, and a trip down the optical axis. It models **perfect transmission of visible light**, not camouflage or a camera-fed cloak. Compare the converging rays that stop at the normal retina with the straight rays that pass through the transparent eye. The final floating eyes are a visual gag about detectors having to interact with light, not a claim that eyes could function detached from nerves or a blood supply.
+
+To export: `npm run render -- episodes/invisible.json`. The continuous voice recording sets the timing. The music stem is reproducible with `python3 scripts/platform_score.py`.

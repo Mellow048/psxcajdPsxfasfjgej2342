@@ -54,9 +54,56 @@ export class EpisodeRunner {
           f.scene.add(fixture);
         }
         for (const def of [...(s.actors ?? []), ...(s.props ?? [])]) {
-          const node = await loader.instance(def);
+          const node = def.fadeOut
+            ? await loader.reflectedInstance(def, 1)
+            : await loader.instance(def);
           f.scene.add(node);
           const item = { def, node };
+          if (def.fadeOut) {
+            const materials = new Set();
+            node.traverse((o) => {
+              for (const m of [].concat(o.material || [])) materials.add(m);
+            });
+            // A world-space edge cuts across the skinned mesh. Its uniform
+            // follows the same shot clock as captions and survives random seeks.
+            const scan = def.fadeStyle === "scan",
+              progress = { value: 0 };
+            if (scan)
+              for (const m of materials) {
+                const patch = m.onBeforeCompile.bind(m);
+                m.depthWrite = true;
+                m.transparent = false;
+                m.onBeforeCompile = (s, ...args) => {
+                  patch(s, ...args);
+                  s.uniforms.phaseEdge = progress;
+                  s.vertexShader =
+                    "varying float phaseY;\n" +
+                    s.vertexShader.replace(
+                      "#include <project_vertex>",
+                      "#include <project_vertex>\nphaseY=(modelMatrix*vec4(transformed,1.)).y;",
+                    );
+                  s.fragmentShader =
+                    "uniform float phaseEdge; varying float phaseY;\n" +
+                    s.fragmentShader.replace(
+                      "#include <opaque_fragment>",
+                      "if(phaseY < phaseEdge) discard; outgoingLight=mix(vec3(0.32,1.0,0.94),outgoingLight,smoothstep(0.0,.055,phaseY-phaseEdge));\n#include <opaque_fragment>",
+                    );
+                };
+                m.customProgramCacheKey = () => "psx-scan-edge-v1";
+                m.needsUpdate = true;
+              }
+            item.fade = (t) => {
+              const [a, b] = def.fadeOut,
+                opacity = 1 - T.MathUtils.smoothstep(t, a, b);
+              node.visible = opacity > 0;
+              if (scan)
+                progress.value =
+                  (def.position?.[1] ?? 0) -
+                  0.12 +
+                  (1 - opacity) * ((def.height ?? 1.6) + 0.4);
+              else for (const m of materials) m.opacity = opacity;
+            };
+          }
           const { clip, take } = await loader.performanceSource(def, node);
           if (def.asset === "evo_cat")
             item.morph = bindMorphs(
@@ -167,9 +214,10 @@ export class EpisodeRunner {
       : t;
     for (const i of f.items) {
       pose(i, rigTime);
+      i.fade?.(rigTime);
       i.morph?.(rigTime, i.def.motion);
     }
-    f.weather?.(rigTime);
+    f.weather?.(rigTime, f.start / CONFIG.hz + rigTime);
     for (const spawn of f.spawns) {
       sampleSpawn(spawn, t);
       spawn.pushChips?.(t);

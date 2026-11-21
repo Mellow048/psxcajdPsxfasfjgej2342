@@ -140,7 +140,11 @@ export function validate(e) {
       "invalid distance",
     );
     if (s.pov !== undefined) {
-      keys(s.pov, "eye whipFrom recoil");
+      keys(s.pov, "eye whipFrom recoil dollyTo");
+      check(
+        s.pov.dollyTo === undefined || vec(s.pov.dollyTo),
+        "invalid dolly endpoint",
+      );
       check(vec(s.pov.eye) && vec(s.focus), "POV needs eye and focus vectors");
       check(
         s.pov.whipFrom === undefined || vec(s.pov.whipFrom),
@@ -160,7 +164,7 @@ export function validate(e) {
       for (const d of s[k] ?? []) {
         keys(
           d,
-          "id asset height yaw position motion motionSfx mesh clip text traits",
+          "id asset height yaw position motion motionSfx mesh clip text traits fadeOut fadeStyle",
         );
         check(
           d.motionSfx === undefined ||
@@ -174,6 +178,22 @@ export function validate(e) {
               Array.isArray(d.traits) &&
               d.traits.every((tr) => has(MORPHS, tr)),
             "invalid starting traits",
+          );
+        if (d.fadeStyle !== undefined)
+          check(
+            d.fadeStyle === "scan" && d.fadeOut !== undefined,
+            "scan needs fadeOut",
+          );
+        if (d.fadeOut !== undefined)
+          check(
+            Array.isArray(d.fadeOut) &&
+              d.fadeOut.length === 2 &&
+              d.fadeOut.every(num) &&
+              d.fadeOut[0] >= 0 &&
+              d.fadeOut[1] > d.fadeOut[0] &&
+              d.fadeOut[1] <= s.duration &&
+              !stages[s.stage].reflection,
+            "fadeOut needs [start,end] seconds inside a non-reflective shot",
           );
         check(str(d.id) && !ids.has(d.id), "missing or duplicate subject id");
         ids.add(d.id);
