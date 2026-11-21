@@ -1,3 +1,4 @@
+import { marsSet } from "./marsSurvival.js";
 import { radioHall, phaseScope } from "./radioHall.js";
 import { platformThree, insideEye, carWindow } from "./platformThree.js";
 import { casinoRoom } from "./casinoRoom.js";
@@ -435,7 +436,7 @@ function windowRoom(s, night) {
     s.add(light);
   }
 }
-export function stage(name) {
+export function stage(name, shot) {
   const s = new T.Scene(),
     p = SCENE_PRESETS[name];
   s.background = new T.Color(p.color);
@@ -446,6 +447,8 @@ export function stage(name) {
   s.add(key);
   let weather = null;
   if (name === "blizzard") weather = blizzard(s);
+  else if (name === "mars_plain" || name === "mars_cabin")
+    weather = marsSet(s, shot.mars, name === "mars_cabin");
   else if (name === "radio_hall") weather = radioHall(s);
   else if (name === "phase_scope") weather = phaseScope(s);
   else if (name === "platform_three") weather = platformThree(s);

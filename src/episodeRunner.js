@@ -1,3 +1,4 @@
+import { bindMarsExplorer } from "./marsSurvival.js";
 import { createScreen } from "./uiDirector.js";
 import { createMass } from "./particleEscalation.js";
 import { createBoard } from "./dataViz.js";
@@ -42,7 +43,7 @@ export class EpisodeRunner {
     try {
       for (const s of e.shots) {
         const f = {
-          ...stage(s.stage),
+          ...stage(s.stage, s),
           items: [],
           spawns: [],
           panels: [],
@@ -117,8 +118,13 @@ export class EpisodeRunner {
               (s.events ?? []).filter((ev) => ev.target === def.id),
             );
           else item.mixer = bindPerformance(node, clip, def.motion, take);
-          if (s.stage === "radio_hall" && s.actors?.includes(def))
+          if (
+            (s.stage === "radio_hall" || (s.mars && def.stride)) &&
+            s.actors?.includes(def)
+          )
             item.hallWalk = bindHallWalk(item);
+          if (s.mars && s.actors?.includes(def))
+            item.explorer = bindMarsExplorer(item, f.scene, s.mars);
           if (!f.observer && s.actors?.includes(def)) f.observer = item;
           f.items.push(item);
           const opacity = SCENE_PRESETS[s.stage].reflection;
@@ -222,6 +228,7 @@ export class EpisodeRunner {
     for (const i of f.items) {
       pose(i, rigTime);
       i.hallWalk?.(rigTime, s);
+      i.explorer?.(rigTime);
       i.fade?.(rigTime);
       i.morph?.(rigTime, i.def.motion);
     }

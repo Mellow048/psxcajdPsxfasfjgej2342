@@ -18,6 +18,26 @@ export function composite(ctx, image, episode, s, index, t) {
   ctx.fillStyle = "#e5efc5";
   ctx.fillRect(40, 47, 8, 8);
   ctx.fillText("FIELD STUDY / " + String(index + 1).padStart(2, "0"), 57, 57);
+  if (s.mars) {
+    const { kit, base, status } = s.mars;
+    ctx.fillStyle = "#182731df";
+    ctx.fillRect(28, 75, 322, 68);
+    ctx.fillStyle = "#ffa671";
+    ctx.font = "bold 13px monospace";
+    ctx.fillText(
+      "MARS  /  " +
+        (base ? "HABITAT SYSTEMS" : kit ? "ATTEMPT 02" : "ATTEMPT 01"),
+      40,
+      95,
+    );
+    ctx.font = "bold 23px sans-serif";
+    ctx.fillStyle = "#fff1da";
+    ctx.fillText(status, 40, 125, 294);
+    for (let k = 0; k < 7; k++) {
+      ctx.fillStyle = k < (base ? 4 + base : kit) ? "#8de2d5" : "#5c5c60";
+      ctx.fillRect(28 + k * 46, 143, 43, 4);
+    }
+  }
   ctx.strokeStyle = "#fffa";
   ctx.lineWidth = 2;
   for (const [x, y, a, b] of [

@@ -98,7 +98,7 @@ export function validate(e) {
     at = `shot ${i + 1}`;
     keys(
       s,
-      "title duration stage pov cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook radio",
+      "title duration stage pov cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook radio mars",
     );
     if (s.matchHook !== undefined)
       check(
@@ -152,6 +152,50 @@ export function validate(e) {
             vec(s.actors[0].position),
           "radio hall needs the phone carrier",
         );
+    }
+    if (
+      s.mars !== undefined ||
+      ["mars_plain", "mars_cabin"].includes(s.stage)
+    ) {
+      keys(s.mars, "kit base cue status");
+      const m = s.mars;
+      check(
+        ["mars_plain", "mars_cabin"].includes(s.stage) &&
+          Number.isInteger(m.kit) &&
+          m.kit >= 0 &&
+          m.kit <= 4 &&
+          Number.isInteger(m.base) &&
+          m.base >= 0 &&
+          m.base <= 3 &&
+          (s.stage !== "mars_cabin" || m.base > 0) &&
+          str(m.status) &&
+          m.status.length <= 28 &&
+          [
+            "hold",
+            "readout",
+            "step",
+            "prints",
+            "fall",
+            "lost",
+            "rewind",
+            "suit",
+            "tank",
+            "filter",
+            "coolant",
+            "hatch",
+            "pressure",
+            "unhelmet",
+            "solar",
+            "charge",
+            "night",
+            "shield",
+          ].includes(m.cue),
+        "invalid Mars loadout",
+      );
+      check(
+        (s.actors ?? []).every((a) => a.asset === "male.character_01"),
+        "expected mission actor",
+      );
     }
     check(has(stages, s.stage), "unknown stage");
     check(CAMERAS.includes(s.cameraPreset), "unknown cameraPreset");
@@ -216,7 +260,8 @@ export function validate(e) {
           if (d[key] !== undefined) {
             const v = d[key];
             check(
-              s.stage === "radio_hall" &&
+              (s.stage === "radio_hall" ||
+                (s.stage === "mars_plain" && key === "stride")) &&
                 k === "actors" &&
                 Array.isArray(v) &&
                 v.length === len &&
@@ -283,7 +328,10 @@ export function validate(e) {
       "events must be an array of at most 24 spawns",
     );
     const hasSubject =
-      ids.size > 0 || ["phase_scope", "casino_room"].includes(s.stage);
+      ids.size > 0 ||
+      ["phase_scope", "casino_room", "mars_plain", "mars_cabin"].includes(
+        s.stage,
+      );
     for (const ev of s.events ?? []) {
       check(obj(ev), "invalid event");
       if (ev.type === "sound") {
