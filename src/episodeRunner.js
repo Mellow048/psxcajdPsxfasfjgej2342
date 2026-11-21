@@ -37,7 +37,7 @@ export class EpisodeRunner {
     try {
       for (const s of e.shots) {
         const f = {
-          ...stage(s.stage),
+          ...stage(s.stage, s),
           items: [],
           spawns: [],
           panels: [],

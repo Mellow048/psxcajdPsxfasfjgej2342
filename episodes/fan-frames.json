@@ -1,0 +1,399 @@
+{
+  "version": 3,
+  "title": "This Fan Never Reversed",
+  "narration": "This fan spins clockwise. Film it, and it seems to turn back. Freeze the picture. See the blade at twelve? Give it a yellow dot. Your phone takes thirty pictures a second. Between these two, that dot swings almost a quarter turn to the right. But look up top. A different blade just landed a little to the left. Hide the dot and play it again. The fan never reversed. You just followed the wrong blade.",
+  "speechRate": 1.12,
+  "series": "Field Study / Frame Inspection",
+  "pacing": "narrative",
+  "voiceover": "episodes/fan-voice.wav",
+  "music": {
+    "track": "episodes/fan-motor.wav",
+    "volume": 0.43
+  },
+  "shots": [
+    {
+      "title": "Clockwise in slow motion",
+      "duration": 2.0,
+      "stage": "fan_bench",
+      "fanView": "bench",
+      "pov": {
+        "eye": [
+          -0.55,
+          2.04,
+          5.05
+        ]
+      },
+      "focus": [
+        0,
+        1.64,
+        0
+      ],
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.12,
+          "text": "This fan"
+        },
+        {
+          "time": 0.73,
+          "text": "spins clockwise.",
+          "highlight": "clockwise"
+        },
+        {
+          "time": 1.97,
+          "text": "Film it,"
+        }
+      ]
+    },
+    {
+      "title": "Raise the phone",
+      "duration": 2.5,
+      "stage": "fan_bench",
+      "fanView": "record",
+      "pov": {
+        "eye": [
+          0.14,
+          1.93,
+          4.74
+        ]
+      },
+      "focus": [
+        0,
+        1.66,
+        0.7
+      ],
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_pull",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "Film it,"
+        },
+        {
+          "time": 0.47,
+          "text": "and it seems"
+        },
+        {
+          "time": 1.36,
+          "text": "to turn back.",
+          "highlight": "back"
+        },
+        {
+          "time": 2.48,
+          "text": "Freeze the picture."
+        }
+      ]
+    },
+    {
+      "title": "Stop the recording",
+      "duration": 2.7666666666666666,
+      "stage": "fan_bench",
+      "fanView": "freeze",
+      "pov": {
+        "eye": [
+          -0.09,
+          1.83,
+          4.32
+        ]
+      },
+      "focus": [
+        0,
+        1.76,
+        0.92
+      ],
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "sfx": "click",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "Freeze the picture."
+        },
+        {
+          "time": 1.22,
+          "text": "See the blade"
+        },
+        {
+          "time": 1.92,
+          "text": "at twelve?",
+          "highlight": "twelve"
+        }
+      ]
+    },
+    {
+      "title": "Mark the top blade",
+      "duration": 2.2666666666666666,
+      "stage": "fan_bench",
+      "fanView": "mark",
+      "pov": {
+        "eye": [
+          0.04,
+          2.02,
+          5.78
+        ]
+      },
+      "focus": [
+        0,
+        1.94,
+        0.95
+      ],
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "sfx": "click",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "at twelve?",
+          "highlight": "twelve"
+        },
+        {
+          "time": 0.083,
+          "text": "Give it"
+        },
+        {
+          "time": 0.403,
+          "text": "a yellow dot.",
+          "highlight": "yellow"
+        },
+        {
+          "time": 1.433,
+          "text": "Your phone takes"
+        }
+      ]
+    },
+    {
+      "title": "Read the frame counter",
+      "duration": 2.833333333333334,
+      "stage": "fan_bench",
+      "fanView": "frames",
+      "pov": {
+        "eye": [
+          -0.19,
+          1.97,
+          4.16
+        ]
+      },
+      "focus": [
+        0,
+        1.85,
+        0.9
+      ],
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_pull",
+      "sfx": "click",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "Your phone takes"
+        },
+        {
+          "time": 0.087,
+          "text": "thirty pictures",
+          "highlight": "thirty"
+        },
+        {
+          "time": 1.007,
+          "text": "a second."
+        },
+        {
+          "time": 1.757,
+          "text": "Between these two,"
+        },
+        {
+          "time": 2.727,
+          "text": "that dot swings"
+        }
+      ]
+    },
+    {
+      "title": "Follow one marked blade",
+      "duration": 2.9333333333333336,
+      "stage": "fan_bench",
+      "fanView": "advance",
+      "pov": {
+        "eye": [
+          0.02,
+          1.93,
+          4.33
+        ]
+      },
+      "focus": [
+        0,
+        1.85,
+        0.94
+      ],
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "that dot swings"
+        },
+        {
+          "time": 0.863,
+          "text": "almost a"
+        },
+        {
+          "time": 1.453,
+          "text": "quarter turn"
+        },
+        {
+          "time": 2.203,
+          "text": "to the right.",
+          "highlight": "right"
+        },
+        {
+          "time": 2.913,
+          "text": "But look"
+        }
+      ]
+    },
+    {
+      "title": "Find its neighbor",
+      "duration": 4.366666666666667,
+      "stage": "fan_bench",
+      "fanView": "neighbor",
+      "pov": {
+        "eye": [
+          -0.09,
+          2.17,
+          5.5
+        ]
+      },
+      "focus": [
+        0,
+        2.0,
+        0.93
+      ],
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_pull",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "But look"
+        },
+        {
+          "time": 0.65,
+          "text": "up top."
+        },
+        {
+          "time": 1.44,
+          "text": "A different blade",
+          "highlight": "different"
+        },
+        {
+          "time": 2.36,
+          "text": "just landed"
+        },
+        {
+          "time": 3.17,
+          "text": "a little"
+        },
+        {
+          "time": 3.53,
+          "text": "to the left.",
+          "highlight": "left"
+        }
+      ]
+    },
+    {
+      "title": "Toggle the two exposures",
+      "duration": 2.1666666666666643,
+      "stage": "fan_bench",
+      "fanView": "compare",
+      "pov": {
+        "eye": [
+          0,
+          1.95,
+          4.36
+        ]
+      },
+      "focus": [
+        0,
+        1.88,
+        0.94
+      ],
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "sfx": "click",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "to the left.",
+          "highlight": "left"
+        },
+        {
+          "time": 0.003,
+          "text": "Hide the dot"
+        },
+        {
+          "time": 0.703,
+          "text": "and play"
+        },
+        {
+          "time": 1.273,
+          "text": "it again."
+        },
+        {
+          "time": 2.153,
+          "text": "The fan"
+        }
+      ]
+    },
+    {
+      "title": "Back to live video",
+      "duration": 3.7666666666666693,
+      "stage": "fan_bench",
+      "fanView": "replay",
+      "pov": {
+        "eye": [
+          0.22,
+          2.17,
+          4.55
+        ]
+      },
+      "focus": [
+        0,
+        1.64,
+        0.78
+      ],
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_pull",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "The fan"
+        },
+        {
+          "time": 0.487,
+          "text": "never reversed.",
+          "highlight": "reversed"
+        },
+        {
+          "time": 1.407,
+          "text": "You just followed"
+        },
+        {
+          "time": 2.607,
+          "text": "the wrong blade.",
+          "highlight": "wrong"
+        }
+      ]
+    }
+  ]
+}

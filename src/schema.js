@@ -1,3 +1,4 @@
+import { FAN_VIEWS } from './fanSampling.js';
 import { storyKey, validateStoryEvent } from "./storyEvents.js";
 import {
   MORPHS,
@@ -98,7 +99,7 @@ export function validate(e) {
     at = `shot ${i + 1}`;
     keys(
       s,
-      "title duration stage pov cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook",
+      "title duration stage fanView pov cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook",
     );
     if (s.matchHook !== undefined)
       check(
@@ -128,6 +129,7 @@ export function validate(e) {
       `duration must be ${minShot}–${maxShot}s on a 60 Hz tick`,
     );
     check(has(stages, s.stage), "unknown stage");
+    check(s.stage === "fan_bench" ? FAN_VIEWS.includes(s.fanView) : s.fanView === undefined, "fan_bench needs a valid fanView; omit it on other stages");
     check(CAMERAS.includes(s.cameraPreset), "unknown cameraPreset");
     check(
       CAMERA_MOTIONS.includes(s.cameraMotion),
@@ -231,7 +233,7 @@ export function validate(e) {
         (Array.isArray(s.events) && s.events.length <= 24),
       "events must be an array of at most 24 spawns",
     );
-    const hasSubject = ids.size > 0 || s.stage === "casino_room";
+    const hasSubject = ids.size > 0 || s.stage === "casino_room" || s.stage === "fan_bench";
     for (const ev of s.events ?? []) {
       check(obj(ev), "invalid event");
       if (ev.type === "sound") {

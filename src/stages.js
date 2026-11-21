@@ -1,3 +1,4 @@
+import { fanBench } from './fanBench.js';
 import { platformThree, insideEye, carWindow } from "./platformThree.js";
 import { casinoRoom } from "./casinoRoom.js";
 import * as T from "three";
@@ -434,7 +435,7 @@ function windowRoom(s, night) {
     s.add(light);
   }
 }
-export function stage(name) {
+export function stage(name, shot = {}) {
   const s = new T.Scene(),
     p = SCENE_PRESETS[name];
   s.background = new T.Color(p.color);
@@ -445,6 +446,7 @@ export function stage(name) {
   s.add(key);
   let weather = null;
   if (name === "blizzard") weather = blizzard(s);
+  else if (name === "fan_bench") weather = fanBench(s, shot.fanView);
   else if (name === "platform_three") weather = platformThree(s);
   else if (name === "retina_tunnel") weather = insideEye(s);
   else if (name === "casino_room") weather = casinoRoom(s);
