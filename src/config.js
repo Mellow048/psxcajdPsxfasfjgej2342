@@ -85,6 +85,8 @@ export const MOTIONS = [
   "pointing",
   "cup_hands",
   "thinking",
+  "place_bet",
+  "wince",
   "shiver",
   "grumpy",
   "shocked",

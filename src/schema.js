@@ -293,7 +293,7 @@ export function validate(e) {
         ev,
         "id type time asset spawn_prop size sfx " +
           (bet
-            ? "count position"
+            ? "count position placedBy slideFrom"
             : stream
               ? "from via to travel"
               : arrow
@@ -320,6 +320,19 @@ export function validate(e) {
         "invalid prop size",
       );
       if (bet) {
+        if (ev.placedBy !== undefined || ev.slideFrom !== undefined)
+          check(
+            s.actors?.some(
+              (a) =>
+                a.id === ev.placedBy &&
+                a.asset === "male.character_01" &&
+                a.motion === "place_bet",
+            ) &&
+              vec(ev.slideFrom) &&
+              vec(ev.position) &&
+              ev.slideFrom[1] === ev.position[1],
+            "chip push needs a supported actor and level slideFrom/position",
+          );
         check(
           vec(ev.position) &&
             Number.isInteger(ev.count) &&

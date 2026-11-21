@@ -6,7 +6,7 @@ import { CONFIG, SCENE_PRESETS } from "./config.js";
 import { validate } from "./schema.js";
 import { Pipeline, patchTree } from "./psxShader.js";
 import { AssetLoader } from "./assetLoader.js";
-import { bindPerformance, pose } from "./animationLibrary.js";
+import { bindPerformance, bindChipPush, pose } from "./animationLibrary.js";
 import { createSpawn, sampleSpawn } from "./comedyProps.js";
 import { stage } from "./stages.js";
 import { CameraDirector } from "./cameraDirector.js";
@@ -115,6 +115,11 @@ export class EpisodeRunner {
             continue;
           }
           const spawn = createSpawn(ev);
+          if (ev.placedBy)
+            spawn.pushChips = bindChipPush(
+              f.items.find((i) => i.def.id === ev.placedBy),
+              spawn,
+            );
           f.spawns.push(spawn);
           f.scene.add(spawn.node);
         }
@@ -165,7 +170,10 @@ export class EpisodeRunner {
       i.morph?.(rigTime, i.def.motion);
     }
     f.weather?.(rigTime);
-    for (const spawn of f.spawns) sampleSpawn(spawn, t);
+    for (const spawn of f.spawns) {
+      sampleSpawn(spawn, t);
+      spawn.pushChips?.(t);
+    }
     f.dust.rotation.y = rigTime * 0.08;
     f.dust.position.y = 0.08 * Math.sin(rigTime);
     if (typeof s.focus === "string") {

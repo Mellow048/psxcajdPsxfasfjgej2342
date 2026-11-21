@@ -63,7 +63,7 @@ test("casino POV: grounded tower and buzzer precisely on the last loss", () => {
   a.start({ shots: [s] }, 0.5);
   assert.deepEqual(cues, [["buzzer", ev.time + g.drawTime - 0.5]]);
 });
-test("45-second micro cut: fast hook, accented doubles, and a wheel match", () => {
+test("Native-rate micro cut: fast hook, accented doubles, and a wheel match", () => {
   const e = validate(
       JSON.parse(readFileSync("episodes/casino_martingale.json")),
     ),
@@ -71,7 +71,7 @@ test("45-second micro cut: fast hook, accented doubles, and a wheel match", () =
   assert.equal(s.length, 18);
   assert.equal(
     s.reduce((n, q) => n + Math.round(q.duration * 30), 0),
-    1350,
+    1270,
   );
   assert.deepEqual(
     s.slice(0, 3).map((q) => q.duration),
@@ -120,5 +120,5 @@ test("45-second micro cut: fast hook, accented doubles, and a wheel match", () =
   assert.ok(s.at(-1).pov.whipFrom);
   const wav = readFileSync(e.voiceover),
     data = wav.indexOf("data", 12, "ascii");
-  assert.equal(wav.readUInt32LE(data + 4) / wav.readUInt32LE(28), 45);
+  assert.equal(wav.readUInt32LE(data + 4) / wav.readUInt32LE(28), 1270 / 30);
 });

@@ -290,17 +290,45 @@ try {
     r.pipeline.render(r.frames[r.index].scene, r.director.camera).toDataURL();
   r.seek(0);
   const opening = worldImage();
-  r.seek(45 - 1 / 30);
+  r.seek(r.duration - 1 / 30);
   assert(
     worldImage() === opening,
     "last encoded 3D wheel frame exactly matches opening (before captions)",
   );
-  r.seek(18.1);
-  assert(
-    r.frames[7].spawns[0].node.visible &&
-      r.frames[7].spawns[0].node.count === 20,
-    "twenty-chip spawn is visible on the wager cue",
-  );
+  for (const i of [7, 8, 9]) {
+    const f = r.frames[i],
+      ev = micro.shots[i].events[0],
+      cue = f.start / 60 + ev.time;
+    const hand = f.items
+      .find((item) => item.def.id === ev.placedBy)
+      .node.getObjectByName("mixamorigRightHandIndex3");
+    const pos = () => hand.getWorldPosition(f.spawns[0].node.position.clone());
+    r.seek(cue - 0.4);
+    const from = f.spawns[0].node.position.clone();
+    r.seek(cue);
+    const pile = f.spawns[0].node;
+    assert(
+      pile.visible &&
+        pile.position.z - from.z > 0.15 &&
+        Math.abs(pile.position.y - 0.9) < 0.001,
+      "wager slides along the felt",
+    );
+    assert(
+      pos().distanceTo(pile.position) < 0.2,
+      "player finger reaches the wager at its cue",
+    );
+    const still = r.ctx.canvas.toDataURL();
+    r.seek(cue + 0.5);
+    assert(
+      pos().y > pile.position.y + 0.23,
+      "hand withdraws after chip release",
+    );
+    r.seek(cue);
+    assert(
+      r.ctx.canvas.toDataURL() === still,
+      "hand/chip contact reproduces on seek",
+    );
+  }
   report.textContent += "\nAll checks passed.";
   report.dataset.result = "pass";
 } catch (e) {

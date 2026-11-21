@@ -24,14 +24,28 @@
           "highlight": "just"
         },
         {
-          "time": 0.78,
+          "time": 0.71,
           "text": "your last",
           "highlight": "your"
         },
         {
-          "time": 1.29,
+          "time": 1.17,
           "text": "ten bucks",
           "highlight": "bucks"
+        },
+        {
+          "time": 1.72,
+          "text": "on red.",
+          "highlight": "red."
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "idle_breathe"
         }
       ]
     },
@@ -57,49 +71,72 @@
       ],
       "captions": [
         {
-          "time": 0.11,
+          "time": 0,
           "text": "on red.",
           "highlight": "red."
         },
         {
-          "time": 1.32,
+          "time": 0.98,
           "text": "But this",
           "highlight": "this"
+        },
+        {
+          "time": 1.38,
+          "text": "online guru",
+          "highlight": "online"
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "idle_breathe"
         }
       ]
     },
     {
-      "title": "Can you get it back?",
+      "title": "Did that just happen?",
       "duration": 2.0,
       "stage": "casino_room",
       "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "slow_push",
-      "focus": [-0.5, 0.91, 0.02],
+      "focus": "player",
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
-      "angle": -0.28,
-      "distance": 2.45,
+      "angle": 0.12,
+      "distance": 3.6,
       "captions": [
         {
-          "time": 0.06,
+          "time": 0,
           "text": "online guru",
           "highlight": "online"
         },
         {
-          "time": 0.95,
+          "time": 0.45,
           "text": "says you can",
           "highlight": "says"
         },
         {
-          "time": 1.52,
+          "time": 0.95,
           "text": "cheat the system.",
           "highlight": "system."
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "thinking"
         }
       ]
     },
     {
       "title": "Incoming pitch",
-      "duration": 2.8,
+      "duration": 2.2,
       "stage": "casino_room",
       "cameraPreset": "whip_pan_to_prop",
       "cameraMotion": "orbit_drift",
@@ -128,60 +165,77 @@
           "highlight": "system."
         },
         {
-          "time": 1.2,
+          "time": 0.43,
           "text": "His rule?",
           "highlight": "rule?"
         },
         {
-          "time": 2.55,
-          "text": "Just double",
-          "highlight": "double"
-        }
-      ]
-    },
-    {
-      "title": "Double the stake",
-      "duration": 2.9,
-      "stage": "casino_room",
-      "cameraPreset": "macro_closeup",
-      "cameraMotion": "slow_push",
-      "focus": [-0.44, 0.94, 0.31],
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "pov": {
-        "eye": [-0.35, 1.8, 1.12]
-      },
-      "captions": [
-        {
-          "time": 0,
+          "time": 1.63,
           "text": "Just double",
           "highlight": "double"
         },
         {
-          "time": 0.28,
+          "time": 2.09,
+          "text": "your bet",
+          "highlight": "your"
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "idle_breathe"
+        }
+      ]
+    },
+    {
+      "title": "Listening to the pitch",
+      "duration": 2.4,
+      "stage": "casino_room",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": "player",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
           "text": "your bet",
           "highlight": "your"
         },
         {
-          "time": 0.77,
+          "time": 0.33,
           "text": "every time",
           "highlight": "every"
         },
         {
-          "time": 1.38,
+          "time": 0.87,
           "text": "you lose.",
           "highlight": "lose."
         },
         {
-          "time": 2.74,
+          "time": 2.06,
           "text": "One win",
           "highlight": "One"
         }
-      ]
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "talking"
+        }
+      ],
+      "distance": 3.3,
+      "angle": -0.25
     },
     {
       "title": "The promise",
-      "duration": 3.0,
+      "duration": 2.6,
       "stage": "casino_room",
       "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "orbit_drift",
@@ -209,78 +263,92 @@
           "highlight": "One"
         },
         {
-          "time": 0.98,
+          "time": 0.66,
           "text": "and you've got",
           "highlight": "you've"
         },
         {
-          "time": 1.56,
+          "time": 1.2,
           "text": "your rent money",
           "highlight": "money"
         },
         {
-          "time": 2.34,
+          "time": 1.87,
           "text": "back.",
           "highlight": "back."
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "idle_breathe"
         }
       ]
     },
     {
-      "title": "Ten ahead?",
-      "duration": 2.8,
+      "title": "My rent, back",
+      "duration": 2.3,
       "stage": "casino_room",
-      "cameraPreset": "wide_orbit",
+      "cameraPreset": "macro_closeup",
       "cameraMotion": "slow_push",
-      "focus": [-0.44, 0.94, 0.31],
+      "focus": "player",
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
-      "angle": 0.62,
-      "distance": 2.55,
+      "angle": 0.4,
+      "distance": 3.05,
       "captions": [
         {
-          "time": 0,
-          "text": "back.",
-          "highlight": "back."
-        },
-        {
-          "time": 0.22,
+          "time": 0.05,
           "text": "You think",
           "highlight": "think"
         },
         {
-          "time": 0.68,
+          "time": 0.45,
           "text": "you literally",
           "highlight": "literally"
         },
         {
-          "time": 1.38,
+          "time": 1.08,
           "text": "can't lose.",
           "highlight": "can't"
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "thinking"
         }
       ]
     },
     {
       "title": "Twenty on red",
-      "duration": 2,
+      "duration": 2.0,
       "stage": "casino_room",
-      "cameraPreset": "whip_pan_to_prop",
-      "cameraMotion": "orbit_drift",
-      "focus": [-0.15, 1.1, 0.18],
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [0.14, 1.26, -1.27],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "pov": {
-        "eye": [0.2, 1.62, 0.94],
-        "whipFrom": [0.31, 0.95, 0.22]
+        "eye": [0.78, 1.56, 1.2]
       },
       "events": [
         {
           "type": "spawn_prop",
           "id": "wager",
           "spawn_prop": "bet_stack",
-          "time": 1.04,
-          "position": [-0.15, 0.9, 0.18],
+          "time": 0.99,
+          "position": [-0.02, 0.9, -0.94],
           "count": 20,
-          "sfx": "cash_register"
+          "sfx": "cash_register",
+          "placedBy": "player",
+          "slideFrom": [0.04, 0.9, -1.21]
         }
       ],
       "captions": [
@@ -290,74 +358,101 @@
           "highlight": "can't"
         },
         {
-          "time": 0.25,
+          "time": 0.26,
           "text": "So you drop",
           "highlight": "drop"
         },
         {
-          "time": 1.01,
+          "time": 0.99,
           "text": "twenty.",
           "highlight": "twenty."
+        },
+        {
+          "time": 1.98,
+          "text": "Lose.",
+          "highlight": "Lose."
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "place_bet"
         }
       ]
     },
     {
-      "title": "Forty on red",
-      "duration": 2,
+      "title": "Push forty across",
+      "duration": 2.0,
       "stage": "casino_room",
-      "cameraPreset": "macro_closeup",
-      "cameraMotion": "slow_push",
-      "focus": [-0.15, 1.1, 0.18],
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "focus": [0.04, 1.13, -1.01],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "pov": {
-        "eye": [-0.71, 1.65, 1.36]
+        "eye": [-0.87, 1.75, 0.34]
       },
       "events": [
         {
           "type": "spawn_prop",
           "id": "wager",
           "spawn_prop": "bet_stack",
-          "time": 1.33,
-          "position": [-0.15, 0.9, 0.18],
+          "time": 1.07,
+          "position": [-0.02, 0.9, -0.94],
           "count": 40,
-          "sfx": "cash_register"
+          "sfx": "cash_register",
+          "placedBy": "player",
+          "slideFrom": [0.04, 0.9, -1.21]
         }
       ],
       "captions": [
         {
-          "time": 0.09,
+          "time": 0,
           "text": "Lose.",
           "highlight": "Lose."
         },
         {
-          "time": 1.3,
+          "time": 1.07,
           "text": "Forty.",
           "highlight": "Forty."
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "place_bet"
         }
       ]
     },
     {
-      "title": "Eighty on red",
-      "duration": 2,
+      "title": "Eighty. Black again.",
+      "duration": 2.0,
       "stage": "casino_room",
       "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "orbit_drift",
-      "focus": [-0.15, 1.1, 0.18],
+      "focus": [0.14, 1.26, -1.27],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "pov": {
-        "eye": [0.37, 1.61, 1.04]
+        "eye": [0.89, 1.55, 0.73]
       },
       "events": [
         {
           "type": "spawn_prop",
           "id": "wager",
           "spawn_prop": "bet_stack",
-          "time": 1.33,
-          "position": [-0.15, 0.9, 0.18],
+          "time": 1.23,
+          "position": [-0.02, 0.9, -0.94],
           "count": 80,
-          "sfx": "cash_register"
+          "sfx": "cash_register",
+          "placedBy": "player",
+          "slideFrom": [0.04, 0.9, -1.21]
         }
       ],
       "captions": [
@@ -367,29 +462,35 @@
           "highlight": "Forty."
         },
         {
-          "time": 0.24,
+          "time": 0.31,
           "text": "Lose.",
           "highlight": "Lose."
         },
         {
-          "time": 1.33,
+          "time": 1.23,
           "text": "Eighty.",
           "highlight": "Eighty."
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "place_bet"
         }
       ]
     },
     {
-      "title": "Black again",
-      "duration": 3,
+      "title": "Sweating",
+      "duration": 2.6,
       "stage": "casino_room",
       "cameraPreset": "macro_closeup",
       "cameraMotion": "orbit_drift",
-      "focus": [-0.86, 1.03, -0.35],
+      "focus": "player",
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
-      "pov": {
-        "eye": [-1.73, 1.98, 0.73]
-      },
       "captions": [
         {
           "time": 0,
@@ -397,20 +498,41 @@
           "highlight": "Eighty."
         },
         {
-          "time": 0.38,
+          "time": 0.19,
           "text": "Black again.",
           "highlight": "again."
         },
         {
-          "time": 1.73,
+          "time": 1.14,
           "text": "You're sweating.",
           "highlight": "sweating."
+        },
+        {
+          "time": 2.15,
+          "text": "You've lost",
+          "highlight": "You've"
+        },
+        {
+          "time": 2.5,
+          "text": "nine times",
+          "highlight": "times"
         }
-      ]
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "wince"
+        }
+      ],
+      "distance": 3.4,
+      "angle": 0.16
     },
     {
       "title": "The wheel owes you nothing",
-      "duration": 3,
+      "duration": 3.1,
       "stage": "casino_room",
       "cameraPreset": "wide_orbit",
       "cameraMotion": "orbit_drift",
@@ -436,29 +558,38 @@
       "captions": [
         {
           "time": 0,
-          "text": "You're sweating.",
-          "highlight": "sweating."
-        },
-        {
-          "time": 0.21,
-          "text": "You've lost",
-          "highlight": "You've"
-        },
-        {
-          "time": 0.71,
           "text": "nine times",
           "highlight": "times"
         },
         {
-          "time": 1.77,
+          "time": 0.62,
           "text": "in a row.",
           "highlight": "row."
+        },
+        {
+          "time": 1.58,
+          "text": "You're already down",
+          "highlight": "already"
+        },
+        {
+          "time": 2.24,
+          "text": "five grand.",
+          "highlight": "grand."
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "idle_breathe"
         }
       ]
     },
     {
       "title": "Nine losses",
-      "duration": 2.9,
+      "duration": 2.8,
       "stage": "casino_room",
       "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "slow_push",
@@ -483,29 +614,43 @@
       "captions": [
         {
           "time": 0,
-          "text": "in a row.",
-          "highlight": "row."
-        },
-        {
-          "time": 0.16,
-          "text": "You're already down",
-          "highlight": "already"
-        },
-        {
-          "time": 1.14,
           "text": "five grand.",
           "highlight": "grand."
         },
         {
-          "time": 2.71,
+          "time": 0.32,
           "text": "The dealer wants",
           "highlight": "dealer"
+        },
+        {
+          "time": 1.08,
+          "text": "another five grand",
+          "highlight": "another"
+        },
+        {
+          "time": 2.1,
+          "text": "just to spin",
+          "highlight": "just"
+        },
+        {
+          "time": 2.68,
+          "text": "the wheel.",
+          "highlight": "wheel."
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "idle_breathe"
         }
       ]
     },
     {
       "title": "The tenth stake",
-      "duration": 2.9,
+      "duration": 2.7,
       "stage": "casino_room",
       "cameraPreset": "macro_closeup",
       "cameraMotion": "orbit_drift",
@@ -530,71 +675,72 @@
       "captions": [
         {
           "time": 0,
-          "text": "The dealer wants",
-          "highlight": "dealer"
-        },
-        {
-          "time": 0.37,
-          "text": "another five grand",
-          "highlight": "another"
-        },
-        {
-          "time": 1.09,
-          "text": "just to spin",
-          "highlight": "just"
-        },
-        {
-          "time": 1.5,
           "text": "the wheel.",
           "highlight": "wheel."
         },
         {
-          "time": 2.09,
+          "time": 0.74,
           "text": "Come on.",
           "highlight": "Come"
         },
         {
-          "time": 2.78,
+          "time": 1.69,
           "text": "Red.",
           "highlight": "Red."
+        },
+        {
+          "time": 2.51,
+          "text": "Just once.",
+          "highlight": "once."
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "idle_breathe"
         }
       ]
     },
     {
-      "title": "Still chasing ten",
-      "duration": 2.8,
+      "title": "Come on, red",
+      "duration": 3.0,
       "stage": "casino_room",
-      "cameraPreset": "whip_pan_to_prop",
+      "cameraPreset": "macro_closeup",
       "cameraMotion": "slow_push",
-      "focus": [-0.44, 0.94, 0.31],
+      "focus": "player",
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
-      "pov": {
-        "eye": [-0.6, 1.71, 1.13],
-        "whipFrom": [0, 1.55, -0.1]
-      },
       "captions": [
         {
           "time": 0,
-          "text": "Red.",
-          "highlight": "Red."
-        },
-        {
-          "time": 0.47,
           "text": "Just once.",
           "highlight": "once."
         },
         {
-          "time": 1.29,
+          "time": 0.98,
           "text": "But the wheel",
           "highlight": "wheel"
         },
         {
-          "time": 1.78,
+          "time": 1.63,
           "text": "doesn't remember you.",
           "highlight": "remember"
         }
-      ]
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "thinking"
+        }
+      ],
+      "distance": 2.95,
+      "angle": -0.24
     },
     {
       "title": "Bankroll collapses",
@@ -630,46 +776,40 @@
           "highlight": "remember"
         },
         {
-          "time": 0.18,
+          "time": 0.21,
           "text": "You lose again.",
           "highlight": "again."
         },
         {
-          "time": 1.83,
+          "time": 1.84,
           "text": "Your entire",
           "highlight": "entire"
         },
         {
-          "time": 2.47,
+          "time": 2.46,
           "text": "life savings",
           "highlight": "savings"
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "idle_breathe"
         }
       ]
     },
     {
-      "title": "Nothing left",
-      "duration": 2.7,
+      "title": "Wiped out",
+      "duration": 2.4,
       "stage": "casino_room",
-      "cameraPreset": "wide_orbit",
+      "cameraPreset": "macro_closeup",
       "cameraMotion": "slow_push",
-      "focus": [0.31, 0.95, 0.22],
+      "focus": "player",
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
-      "pov": {
-        "eye": [0.33, 2.05, 1.16]
-      },
-      "events": [
-        {
-          "time": 0,
-          "sfx": "ding",
-          "position": [0.31, 0.9, 0.22],
-          "show_phone": {
-            "app": "bank",
-            "balance": "$0",
-            "debit": "−$10,230 TOTAL"
-          }
-        }
-      ],
       "captions": [
         {
           "time": 0,
@@ -682,15 +822,26 @@
           "highlight": "gone"
         },
         {
-          "time": 1.14,
+          "time": 1.13,
           "text": "in sixty seconds.",
           "highlight": "seconds."
         }
-      ]
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "wince"
+        }
+      ],
+      "distance": 3.2,
+      "angle": 0.31
     },
     {
       "title": "Back to the wheel",
-      "duration": 2,
+      "duration": 2.033333333333333,
       "stage": "casino_room",
       "cameraPreset": "macro_closeup",
       "cameraMotion": "slow_push",
@@ -704,14 +855,28 @@
       },
       "captions": [
         {
-          "time": 0.11,
+          "time": 0,
+          "text": "in sixty seconds.",
+          "highlight": "seconds."
+        },
+        {
+          "time": 0.33,
           "text": "And that is",
           "highlight": "that"
         },
         {
-          "time": 0.71,
+          "time": 0.89,
           "text": "exactly why...",
           "highlight": "exactly"
+        }
+      ],
+      "actors": [
+        {
+          "id": "player",
+          "asset": "male.character_01",
+          "height": 1.8,
+          "position": [0.18, -0.08, -1.46],
+          "motion": "idle_breathe"
         }
       ]
     }
