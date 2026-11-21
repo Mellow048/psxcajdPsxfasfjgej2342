@@ -2,6 +2,10 @@
 
 Use [Platform Three](examples/platform-three/invisible.mp4) as the reference for a fast science short. Watch it before writing; open its [episode JSON](episodes/invisible.json) beside it. For a slower story that gives the audience time to count, study [Your last $10 on red](examples/last-ten-on-red/README.md). Match the decisions, not the runtime or the subway setting. [SCRIPT_GUIDE.md](SCRIPT_GUIDE.md) is the reference for supported JSON fields.
 
+## Recurring host and narration
+
+Include the returning `male.character_01` host in each short. Give him something to notice or demonstrate; cut to the object alone when a close-up makes the explanation clearer. Use a playful, conversational masculine narrator rather than a formal announcer. For finished episodes, record a continuous `voiceover` in that style and time captions to the take; don't substitute the default offline TTS.
+
 ## Start with one thing the viewer can watch happen
 
 Write the hook, the physical cause, and the payoff in a sentence each. Start on the action, not a greeting or title card. In Platform Three, the *same lit train window* is visible through the vanishing face, forms an image on the retina, then disappears from the rider's view. That continuity does more explanatory work than a new diagram at every cut. Check the science and state the assumption that makes the example work.

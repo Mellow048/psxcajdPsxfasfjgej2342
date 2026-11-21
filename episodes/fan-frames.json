@@ -1,8 +1,7 @@
 {
   "version": 3,
   "title": "This Fan Never Reversed",
-  "narration": "This fan spins clockwise. Film it, and it seems to turn back. Freeze the picture. See the blade at twelve? Give it a yellow dot. Your phone takes thirty pictures a second. Between these two, that dot swings almost a quarter turn to the right. But look up top. A different blade just landed a little to the left. Hide the dot and play it again. The fan never reversed. You just followed the wrong blade.",
-  "speechRate": 1.12,
+  "narration": "Hang on. Did that fan just go backwards? Let's put a yellow dot on one blade so we can keep an eye on the little guy. Your phone takes thirty pictures a second. Between these two, our dot swings almost a quarter turn to the right. Wait, who went left? Look up top. That's a different blade, just left of where our dot started. Hide the dot and play it again. Same fan. Same direction. You just switched blades.",
   "series": "Field Study / Frame Inspection",
   "pacing": "narrative",
   "voiceover": "episodes/fan-voice.wav",
@@ -12,386 +11,477 @@
   },
   "shots": [
     {
-      "title": "Clockwise in slow motion",
-      "duration": 2.0,
-      "stage": "fan_bench",
-      "fanView": "bench",
-      "pov": {
-        "eye": [
-          -0.55,
-          2.04,
-          5.05
-        ]
-      },
-      "focus": [
-        0,
-        1.64,
-        0
-      ],
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "slow_push",
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.12,
-          "text": "This fan"
-        },
-        {
-          "time": 0.73,
-          "text": "spins clockwise.",
-          "highlight": "clockwise"
-        },
-        {
-          "time": 1.97,
-          "text": "Film it,"
-        }
-      ]
-    },
-    {
-      "title": "Raise the phone",
-      "duration": 2.5,
+      "title": "Did that fan go backwards?",
+      "duration": 2.966666666666667,
       "stage": "fan_bench",
       "fanView": "record",
       "pov": {
         "eye": [
-          0.14,
-          1.93,
-          4.74
+          0.58,
+          1.96,
+          6.05
         ]
       },
       "focus": [
-        0,
-        1.66,
-        0.7
+        0.53,
+        1.56,
+        0.65
       ],
       "cameraPreset": "over_shoulder",
-      "cameraMotion": "slow_pull",
+      "cameraMotion": "slow_push",
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "height": 2.02,
+          "position": [
+            1.24,
+            0,
+            0.68
+          ],
+          "yaw": -0.48,
+          "motion": "shocked"
+        }
+      ],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "captions": [
         {
           "time": 0,
-          "text": "Film it,"
+          "text": "Hang on."
         },
         {
-          "time": 0.47,
-          "text": "and it seems"
+          "time": 0.71,
+          "text": "Did that fan"
         },
         {
-          "time": 1.36,
-          "text": "to turn back.",
-          "highlight": "back"
+          "time": 1.28,
+          "text": "just go backwards?",
+          "highlight": "backwards"
         },
         {
-          "time": 2.48,
-          "text": "Freeze the picture."
-        }
-      ]
-    },
-    {
-      "title": "Stop the recording",
-      "duration": 2.7666666666666666,
-      "stage": "fan_bench",
-      "fanView": "freeze",
-      "pov": {
-        "eye": [
-          -0.09,
-          1.83,
-          4.32
-        ]
-      },
-      "focus": [
-        0,
-        1.76,
-        0.92
-      ],
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "slow_push",
-      "sfx": "click",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0,
-          "text": "Freeze the picture."
-        },
-        {
-          "time": 1.22,
-          "text": "See the blade"
-        },
-        {
-          "time": 1.92,
-          "text": "at twelve?",
-          "highlight": "twelve"
+          "time": 2.7,
+          "text": "Let's put"
         }
       ]
     },
     {
       "title": "Mark the top blade",
-      "duration": 2.2666666666666666,
+      "duration": 3.066666666666667,
       "stage": "fan_bench",
       "fanView": "mark",
       "pov": {
         "eye": [
-          0.04,
-          2.02,
-          5.78
+          -0.03,
+          1.99,
+          4.63
         ]
       },
       "focus": [
-        0,
-        1.94,
-        0.95
+        0.06,
+        1.88,
+        0.9
       ],
-      "cameraPreset": "macro_closeup",
+      "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "slow_push",
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "height": 2.02,
+          "position": [
+            1.24,
+            0,
+            0.68
+          ],
+          "yaw": -0.48,
+          "motion": "pointing"
+        }
+      ],
       "sfx": "click",
       "captionPosition": "lower",
       "captions": [
         {
           "time": 0,
-          "text": "at twelve?",
-          "highlight": "twelve"
+          "text": "Let's put"
         },
         {
-          "time": 0.083,
-          "text": "Give it"
-        },
-        {
-          "time": 0.403,
-          "text": "a yellow dot.",
+          "time": 0.003,
+          "text": "a yellow dot",
           "highlight": "yellow"
         },
         {
-          "time": 1.433,
-          "text": "Your phone takes"
+          "time": 0.623,
+          "text": "on one blade"
+        },
+        {
+          "time": 1.303,
+          "text": "so we can"
+        },
+        {
+          "time": 1.633,
+          "text": "keep an eye"
+        },
+        {
+          "time": 2.053,
+          "text": "on the"
+        },
+        {
+          "time": 2.213,
+          "text": "little guy.",
+          "highlight": "little"
         }
       ]
     },
     {
-      "title": "Read the frame counter",
-      "duration": 2.833333333333334,
+      "title": "Count the exposures",
+      "duration": 2.433333333333333,
       "stage": "fan_bench",
       "fanView": "frames",
       "pov": {
         "eye": [
-          -0.19,
-          1.97,
-          4.16
+          0.65,
+          1.94,
+          5.72
         ]
       },
       "focus": [
-        0,
-        1.85,
-        0.9
+        0.51,
+        1.7,
+        0.75
       ],
       "cameraPreset": "over_shoulder",
       "cameraMotion": "slow_pull",
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "height": 2.02,
+          "position": [
+            1.24,
+            0,
+            0.68
+          ],
+          "yaw": -0.48,
+          "motion": "talking"
+        }
+      ],
       "sfx": "click",
       "captionPosition": "lower",
       "captions": [
         {
           "time": 0,
+          "text": "little guy.",
+          "highlight": "little"
+        },
+        {
+          "time": 0.127,
           "text": "Your phone takes"
         },
         {
-          "time": 0.087,
+          "time": 0.707,
           "text": "thirty pictures",
           "highlight": "thirty"
         },
         {
-          "time": 1.007,
+          "time": 1.317,
           "text": "a second."
         },
         {
-          "time": 1.757,
+          "time": 2.157,
           "text": "Between these two,"
-        },
-        {
-          "time": 2.727,
-          "text": "that dot swings"
         }
       ]
     },
     {
-      "title": "Follow one marked blade",
-      "duration": 2.9333333333333336,
+      "title": "Follow the yellow dot",
+      "duration": 3.0,
       "stage": "fan_bench",
       "fanView": "advance",
       "pov": {
         "eye": [
           0.02,
-          1.93,
-          4.33
+          2.02,
+          4.47
         ]
       },
       "focus": [
-        0,
-        1.85,
+        0.01,
+        1.87,
         0.94
       ],
       "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "slow_push",
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "height": 2.02,
+          "position": [
+            1.24,
+            0,
+            0.68
+          ],
+          "yaw": -0.48,
+          "motion": "pointing"
+        }
+      ],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "captions": [
         {
           "time": 0,
-          "text": "that dot swings"
+          "text": "Between these two,"
         },
         {
-          "time": 0.863,
+          "time": 0.563,
+          "text": "our dot swings"
+        },
+        {
+          "time": 1.343,
           "text": "almost a"
         },
         {
-          "time": 1.453,
+          "time": 1.673,
           "text": "quarter turn"
         },
         {
-          "time": 2.203,
+          "time": 2.263,
           "text": "to the right.",
           "highlight": "right"
-        },
-        {
-          "time": 2.913,
-          "text": "But look"
         }
       ]
     },
     {
-      "title": "Find its neighbor",
-      "duration": 4.366666666666667,
+      "title": "Who went left?",
+      "duration": 2.033333333333333,
       "stage": "fan_bench",
       "fanView": "neighbor",
       "pov": {
         "eye": [
-          -0.09,
-          2.17,
-          5.5
+          1.45,
+          1.97,
+          3.68
         ]
       },
       "focus": [
-        0,
-        2.0,
-        0.93
+        1.22,
+        1.74,
+        0.68
       ],
       "cameraPreset": "macro_closeup",
       "cameraMotion": "slow_pull",
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "height": 2.02,
+          "position": [
+            1.24,
+            0,
+            0.68
+          ],
+          "yaw": -0.48,
+          "motion": "thinking"
+        }
+      ],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "captions": [
         {
           "time": 0,
-          "text": "But look"
+          "text": "to the right.",
+          "highlight": "right"
         },
         {
-          "time": 0.65,
-          "text": "up top."
+          "time": 0.223,
+          "text": "Wait,"
         },
         {
-          "time": 1.44,
-          "text": "A different blade",
-          "highlight": "different"
-        },
-        {
-          "time": 2.36,
-          "text": "just landed"
-        },
-        {
-          "time": 3.17,
-          "text": "a little"
-        },
-        {
-          "time": 3.53,
-          "text": "to the left.",
+          "time": 0.783,
+          "text": "who went left?",
           "highlight": "left"
+        },
+        {
+          "time": 2.003,
+          "text": "Look up top."
         }
       ]
     },
     {
-      "title": "Toggle the two exposures",
-      "duration": 2.1666666666666643,
+      "title": "Find the neighboring blade",
+      "duration": 3.7,
       "stage": "fan_bench",
-      "fanView": "compare",
+      "fanView": "neighbor",
       "pov": {
         "eye": [
-          0,
-          1.95,
-          4.36
+          0.01,
+          2.08,
+          4.46
         ]
       },
       "focus": [
         0,
-        1.88,
-        0.94
+        1.96,
+        0.93
       ],
       "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "slow_push",
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "height": 2.02,
+          "position": [
+            1.24,
+            0,
+            0.68
+          ],
+          "yaw": -0.48,
+          "motion": "pointing"
+        }
+      ],
       "sfx": "click",
       "captionPosition": "lower",
       "captions": [
         {
           "time": 0,
-          "text": "to the left.",
+          "text": "Look up top."
+        },
+        {
+          "time": 0.99,
+          "text": "That's a"
+        },
+        {
+          "time": 1.2,
+          "text": "different blade,",
+          "highlight": "different"
+        },
+        {
+          "time": 1.89,
+          "text": "just left of",
           "highlight": "left"
         },
         {
-          "time": 0.003,
-          "text": "Hide the dot"
+          "time": 2.45,
+          "text": "where our dot"
         },
         {
-          "time": 0.703,
-          "text": "and play"
-        },
-        {
-          "time": 1.273,
-          "text": "it again."
-        },
-        {
-          "time": 2.153,
-          "text": "The fan"
+          "time": 2.93,
+          "text": "started."
         }
       ]
     },
     {
-      "title": "Back to live video",
-      "duration": 3.7666666666666693,
+      "title": "Hide the tracker",
+      "duration": 2.066666666666667,
       "stage": "fan_bench",
-      "fanView": "replay",
+      "fanView": "compare",
       "pov": {
         "eye": [
-          0.22,
-          2.17,
-          4.55
+          0.01,
+          1.95,
+          5.97
         ]
       },
       "focus": [
         0,
-        1.64,
-        0.78
+        1.83,
+        0.94
+      ],
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "height": 2.02,
+          "position": [
+            1.24,
+            0,
+            0.68
+          ],
+          "yaw": -0.48,
+          "motion": "thinking"
+        }
+      ],
+      "sfx": "click",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "started."
+        },
+        {
+          "time": 0.17,
+          "text": "Hide the dot"
+        },
+        {
+          "time": 0.76,
+          "text": "and play it"
+        },
+        {
+          "time": 1.11,
+          "text": "again."
+        },
+        {
+          "time": 1.77,
+          "text": "Same fan."
+        }
+      ]
+    },
+    {
+      "title": "Same fan, same direction",
+      "duration": 3.1333333333333333,
+      "stage": "fan_bench",
+      "fanView": "replay",
+      "pov": {
+        "eye": [
+          0.74,
+          2.04,
+          5.83
+        ]
+      },
+      "focus": [
+        0.55,
+        1.63,
+        0.7
       ],
       "cameraPreset": "over_shoulder",
       "cameraMotion": "slow_pull",
+      "actors": [
+        {
+          "id": "host",
+          "asset": "male.character_01",
+          "height": 2.02,
+          "position": [
+            1.24,
+            0,
+            0.68
+          ],
+          "yaw": -0.16,
+          "motion": "talking"
+        }
+      ],
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "captions": [
         {
           "time": 0,
-          "text": "The fan"
+          "text": "Same fan."
         },
         {
-          "time": 0.487,
-          "text": "never reversed.",
-          "highlight": "reversed"
+          "time": 0.443,
+          "text": "Same direction."
         },
         {
-          "time": 1.407,
-          "text": "You just followed"
+          "time": 1.653,
+          "text": "You just"
         },
         {
-          "time": 2.607,
-          "text": "the wrong blade.",
-          "highlight": "wrong"
+          "time": 1.923,
+          "text": "switched blades.",
+          "highlight": "switched"
         }
       ]
     }
