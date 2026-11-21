@@ -4,7 +4,7 @@ Use [Platform Three](examples/platform-three/invisible.mp4) as the reference for
 
 ## Recurring host and narration
 
-Include the returning `male.character_01` host in each short. Give him something to notice or demonstrate; cut to the object alone when a close-up makes the explanation clearer. Use a playful, conversational masculine narrator rather than a formal announcer. For finished episodes, record a continuous `voiceover` in that style and time captions to the take; don't substitute the default offline TTS.
+Include the returning `male.character_01` host in each short. Give him the job the demonstration needs: if he films it, put a hand-sized phone in his hands, keep the grip through cuts, and check contact at phone size. Don’t loop a talking or reaction gesture beside a floating prop; cut to the object alone when a close-up makes the explanation clearer. Use a playful, conversational masculine narrator rather than a formal announcer. For finished episodes, record a continuous `voiceover` in that style and time captions to the take; don't substitute the default offline TTS.
 
 ## Start with one thing the viewer can watch happen
 

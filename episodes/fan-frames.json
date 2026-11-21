@@ -17,30 +17,30 @@
       "fanView": "record",
       "pov": {
         "eye": [
-          0.58,
-          1.96,
-          6.05
+          -1.58,
+          1.83,
+          3.34
         ]
       },
       "focus": [
-        0.53,
-        1.56,
-        0.65
+        0.13,
+        1.57,
+        1.15
       ],
-      "cameraPreset": "over_shoulder",
-      "cameraMotion": "slow_push",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
       "actors": [
         {
           "id": "host",
           "asset": "male.character_01",
           "height": 2.02,
           "position": [
-            1.24,
+            0.34,
             0,
-            0.68
+            1.66
           ],
-          "yaw": -0.48,
-          "motion": "shocked"
+          "yaw": -2.61,
+          "motion": "hold_phone"
         }
       ],
       "sfx": "whoosh_fast",
@@ -72,30 +72,30 @@
       "fanView": "mark",
       "pov": {
         "eye": [
-          -0.03,
-          1.99,
-          4.63
+          0.19,
+          1.69,
+          1.78
         ]
       },
       "focus": [
-        0.06,
-        1.88,
-        0.9
+        0.1,
+        1.55,
+        1.25
       ],
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "slow_push",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
       "actors": [
         {
           "id": "host",
           "asset": "male.character_01",
           "height": 2.02,
           "position": [
-            1.24,
+            0.34,
             0,
-            0.68
+            1.66
           ],
-          "yaw": -0.48,
-          "motion": "pointing"
+          "yaw": -2.61,
+          "motion": "hold_phone"
         }
       ],
       "sfx": "click",
@@ -140,30 +140,30 @@
       "fanView": "frames",
       "pov": {
         "eye": [
-          0.65,
-          1.94,
-          5.72
+          -0.37,
+          1.92,
+          2.85
         ]
       },
       "focus": [
-        0.51,
-        1.7,
-        0.75
+        0.27,
+        1.69,
+        1.49
       ],
       "cameraPreset": "over_shoulder",
-      "cameraMotion": "slow_pull",
+      "cameraMotion": "slow_push",
       "actors": [
         {
           "id": "host",
           "asset": "male.character_01",
           "height": 2.02,
           "position": [
-            1.24,
+            0.34,
             0,
-            0.68
+            1.66
           ],
-          "yaw": -0.48,
-          "motion": "talking"
+          "yaw": -2.61,
+          "motion": "hold_phone"
         }
       ],
       "sfx": "click",
@@ -200,30 +200,30 @@
       "fanView": "advance",
       "pov": {
         "eye": [
-          0.02,
-          2.02,
-          4.47
+          0.22,
+          1.72,
+          1.76
         ]
       },
       "focus": [
-        0.01,
-        1.87,
-        0.94
+        0.1,
+        1.55,
+        1.25
       ],
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "slow_push",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
       "actors": [
         {
           "id": "host",
           "asset": "male.character_01",
           "height": 2.02,
           "position": [
-            1.24,
+            0.34,
             0,
-            0.68
+            1.66
           ],
-          "yaw": -0.48,
-          "motion": "pointing"
+          "yaw": -2.61,
+          "motion": "hold_phone"
         }
       ],
       "sfx": "whoosh_fast",
@@ -259,30 +259,30 @@
       "fanView": "neighbor",
       "pov": {
         "eye": [
-          1.45,
-          1.97,
-          3.68
+          -0.43,
+          1.8,
+          0.79
         ]
       },
       "focus": [
-        1.22,
-        1.74,
-        0.68
+        0.31,
+        1.7,
+        1.6
       ],
-      "cameraPreset": "macro_closeup",
-      "cameraMotion": "slow_pull",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
       "actors": [
         {
           "id": "host",
           "asset": "male.character_01",
           "height": 2.02,
           "position": [
-            1.24,
+            0.34,
             0,
-            0.68
+            1.66
           ],
-          "yaw": -0.48,
-          "motion": "thinking"
+          "yaw": -2.61,
+          "motion": "hold_phone"
         }
       ],
       "sfx": "whoosh_fast",
@@ -315,30 +315,30 @@
       "fanView": "neighbor",
       "pov": {
         "eye": [
-          0.01,
-          2.08,
-          4.46
+          0.18,
+          1.71,
+          1.76
         ]
       },
       "focus": [
-        0,
-        1.96,
-        0.93
+        0.1,
+        1.55,
+        1.25
       ],
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "slow_push",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
       "actors": [
         {
           "id": "host",
           "asset": "male.character_01",
           "height": 2.02,
           "position": [
-            1.24,
+            0.34,
             0,
-            0.68
+            1.66
           ],
-          "yaw": -0.48,
-          "motion": "pointing"
+          "yaw": -2.61,
+          "motion": "hold_phone"
         }
       ],
       "sfx": "click",
@@ -379,30 +379,30 @@
       "fanView": "compare",
       "pov": {
         "eye": [
-          0.01,
-          1.95,
-          5.97
+          0.18,
+          1.69,
+          1.75
         ]
       },
       "focus": [
-        0,
-        1.83,
-        0.94
+        0.1,
+        1.55,
+        1.25
       ],
       "cameraPreset": "macro_closeup",
-      "cameraMotion": "slow_push",
+      "cameraMotion": "orbit_drift",
       "actors": [
         {
           "id": "host",
           "asset": "male.character_01",
           "height": 2.02,
           "position": [
-            1.24,
+            0.34,
             0,
-            0.68
+            1.66
           ],
-          "yaw": -0.48,
-          "motion": "thinking"
+          "yaw": -2.61,
+          "motion": "hold_phone"
         }
       ],
       "sfx": "click",
@@ -437,30 +437,30 @@
       "fanView": "replay",
       "pov": {
         "eye": [
-          0.74,
-          2.04,
-          5.83
+          -0.8,
+          1.85,
+          3.1
         ]
       },
       "focus": [
-        0.55,
-        1.63,
-        0.7
+        0.18,
+        1.62,
+        1.19
       ],
       "cameraPreset": "over_shoulder",
-      "cameraMotion": "slow_pull",
+      "cameraMotion": "orbit_drift",
       "actors": [
         {
           "id": "host",
           "asset": "male.character_01",
           "height": 2.02,
           "position": [
-            1.24,
+            0.34,
             0,
-            0.68
+            1.66
           ],
-          "yaw": -0.16,
-          "motion": "talking"
+          "yaw": -2.61,
+          "motion": "hold_phone"
         }
       ],
       "sfx": "whoosh_fast",

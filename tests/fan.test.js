@@ -26,3 +26,16 @@ test("the phone holds each sample, advancing clockwise 84°, not backwards 6°",
   assert.equal(fanSample("compare", 0.7, 0).angle, step);
   assert.equal(fanSample("compare", 0.7, 0).dot, false);
 });
+
+test('one host operates the handset throughout the fan demonstration', () => {
+  validate(episode);
+  for (const shot of episode.shots) {
+    assert.equal(shot.actors.length, 1);
+    assert.equal(shot.actors[0].motion, 'hold_phone');
+    assert.equal(shot.actors[0].asset, 'male.character_01');
+    assert.deepEqual(shot.actors[0].position, episode.shots[0].actors[0].position);
+  }
+  const invalid = structuredClone(episode);
+  invalid.shots[0].actors[0].asset = 'evo_cat';
+  assert.throws(() => validate(invalid), /compatible fan-bench host/);
+});

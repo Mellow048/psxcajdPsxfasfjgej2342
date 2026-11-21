@@ -173,6 +173,7 @@ export function validate(e) {
             ["ui_pop", "click", "ding"].includes(d.motionSfx),
           "invalid motion cue",
         );
+        if (d.motion === "hold_phone") check(k === "actors" && s.stage === "fan_bench" && d.asset === "male.character_01" && s.actors.filter(a=>a.motion === "hold_phone").length === 1, "hold_phone needs one compatible fan-bench host");
         if (d.traits !== undefined)
           check(
             k === "actors" &&

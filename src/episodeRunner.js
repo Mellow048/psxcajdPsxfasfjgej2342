@@ -1,3 +1,4 @@
+import { bindPhoneGrip } from "./phoneGrip.js";
 import { createScreen } from "./uiDirector.js";
 import { createMass } from "./particleEscalation.js";
 import { createBoard } from "./dataViz.js";
@@ -111,6 +112,7 @@ export class EpisodeRunner {
               def.traits,
               (s.events ?? []).filter((ev) => ev.target === def.id),
             );
+          else if (def.motion === "hold_phone") item.grip = bindPhoneGrip(node, f.scene.getObjectByName("fan-handset"), s.fanView);
           else item.mixer = bindPerformance(node, clip, def.motion, take);
           if (!f.observer && s.actors?.includes(def)) f.observer = item;
           f.items.push(item);
@@ -214,6 +216,7 @@ export class EpisodeRunner {
       : t;
     for (const i of f.items) {
       pose(i, rigTime);
+      i.grip?.(rigTime);
       i.fade?.(rigTime);
       i.morph?.(rigTime, i.def.motion);
     }

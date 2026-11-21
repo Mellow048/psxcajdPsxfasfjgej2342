@@ -96,9 +96,14 @@ export function fanBench(s, view) {
   box(s, 0.53, 0.12, 0.35, petrol, 0, 0.99, -0.06);
   box(s, 0.17, 0.78, 0.21, petrol, 0, 1.39, -0.09);
   box(s, 0.032, 0.68, 0.03, brass, -0.044, 1.39, 0.028);
-  const fan = group(s, 0, 1.95, 0),
+  const fan = group(s, 0, 1.65, 0),
     live = housing(fan);
+  fan.scale.setScalar(.51);
   const phone = group(s, 0, 1.89, 0.87);
+  phone.name = "fan-handset";
+  // Rear camera cluster reads in the host-facing cutaway.
+  box(phone,.37,.45,.06,0x314e54,-.44,.77,-.084);
+  for (const y of [.66,.86]) disc(phone,.081,ink,-.44,y,-.121);
   box(phone, 1.46, 2.31, 0.12, ink, 0, 0, 0);
   box(phone, 1.37, 2.19, 0.02, 0x223f42, 0, 0, 0.075);
   box(phone, 0.28, 0.034, 0.01, 0x7d9894, 0, 0.997, 0.094);
@@ -172,7 +177,7 @@ export function fanBench(s, view) {
       r = (-v.angle * Math.PI) / 180;
     phone.visible = view !== "bench";
     benchTag.visible = !phone.visible;
-    phone.position.y =
+    if (!phone.userData.held) phone.position.y =
       1.89 -
       (view === "record" ? 2.65 * (1 - T.MathUtils.smoothstep(t, 0, 0.55)) : 0);
     live.o.rotation.z = view === "bench" ? r : -globalTime * 14 * Math.PI;

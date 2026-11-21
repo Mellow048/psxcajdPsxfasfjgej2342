@@ -35,7 +35,7 @@ function rotationTracks(source, bones) {
 }
 // Aim in studio space during baking, then store local joint quaternions. This
 // does not assume that +X on a Mixamo arm means the same as +X on a ghost arm.
-function aim(bone, child, dir) {
+export function aim(bone, child, dir) {
   if (!bone || !child) return;
   const here = bone.getWorldPosition(new T.Vector3()),
     from = child.getWorldPosition(new T.Vector3()).sub(here);
@@ -165,6 +165,11 @@ export function bindPerformance(
   return mixer;
 }
 export function pose({ node, def, mixer }, t) {
+  if (def.motion === "hold_phone") {
+    node.position.fromArray(def.position ?? [0,0,0]);
+    node.rotation.set(0, def.yaw ?? 0, 0);
+    return; // Feet planted; the grip pass owns the upper body.
+  }
   let y = 0.035 * Math.sin(t * 3),
     a = 0.045 * Math.sin(t * 2),
     z = 0,
