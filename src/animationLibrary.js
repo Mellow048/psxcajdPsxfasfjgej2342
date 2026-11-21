@@ -277,3 +277,138 @@ export function bindChipPush(item, spawn) {
     aim(hand, tip, b.copy(point).sub(c).toArray());
   };
 }
+
+// Stance feet stay at floor-space targets. Only the swinging foot advances;
+// advancing the pelvis alone would make a character slide under a fixed pose.
+export function bindHallWalk(item) {
+  const bones = new Map();
+  item.node.traverse((o) => {
+    if (o.isBone) bones.set(canonical(o.name), o);
+  });
+  const bone = (n) => bones.get(n),
+    v = () => new T.Vector3(),
+    forward = v(),
+    right = v(),
+    start = v(),
+    origin = v(),
+    goal = v(),
+    tmp = v(),
+    here = v(),
+    axis = v(),
+    pole = v(),
+    bend = v();
+  const legs = ["right", "left"].map((s) => [
+    bone(s + "upleg"),
+    bone(s + "leg"),
+    bone(s + "foot"),
+  ]);
+  const controlled = [
+    ...legs.flat(),
+    ...["rightarm", "rightforearm", "leftarm", "leftforearm"].map(bone),
+  ];
+  const initial = controlled.map((b) => b.quaternion.clone());
+  const rest = legs.map(([, , f]) => {
+    const pos = f.getWorldPosition(v());
+    return {
+      x: pos.x,
+      z: pos.z,
+      y: pos.y,
+      foot: f.getWorldQuaternion(new T.Quaternion()),
+    };
+  });
+  const turn = new T.Quaternion(),
+    up = new T.Vector3(0, 1, 0),
+    parent = new T.Quaternion();
+  return (t) => {
+    controlled.forEach((b, i) => b.quaternion.copy(initial[i]));
+    const def = item.def,
+      { node } = item,
+      walk = def.stride,
+      sep = def.reach ?? [0, 0, 0, 1],
+      yaw = def.yaw ?? 0;
+    forward.set(Math.sin(yaw), 0, Math.cos(yaw));
+    right.set(Math.cos(yaw), 0, -Math.sin(yaw));
+    start.fromArray(def.position);
+    const travel = walk?.[0] ?? 0,
+      steps = Math.max(1, Math.round(travel / 0.45)),
+      u = walk ? Math.min(1, t / walk[1]) : 0;
+    const dist = [0, 0],
+      lift = [0, 0];
+    for (let n = 0; n <= steps; n++) {
+      const i = n % 2,
+        f = Math.max(0, Math.min(1, u * (steps + 1) - n)),
+        target = travel * Math.min(1, (n + 1) / steps);
+      if (f > 0) {
+        dist[i] += (target - dist[i]) * f * f * (3 - 2 * f);
+        if (f < 1) lift[i] = 0.13 * Math.sin(Math.PI * f);
+      }
+    }
+    const progress = (dist[0] + dist[1]) / 2;
+    node.position.copy(start).addScaledVector(forward, progress);
+    node.position.y -= 0.035 + 0.038 * Math.min(1, Math.abs(dist[0] - dist[1]));
+    node.rotation.set(0, yaw, 0);
+    node.scale.setScalar(1);
+    turn.setFromAxisAngle(up, yaw);
+    legs.forEach(([hip, knee, foot], i) => {
+      const r = rest[i];
+      goal
+        .copy(start)
+        .addScaledVector(right, r.x)
+        .addScaledVector(forward, r.z + dist[i]);
+      goal.y += r.y + lift[i];
+      hip.getWorldPosition(origin);
+      const a = knee.getWorldPosition(tmp).distanceTo(origin),
+        b = foot.getWorldPosition(here).distanceTo(tmp);
+      axis.copy(goal).sub(origin);
+      const d = T.MathUtils.clamp(
+        axis.length(),
+        Math.abs(a - b) + 0.001,
+        a + b - 0.001,
+      );
+      axis.normalize();
+      pole.copy(forward).addScaledVector(axis, -forward.dot(axis)).normalize();
+      const along = (d * d + a * a - b * b) / (2 * d);
+      bend
+        .copy(origin)
+        .addScaledVector(axis, along)
+        .addScaledVector(pole, Math.sqrt(Math.max(0, a * a - along * along)));
+      aim(hip, knee, bend.sub(origin).toArray());
+      knee.getWorldPosition(here);
+      aim(knee, foot, tmp.copy(goal).sub(here).toArray());
+      foot.quaternion
+        .copy(foot.parent.getWorldQuaternion(parent).invert())
+        .multiply(turn)
+        .multiply(r.foot);
+    });
+    const reach =
+      sep[0] + (sep[1] - sep[0]) * T.MathUtils.smoothstep(t, sep[2], sep[3]);
+    const direction = (side, y, z) =>
+      tmp
+        .copy(right)
+        .multiplyScalar(side)
+        .addScaledVector(forward, z)
+        .setY(y)
+        .toArray();
+    const swing = travel ? Math.sin(u * Math.PI * (steps + 1)) : 0;
+    aim(
+      bone("rightarm"),
+      bone("rightforearm"),
+      direction(-0.24, -0.78, 0.48 + reach),
+    );
+    aim(
+      bone("rightforearm"),
+      bone("righthand"),
+      direction(-0.08, 0.63 - reach, 0.72 + reach),
+    );
+    aim(
+      bone("leftarm"),
+      bone("leftforearm"),
+      direction(0.19, -0.88, 0.12 - 0.45 * swing),
+    );
+    aim(
+      bone("leftforearm"),
+      bone("lefthand"),
+      direction(-0.07, -0.82, 0.39 - 0.38 * swing),
+    );
+  };
+}

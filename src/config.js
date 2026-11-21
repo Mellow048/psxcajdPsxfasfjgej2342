@@ -7,6 +7,8 @@ export const CONFIG = {
   psx: { grid: 160, gridHeight: 240, affine: 1, dither: 1, scale: 1 / 3 },
 };
 export const SCENE_PRESETS = {
+  radio_hall: { color: 0x364851, fog: 0x536268 },
+  phase_scope: { color: 0x27353c, fog: 0x374451 },
   platform_three: { color: 0x192833, fog: 0x283b49 },
   retina_tunnel: { color: 0x371d36, fog: 0x382339 },
   signal_dark: { color: 0x05060c, fog: 0x05060c },

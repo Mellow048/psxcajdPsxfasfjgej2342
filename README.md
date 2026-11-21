@@ -102,3 +102,7 @@ The narrative recut, **[Your last $10 on red](episodes/casino_martingale.json)**
 [Episode JSON](episodes/invisible.json) · Open `/?episode=episodes/invisible.json` in the studio. A 28.4-second subway-platform experiment: 11 moving shots, a scan-line disappearance against passing train windows, and a trip down the optical axis. It models **perfect transmission of visible light**, not camouflage or a camera-fed cloak. Compare the converging rays that stop at the normal retina with the straight rays that pass through the transparent eye. The final floating eyes are a visual gag about detectors having to interact with light, not a claim that eyes could function detached from nerves or a blood supply.
 
 To export: `npm run render -- episodes/invisible.json`. The continuous voice recording sets the timing. The music stem is reproducible with `python3 scripts/platform_score.py`.
+
+### Field study: What if you could see Wi-Fi?
+
+Open `/?episode=episodes/wifi.json` or inspect the [episode JSON](episodes/wifi.json). The tester walks toward a stationary 2.4 GHz router, then tries moving just the handset at the weak spot. Mint is the direct path, coral is the cabinet reflection, and yellow is their sum at the phone. This is an illustrated two-path example, not a coverage prediction: real indoor reception also depends on other reflectors, interference and the radios. The wave shapes are slowed and enlarged for visibility. Rebuild the music with `python3 scripts/score.py episodes/wifi-score.wav --bpm 133 --seed 32 --bars 6`.

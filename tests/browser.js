@@ -329,6 +329,33 @@ try {
       "hand/chip contact reproduces on seek",
     );
   }
+  const wifi = await (await fetch("episodes/wifi.json")).json();
+  await r.load(wifi);
+  const carrier = r.frames[0].observer.node,
+    foot = (side) =>
+      carrier
+        .getObjectByName("mixamorig" + side + "Foot")
+        .getWorldPosition(carrier.position.clone());
+  r.seek(0);
+  const startX = carrier.position.x,
+    plant = foot("Left"),
+    lift = foot("Right");
+  r.seek(0.17);
+  assert(
+    foot("Left").distanceTo(plant) < 0.022 && foot("Right").y > lift.y + 0.065,
+    "swing foot lifts while the other remains planted",
+  );
+  const strideFrame = r.ctx.canvas.toDataURL();
+  r.seek(1.92);
+  assert(
+    carrier.position.x - startX > 1.6,
+    "character traverses the hall rather than walking in place",
+  );
+  r.seek(0.17);
+  assert(
+    r.ctx.canvas.toDataURL() === strideFrame,
+    "walking pose and phone reproduce on seek",
+  );
   report.textContent += "\nAll checks passed.";
   report.dataset.result = "pass";
 } catch (e) {

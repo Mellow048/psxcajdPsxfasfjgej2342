@@ -1,3 +1,4 @@
+import { radioHall, phaseScope } from "./radioHall.js";
 import { platformThree, insideEye, carWindow } from "./platformThree.js";
 import { casinoRoom } from "./casinoRoom.js";
 import * as T from "three";
@@ -445,6 +446,8 @@ export function stage(name) {
   s.add(key);
   let weather = null;
   if (name === "blizzard") weather = blizzard(s);
+  else if (name === "radio_hall") weather = radioHall(s);
+  else if (name === "phase_scope") weather = phaseScope(s);
   else if (name === "platform_three") weather = platformThree(s);
   else if (name === "retina_tunnel") weather = insideEye(s);
   else if (name === "casino_room") weather = casinoRoom(s);

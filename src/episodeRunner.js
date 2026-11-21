@@ -6,7 +6,12 @@ import { CONFIG, SCENE_PRESETS } from "./config.js";
 import { validate } from "./schema.js";
 import { Pipeline, patchTree } from "./psxShader.js";
 import { AssetLoader } from "./assetLoader.js";
-import { bindPerformance, bindChipPush, pose } from "./animationLibrary.js";
+import {
+  bindHallWalk,
+  bindPerformance,
+  bindChipPush,
+  pose,
+} from "./animationLibrary.js";
 import { createSpawn, sampleSpawn } from "./comedyProps.js";
 import { stage } from "./stages.js";
 import { CameraDirector } from "./cameraDirector.js";
@@ -112,6 +117,8 @@ export class EpisodeRunner {
               (s.events ?? []).filter((ev) => ev.target === def.id),
             );
           else item.mixer = bindPerformance(node, clip, def.motion, take);
+          if (s.stage === "radio_hall" && s.actors?.includes(def))
+            item.hallWalk = bindHallWalk(item);
           if (!f.observer && s.actors?.includes(def)) f.observer = item;
           f.items.push(item);
           const opacity = SCENE_PRESETS[s.stage].reflection;
@@ -214,10 +221,11 @@ export class EpisodeRunner {
       : t;
     for (const i of f.items) {
       pose(i, rigTime);
+      i.hallWalk?.(rigTime, s);
       i.fade?.(rigTime);
       i.morph?.(rigTime, i.def.motion);
     }
-    f.weather?.(rigTime, f.start / CONFIG.hz + rigTime);
+    f.weather?.(rigTime, f.start / CONFIG.hz + rigTime, f, s);
     for (const spawn of f.spawns) {
       sampleSpawn(spawn, t);
       spawn.pushChips?.(t);
