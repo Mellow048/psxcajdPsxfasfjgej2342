@@ -26,7 +26,7 @@ if (!/^episodes\/[a-zA-Z0-9_/-]+\.json$/.test(file))
   throw Error("Expected episodes/name.json");
 const episode = validate(JSON.parse(await readFile(file, "utf8")));
 const frames = Math.ceil(
-  (episode.scenes.reduce((n, s) => n + Math.round(s.duration * CONFIG.hz), 0) *
+  (episode.shots.reduce((n, s) => n + Math.round(s.duration * CONFIG.hz), 0) *
     CONFIG.fps) /
     CONFIG.hz,
 );
@@ -92,8 +92,7 @@ try {
     `http://127.0.0.1:${server.address().port}/scripts/render.html`,
   );
   const pcm = await page.evaluate(async (e) => {
-    const { EpisodeRunner } = await import("/src/episodeRunner.js"),
-      { SFX_MANIFEST } = await import("/src/config.js");
+    const { EpisodeRunner } = await import("/src/episodeRunner.js");
     const runner = (globalThis.cutframe = new EpisodeRunner(
       document.querySelector("canvas"),
     ));
@@ -108,12 +107,7 @@ try {
     audio.bus = ctx.createGain();
     audio.bus.gain.value = 0.65;
     audio.bus.connect(ctx.destination);
-    const urls = new Set(
-      [e.narration, ...e.scenes.map((s) => SFX_MANIFEST[s.sfx])].filter(
-        (u) => u && u !== "synth",
-      ),
-    );
-    for (const u of urls) await audio.buffer(u);
+    await audio.prepareBuffers(e);
     audio.start(e, 0);
     const samples = (await ctx.startRendering()).getChannelData(0);
     const bytes = new Uint8Array(samples.length * 2),

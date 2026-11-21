@@ -4,13 +4,17 @@ export const CONFIG = {
   height: 960,
   fps: 30,
   hz: 60,
-  psx: { grid: 180, affine: 0.85, dither: 0.65, scale: 0.5 },
+  psx: { grid: 160, gridHeight: 240, affine: 1, dither: 1, scale: 1 / 3 },
 };
 export const SCENE_PRESETS = {
+  casino_room: { color: 0x432737, fog: 0x4c2b39 },
+  blizzard: { color: 0x8999b1, fog: 0xb5c9d9 },
   graveyard: { color: 0x716691, fog: 0x706088 },
   backstage: { color: 0x342842, fog: 0x40304c },
   optics_lab: { color: 0x203646, fog: 0x284453 },
   void: { color: 0x262433, fog: 0x2c2939 },
+  window_day: { color: 0x92bada, fog: 0xa8c3d9, reflection: 0.1 },
+  window_night: { color: 0x172642, fog: 0x27304b, reflection: 0.68 },
   house_corner: {
     color: 0x554759,
     fog: 0x685662,
@@ -38,6 +42,7 @@ export const SCENE_PRESETS = {
   },
 };
 export const BUILTINS = [
+  "evo_cat",
   "sheet",
   "pane",
   "lamp",
@@ -50,27 +55,49 @@ export const ASSET_MANIFEST = {
   ...MODELS,
   ...Object.fromEntries(BUILTINS.map((k) => [k, { builtin: true, clips: [] }])),
 };
+export const MUSIC_PRESETS = {
+  tense_heartbeat: { track: "episodes/tense-heartbeat.wav", volume: 0.44 },
+  synthwave_tense: {
+    track: "episodes/synthwave-tense.wav",
+    volume: 0.34,
+    seamless: true,
+  },
+};
 export const SFX_MANIFEST = {
-  pop: "synth",
+  whoosh_fast: "synth",
+  ui_pop: "synth",
+  ding: "synth",
   whoosh: "synth",
   riser: "synth",
-  tick: "synth",
+  click: "synth",
   ...Object.fromEntries(SOUNDS.map((p) => [p, p])),
 };
 export const CAMERAS = [
-  "slow_push",
-  "fast_push",
-  "orbit_drift",
-  "handheld_bob",
-  "whip_pan",
-  "dutch_tilt_zoom",
-  "cutaway_macro",
+  "wide_orbit",
+  "dutch_tilt_push",
+  "macro_closeup",
+  "over_shoulder",
+  "whip_pan_to_prop",
 ];
 export const MOTIONS = [
   "idle_breathe",
-  "talk_gesture",
-  "point",
-  "shock",
+  "talking",
+  "pointing",
+  "cup_hands",
+  "thinking",
+  "place_bet",
+  "wince",
+  "shiver",
+  "grumpy",
+  "shocked",
   "float_spin",
   "pop_in",
 ];
+
+export const CAMERA_MOTIONS = [
+  "slow_push",
+  "slow_pull",
+  "orbit_drift",
+  "handheld_bob",
+];
+export const ICONS = ["Sun", "Moon", "Lightbulb", "Eyeball"];

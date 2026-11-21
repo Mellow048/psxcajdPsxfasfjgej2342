@@ -1,0 +1,218 @@
+{
+  "version": 3,
+  "title": "Ten bucks on red",
+  "series": "POV / Martingale panic",
+  "bgMusic": "tense_heartbeat",
+  "narration": "Ten bucks on red. You lose. Now your phone rings. Double it, says the guru. Lose again? Double again! That's the Martingale trap. Your tenth bet? Five grand. Lose ten straight and you're out ten thousand two hundred thirty dollars. Not a hundred.",
+  "voiceover": "episodes/martingale-voice.wav",
+  "shots": [
+    {
+      "title": "RED / declined",
+      "duration": 2.65,
+      "stage": "casino_room",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "handheld_bob",
+      "pov": {
+        "eye": [-0.32, 2.15, 1.05]
+      },
+      "focus": [-0.44, 0.9, 0.3],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "Ten bucks",
+          "highlight": "bucks"
+        },
+        {
+          "time": 0.43,
+          "text": "on red.",
+          "highlight": "red."
+        },
+        {
+          "time": 0.97,
+          "text": "You lose.",
+          "highlight": "lose."
+        },
+        {
+          "time": 1.69,
+          "text": "Now your",
+          "highlight": "your"
+        },
+        {
+          "time": 1.96,
+          "text": "phone rings.",
+          "highlight": "rings."
+        }
+      ],
+      "events": [
+        {
+          "time": 0.1,
+          "sfx": "cash_register",
+          "position": [-0.44, 0.9, 0.3],
+          "show_phone": {
+            "app": "bank",
+            "balance": "$10,220",
+            "debit": "−$10 • RED"
+          }
+        }
+      ]
+    },
+    {
+      "title": "The call",
+      "duration": 2.4,
+      "stage": "casino_room",
+      "cameraPreset": "whip_pan_to_prop",
+      "cameraMotion": "handheld_bob",
+      "pov": {
+        "eye": [-0.08, 1.78, 1.13],
+        "whipFrom": [-0.44, 0.9, 0.3]
+      },
+      "focus": [0.7, 1.46, -0.54],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.1,
+          "text": "Double it,",
+          "highlight": "Double"
+        },
+        {
+          "time": 0.57,
+          "text": "says the guru.",
+          "highlight": "guru."
+        },
+        {
+          "time": 1.22,
+          "text": "Lose again?",
+          "highlight": "again?"
+        },
+        {
+          "time": 1.81,
+          "text": "Double again!",
+          "highlight": "Double"
+        }
+      ],
+      "events": [
+        {
+          "time": 0,
+          "sfx": "ding",
+          "position": [0.7, 0.9, -0.54],
+          "show_tv": {
+            "app": "video_call",
+            "avatar": "guru"
+          }
+        }
+      ]
+    },
+    {
+      "title": "The tenth bet",
+      "duration": 2.7,
+      "stage": "casino_room",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_pull",
+      "pov": {
+        "eye": [0, 1.61, 0.68],
+        "recoil": 1.48
+      },
+      "focus": [0, 1.49, -0.1],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.09,
+          "text": "That's the",
+          "highlight": "That's"
+        },
+        {
+          "time": 0.34,
+          "text": "Martingale trap.",
+          "highlight": "Martingale"
+        },
+        {
+          "time": 1.27,
+          "text": "Your tenth bet?",
+          "highlight": "tenth"
+        },
+        {
+          "time": 2.02,
+          "text": "Five grand.",
+          "highlight": "grand."
+        }
+      ],
+      "events": [
+        {
+          "time": 0,
+          "sfx": "heavy_thud",
+          "position": [0, 0.9, -0.1],
+          "spawn_mass": {
+            "prop": "casino_chip",
+            "count": 1000,
+            "formation": "table_tower"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Bankroll zero",
+      "duration": 3.5,
+      "stage": "casino_room",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "handheld_bob",
+      "pov": {
+        "eye": [0.06, 1.69, 1.41]
+      },
+      "focus": [0, 1.25, 0],
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.13,
+          "text": "Lose ten straight",
+          "highlight": "straight"
+        },
+        {
+          "time": 1.02,
+          "text": "and you're out",
+          "highlight": "you're"
+        },
+        {
+          "time": 1.36,
+          "text": "ten thousand",
+          "highlight": "thousand"
+        },
+        {
+          "time": 1.82,
+          "text": "two hundred",
+          "highlight": "hundred"
+        },
+        {
+          "time": 2.14,
+          "text": "thirty dollars.",
+          "highlight": "dollars."
+        },
+        {
+          "time": 2.88,
+          "text": "Not a hundred.",
+          "highlight": "hundred."
+        }
+      ],
+      "events": [
+        {
+          "time": 0.14,
+          "sfx": "buzzer",
+          "show_graph": {
+            "label": "Martingale / bankroll",
+            "unit": "$",
+            "start": 10230,
+            "end": 0,
+            "lossStreak": 10,
+            "drawTime": 1.67,
+            "cueAt": "end"
+          }
+        }
+      ]
+    }
+  ],
+  "narratorStyle": "urgent"
+}

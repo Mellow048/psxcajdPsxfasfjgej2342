@@ -20,7 +20,7 @@ const { streams, format } = JSON.parse(
 );
 const v = streams.find((s) => s.codec_type === "video"),
   a = streams.find((s) => s.codec_type === "audio");
-const ticks = ep.scenes.reduce(
+const ticks = ep.shots.reduce(
     (sum, s) => sum + Math.round(s.duration * CONFIG.hz),
     0,
   ),
