@@ -1,3 +1,4 @@
+import { platformThree, insideEye, carWindow } from "./platformThree.js";
 import { casinoRoom } from "./casinoRoom.js";
 import * as T from "three";
 import { blizzard } from "./Evolutionary_Explainer/blizzard.js";
@@ -27,7 +28,8 @@ function rand(seed) {
 export function makeProp(key, text = "NOTE") {
   const p = new T.Group();
   const dark = () => lit(0x24233b);
-  if (key === "sheet") {
+  if (key === "car_window") carWindow(p);
+  else if (key === "sheet") {
     const points = [],
       idx = [],
       uv = [];
@@ -443,6 +445,8 @@ export function stage(name) {
   s.add(key);
   let weather = null;
   if (name === "blizzard") weather = blizzard(s);
+  else if (name === "platform_three") weather = platformThree(s);
+  else if (name === "retina_tunnel") weather = insideEye(s);
   else if (name === "casino_room") weather = casinoRoom(s);
   else if (name === "signal_dark") {
     /* The detector POV has no environmental signal. */

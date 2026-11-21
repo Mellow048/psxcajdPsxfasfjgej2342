@@ -1,9 +1,9 @@
 {
   "version": 3,
   "title": "What if you could turn invisible?",
-  "series": "Field Study / The Invisible Eye",
+  "series": "Field Study / Platform Three",
   "pacing": "micro",
-  "narration": "What if you could turn invisible? Okay. Stand in front of these stripes. Now imagine light goes straight through every part of you. See that stripe where your face used to be? Everyone else sees the wall. Great trick. One problem. What do you see? Look at this lamp. Normally, light from it enters your eye. Your lens focuses that light onto your retina. Tiny cells absorb it. That's how you know the lamp is on. Now make the whole eye invisible. The light goes straight through. The lamp is still on. You just can't see it. Keep your eyes working instead? Then some light has to stop there. Congratulations. You're a pair of eyes in the middle of the room.",
+  "narration": "Go invisible on a subway platform and the first thing you lose isn't your reflection. It's the train. Everyone else can see those bright windows right through your face, but try looking back at them. Normally your lens bends light from a window onto the back of your eye, where your retina catches it and sends your brain the picture. If light sails straight through your retina too, that train could fill your whole view and you wouldn't see a thing. Want your eyesight back? Some light has to stop inside your eyes. So now there's a pair of eyeballs on platform three, watching everybody else miss their train.",
   "voiceover": "episodes/invisible-voice.wav",
   "music": {
     "track": "episodes/invisible-score.wav",
@@ -11,37 +11,37 @@
   },
   "shots": [
     {
-      "title": "The disappearing face",
-      "duration": 2.9,
-      "stage": "light_gallery",
-      "cameraPreset": "macro_closeup",
+      "title": "Invisible on platform three",
+      "duration": 2.1,
+      "stage": "platform_three",
+      "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "slow_push",
-      "focus": [0, 1.55, 0],
+      "focus": [0, 1.3, -0.1],
       "pov": {
-        "eye": [0.1, 1.69, 2.15]
+        "eye": [0.46, 1.38, 2.15]
       },
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.13,
-          "text": "What if you",
-          "highlight": "What"
+          "time": 0.0,
+          "text": "Go invisible",
+          "highlight": "invisible"
         },
         {
-          "time": 0.54,
-          "text": "could turn",
-          "highlight": "could"
+          "time": 0.84,
+          "text": "on a subway",
+          "highlight": "subway"
         },
         {
-          "time": 0.95,
-          "text": "invisible?",
-          "highlight": "invisible?"
+          "time": 1.36,
+          "text": "platform",
+          "highlight": "platform"
         },
         {
-          "time": 2.07,
-          "text": "Okay.",
-          "highlight": "Okay."
+          "time": 1.97,
+          "text": "and the first",
+          "highlight": "first"
         }
       ],
       "actors": [
@@ -49,568 +49,334 @@
           "id": "visitor",
           "asset": "male.character_01",
           "height": 1.75,
-          "position": [0, 0.14, 0],
+          "position": [0, 0, 0],
           "motion": "talking",
-          "fadeOut": [0.88, 1.51]
+          "fadeOut": [0.22, 1.1],
+          "fadeStyle": "scan"
         }
       ],
       "events": [
         {
           "type": "sound",
-          "time": 1.03,
-          "sfx": "ding"
+          "time": 0.38,
+          "sfx": "click"
         }
       ]
     },
     {
-      "title": "The registration target",
-      "duration": 2.4,
-      "stage": "light_gallery",
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "orbit_drift",
-      "focus": [0, 1.25, -0.2],
+      "title": "What did you lose?",
+      "duration": 2.2,
+      "stage": "platform_three",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "focus": [0, 1.45, -1.55],
       "pov": {
-        "eye": [0.52, 1.62, 3.5]
+        "eye": [-1.05, 1.48, 1.9]
       },
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "captions": [
         {
           "time": 0,
-          "text": "Okay.",
-          "highlight": "Okay."
+          "text": "and the first",
+          "highlight": "first"
         },
         {
-          "time": 0.36,
-          "text": "Stand in front",
-          "highlight": "Stand"
+          "time": 0.32,
+          "text": "thing you lose",
+          "highlight": "thing"
         },
         {
-          "time": 1.08,
-          "text": "of these stripes.",
-          "highlight": "stripes."
-        }
-      ],
-      "props": [
+          "time": 1.1,
+          "text": "isn't your reflection.",
+          "highlight": "reflection."
+        },
         {
-          "id": "lamp",
-          "asset": "lamp",
-          "height": 1.32,
-          "position": [-0.66, 0.14, 0.07]
+          "time": 2.16,
+          "text": "It's the train.",
+          "highlight": "train."
         }
       ],
       "actors": [
         {
-          "id": "visitor",
+          "id": "commuter",
           "asset": "male.character_01",
-          "height": 1.75,
-          "position": [0, 0.14, 0],
-          "motion": "pointing"
-        }
-      ]
-    },
-    {
-      "title": "Light through the visitor",
-      "duration": 2.9,
-      "stage": "light_gallery",
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "slow_push",
-      "focus": [0, 1.45, 0],
-      "pov": {
-        "eye": [-0.6, 1.67, 2.6]
-      },
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.0,
-          "text": "Now imagine",
-          "highlight": "imagine"
-        },
-        {
-          "time": 0.57,
-          "text": "light goes",
-          "highlight": "light"
-        },
-        {
-          "time": 1.01,
-          "text": "straight through",
-          "highlight": "straight"
-        },
-        {
-          "time": 1.62,
-          "text": "every part",
-          "highlight": "every"
-        },
-        {
-          "time": 2.21,
-          "text": "of you.",
-          "highlight": "you."
-        }
-      ],
-      "actors": [
-        {
-          "id": "visitor",
-          "asset": "male.character_01",
-          "height": 1.75,
-          "position": [0, 0.14, 0],
-          "motion": "talking",
-          "fadeOut": [0.56, 1.3]
-        }
-      ],
-      "events": [
-        {
-          "id": "ray1",
-          "type": "spawn_prop",
-          "spawn_prop": "particle_stream_yellow",
-          "time": 0.57,
-          "sfx": "click",
-          "size": 0.4,
-          "travel": 0.78,
-          "from": [-1.2, 1.43, 0.04],
-          "to": [1.2, 1.43, 0.04]
-        }
-      ]
-    },
-    {
-      "title": "Nothing interrupts the stripe",
-      "duration": 2.3,
-      "stage": "light_gallery",
-      "cameraPreset": "macro_closeup",
-      "cameraMotion": "orbit_drift",
-      "focus": [0, 1.7, -1.86],
-      "pov": {
-        "eye": [0.46, 1.62, 0.55]
-      },
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.05,
-          "text": "See that stripe",
-          "highlight": "stripe"
-        },
-        {
-          "time": 0.83,
-          "text": "where your face",
-          "highlight": "where"
-        },
-        {
-          "time": 1.37,
-          "text": "used to be?",
-          "highlight": "used"
-        }
-      ],
-      "props": [
-        {
-          "id": "lamp",
-          "asset": "lamp",
-          "height": 1.32,
-          "position": [-0.66, 0.14, 0.07]
-        }
-      ]
-    },
-    {
-      "title": "The empty podium",
-      "duration": 2.8,
-      "stage": "light_gallery",
-      "cameraPreset": "wide_orbit",
-      "cameraMotion": "slow_push",
-      "focus": [0, 1.22, -0.55],
-      "pov": {
-        "eye": [0.68, 1.59, 3.6]
-      },
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.05,
-          "text": "Everyone else",
-          "highlight": "Everyone"
-        },
-        {
-          "time": 0.63,
-          "text": "sees the wall.",
-          "highlight": "wall."
-        },
-        {
-          "time": 1.74,
-          "text": "Great trick.",
-          "highlight": "trick."
-        }
-      ],
-      "props": [
-        {
-          "id": "lamp",
-          "asset": "lamp",
-          "height": 1.32,
-          "position": [-0.66, 0.14, 0.07]
-        },
-        {
-          "id": "label",
-          "asset": "label",
-          "height": 0.13,
-          "position": [0, 0.22, 0.13],
-          "text": "TEST 01   /   CLEAR"
-        }
-      ]
-    },
-    {
-      "title": "Whose point of view?",
-      "duration": 2.3,
-      "stage": "light_gallery",
-      "cameraPreset": "macro_closeup",
-      "cameraMotion": "orbit_drift",
-      "focus": [0, 1.68, 0],
-      "pov": {
-        "eye": [0.45, 1.68, 1.75]
-      },
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.04,
-          "text": "One problem.",
-          "highlight": "problem."
-        },
-        {
-          "time": 1.21,
-          "text": "What do YOU",
-          "highlight": "What"
-        },
-        {
-          "time": 1.58,
-          "text": "see?",
-          "highlight": "see?"
-        }
-      ],
-      "actors": [
-        {
-          "id": "visitor",
-          "asset": "male.character_01",
-          "height": 1.75,
-          "position": [0, 0.14, 0],
+          "height": 1.74,
+          "position": [-0.8, 0, -0.34],
+          "yaw": 1.8,
           "motion": "thinking"
         }
       ]
     },
     {
-      "title": "The lamp is on",
-      "duration": 2.2,
-      "stage": "light_gallery",
-      "cameraPreset": "macro_closeup",
-      "cameraMotion": "slow_push",
-      "focus": [-0.66, 1.03, 0.1],
-      "pov": {
-        "eye": [0.18, 1.69, 2.12]
-      },
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.02,
-          "text": "Look at",
-          "highlight": "Look"
-        },
-        {
-          "time": 0.29,
-          "text": "this lamp.",
-          "highlight": "lamp."
-        },
-        {
-          "time": 1.26,
-          "text": "Normally,",
-          "highlight": "Normally,"
-        },
-        {
-          "time": 2.18,
-          "text": "light from it",
-          "highlight": "light"
-        }
-      ],
-      "props": [
-        {
-          "id": "lamp",
-          "asset": "lamp",
-          "height": 1.32,
-          "position": [-0.66, 0.14, 0.07]
-        }
-      ]
-    },
-    {
-      "title": "Into the pupil",
-      "duration": 2.1,
-      "stage": "optics_lab",
+      "title": "Watch those windows",
+      "duration": 2.5,
+      "stage": "platform_three",
       "cameraPreset": "wide_orbit",
-      "cameraMotion": "orbit_drift",
-      "focus": [-0.2, 1.47, 0],
+      "cameraMotion": "slow_push",
+      "focus": [0, 1.48, -1.35],
       "pov": {
-        "eye": [-0.34, 1.72, 2.9]
+        "eye": [0.66, 1.55, 1.38]
       },
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "captions": [
         {
           "time": 0,
-          "text": "light from it",
-          "highlight": "light"
+          "text": "It's the train.",
+          "highlight": "train."
         },
         {
-          "time": 0.82,
-          "text": "enters your eye.",
-          "highlight": "enters"
+          "time": 0.71,
+          "text": "Everyone else",
+          "highlight": "Everyone"
+        },
+        {
+          "time": 1.33,
+          "text": "can see",
+          "highlight": "can"
+        },
+        {
+          "time": 1.65,
+          "text": "those bright windows",
+          "highlight": "windows"
         }
       ],
-      "props": [
+      "actors": [
         {
-          "id": "section_eye",
-          "asset": "section_eye",
-          "height": 1.35,
-          "position": [0, 0.825, 0]
+          "id": "visitor",
+          "asset": "male.character_01",
+          "height": 1.75,
+          "position": [0, 0, 0],
+          "motion": "thinking",
+          "fadeOut": [1.1, 2.4],
+          "fadeStyle": "scan"
+        }
+      ]
+    },
+    {
+      "title": "Pass through his face",
+      "duration": 2.4,
+      "stage": "platform_three",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
+      "focus": [0, 1.63, 0.02],
+      "pov": {
+        "eye": [0.06, 1.62, 1.38]
+      },
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.01,
+          "text": "right through",
+          "highlight": "through"
+        },
+        {
+          "time": 0.47,
+          "text": "your face,",
+          "highlight": "face,"
+        },
+        {
+          "time": 1.01,
+          "text": "but try looking",
+          "highlight": "looking"
+        },
+        {
+          "time": 1.72,
+          "text": "back at them.",
+          "highlight": "them."
+        },
+        {
+          "time": 2.39,
+          "text": "Normally",
+          "highlight": "Normally"
+        }
+      ],
+      "actors": [
+        {
+          "id": "visitor",
+          "asset": "male.character_01",
+          "height": 1.75,
+          "position": [0, 0, 0],
+          "motion": "talking",
+          "fadeOut": [0.04, 0.53],
+          "fadeStyle": "scan"
         }
       ],
       "events": [
         {
-          "id": "ray0",
-          "type": "spawn_prop",
-          "spawn_prop": "particle_stream_yellow",
-          "time": 0.0,
-          "sfx": "click",
-          "size": 0.4,
-          "travel": 0.78,
-          "from": [-1.35, 1.3599999999999999, 0.13],
-          "to": [0.53, 1.5, 0.13],
-          "via": [-0.4, 1.3599999999999999, 0.13]
-        },
-        {
           "id": "ray1",
           "type": "spawn_prop",
           "spawn_prop": "particle_stream_yellow",
-          "time": 0.04,
+          "time": 0.57,
           "sfx": "click",
-          "size": 0.4,
+          "size": 0.3,
           "travel": 0.78,
-          "from": [-1.35, 1.6400000000000001, 0.13],
-          "to": [0.53, 1.5, 0.13],
-          "via": [-0.4, 1.6400000000000001, 0.13]
+          "from": [-0.9, 1.6, -2.1],
+          "to": [0.32, 1.57, 0.54]
         }
       ]
     },
     {
       "title": "The lens bends the rays",
-      "duration": 3.0,
+      "duration": 2.4,
       "stage": "optics_lab",
       "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "slow_push",
       "focus": [0, 1.5, 0],
       "pov": {
-        "eye": [0.15, 1.58, 3.28]
-      },
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.03,
-          "text": "Your lens",
-          "highlight": "Your"
-        },
-        {
-          "time": 0.6,
-          "text": "focuses that light",
-          "highlight": "focuses"
-        },
-        {
-          "time": 1.72,
-          "text": "onto your retina.",
-          "highlight": "retina."
-        }
-      ],
-      "props": [
-        {
-          "id": "section_eye",
-          "asset": "section_eye",
-          "height": 1.35,
-          "position": [0, 0.825, 0]
-        },
-        {
-          "id": "label",
-          "asset": "label",
-          "height": 0.13,
-          "position": [0, 0.54, 0],
-          "text": "LENS   /   FOCUS"
-        }
-      ],
-      "events": [
-        {
-          "id": "ray0",
-          "type": "spawn_prop",
-          "spawn_prop": "particle_stream_yellow",
-          "time": 0.0,
-          "sfx": "click",
-          "size": 0.4,
-          "travel": 0.78,
-          "from": [-1.35, 1.3599999999999999, 0.13],
-          "to": [0.53, 1.5, 0.13],
-          "via": [-0.4, 1.3599999999999999, 0.13]
-        },
-        {
-          "id": "ray1",
-          "type": "spawn_prop",
-          "spawn_prop": "particle_stream_yellow",
-          "time": 0.04,
-          "sfx": "click",
-          "size": 0.4,
-          "travel": 0.78,
-          "from": [-1.35, 1.6400000000000001, 0.13],
-          "to": [0.53, 1.5, 0.13],
-          "via": [-0.4, 1.6400000000000001, 0.13]
-        }
-      ]
-    },
-    {
-      "title": "Absorption at the retina",
-      "duration": 2.2,
-      "stage": "optics_lab",
-      "cameraPreset": "macro_closeup",
-      "cameraMotion": "orbit_drift",
-      "focus": [0.49, 1.49, 0.07],
-      "pov": {
-        "eye": [0.54, 1.56, 1.43]
-      },
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.04,
-          "text": "Tiny cells",
-          "highlight": "cells"
-        },
-        {
-          "time": 0.9,
-          "text": "absorb it.",
-          "highlight": "absorb"
-        },
-        {
-          "time": 1.87,
-          "text": "That's how",
-          "highlight": "That's"
-        }
-      ],
-      "props": [
-        {
-          "id": "section_eye",
-          "asset": "section_eye",
-          "height": 1.35,
-          "position": [0, 0.825, 0]
-        }
-      ],
-      "events": [
-        {
-          "id": "ray0",
-          "type": "spawn_prop",
-          "spawn_prop": "particle_stream_yellow",
-          "time": 0.0,
-          "sfx": "click",
-          "size": 0.4,
-          "travel": 0.78,
-          "from": [-1.35, 1.3599999999999999, 0.13],
-          "to": [0.53, 1.5, 0.13],
-          "via": [-0.4, 1.3599999999999999, 0.13]
-        },
-        {
-          "id": "ray1",
-          "type": "spawn_prop",
-          "spawn_prop": "particle_stream_yellow",
-          "time": 0.04,
-          "sfx": "click",
-          "size": 0.4,
-          "travel": 0.78,
-          "from": [-1.35, 1.6400000000000001, 0.13],
-          "to": [0.53, 1.5, 0.13],
-          "via": [-0.4, 1.6400000000000001, 0.13]
-        }
-      ]
-    },
-    {
-      "title": "The signal means light",
-      "duration": 2.2,
-      "stage": "light_gallery",
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "slow_push",
-      "focus": [-0.62, 1.1, 0.1],
-      "pov": {
-        "eye": [-0.9, 1.28, 2.15]
-      },
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.12,
-          "text": "you know",
-          "highlight": "know"
-        },
-        {
-          "time": 0.49,
-          "text": "the lamp",
-          "highlight": "lamp"
-        },
-        {
-          "time": 0.91,
-          "text": "is on.",
-          "highlight": "on."
-        },
-        {
-          "time": 1.77,
-          "text": "Now make",
-          "highlight": "make"
-        },
-        {
-          "time": 2.07,
-          "text": "the whole eye",
-          "highlight": "whole"
-        }
-      ],
-      "props": [
-        {
-          "id": "lamp",
-          "asset": "lamp",
-          "height": 1.32,
-          "position": [-0.66, 0.14, 0.07]
-        }
-      ]
-    },
-    {
-      "title": "Nothing catches the light",
-      "duration": 3.2,
-      "stage": "optics_lab",
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "orbit_drift",
-      "focus": [0, 1.49, 0],
-      "pov": {
-        "eye": [0.21, 1.58, 2.6]
+        "eye": [0.34, 1.7, 3.45]
       },
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "captions": [
         {
           "time": 0,
-          "text": "the whole eye",
-          "highlight": "whole"
+          "text": "Normally",
+          "highlight": "Normally"
         },
         {
-          "time": 0.4,
-          "text": "invisible.",
-          "highlight": "invisible."
+          "time": 0.67,
+          "text": "your lens",
+          "highlight": "your"
         },
         {
-          "time": 1.44,
-          "text": "The light goes",
+          "time": 1.2,
+          "text": "bends light",
+          "highlight": "bends"
+        },
+        {
+          "time": 1.72,
+          "text": "from a window",
+          "highlight": "window"
+        },
+        {
+          "time": 2.23,
+          "text": "onto the back",
+          "highlight": "onto"
+        }
+      ],
+      "props": [
+        {
+          "id": "section_eye",
+          "asset": "section_eye",
+          "height": 1.35,
+          "position": [0, 0.825, 0]
+        }
+      ],
+      "events": [
+        {
+          "id": "ray0",
+          "type": "spawn_prop",
+          "spawn_prop": "particle_stream_yellow",
+          "time": 0.0,
+          "sfx": "click",
+          "size": 0.4,
+          "travel": 0.78,
+          "from": [-1.35, 1.3599999999999999, 0.13],
+          "to": [0.53, 1.5, 0.13],
+          "via": [-0.4, 1.3599999999999999, 0.13]
+        },
+        {
+          "id": "ray1",
+          "type": "spawn_prop",
+          "spawn_prop": "particle_stream_yellow",
+          "time": 0.04,
+          "sfx": "click",
+          "size": 0.4,
+          "travel": 0.78,
+          "from": [-1.35, 1.6400000000000001, 0.13],
+          "to": [0.53, 1.5, 0.13],
+          "via": [-0.4, 1.6400000000000001, 0.13]
+        }
+      ]
+    },
+    {
+      "title": "Ride the light to the retina",
+      "duration": 3.2,
+      "stage": "retina_tunnel",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "focus": [0, 1.5, -4.5],
+      "pov": {
+        "eye": [0.1, 1.57, 1.32],
+        "dollyTo": [-0.05, 1.48, -2.42]
+      },
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "onto the back",
+          "highlight": "onto"
+        },
+        {
+          "time": 0.31,
+          "text": "of your eye,",
+          "highlight": "your"
+        },
+        {
+          "time": 0.87,
+          "text": "where your retina",
+          "highlight": "retina"
+        },
+        {
+          "time": 1.51,
+          "text": "catches it",
+          "highlight": "catches"
+        },
+        {
+          "time": 2.05,
+          "text": "and sends",
+          "highlight": "sends"
+        },
+        {
+          "time": 2.43,
+          "text": "your brain",
+          "highlight": "brain"
+        },
+        {
+          "time": 2.77,
+          "text": "the picture.",
+          "highlight": "picture."
+        }
+      ],
+      "events": [
+        {
+          "type": "sound",
+          "time": 0,
+          "sfx": "click"
+        }
+      ]
+    },
+    {
+      "title": "The transparent retina",
+      "duration": 2.6,
+      "stage": "optics_lab",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [0, 1.5, 0],
+      "pov": {
+        "eye": [0.07, 1.55, 3.17]
+      },
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.17,
+          "text": "If light sails",
           "highlight": "light"
         },
         {
-          "time": 2.1,
-          "text": "straight through.",
+          "time": 1.03,
+          "text": "straight through",
           "highlight": "straight"
+        },
+        {
+          "time": 1.59,
+          "text": "your retina too,",
+          "highlight": "retina"
         }
       ],
       "props": [
@@ -619,14 +385,8 @@
           "asset": "section_eye",
           "height": 1.35,
           "position": [0, 0.825, 0],
-          "fadeOut": [0.23, 1]
-        },
-        {
-          "id": "label",
-          "asset": "label",
-          "height": 0.13,
-          "position": [0, 0.65, 0],
-          "text": "NO ABSORPTION"
+          "fadeOut": [0.2, 0.9],
+          "fadeStyle": "scan"
         }
       ],
       "events": [
@@ -655,204 +415,135 @@
       ]
     },
     {
-      "title": "Subjective view: no signal",
-      "duration": 2.8,
+      "title": "Window without a signal",
+      "duration": 2.9,
       "stage": "signal_dark",
-      "cameraPreset": "macro_closeup",
-      "cameraMotion": "slow_push",
-      "focus": [-0.66, 1.16, 0.16],
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [0, 1.36, -0.58],
       "pov": {
-        "eye": [-0.61, 1.3, 2.1]
+        "eye": [-0.25, 1.46, 1.29],
+        "dollyTo": [0.13, 1.38, 0.87]
+      },
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.01,
+          "text": "that train",
+          "highlight": "train"
+        },
+        {
+          "time": 0.6,
+          "text": "could fill",
+          "highlight": "could"
+        },
+        {
+          "time": 0.99,
+          "text": "your whole view",
+          "highlight": "whole"
+        },
+        {
+          "time": 1.75,
+          "text": "and you wouldn't",
+          "highlight": "wouldn't"
+        },
+        {
+          "time": 2.22,
+          "text": "see a thing.",
+          "highlight": "thing."
+        }
+      ],
+      "props": [
+        {
+          "id": "car_window",
+          "asset": "car_window",
+          "height": 1.2,
+          "position": [0, 0.73, -0.58],
+          "fadeOut": [1.45, 1.8]
+        }
+      ]
+    },
+    {
+      "title": "Back through the pupil",
+      "duration": 2.3,
+      "stage": "retina_tunnel",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_pull",
+      "focus": [0, 1.5, -4.5],
+      "pov": {
+        "eye": [-0.09, 1.55, -3.15],
+        "dollyTo": [0.19, 1.47, 0.65]
       },
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "captions": [
         {
           "time": 0.02,
-          "text": "The lamp",
-          "highlight": "lamp"
+          "text": "Want your",
+          "highlight": "Want"
         },
         {
-          "time": 0.39,
-          "text": "is still on.",
-          "highlight": "still"
+          "time": 0.42,
+          "text": "eyesight back?",
+          "highlight": "eyesight"
         },
         {
-          "time": 1.43,
-          "text": "You just can't",
-          "highlight": "can't"
-        },
-        {
-          "time": 1.95,
-          "text": "see it.",
-          "highlight": "see"
-        }
-      ],
-      "props": [
-        {
-          "id": "lamp",
-          "asset": "lamp",
-          "height": 1.32,
-          "position": [-0.66, 0.14, 0.07],
-          "fadeOut": [1.22, 1.49]
-        }
-      ]
-    },
-    {
-      "title": "Keep the detectors",
-      "duration": 2.1,
-      "stage": "light_gallery",
-      "cameraPreset": "macro_closeup",
-      "cameraMotion": "orbit_drift",
-      "focus": [0, 1.76, 0.02],
-      "pov": {
-        "eye": [0.04, 1.78, 1.12]
-      },
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.03,
-          "text": "Keep your",
-          "highlight": "Keep"
-        },
-        {
-          "time": 0.38,
-          "text": "eyes working",
-          "highlight": "working"
-        },
-        {
-          "time": 0.95,
-          "text": "instead?",
-          "highlight": "instead?"
-        },
-        {
-          "time": 1.81,
-          "text": "Then some light",
-          "highlight": "light"
-        }
-      ],
-      "props": [
-        {
-          "id": "L",
-          "asset": "eye",
-          "height": 0.11,
-          "position": [-0.105, 1.69, 0]
-        },
-        {
-          "id": "R",
-          "asset": "eye",
-          "height": 0.11,
-          "position": [0.105, 1.69, 0]
-        }
-      ]
-    },
-    {
-      "title": "A little light must stop",
-      "duration": 2.4,
-      "stage": "optics_lab",
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "slow_push",
-      "focus": [0.3, 1.53, 0.1],
-      "pov": {
-        "eye": [0.35, 1.55, 1.9]
-      },
-      "sfx": "whoosh_fast",
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0,
-          "text": "Then some light",
+          "time": 1.3,
+          "text": "Some light",
           "highlight": "light"
         },
         {
-          "time": 0.43,
-          "text": "has to",
-          "highlight": "has"
-        },
-        {
-          "time": 0.71,
-          "text": "stop there.",
-          "highlight": "there."
-        },
-        {
-          "time": 1.69,
-          "text": "Congratulations.",
-          "highlight": "Congratulations."
-        }
-      ],
-      "props": [
-        {
-          "id": "section_eye",
-          "asset": "section_eye",
-          "height": 1.35,
-          "position": [0, 0.825, 0]
+          "time": 1.8,
+          "text": "has to stop",
+          "highlight": "stop"
         }
       ],
       "events": [
         {
-          "id": "ray0",
-          "type": "spawn_prop",
-          "spawn_prop": "particle_stream_yellow",
-          "time": 0.0,
-          "sfx": "click",
-          "size": 0.4,
-          "travel": 0.78,
-          "from": [-1.35, 1.3599999999999999, 0.13],
-          "to": [0.53, 1.5, 0.13],
-          "via": [-0.4, 1.3599999999999999, 0.13]
-        },
-        {
-          "id": "ray1",
-          "type": "spawn_prop",
-          "spawn_prop": "particle_stream_yellow",
-          "time": 0.04,
-          "sfx": "click",
-          "size": 0.4,
-          "travel": 0.78,
-          "from": [-1.35, 1.6400000000000001, 0.13],
-          "to": [0.53, 1.5, 0.13],
-          "via": [-0.4, 1.6400000000000001, 0.13]
+          "type": "sound",
+          "time": 0,
+          "sfx": "ding"
         }
       ]
     },
     {
-      "title": "Two eyes. No visitor.",
-      "duration": 3.066666666666667,
-      "stage": "light_gallery",
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "slow_pull",
-      "focus": [0, 1.58, -0.15],
+      "title": "Two little exceptions",
+      "duration": 2.8,
+      "stage": "platform_three",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
+      "focus": [0, 1.74, 0],
       "pov": {
-        "eye": [-0.21, 1.76, 1.95]
+        "eye": [0.04, 1.78, 1.13]
       },
       "sfx": "whoosh_fast",
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0,
-          "text": "Congratulations.",
-          "highlight": "Congratulations."
+          "time": 0.09,
+          "text": "inside your eyes.",
+          "highlight": "inside"
         },
         {
-          "time": 0.79,
-          "text": "You're a pair",
-          "highlight": "You're"
+          "time": 1.07,
+          "text": "So now",
+          "highlight": "now"
         },
         {
-          "time": 1.38,
-          "text": "of eyes",
-          "highlight": "eyes"
+          "time": 1.74,
+          "text": "there's a pair",
+          "highlight": "there's"
         },
         {
-          "time": 1.79,
-          "text": "in the middle",
-          "highlight": "middle"
+          "time": 2.2,
+          "text": "of eyeballs",
+          "highlight": "eyeballs"
         },
         {
-          "time": 2.23,
-          "text": "of the room.",
-          "highlight": "room."
+          "time": 2.74,
+          "text": "on platform three,",
+          "highlight": "platform"
         }
       ],
       "props": [
@@ -860,21 +551,68 @@
           "id": "L",
           "asset": "eye",
           "height": 0.11,
-          "position": [-0.105, 1.69, 0],
-          "yaw": 0.2
+          "position": [-0.093, 1.69, 0]
         },
         {
           "id": "R",
           "asset": "eye",
           "height": 0.11,
-          "position": [0.105, 1.69, 0],
-          "yaw": 0.2
+          "position": [0.093, 1.69, 0]
+        }
+      ]
+    },
+    {
+      "title": "Waiting on platform three",
+      "duration": 3.0,
+      "stage": "platform_three",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_pull",
+      "focus": [0, 1.69, -0.2],
+      "pov": {
+        "eye": [-0.08, 1.73, 1.06],
+        "dollyTo": [0.36, 1.79, 2.35]
+      },
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "on platform three,",
+          "highlight": "platform"
         },
         {
-          "id": "lamp",
-          "asset": "lamp",
-          "height": 1.32,
-          "position": [-0.66, 0.14, 0.07]
+          "time": 1.11,
+          "text": "watching everybody else",
+          "highlight": "everybody"
+        },
+        {
+          "time": 2.13,
+          "text": "miss their train.",
+          "highlight": "train."
+        }
+      ],
+      "props": [
+        {
+          "id": "L",
+          "asset": "eye",
+          "height": 0.11,
+          "position": [-0.093, 1.69, 0]
+        },
+        {
+          "id": "R",
+          "asset": "eye",
+          "height": 0.11,
+          "position": [0.093, 1.69, 0]
+        }
+      ],
+      "actors": [
+        {
+          "id": "commuter",
+          "asset": "male.character_01",
+          "height": 1.74,
+          "position": [0.77, 0, -0.51],
+          "yaw": 2.27,
+          "motion": "thinking"
         }
       ]
     }

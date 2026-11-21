@@ -95,6 +95,6 @@ The narrative recut, **[Your last $10 on red](episodes/casino_martingale.json)**
 
 ### Field study: What if you could turn invisible?
 
-[Episode JSON](episodes/invisible.json) · Open `/?episode=episodes/invisible.json` in the studio. A 16-shot experiment with a striped registration target, the returning actor and a cutaway eye. It models **perfect transmission of visible light**, not camouflage or a camera-fed cloak. Compare the converging rays that stop at the normal retina with the straight rays that pass through the transparent eye. The final floating eyes are a visual gag about detectors having to interact with light, not a claim that eyes could function detached from nerves or a blood supply.
+[Episode JSON](episodes/invisible.json) · Open `/?episode=episodes/invisible.json` in the studio. A 28.4-second subway-platform experiment: 11 moving shots, a scan-line disappearance against passing train windows, and a trip down the optical axis. It models **perfect transmission of visible light**, not camouflage or a camera-fed cloak. Compare the converging rays that stop at the normal retina with the straight rays that pass through the transparent eye. The final floating eyes are a visual gag about detectors having to interact with light, not a claim that eyes could function detached from nerves or a blood supply.
 
-To export: `npm run render -- episodes/invisible.json`. The continuous voice recording sets the timing. The music stem is reproducible with `python3 scripts/score.py episodes/invisible-score.wav --bpm 112 --seed 40`.
+To export: `npm run render -- episodes/invisible.json`. The continuous voice recording sets the timing. The music stem is reproducible with `python3 scripts/platform_score.py`.

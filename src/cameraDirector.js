@@ -50,6 +50,11 @@ export class CameraDirector {
       const turn = Math.min(1, t / 0.36),
         kick = 1 - Math.exp(-8 * t);
       c.position.fromArray(s.pov.eye);
+      if (s.pov.dollyTo)
+        c.position.lerp(
+          this.offset.fromArray(s.pov.dollyTo),
+          u * u * (3 - 2 * u),
+        );
       c.position.y += 0.014 * Math.sin(5 * t);
       if (s.pov.whipFrom)
         this.focus.lerp(

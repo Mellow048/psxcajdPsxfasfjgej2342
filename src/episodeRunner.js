@@ -64,11 +64,44 @@ export class EpisodeRunner {
             node.traverse((o) => {
               for (const m of [].concat(o.material || [])) materials.add(m);
             });
+            // A world-space edge cuts across the skinned mesh. Its uniform
+            // follows the same shot clock as captions and survives random seeks.
+            const scan = def.fadeStyle === "scan",
+              progress = { value: 0 };
+            if (scan)
+              for (const m of materials) {
+                const patch = m.onBeforeCompile.bind(m);
+                m.depthWrite = true;
+                m.transparent = false;
+                m.onBeforeCompile = (s, ...args) => {
+                  patch(s, ...args);
+                  s.uniforms.phaseEdge = progress;
+                  s.vertexShader =
+                    "varying float phaseY;\n" +
+                    s.vertexShader.replace(
+                      "#include <project_vertex>",
+                      "#include <project_vertex>\nphaseY=(modelMatrix*vec4(transformed,1.)).y;",
+                    );
+                  s.fragmentShader =
+                    "uniform float phaseEdge; varying float phaseY;\n" +
+                    s.fragmentShader.replace(
+                      "#include <opaque_fragment>",
+                      "if(phaseY < phaseEdge) discard; outgoingLight=mix(vec3(0.32,1.0,0.94),outgoingLight,smoothstep(0.0,.055,phaseY-phaseEdge));\n#include <opaque_fragment>",
+                    );
+                };
+                m.customProgramCacheKey = () => "psx-scan-edge-v1";
+                m.needsUpdate = true;
+              }
             item.fade = (t) => {
               const [a, b] = def.fadeOut,
                 opacity = 1 - T.MathUtils.smoothstep(t, a, b);
               node.visible = opacity > 0;
-              for (const m of materials) m.opacity = opacity;
+              if (scan)
+                progress.value =
+                  (def.position?.[1] ?? 0) -
+                  0.12 +
+                  (1 - opacity) * ((def.height ?? 1.6) + 0.4);
+              else for (const m of materials) m.opacity = opacity;
             };
           }
           const { clip, take } = await loader.performanceSource(def, node);
@@ -184,7 +217,7 @@ export class EpisodeRunner {
       i.fade?.(rigTime);
       i.morph?.(rigTime, i.def.motion);
     }
-    f.weather?.(rigTime);
+    f.weather?.(rigTime, f.start / CONFIG.hz + rigTime);
     for (const spawn of f.spawns) {
       sampleSpawn(spawn, t);
       spawn.pushChips?.(t);

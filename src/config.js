@@ -7,6 +7,8 @@ export const CONFIG = {
   psx: { grid: 160, gridHeight: 240, affine: 1, dither: 1, scale: 1 / 3 },
 };
 export const SCENE_PRESETS = {
+  platform_three: { color: 0x192833, fog: 0x283b49 },
+  retina_tunnel: { color: 0x371d36, fog: 0x382339 },
   signal_dark: { color: 0x05060c, fog: 0x05060c },
   light_gallery: { color: 0x234450, fog: 0x426164 },
   casino_room: { color: 0x432737, fog: 0x4c2b39 },
@@ -45,6 +47,7 @@ export const SCENE_PRESETS = {
 };
 export const BUILTINS = [
   "evo_cat",
+  "car_window",
   "section_eye",
   "sheet",
   "pane",
