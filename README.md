@@ -2,6 +2,10 @@
 
 Cutframe is a static Three.js r170 editor for making vertical educational videos from JSON. The studio opens with **Why windows become mirrors at night**, a 24-second v3 episode with eleven hard cuts and shot-local performances. The alternate **The ghost in the glass** episode explains Pepper’s ghost in nine 2.5-second shots, with original sets, an uploaded Halloween actor, a synthesized narrator, and cut cues. [Watch the archived v1 WebM](episodes/ghost-in-the-glass.webm) or [open its JSON](episodes/ghost-in-the-glass.json).
 
+## Finished reference short
+
+[Watch **Your last $10 on red** (MP4)](examples/last-ten-on-red/casino_martingale.mp4) · [Editable episode source](episodes/casino_martingale.json) · [Shot breakdown and rebuild instructions](examples/last-ten-on-red/README.md). Use this 42⅓-second short as a starting point for timing a continuous voice take, staging hand-placed bets, and mixing a score beneath dialogue.
+
 ## Render on GitHub — no local GPU required
 
 1. Add a script under `episodes/` (see [the writing guide](SCRIPT_GUIDE.md)). For speech, write a sentence or paragraph in episode-level `narration`, or set `voiceover` to one recording. With neither, the engine exports captions, beat and SFX only.

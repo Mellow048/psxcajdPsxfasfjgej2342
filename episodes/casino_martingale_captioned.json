@@ -883,7 +883,7 @@
   ],
   "pacing": "micro",
   "music": {
-    "track": "episodes/casino-room-tone.wav",
-    "volume": 0.9
+    "track": "episodes/casino-score.wav",
+    "volume": 0.48
   }
 }
