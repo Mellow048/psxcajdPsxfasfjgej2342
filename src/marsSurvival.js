@@ -63,7 +63,7 @@ const palette = () => ({
   mint: paint(0x93ffce, false),
   red: paint(0xff774d, false),
 });
-function landscape(s, night) {
+function landscape(s, night, sunset) {
   const rand = seed(505),
     m = new T.Matrix4(),
     q = new T.Quaternion(),
@@ -89,7 +89,12 @@ function landscape(s, night) {
     }),
   );
   sky.renderOrder = -5;
-  oval(
+  if (night) {
+    s.children.forEach((x) => {
+      if (x.isLight) x.intensity *= 0.24;
+    });
+  }
+  const sun = oval(
     s,
     6,
     4.5,
@@ -227,7 +232,13 @@ function landscape(s, night) {
     }
     stamps.push(o);
   }
-  return stamps;
+  return {
+    stamps,
+    sampleSky: (t) => {
+      if (sunset) sun.position.y = 3.6 - 2.4 * ease(t, 0, 2.0);
+      sun.visible = !night;
+    },
+  };
 }
 function hab(s, c, m) {
   const base = new T.Group();
@@ -359,9 +370,36 @@ function cabin(s, c, m) {
       );
     b.rotation.z = -a + 0.25;
   }
-  tag(s, 0.69, 0.12, 1.17, 1.62, -1.03, "AIR CIRC.", "ONLINE");
+  const stop = m.cue === "fan_stop";
+  tag(
+    s,
+    0.69,
+    0.12,
+    1.17,
+    1.62,
+    -1.03,
+    "AIR CIRC.",
+    stop ? "POWER LOSS" : "ONLINE",
+  );
+  box(s, 0.17, 0.15, 0.06, c.ink, 1.72, 1.7, -1.1);
+  const plug = box(s, 0.09, 0.09, 0.09, c.orange, 1.72, 1.7, -1.03);
+  tube(
+    s,
+    [
+      [1.72, 1.65, -0.98],
+      [1.69, 1.46, -0.97],
+      [1.48, 1.51, -0.97],
+      [1.43, 1.6, -1.0],
+    ],
+    0.019,
+    c.slate,
+  );
   return (t) => {
-    fan.rotation.z = t * 2.4;
+    const power = stop ? 1 - ease(t, 0.12, 0.85) : 1;
+    fan.rotation.z = stop
+      ? 6 * Math.min(t, 0.12) + 3 * (1 - Math.exp(-5 * Math.max(0, t - 0.12)))
+      : t * 4.5;
+    plug.position.z = -1.03 + 0.19 * (1 - power);
     bars.forEach(
       (b, i) =>
         (b.visible =
@@ -385,12 +423,58 @@ export function marsSet(s, m, inside) {
     tag(g, 0.24, 0.081, -0.27, 0.89, 0.126, "EARTH", "SEA LEVEL");
     tag(g, 0.24, 0.081, -0.27, 0.77, 0.126, "MARS", "< 1%");
   }
-  const prints = landscape(s, m.cue === "night"),
+  const { stamps: prints, sampleSky } = landscape(
+      s,
+      m.cue === "night",
+      m.cue === "sunset",
+    ),
     sample = m.base ? hab(s, c, m) : null;
+  // A low, ballistic spray marks the actual contact, not a looping magic cloud.
+  const landing = m.cue === "step" || m.cue === "second_print";
+  const grit = landing
+    ? new T.InstancedMesh(
+        new T.IcosahedronGeometry(0.012, 0),
+        paint(0xb47750),
+        28,
+      )
+    : null;
+  if (grit) {
+    grit.frustumCulled = false;
+    s.add(grit);
+  }
+  const matrix = new T.Matrix4();
   return (t) => {
+    sampleSky(t);
+    if (grit) {
+      const last = m.cue === "second_print",
+        age = t - (last ? 0.54 : 0.22);
+      grit.visible = age >= 0 && age < 0.66;
+      if (grit.visible) {
+        for (let i = 0; i < grit.count; i++) {
+          const ang = i * 2.4,
+            speed = 0.19 + 0.033 * (i % 7),
+            rise = (0.45 + 0.07 * (i % 6)) * age - 1.9 * age * age;
+          matrix
+            .makeScale(1.35, 0.66, 1)
+            .setPosition(
+              (last ? -0.28 : -0.53) + Math.cos(ang) * age * speed,
+              0.009 + Math.max(0, rise),
+              (last ? -0.06 : 0.18) + Math.sin(ang) * age * speed,
+            );
+          grit.setMatrixAt(i, matrix);
+        }
+        grit.instanceMatrix.needsUpdate = true;
+      }
+    }
+
     prints.forEach(
       (p, i) =>
-        (p.visible = m.cue === "prints" ? i < 2 + Math.floor(t * 2) : i < 3),
+        (p.visible =
+          m.cue === "second_print"
+            ? i === 0 || (i === 1 && t > 0.54)
+            : m.cue === "step"
+              ? i === 0 && t > 0.22
+              : i === 0),
     );
     sample?.(t);
   };
@@ -531,6 +615,11 @@ export function bindMarsExplorer(item, scene, m) {
     c.slate,
   );
   const bead = oval(filter, 0, 0, 0, 0.03, 0.03, 0.03, c.mint);
+  // Inset cutaway: show exhaled gas accumulating; the amber tracer stops at the cartridge.
+  const waste = [];
+  if (m.cue === "gas" || m.cue === "filter")
+    for (let i = 0; i < 8; i++)
+      waste.push(oval(chest, 0, 0, 0, 0.023, 0.023, 0.023, c.red));
   const loops = [];
   for (let j = 0; j < 4; j++)
     loops.push(
@@ -556,7 +645,7 @@ export function bindMarsExplorer(item, scene, m) {
     delta = new T.Vector3();
   return (t) => {
     const suitOn = m.cue === "suit" ? smooth(t, 0.18, 1.16) : 1;
-    const opening = m.cue === "unhelmet" ? smooth(t, 0.64, 1.8) : 0;
+    const opening = m.cue === "unhelmet" ? smooth(t, 0.34, 1.26) : 0;
     skinned.forEach((o) => (o.visible = suitOn < 0.92 || opening > 0));
     gear.visible = suitOn > 0.01;
     const yaw = actor.rotation.y;
@@ -595,6 +684,16 @@ export function bindMarsExplorer(item, scene, m) {
       const lock = m.cue === key ? smooth(t, 0.16, 0.98) : 1;
       g.position.z = -(1 - lock) * 0.46;
       g.scale.setScalar(0.03 + 0.97 * lock);
+    }
+    for (let i = 0; i < waste.length; i++) {
+      const u = (t * 0.68 + i / 8) % 1;
+      const o = waste[i];
+      o.visible = m.kit < 3 ? i < 2 + Math.floor(t * 4) : u < 0.86;
+      o.position.set(
+        -0.12 - 0.13 * Math.sin(u * Math.PI),
+        0.34 - 0.3 * u,
+        0.16 - 0.42 * u,
+      );
     }
     path.getPoint((t * 0.78) % 1, bead.position);
     loops[1].getPoint((t * 0.88) % 1, coolant.position);

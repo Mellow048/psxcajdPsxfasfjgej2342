@@ -74,6 +74,7 @@ export const MUSIC_PRESETS = {
   },
 };
 export const SFX_MANIFEST = {
+  none: null,
   whoosh_fast: "synth",
   ui_pop: "synth",
   ding: "synth",

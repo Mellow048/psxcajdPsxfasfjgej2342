@@ -150,7 +150,7 @@ test("Mars: failed bare landing, cumulative suit, safe helmet removal and a shie
     at = (c) => shots[cues.indexOf(c)];
   assert.equal(
     shots.reduce((n, s) => n + Math.round(s.duration * 30), 0),
-    2654,
+    2109,
   );
   assert.equal(shots[0].actors[0].asset, "male.character_01");
   assert.equal(at("lost").mars.kit, 0);
@@ -182,4 +182,17 @@ test("Mars: failed bare landing, cumulative suit, safe helmet removal and a shie
   const broken = structuredClone(e);
   broken.shots[0].mars.kit = 5;
   assert.throws(() => validate(broken), /loadout/);
+});
+
+test("Mars sunrise mix schedules the dry take once, with no other layers", () => {
+  const ep = validate(JSON.parse(readFileSync("episodes/mars.json"))),
+    played = [],
+    audio = new SfxEngine();
+  audio.ctx = { currentTime: 0 };
+  audio.sample = (url) => played.push(url);
+  audio.tone = (key) => played.push(key);
+  audio.musicBed = () => played.push("music");
+  audio.start(ep, 0);
+  assert.deepEqual(played, [ep.voiceover]);
+  assert.equal(ep.shots.length, 39);
 });

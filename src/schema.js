@@ -87,11 +87,16 @@ export function validate(e) {
     "expected 1–60 shots",
   );
   check(
-    e.pacing === undefined || ["narrative", "micro"].includes(e.pacing),
+    e.pacing === undefined ||
+      ["narrative", "micro", "burst"].includes(e.pacing),
     "invalid pacing profile",
   );
   const maxShot =
-    e.pacing === "narrative" ? 15 : e.pacing === "micro" ? 3.2 : 3.5;
+    e.pacing === "narrative"
+      ? 15
+      : ["micro", "burst"].includes(e.pacing)
+        ? 3.2
+        : 3.5;
   let storyCount = 0,
     instanceCount = 0;
   for (const [i, s] of e.shots.entries()) {
@@ -118,7 +123,8 @@ export function validate(e) {
         ["center", "lower"].includes(s.captionPosition),
       "invalid captionPosition",
     );
-    const minShot = e.pacing === "micro" && i < 2 ? 1.7 : 2;
+    const minShot =
+      e.pacing === "burst" ? 0.8 : e.pacing === "micro" && i < 2 ? 1.7 : 2;
     check(str(s.title), "missing title");
     check(
       num(s.duration) &&
@@ -173,6 +179,10 @@ export function validate(e) {
           [
             "hold",
             "readout",
+            "gas",
+            "fan_stop",
+            "sunset",
+            "second_print",
             "step",
             "prints",
             "fall",

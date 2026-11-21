@@ -109,6 +109,6 @@ Open `/?episode=episodes/wifi.json` or inspect the [episode JSON](episodes/wifi.
 
 ### Field study: One Human on Mars
 
-[What if you stepped onto Mars?](episodes/mars.json) is an 88.47-second, 34-shot survival experiment. A failed unprotected landing rewinds to the same explorer. Watch the pressure shell, oxygen pack, CO₂ scrubber and cooling unit accumulate on the moving rig; later shots add a pressurized shelter, supplies, power storage and a regolith cover. The failure is time-compressed; blackout is not the same as immediate death. The upgrades illustrate problems each system addresses, not a complete spacecraft design or a guarantee of indefinite survival.
+[What if you stepped onto Mars?](episodes/mars.json) is a 70.3-second, 39-shot race to sunrise. A failed unprotected landing rewinds to the same explorer. Watch the pressure shell, oxygen pack, CO₂ scrubber and cooling unit accumulate on the moving rig; later shots add a pressurized shelter, supplies, power storage and a regolith cover. The failure is time-compressed; blackout is not the same as immediate death. The upgrades illustrate problems each system addresses, not a complete spacecraft design or a guarantee of indefinite survival.
 
-Preview with `/?episode=episodes/mars.json`, export with `npm run render -- episodes/mars.json`, or rebuild the music with `python3 scripts/mars_score.py`.
+Preview with `/?episode=episodes/mars.json`, export with `npm run render -- episodes/mars.json`. The sunrise cut deliberately uses a single dry voice track, without a score or electronic cut sounds.

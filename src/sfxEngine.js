@@ -157,9 +157,9 @@ export class SfxEngine {
         const when = now + Math.max(0, t - offset);
         for (const def of [...(s.actors ?? []), ...(s.props ?? [])])
           if (def.motionSfx) this.tone(def.motionSfx, when);
-        SFX_MANIFEST[s.sfx] === "synth"
-          ? this.tone(s.sfx, when)
-          : this.sample(SFX_MANIFEST[s.sfx], when);
+        const cut = SFX_MANIFEST[s.sfx];
+        if (cut === "synth") this.tone(s.sfx, when);
+        else if (cut) this.sample(cut, when);
       }
       for (const ev of s.events ?? []) {
         const at =
