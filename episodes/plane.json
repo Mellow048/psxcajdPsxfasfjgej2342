@@ -17,9 +17,9 @@
       "cameraPreset": "wide_orbit",
       "cameraMotion": "slow_pull",
       "focus": [
-        0.8,
-        2.1,
-        -4.6
+        0,
+        1.7,
+        -0.8
       ],
       "sfx": "whoosh_fast",
       "actors": [
@@ -54,7 +54,7 @@
           "highlight": "warning"
         }
       ],
-      "distance": 3.6,
+      "distance": 4.4,
       "duration": 2.65
     },
     {
@@ -66,11 +66,7 @@
       },
       "cameraPreset": "over_shoulder",
       "cameraMotion": "handheld_bob",
-      "focus": [
-        0,
-        1.5,
-        0
-      ],
+      "focus": "faller",
       "sfx": "riser",
       "actors": [
         {
@@ -109,24 +105,8 @@
           "highlight": "mind"
         }
       ],
-      "pov": {
-        "eye": [
-          0.35,
-          2.6,
-          -2.3
-        ],
-        "lookTo": [
-          1.5,
-          2.6,
-          -5.8
-        ],
-        "dollyTo": [
-          0.15,
-          2.15,
-          -1.1
-        ]
-      },
-      "duration": 2.2666666666666666
+      "duration": 2.2666666666666666,
+      "distance": 2.7
     },
     {
       "title": "Not enough oxygen",
@@ -170,7 +150,7 @@
           "highlight": "oxygen"
         }
       ],
-      "distance": 1.7,
+      "distance": 1.9,
       "duration": 2.033333333333333
     },
     {
@@ -408,9 +388,9 @@
       "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "slow_push",
       "focus": [
-        0,
-        1.3,
-        0
+        2,
+        -7,
+        8.5
       ],
       "sfx": "riser",
       "actors": [
@@ -453,18 +433,18 @@
       "pov": {
         "eye": [
           0.5,
-          2.7,
-          0.2
+          2.55,
+          0.25
         ],
         "lookTo": [
-          10,
-          -4.6,
-          15.5
+          2,
+          -7,
+          8.5
         ],
         "dollyTo": [
           0.2,
-          2.1,
-          0.8
+          2.2,
+          0.9
         ]
       },
       "duration": 2.5
@@ -479,9 +459,9 @@
       "cameraPreset": "wide_orbit",
       "cameraMotion": "slow_push",
       "focus": [
-        -4,
-        -2.2,
-        -2.5
+        2,
+        -7,
+        9.5
       ],
       "sfx": "whoosh",
       "actors": [
@@ -518,19 +498,19 @@
       ],
       "pov": {
         "eye": [
-          0.4,
+          0.45,
           2.3,
-          0.7
+          0.75
         ],
         "lookTo": [
           2,
-          -5.5,
-          6
+          -7,
+          9.5
         ],
         "dollyTo": [
           0.2,
-          1.7,
-          1.3
+          1.85,
+          1.35
         ]
       },
       "duration": 2.3666666666666667
@@ -545,9 +525,9 @@
       "cameraPreset": "dutch_tilt_push",
       "cameraMotion": "slow_push",
       "focus": [
-        -9.1,
-        -4.6,
-        -4
+        -8,
+        -6.9,
+        -3
       ],
       "sfx": "whoosh_fast",
       "actors": [
@@ -582,7 +562,7 @@
           "highlight": "concrete"
         }
       ],
-      "distance": 2.8,
+      "distance": 4.6,
       "duration": 3.1333333333333333
     },
     {
@@ -596,7 +576,7 @@
       "cameraMotion": "orbit_drift",
       "focus": [
         14,
-        -5.4,
+        -5.6,
         -8
       ],
       "sfx": "whoosh",
@@ -637,7 +617,7 @@
           "highlight": "branches"
         }
       ],
-      "distance": 4.2,
+      "distance": 5.4,
       "duration": 3.2
     },
     {
@@ -651,7 +631,7 @@
       "cameraMotion": "handheld_bob",
       "focus": [
         -9,
-        -6.5,
+        -6.8,
         13
       ],
       "sfx": "click",
@@ -682,7 +662,7 @@
           "highlight": "rocks"
         }
       ],
-      "distance": 3.2,
+      "distance": 4.3,
       "duration": 1.5
     },
     {
@@ -738,11 +718,11 @@
         "cue": "steer",
         "alt": 2
       },
-      "cameraPreset": "dutch_tilt_push",
-      "cameraMotion": "slow_push",
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_pull",
       "focus": [
         10,
-        -5.2,
+        -6.9,
         15.5
       ],
       "sfx": "whoosh",
@@ -773,7 +753,7 @@
           "highlight": "farm"
         }
       ],
-      "distance": 3.0,
+      "distance": 6.0,
       "duration": 1.5
     },
     {
@@ -819,7 +799,7 @@
           "highlight": "hundred"
         }
       ],
-      "distance": 3.4,
+      "distance": 4.2,
       "duration": 2.45
     },
     {
@@ -865,7 +845,7 @@
           "highlight": "roll"
         }
       ],
-      "distance": 2.4,
+      "distance": 2.7,
       "duration": 1.9
     },
     {

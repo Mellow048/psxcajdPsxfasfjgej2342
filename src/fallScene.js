@@ -18,34 +18,6 @@ function oval(p, x, y, z, w, h, d, m) {
 }
 const cyl = (p, a, b, h, m, x, y, z, n = 12) =>
   mesh(p, new T.CylinderGeometry(a, b, h, n), m, x, y, z);
-function tag(p, w, h, x, y, z, top, small, ry = 0) {
-  const c = document.createElement("canvas");
-  c.width = 512;
-  c.height = 160;
-  const q = c.getContext("2d");
-  q.fillStyle = "#101d2b";
-  q.fillRect(0, 0, 512, 160);
-  q.fillStyle = "#ffd384";
-  q.fillRect(0, 0, 12, 160);
-  q.font = "bold 67px sans-serif";
-  q.fillStyle = "#ffe9c4";
-  q.fillText(top, 24, 83, 467);
-  q.fillStyle = "#8fe8ff";
-  q.font = "bold 30px monospace";
-  q.fillText(small, 27, 140, 464);
-  const map = new T.CanvasTexture(c);
-  map.colorSpace = T.SRGBColorSpace;
-  const o = mesh(
-    p,
-    new T.PlaneGeometry(w, h),
-    new T.MeshBasicMaterial({ map }),
-    x,
-    y,
-    z,
-  );
-  o.rotation.y = ry;
-  return o;
-}
 const ease = (t, a, b) => T.MathUtils.smoothstep(t, a, b);
 function seed(n) {
   return () => (n = (Math.imul(n, 1664525) + 1013904223) >>> 0) / 4294967296;
@@ -200,23 +172,8 @@ export function fallSet(s, m) {
     tm.makeRotationY(0.12).setPosition(3.4 + i * 0.55, 0.05, 15.5);
     rows.setMatrixAt(i, tm);
   }
-  // Option labels floating over each landing choice.
-  const labels = new T.Group();
-  ground.add(labels);
-  tag(
-    labels,
-    3.4,
-    1.0,
-    riverX(-4),
-    2.4,
-    -4,
-    "RIVER",
-    "SOFT LOOKING",
-    Math.PI * 0.06,
-  );
-  tag(labels, 4.2, 1.2, 14, 3.4, -8, "FOREST", "TREES CUSHION?", 0);
-  tag(labels, 4.0, 1.2, -9, 3.0, 13, "ROCKS", "JUST ROCKS", 0);
-  tag(labels, 5.6, 1.6, 10, 3.6, 15.5, "PLOWED FARM", "SOFTEST GROUND", 0);
+  // No floating labels: the patchwork terrain and VO carry the landing options;
+  // pasted signboards read like UI and flattened the depth of the drop.
   // The wreck: fuselage, wing and tail tumbling away with fire and smoke.
   const wreck = new T.Group();
   s.add(wreck);
@@ -354,31 +311,31 @@ export function bindFaller(item, scene, m) {
       head = 0;
     if (p === "blast" || p === "debris") {
       roll = t * 2.4;
-      pitch = -1.15 + 0.25 * Math.sin(t * 3);
+      pitch = -1.34 + 0.18 * Math.sin(t * 3);
       arm = 1.0 + 0.5 * Math.sin(t * 6);
     } else if (p === "thin") {
       roll = t * 0.45;
-      pitch = -1.05;
+      pitch = -1.28;
       arm = 0.5;
       head = 0.55 * ease(t, 0.2, 2.4);
     } else if (p === "blackout") {
       roll = t * 0.18;
-      pitch = -0.9;
+      pitch = -1.16;
       arm = 0.3;
       head = 0.95;
     } else if (p === "wake") {
       roll = (1 - ease(t, 0.2, 1.6)) * 2.0;
       pitch = -1.5;
-      arm = 0.6 + 1.0 * ease(t, 0.3, 1.8);
+      arm = 0.62 + 1.05 * ease(t, 0.3, 1.8);
       head = 0.95 - 0.95 * ease(t, 0.3, 1.4);
     } else if (p === "fall" || p === "tumble") {
       roll = t * 1.7;
-      pitch = -1.45 + 0.18 * Math.sin(t * 4);
+      pitch = -1.5 + 0.16 * Math.sin(t * 4);
       arm = 1.25 + 0.2 * Math.sin(t * 5);
       leg = 0.22;
     } else if (["scan", "steer", "farm", "low"].includes(p)) {
       roll = 0.35 * Math.sin(t * 1.4);
-      pitch = -1.0;
+      pitch = -1.24;
       arm = 1.55;
       leg = 0.25;
     } else if (p === "brace") {

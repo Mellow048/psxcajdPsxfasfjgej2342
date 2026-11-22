@@ -250,12 +250,23 @@ export class EpisodeRunner {
           f.spawns.find((p) => p.ev.id === s.focus).node.position,
         );
       else {
-        this.focus.copy(o.node.position);
-        this.focus.y +=
-          (o.def.height ?? 1.6) *
-          (s.cameraPreset === "macro_closeup" && s.actors?.includes(o.def)
-            ? 0.87
-            : 0.51);
+        const boneName =
+          s.cameraPreset === "macro_closeup"
+            ? "mixamorigHead"
+            : "mixamorigSpine2",
+          bone =
+            s.stage === "fall_sky" && s.actors?.includes(o.def)
+              ? o.node.getObjectByName(boneName)
+              : null;
+        if (bone) this.focus.copy(bone.getWorldPosition(new T.Vector3()));
+        else {
+          this.focus.copy(o.node.position);
+          this.focus.y +=
+            (o.def.height ?? 1.6) *
+            (s.cameraPreset === "macro_closeup" && s.actors?.includes(o.def)
+              ? 0.87
+              : 0.51);
+        }
       }
     } else this.focus.fromArray(s.focus ?? [0, 1, 0]);
     if (s.matchHook) {
