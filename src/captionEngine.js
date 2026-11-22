@@ -12,12 +12,6 @@ export function composite(ctx, image, episode, s, index, t) {
   grad.addColorStop(1, "#131420c9");
   ctx.fillStyle = grad;
   ctx.fillRect(0, 530, 540, 430);
-  ctx.font = "bold 15px monospace";
-  ctx.fillStyle = "#222236b3";
-  ctx.fillRect(28, 35, 170, 33);
-  ctx.fillStyle = "#e5efc5";
-  ctx.fillRect(40, 47, 8, 8);
-  ctx.fillText("FIELD STUDY / " + String(index + 1).padStart(2, "0"), 57, 57);
   if (s.mars) {
     const { kit, base, status } = s.mars;
     ctx.fillStyle = "#182731df";
@@ -37,20 +31,6 @@ export function composite(ctx, image, episode, s, index, t) {
       ctx.fillStyle = k < (base ? 4 + base : kit) ? "#8de2d5" : "#5c5c60";
       ctx.fillRect(28 + k * 46, 143, 43, 4);
     }
-  }
-  ctx.strokeStyle = "#fffa";
-  ctx.lineWidth = 2;
-  for (const [x, y, a, b] of [
-    [20, 20, 1, 1],
-    [520, 20, -1, 1],
-    [20, 940, 1, -1],
-    [520, 940, -1, -1],
-  ]) {
-    ctx.beginPath();
-    ctx.moveTo(x + a * 16, y);
-    ctx.lineTo(x, y);
-    ctx.lineTo(x, y + b * 16);
-    ctx.stroke();
   }
   for (const ev of s.events ?? []) if (ev.show_graph) drawGraph(ctx, ev, t);
   const c = s.captions.findLast((c) => c.time <= t);
