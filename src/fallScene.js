@@ -64,7 +64,7 @@ export function fallSet(s, m) {
   s.add(clouds);
   const cloudMat = paint(0xf4f8fb);
   const cloudPos = [];
-  for (let i = 0; i < 26; i++) {
+  for (let i = 0; i < 44; i++) {
     const x = (rand() - 0.5) * 90,
       y = [2, 8, 16, 26][m.alt] + rand() * (m.alt === 0 ? 26 : 10),
       z = (rand() - 0.5) * 90,
@@ -123,22 +123,23 @@ export function fallSet(s, m) {
   const trunk = new T.InstancedMesh(
     new T.CylinderGeometry(0.09, 0.13, 0.7, 5),
     paint(0x5a4632),
-    46,
+    150,
   );
   const crown = new T.InstancedMesh(
     new T.ConeGeometry(0.85, 2.1, 6),
-    paint(0x2c5c31),
-    46,
+    paint(0x2f6336),
+    150,
   );
   trunk.frustumCulled = crown.frustumCulled = false;
   ground.add(trunk, crown);
   const tm = new T.Matrix4();
-  for (let i = 0; i < 46; i++) {
+  for (let i = 0; i < 150; i++) {
+    const shade = rand() < 0.5 ? 1 : 1.18;
     const inForest = rand() < 0.8,
       x = inForest ? 14 + (rand() - 0.5) * 17 : (rand() - 0.5) * 80,
       z = inForest ? -8 + (rand() - 0.5) * 17 : (rand() - 0.5) * 80,
-      sc = 0.8 + rand() * 0.9;
-    tm.makeScale(sc, sc, sc).setPosition(x, 0.35 * sc, z);
+      sc = (0.62 + rand() * 1.15) * shade;
+    tm.makeScale(sc, sc, sc).setPosition(x, 0.32 * sc, z);
     trunk.setMatrixAt(i, tm);
     tm.makeScale(sc, sc, sc).setPosition(x, (0.7 + 1.05) * sc, z);
     crown.setMatrixAt(i, tm);
@@ -172,8 +173,121 @@ export function fallSet(s, m) {
     tm.makeRotationY(0.12).setPosition(3.4 + i * 0.55, 0.05, 15.5);
     rows.setMatrixAt(i, tm);
   }
-  // No floating labels: the patchwork terrain and VO carry the landing options;
-  // pasted signboards read like UI and flattened the depth of the drop.
+  // Horizon silhouettes: ridges and distant rooftops give the drop a sense of scale.
+  const ridgeMat = paint(0x6f8291);
+  const roofMat = paint(0x556270);
+  const mountainData = [
+    [-42, 4.8, -18, 18, 10.5], [-26, 3.2, -38, 14, 8.5], [-4, 5.6, -46, 22, 13],
+    [18, 4.1, -39, 16, 9], [40, 5.2, -18, 19, 11], [46, 3.4, 8, 15, 8],
+    [39, 4.5, 35, 17, 10], [12, 3.5, 46, 15, 7.5], [-17, 4.7, 44, 19, 10.5],
+    [-42, 3.8, 19, 12, 8], [-46, 2.8, -5, 10, 7],
+  ];
+  for (const [x, y, z, w, h] of mountainData)
+    mesh(ground, new T.ConeGeometry(w, h, 5), ridgeMat, x, h * 0.36, z).scale.y = 1.15;
+  const skyline = new T.Group();
+  ground.add(skyline);
+  for (let i = 0; i < 22; i++) {
+    const side = i % 2 ? 1 : -1,
+      z = -34 + i * 3.1 + (rand() - 0.5) * 1.2,
+      h = 0.8 + rand() * 2.3;
+    box(skyline, 1.1 + rand() * 1.5, h, 1.1 + rand() * 1.2, roofMat, side * (34 + rand() * 8), h * 0.5, z);
+  }
+  // Two roads cut through the patchwork, converging toward the horizon.
+  const roadMat = paint(0x514d46);
+  const roadA = mesh(ground, new T.PlaneGeometry(2.8, 96), roadMat, 26, 0.035, 4);
+  roadA.rotation.x = -Math.PI / 2;
+  roadA.rotation.z = -0.24;
+  const roadB = mesh(ground, new T.PlaneGeometry(1.8, 96), roadMat, -2, 0.04, 0);
+  roadB.rotation.x = -Math.PI / 2;
+  roadB.rotation.z = 0.58;
+  // River: pale sandy banks hide under the blue ribbon; glints sell moving water.
+  const bank = mesh(
+    ground,
+    new T.PlaneGeometry(96, 8.2, 48, 1),
+    new T.MeshLambertMaterial({ color: 0xb8a36c, flatShading: true }),
+    0,
+    0.025,
+    0,
+  );
+  bank.rotation.x = -Math.PI / 2;
+  const bankPos = bank.geometry.attributes.position;
+  for (let i = 0; i < bankPos.count; i++)
+    bankPos.setX(i, bankPos.getX(i) + riverX(bankPos.getZ(i)));
+  const glintMat = new T.MeshBasicMaterial({ color: 0xe8fbff });
+  for (let i = 0; i < 54; i++) {
+    const z = (rand() - 0.5) * 88,
+      glint = mesh(ground, new T.PlaneGeometry(0.55 + rand() * 1.1, 0.08 + rand() * 0.08), glintMat, riverX(z) + (rand() - 0.5) * 3.8, 0.1, z);
+    glint.rotation.x = -Math.PI / 2;
+    glint.rotation.z = rand() * Math.PI;
+  }
+  // Village: a lived-in landing bad idea on the western ridge.
+  const village = new T.Group();
+  ground.add(village);
+  village.position.set(-19, 0, -16);
+  const wallMats = [0xe5dcc8, 0xd4c7a8, 0xc8d0d2, 0xb9a98e].map((c) => paint(c));
+  const roofMats = [0x7d3f32, 0x59606a, 0x8b5a38].map((c) => paint(c));
+  const houseOffsets = [
+    [-4.8, -3.8], [-2.2, -4.6], [0.7, -4.1], [3.8, -2.8], [-5.2, -0.6], [-2.5, -1.2],
+    [0.4, -0.4], [3.3, 0.8], [-4.1, 2.8], [-1.1, 2.1], [1.9, 3.6], [5.0, 3.2],
+  ];
+  for (let i = 0; i < houseOffsets.length; i++) {
+    const [x, z] = houseOffsets[i],
+      w = 0.9 + rand() * 0.45,
+      h = 0.65 + rand() * 0.35,
+      d = 0.75 + rand() * 0.4;
+    box(village, w, h, d, wallMats[i % wallMats.length], x, h * 0.5, z);
+    const roof = mesh(village, new T.ConeGeometry(Math.max(w, d) * 0.72, 0.55 + rand() * 0.25, 4), roofMats[i % roofMats.length], x, h + 0.28, z);
+    roof.rotation.y = Math.PI / 4;
+  }
+  box(village, 0.65, 3.2, 0.65, paint(0xd8d3c0), 0.2, 1.6, 0.8);
+  const spire = mesh(village, new T.ConeGeometry(0.72, 1.4, 4), paint(0x59606a), 0.2, 3.85, 0.8);
+  spire.rotation.y = Math.PI / 4;
+  // Farm: barn, farmhouse, silo, fence and dense wheat for the survivable option.
+  const farm = new T.Group();
+  ground.add(farm);
+  farm.position.set(10, 0, 15.5);
+  box(farm, 2.2, 1.15, 1.5, paint(0xb44a32), 5.2, 0.58, 1.2);
+  const barnRoof = mesh(farm, new T.ConeGeometry(1.75, 0.9, 4), paint(0x6f3128), 5.2, 1.6, 1.2);
+  barnRoof.rotation.y = Math.PI / 4;
+  box(farm, 1.65, 1.05, 1.25, paint(0xe4d9b8), -5.4, 0.52, 1.6);
+  const houseRoof = mesh(farm, new T.ConeGeometry(1.38, 0.72, 4), paint(0x59606a), -5.4, 1.4, 1.6);
+  houseRoof.rotation.y = Math.PI / 4;
+  cyl(farm, 0.48, 0.48, 1.8, paint(0xbfc7c9), 6.2, 0.9, -1.1, 10);
+  const windmill = new T.Group();
+  windmill.position.set(6.8, 0, 3.8);
+  farm.add(windmill);
+  cyl(windmill, 0.08, 0.13, 2.8, paint(0x6d6a62), 0, 1.4, 0, 6);
+  for (let i = 0; i < 6; i++) {
+    const blade = box(windmill, 0.07, 1.15, 0.06, paint(0xd9d7cb), 0, 2.8, 0);
+    blade.rotation.z = (i * Math.PI) / 3;
+    blade.position.x = Math.cos(blade.rotation.z) * 0.5;
+    blade.position.y = 2.8 + Math.sin(blade.rotation.z) * 0.5;
+  }
+  const wheat = new T.InstancedMesh(
+    new T.ConeGeometry(0.055, 0.72, 4),
+    paint(0xd6b95a),
+    240,
+  );
+  wheat.frustumCulled = false;
+  farm.add(wheat);
+  for (let i = 0; i < wheat.count; i++) {
+    const x = (rand() - 0.5) * 11.2,
+      z = (rand() - 0.5) * 7.2,
+      sc = 0.75 + rand() * 0.65;
+    tm.makeScale(sc, sc, sc).setPosition(x, 0.34 * sc, z);
+    wheat.setMatrixAt(i, tm);
+  }
+  const fenceMat = paint(0x6e5638);
+  for (let i = 0; i < 9; i++) {
+    box(farm, 0.08, 0.68, 0.08, fenceMat, -5.4 + i * 1.35, 0.34, -3.8);
+    box(farm, 1.28, 0.07, 0.07, fenceMat, -4.72 + i * 1.35, 0.56, -3.8);
+  }
+  // Scorched craters make the rocky option read as dangerous from altitude.
+  const craterMat = paint(0x4c4741);
+  for (const [x, z, r] of [[-12, 10, 1.1], [-5, 17, 0.8], [-11, 16.5, 1.4]]) {
+    const crater = cyl(ground, r * 0.75, r, 0.035, craterMat, x, 0.02, z, 12);
+    crater.scale.y = 0.25;
+  }
   // The wreck: fuselage, wing and tail tumbling away with fire and smoke.
   const wreck = new T.Group();
   s.add(wreck);
@@ -334,8 +448,8 @@ export function bindFaller(item, scene, m) {
       arm = 1.25 + 0.2 * Math.sin(t * 5);
       leg = 0.22;
     } else if (["scan", "steer", "farm", "low"].includes(p)) {
-      roll = 0.35 * Math.sin(t * 1.4);
-      pitch = -1.24;
+      roll = 0.28 * Math.sin(t * 1.4);
+      pitch = -1.12;
       arm = 1.55;
       leg = 0.25;
     } else if (p === "brace") {

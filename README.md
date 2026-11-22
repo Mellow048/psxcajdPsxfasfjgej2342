@@ -109,7 +109,7 @@ Open `/?episode=episodes/wifi.json` or inspect the [episode JSON](episodes/wifi.
 
 ### Field study: Falling from a Plane
 
-[What if your plane blew up?](episodes/plane.json) is a 44.3-second, 20-shot freefall over a tense heartbeat bed. It opens on the blast, pitches the viewer straight into the fall (POV descents, over-the-shoulder and face-close framing, no standing-and-orbiting framing), wakes the passenger at ten thousand feet, and walks each landing option — river, forest, rocks — before the plowed-farm payoff and the closing train gag. The burned-in FIELD STUDY chip and viewfinder corners are gone; cuts carry real cues. Preview with `/?episode=episodes/plane.json`, export with `npm run render -- episodes/plane.json`.
+[What if your plane blew up?](episodes/plane.json) is a 49.6-second, 22-shot freefall over a tense heartbeat bed. It opens on the blast, pitches the viewer straight into the fall (POV descents, over-the-shoulder and face-close framing, no standing-and-orbiting framing), wakes the passenger at ten thousand feet, and walks each landing option — river, forest, rocks, a village — before the plowed-farm payoff and the closing train gag. The burned-in FIELD STUDY chip and viewfinder corners are gone; cuts carry real cues, the camera tracks the animated head, and the descent is dressed with mountains, roads, a lived-in village, farm structures and dense wheat. Preview with `/?episode=episodes/plane.json`, export with `npm run render -- episodes/plane.json`.
 
 ### Field study: One Human on Mars
 

@@ -95,11 +95,11 @@ export class CameraDirector {
       case "over_shoulder": {
         // For a real observer anchor the lens behind and beside their shoulder.
         if (actor) {
-          const spine = actor.node.getObjectByName?.("mixamorigSpine2");
-          const shoulder = spine
-            ? spine.getWorldPosition(this.offset.set(0, 0, 0))
+          const head = actor.node.getObjectByName?.("mixamorigHead");
+          const shoulder = head
+            ? head.getWorldPosition(this.offset.set(0, 0, 0))
             : this.offset.copy(actor.node.position);
-          if (!spine) shoulder.y += (actor.def.height ?? 1.6) * 0.87;
+          if (!head) shoulder.y += (actor.def.height ?? 1.6) * 0.87;
           const dx = shoulder.x - target.x,
             dz = shoulder.z - target.z;
           const bearing = Math.hypot(dx, dz) > 0.08 ? Math.atan2(dx, dz) : a;

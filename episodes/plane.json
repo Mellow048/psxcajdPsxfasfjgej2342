@@ -2,8 +2,8 @@
   "version": 3,
   "title": "What if your plane blew up?",
   "series": "Freefall / Pick Your Landing",
-  "narration": "Your plane exploded. No warning, no parachute, just sky. First the sky takes your mind, up here there isn't enough oxygen, your vision narrows, you pass out mid-scream. But falling air thickens, and at ten thousand feet you're wide awake again. Tumbling at a hundred and twenty miles an hour, wind screaming, you get to pick where this ends. Look down. A river, a forest, a rocky field, a plowed farm. The river lies, water at this speed hits like concrete. Trees can break your fall, if you're lucky with the branches. Rocks are just rocks. So arch your back, spread your arms, kill the spin, and steer for the farm. Five thousand feet, two thousand, five hundred. Feet first, knees bent, and roll. You hit the wheat, pop up, brush off your jacket, and walk away. Next time? Take the train.",
-  "voiceover": "episodes/plane-voice.wav",
+  "narration": "Okay, your plane just exploded. No parachute, no warning, just a lot of sky. First your brain taps out, not enough oxygen, just blackness. Then the air starts working, and at ten thousand feet you're wide awake, holding a hundred and twenty miles an hour. Look down. A river, a forest, a rocky field, a little village, and one suspiciously beautiful plowed farm. The river is concrete wearing water. Trees might catch you if they feel charitable. Bricks are bricks. Rocks are rocks. So spread your arms, kill the spin, and steer for the farm. Five thousand feet. Two thousand. Five hundred. Feet first, knees bent, and roll. You hit the wheat, pop up, brush off your jacket, and walk away. Next time? Take the train.",
+  "voiceover": "episodes/plane-voice.mp3",
   "bgMusic": "tense_heartbeat",
   "pacing": "burst",
   "shots": [
@@ -16,11 +16,7 @@
       },
       "cameraPreset": "wide_orbit",
       "cameraMotion": "slow_pull",
-      "focus": [
-        0,
-        1.7,
-        -0.8
-      ],
+      "focus": "faller",
       "sfx": "whoosh_fast",
       "actors": [
         {
@@ -44,18 +40,13 @@
           "highlight": "plane"
         },
         {
-          "time": 0.75,
+          "time": 1.3,
           "text": "exploded",
           "highlight": "exploded"
-        },
-        {
-          "time": 1.25,
-          "text": "no warning",
-          "highlight": "warning"
         }
       ],
-      "distance": 4.4,
-      "duration": 2.65
+      "duration": 2.35,
+      "distance": 4.8
     },
     {
       "title": "Just sky",
@@ -67,7 +58,7 @@
       "cameraPreset": "over_shoulder",
       "cameraMotion": "handheld_bob",
       "focus": "faller",
-      "sfx": "riser",
+      "sfx": "whoosh",
       "actors": [
         {
           "id": "faller",
@@ -85,28 +76,23 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.03,
+          "time": 0.0,
           "text": "no parachute",
           "highlight": "parachute"
         },
         {
-          "time": 0.45,
+          "time": 0.95,
+          "text": "no warning",
+          "highlight": "warning"
+        },
+        {
+          "time": 2.2,
           "text": "just sky",
           "highlight": "sky"
-        },
-        {
-          "time": 1.05,
-          "text": "the sky takes",
-          "highlight": "takes"
-        },
-        {
-          "time": 1.75,
-          "text": "your mind",
-          "highlight": "mind"
         }
       ],
-      "duration": 2.2666666666666666,
-      "distance": 2.7
+      "duration": 3.2,
+      "distance": 2.6
     },
     {
       "title": "Not enough oxygen",
@@ -136,25 +122,26 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.15,
-          "text": "up here"
+          "time": 0.35,
+          "text": "brain taps",
+          "highlight": "taps"
         },
         {
-          "time": 0.7,
+          "time": 1.6,
           "text": "not enough",
           "highlight": "enough"
         },
         {
-          "time": 1.35,
+          "time": 2.2,
           "text": "oxygen",
           "highlight": "oxygen"
         }
       ],
-      "distance": 1.9,
-      "duration": 2.033333333333333
+      "duration": 2.65,
+      "distance": 1.9
     },
     {
-      "title": "Vision narrows",
+      "title": "Blackout",
       "stage": "fall_sky",
       "fall": {
         "cue": "blackout",
@@ -178,31 +165,16 @@
           "yaw": 0
         }
       ],
-      "captionPosition": "lower",
+      "captionPosition": "center",
       "captions": [
         {
-          "time": 0.0,
-          "text": "your vision",
-          "highlight": "vision"
-        },
-        {
-          "time": 0.65,
-          "text": "narrows",
-          "highlight": "narrows"
-        },
-        {
-          "time": 1.15,
-          "text": "pass out",
-          "highlight": "out"
-        },
-        {
-          "time": 1.9,
-          "text": "mid-scream",
-          "highlight": "scream"
+          "time": 0.35,
+          "text": "blackness",
+          "highlight": "blackness"
         }
       ],
-      "distance": 2.4,
-      "duration": 2.5
+      "duration": 1.55,
+      "distance": 2.7
     },
     {
       "title": "The air thickens",
@@ -232,29 +204,29 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.1,
-          "text": "falling air",
-          "highlight": "falling"
+          "time": 0.45,
+          "text": "air starts",
+          "highlight": "starts"
         },
         {
-          "time": 1.0,
-          "text": "air thickens",
-          "highlight": "thickens"
-        },
-        {
-          "time": 1.7,
-          "text": "at ten thousand",
+          "time": 1.95,
+          "text": "at ten",
           "highlight": "ten"
+        },
+        {
+          "time": 2.3,
+          "text": "thousand feet",
+          "highlight": "feet"
         }
       ],
-      "distance": 2.6,
-      "duration": 1.95
+      "duration": 2.6,
+      "distance": 2.7
     },
     {
       "title": "Wide awake",
       "stage": "fall_sky",
       "fall": {
-        "cue": "tumble",
+        "cue": "wake",
         "alt": 1
       },
       "cameraPreset": "dutch_tilt_push",
@@ -278,18 +250,18 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.62,
-          "text": "feet",
-          "highlight": "feet"
+          "time": 0.45,
+          "text": "you're wide",
+          "highlight": "wide"
         },
         {
-          "time": 1.35,
-          "text": "wide awake",
+          "time": 1.05,
+          "text": "awake",
           "highlight": "awake"
         }
       ],
-      "distance": 2.9,
-      "duration": 1.9
+      "duration": 1.65,
+      "distance": 2.5
     },
     {
       "title": "A hundred and twenty",
@@ -319,73 +291,32 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.45,
-          "text": "tumbling",
-          "highlight": "tumbling"
+          "time": 0.05,
+          "text": "holding a",
+          "highlight": "holding"
         },
         {
-          "time": 0.9,
-          "text": "a hundred and",
+          "time": 0.55,
+          "text": "hundred and",
           "highlight": "hundred"
         },
         {
-          "time": 1.6,
-          "text": "twenty miles",
-          "highlight": "twenty"
-        }
-      ],
-      "distance": 2.9,
-      "duration": 2.3
-    },
-    {
-      "title": "Wind screaming",
-      "stage": "fall_sky",
-      "fall": {
-        "cue": "tumble",
-        "alt": 1
-      },
-      "cameraPreset": "wide_orbit",
-      "cameraMotion": "slow_pull",
-      "focus": "faller",
-      "sfx": "whoosh_fast",
-      "actors": [
-        {
-          "id": "faller",
-          "asset": "male.character_01",
-          "height": 1.78,
-          "position": [
-            0,
-            1.6,
-            0
-          ],
-          "motion": "idle_breathe",
-          "yaw": 0
-        }
-      ],
-      "captionPosition": "lower",
-      "captions": [
-        {
-          "time": 0.45,
+          "time": 1.65,
           "text": "an hour",
           "highlight": "hour"
-        },
-        {
-          "time": 0.8,
-          "text": "wind screaming",
-          "highlight": "screaming"
         }
       ],
-      "distance": 3.6,
-      "duration": 2.0
+      "duration": 2.75,
+      "distance": 2.9
     },
     {
-      "title": "Pick where this ends",
+      "title": "Look down",
       "stage": "fall_sky",
       "fall": {
         "cue": "scan",
         "alt": 2
       },
-      "cameraPreset": "dutch_tilt_push",
+      "cameraPreset": "over_shoulder",
       "cameraMotion": "slow_push",
       "focus": [
         2,
@@ -410,58 +341,27 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.35,
-          "text": "pick where",
-          "highlight": "pick"
-        },
-        {
-          "time": 1.3,
-          "text": "this ends",
-          "highlight": "ends"
-        },
-        {
-          "time": 1.6,
+          "time": 0.05,
           "text": "look down",
           "highlight": "down"
-        },
-        {
-          "time": 2.1,
-          "text": "a river",
-          "highlight": "river"
         }
       ],
-      "pov": {
-        "eye": [
-          0.5,
-          2.55,
-          0.25
-        ],
-        "lookTo": [
-          2,
-          -7,
-          8.5
-        ],
-        "dollyTo": [
-          0.2,
-          2.2,
-          0.9
-        ]
-      },
-      "duration": 2.5
+      "duration": 0.9833333333333333,
+      "distance": 5.8
     },
     {
-      "title": "The choices below",
+      "title": "River, forest, rocks",
       "stage": "fall_sky",
       "fall": {
         "cue": "scan",
         "alt": 2
       },
-      "cameraPreset": "wide_orbit",
-      "cameraMotion": "slow_push",
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_pull",
       "focus": [
-        2,
+        1,
         -7,
-        9.5
+        10
       ],
       "sfx": "whoosh",
       "actors": [
@@ -482,38 +382,107 @@
       "captions": [
         {
           "time": 0.15,
-          "text": "a forest",
+          "text": "river",
+          "highlight": "river"
+        },
+        {
+          "time": 0.85,
+          "text": "forest",
           "highlight": "forest"
         },
         {
-          "time": 0.65,
+          "time": 1.6,
           "text": "rocky field",
           "highlight": "field"
+        }
+      ],
+      "duration": 2.6666666666666665,
+      "distance": 6.2
+    },
+    {
+      "title": "A little village",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "scan",
+        "alt": 2
+      },
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "handheld_bob",
+      "focus": [
+        -19,
+        -6.7,
+        -16
+      ],
+      "sfx": "click",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.6,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.3,
+          "text": "little village",
+          "highlight": "village"
         },
         {
-          "time": 1.55,
-          "text": "a plowed farm",
+          "time": 1.4,
+          "text": "one suspiciously",
+          "highlight": "suspiciously"
+        }
+      ],
+      "duration": 2.55,
+      "distance": 6.0
+    },
+    {
+      "title": "One good option",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "scan",
+        "alt": 2
+      },
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_push",
+      "focus": [
+        10,
+        -6.8,
+        15.5
+      ],
+      "sfx": "riser",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.6,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.05,
+          "text": "plowed farm",
           "highlight": "farm"
         }
       ],
-      "pov": {
-        "eye": [
-          0.45,
-          2.3,
-          0.75
-        ],
-        "lookTo": [
-          2,
-          -7,
-          9.5
-        ],
-        "dollyTo": [
-          0.2,
-          1.85,
-          1.35
-        ]
-      },
-      "duration": 2.3666666666666667
+      "duration": 1.25,
+      "distance": 5.6
     },
     {
       "title": "The river lies",
@@ -522,12 +491,12 @@
         "cue": "river",
         "alt": 2
       },
-      "cameraPreset": "dutch_tilt_push",
+      "cameraPreset": "over_shoulder",
       "cameraMotion": "slow_push",
       "focus": [
-        -8,
-        -6.9,
-        -3
+        -11,
+        -6.8,
+        -4
       ],
       "sfx": "whoosh_fast",
       "actors": [
@@ -547,36 +516,31 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.05,
-          "text": "the river lies",
-          "highlight": "lies"
-        },
-        {
-          "time": 1.3,
-          "text": "water hits",
-          "highlight": "water"
-        },
-        {
-          "time": 2.35,
-          "text": "like concrete",
+          "time": 0.65,
+          "text": "concrete",
           "highlight": "concrete"
+        },
+        {
+          "time": 1.15,
+          "text": "wearing water",
+          "highlight": "water"
         }
       ],
-      "distance": 4.6,
-      "duration": 3.1333333333333333
+      "duration": 2.3,
+      "distance": 5.2
     },
     {
-      "title": "Trees can break your fall",
+      "title": "Trees might catch you",
       "stage": "fall_sky",
       "fall": {
         "cue": "trees",
         "alt": 2
       },
-      "cameraPreset": "wide_orbit",
+      "cameraPreset": "over_shoulder",
       "cameraMotion": "orbit_drift",
       "focus": [
         14,
-        -5.6,
+        -6.1,
         -8
       ],
       "sfx": "whoosh",
@@ -597,37 +561,32 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.1,
-          "text": "trees can break",
-          "highlight": "break"
+          "time": 0.05,
+          "text": "trees might",
+          "highlight": "trees"
         },
         {
-          "time": 1.15,
-          "text": "your fall",
-          "highlight": "fall"
+          "time": 1.35,
+          "text": "if they feel",
+          "highlight": "feel"
         },
         {
-          "time": 1.7,
-          "text": "if you're lucky",
-          "highlight": "lucky"
-        },
-        {
-          "time": 2.95,
-          "text": "the branches",
-          "highlight": "branches"
+          "time": 1.9,
+          "text": "charitable",
+          "highlight": "charitable"
         }
       ],
-      "distance": 5.4,
-      "duration": 3.2
+      "duration": 2.95,
+      "distance": 5.4
     },
     {
-      "title": "Rocks are just rocks",
+      "title": "Bricks, rocks",
       "stage": "fall_sky",
       "fall": {
         "cue": "rocks",
         "alt": 2
       },
-      "cameraPreset": "dutch_tilt_push",
+      "cameraPreset": "over_shoulder",
       "cameraMotion": "handheld_bob",
       "focus": [
         -9,
@@ -652,18 +611,18 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.3,
-          "text": "rocks are",
-          "highlight": "rocks"
+          "time": 0.05,
+          "text": "bricks are bricks",
+          "highlight": "bricks"
         },
         {
-          "time": 0.8,
-          "text": "just rocks",
+          "time": 1.5,
+          "text": "rocks are rocks",
           "highlight": "rocks"
         }
       ],
-      "distance": 4.3,
-      "duration": 1.5
+      "duration": 2.75,
+      "distance": 5.0
     },
     {
       "title": "Kill the spin",
@@ -693,23 +652,18 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.05,
-          "text": "arch your back",
-          "highlight": "back"
-        },
-        {
-          "time": 1.05,
+          "time": 0.2,
           "text": "spread your arms",
           "highlight": "arms"
         },
         {
-          "time": 2.2,
+          "time": 1.35,
           "text": "kill the spin",
           "highlight": "spin"
         }
       ],
-      "distance": 2.8,
-      "duration": 3.0
+      "duration": 2.3,
+      "distance": 2.8
     },
     {
       "title": "Steer for the farm",
@@ -719,10 +673,10 @@
         "alt": 2
       },
       "cameraPreset": "over_shoulder",
-      "cameraMotion": "slow_pull",
+      "cameraMotion": "slow_push",
       "focus": [
         10,
-        -6.9,
+        -6.8,
         15.5
       ],
       "sfx": "whoosh",
@@ -743,7 +697,7 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.2,
+          "time": 0.3,
           "text": "steer for",
           "highlight": "steer"
         },
@@ -753,8 +707,8 @@
           "highlight": "farm"
         }
       ],
-      "distance": 6.0,
-      "duration": 1.5
+      "duration": 1.75,
+      "distance": 5.8
     },
     {
       "title": "Five thousand feet",
@@ -785,22 +739,58 @@
       "captions": [
         {
           "time": 0.05,
-          "text": "five thousand feet",
+          "text": "five thousand",
           "highlight": "thousand"
         },
         {
-          "time": 1.0,
+          "time": 0.75,
+          "text": "feet",
+          "highlight": "feet"
+        }
+      ],
+      "duration": 1.45,
+      "distance": 4.2
+    },
+    {
+      "title": "Two thousand, five hundred",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "low",
+        "alt": 3
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "focus": "faller",
+      "sfx": "whoosh_fast",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.6,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.05,
           "text": "two thousand",
           "highlight": "thousand"
         },
         {
-          "time": 1.8,
+          "time": 1.25,
           "text": "five hundred",
           "highlight": "hundred"
         }
       ],
-      "distance": 4.2,
-      "duration": 2.45
+      "duration": 2.466666666666667,
+      "distance": 3.8
     },
     {
       "title": "Feet first, knees bent",
@@ -830,26 +820,26 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.05,
+          "time": 0.0,
           "text": "feet first",
           "highlight": "feet"
         },
         {
-          "time": 0.7,
+          "time": 0.85,
           "text": "knees bent",
           "highlight": "knees"
         },
         {
-          "time": 1.55,
+          "time": 1.9,
           "text": "and roll",
           "highlight": "roll"
         }
       ],
-      "distance": 2.7,
-      "duration": 1.9
+      "duration": 2.65,
+      "distance": 2.5
     },
     {
-      "title": "The roll",
+      "title": "The wheat",
       "stage": "fall_sky",
       "fall": {
         "cue": "land",
@@ -876,38 +866,33 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.05,
+          "time": 0.0,
           "text": "you hit",
           "highlight": "hit"
         },
         {
-          "time": 0.45,
+          "time": 0.4,
           "text": "the wheat",
           "highlight": "wheat"
         },
         {
-          "time": 1.05,
+          "time": 1.15,
           "text": "pop up",
           "highlight": "up"
-        },
-        {
-          "time": 1.45,
-          "text": "brush off",
-          "highlight": "off"
         }
       ],
-      "distance": 3.0,
+      "duration": 1.7833333333333334,
+      "distance": 3.1,
       "events": [
         {
           "type": "sound",
-          "time": 0.42,
+          "time": 0.18,
           "sfx": "heavy_thud"
         }
-      ],
-      "duration": 2.0
+      ]
     },
     {
-      "title": "Walks away",
+      "title": "Brush it off",
       "stage": "fall_sky",
       "fall": {
         "cue": "alive",
@@ -934,18 +919,23 @@
       "captionPosition": "lower",
       "captions": [
         {
-          "time": 0.35,
+          "time": 0.1,
+          "text": "brush off",
+          "highlight": "off"
+        },
+        {
+          "time": 0.6,
           "text": "your jacket",
           "highlight": "jacket"
         },
         {
-          "time": 1.1,
+          "time": 1.7,
           "text": "walk away",
           "highlight": "walk"
         }
       ],
-      "distance": 3.4,
-      "duration": 1.65
+      "duration": 2.7,
+      "distance": 3.6
     },
     {
       "title": "Take the train",
@@ -976,17 +966,17 @@
       "captions": [
         {
           "time": 0.05,
-          "text": "next time?"
+          "text": "next time?",
+          "highlight": "time"
         },
         {
-          "time": 0.55,
+          "time": 1.0,
           "text": "take the train",
           "highlight": "train"
         }
       ],
-      "distance": 3.4,
-      "duration": 1.4666666666666666
+      "duration": 2.283333333333333,
+      "distance": 3.5
     }
-  ],
-  "speechRate": 1.28
+  ]
 }

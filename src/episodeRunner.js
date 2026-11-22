@@ -251,9 +251,11 @@ export class EpisodeRunner {
         );
       else {
         const boneName =
-          s.cameraPreset === "macro_closeup"
+          s.stage === "fall_sky"
             ? "mixamorigHead"
-            : "mixamorigSpine2",
+            : s.cameraPreset === "macro_closeup"
+              ? "mixamorigHead"
+              : "mixamorigSpine2",
           bone =
             s.stage === "fall_sky" && s.actors?.includes(o.def)
               ? o.node.getObjectByName(boneName)

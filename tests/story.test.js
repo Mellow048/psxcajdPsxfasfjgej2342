@@ -226,5 +226,5 @@ test("Plane freefall mix: one dry take, heartbeat bed, sanctioned cut cues", () 
       "unexpected layer in the mix: " + k,
     );
   assert.ok(cues.length > 0, "cut cues should be scheduled, not silenced");
-  assert.equal(ep.shots.length, 20);
+  assert.equal(ep.shots.length, 22);
 });
