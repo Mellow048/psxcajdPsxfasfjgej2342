@@ -107,6 +107,10 @@ To export: `npm run render -- episodes/invisible.json`. The continuous voice rec
 
 Open `/?episode=episodes/wifi.json` or inspect the [episode JSON](episodes/wifi.json). The tester walks toward a stationary 2.4 GHz router, then tries moving just the handset at the weak spot. Mint is the direct path, coral is the cabinet reflection, and yellow is their sum at the phone. This is an illustrated two-path example, not a coverage prediction: real indoor reception also depends on other reflectors, interference and the radios. The wave shapes are slowed and enlarged for visibility. Rebuild the music with `python3 scripts/score.py episodes/wifi-score.wav --bpm 133 --seed 32 --bars 6`.
 
+### Field study: Falling from a Plane
+
+[What if your plane blew up?](episodes/plane.json) is a 62.4-second, 34-shot freefall in one dry voice take: thin air knocks the passenger out, thicker air wakes him up, and he steers past the river, forest and rocks toward the plowed farm for the landing roll. Preview with `/?episode=episodes/plane.json`, export with `npm run render -- episodes/plane.json`.
+
 ### Field study: One Human on Mars
 
 [What if you stepped onto Mars?](episodes/mars.json) is a 70.3-second, 39-shot race to sunrise. A failed unprotected landing rewinds to the same explorer. Watch the pressure shell, oxygen pack, CO₂ scrubber and cooling unit accumulate on the moving rig; later shots add a pressurized shelter, supplies, power storage and a regolith cover. The failure is time-compressed; blackout is not the same as immediate death. The upgrades illustrate problems each system addresses, not a complete spacecraft design or a guarantee of indefinite survival.

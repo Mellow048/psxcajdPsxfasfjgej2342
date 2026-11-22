@@ -18,6 +18,25 @@ export function composite(ctx, image, episode, s, index, t) {
   ctx.fillStyle = "#e5efc5";
   ctx.fillRect(40, 47, 8, 8);
   ctx.fillText("FIELD STUDY / " + String(index + 1).padStart(2, "0"), 57, 57);
+  if (s.fall) {
+    const { alt, status } = s.fall;
+    ctx.fillStyle = "#101d2bdf";
+    ctx.fillRect(28, 75, 322, 68);
+    ctx.fillStyle = "#8fd8ff";
+    ctx.font = "bold 13px monospace";
+    ctx.fillText(
+      "FREEFALL  /  ALT " + ["30000 FT", "10000 FT", "5000 FT", "GROUND"][alt],
+      40,
+      95,
+    );
+    ctx.font = "bold 23px sans-serif";
+    ctx.fillStyle = "#eaf6ff";
+    ctx.fillText(status, 40, 125, 294);
+    for (let k = 0; k < 4; k++) {
+      ctx.fillStyle = k < 4 - alt ? "#8de2d5" : "#5c5c60";
+      ctx.fillRect(28 + k * 46, 143, 43, 4);
+    }
+  }
   if (s.mars) {
     const { kit, base, status } = s.mars;
     ctx.fillStyle = "#182731df";

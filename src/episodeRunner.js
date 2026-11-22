@@ -1,4 +1,5 @@
 import { bindMarsExplorer } from "./marsSurvival.js";
+import { bindFaller } from "./fallScene.js";
 import { createScreen } from "./uiDirector.js";
 import { createMass } from "./particleEscalation.js";
 import { createBoard } from "./dataViz.js";
@@ -125,6 +126,8 @@ export class EpisodeRunner {
             item.hallWalk = bindHallWalk(item);
           if (s.mars && s.actors?.includes(def))
             item.explorer = bindMarsExplorer(item, f.scene, s.mars);
+          if (s.fall && s.actors?.includes(def))
+            item.faller = bindFaller(item, f.scene, s.fall);
           if (!f.observer && s.actors?.includes(def)) f.observer = item;
           f.items.push(item);
           const opacity = SCENE_PRESETS[s.stage].reflection;
@@ -229,6 +232,7 @@ export class EpisodeRunner {
       pose(i, rigTime);
       i.hallWalk?.(rigTime, s);
       i.explorer?.(rigTime);
+      i.faller?.(rigTime);
       i.fade?.(rigTime);
       i.morph?.(rigTime, i.def.motion);
     }

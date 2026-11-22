@@ -23,6 +23,8 @@ For a survival challenge, show the consequence before listing equipment. Give th
 
 When someone reports a robotic layer, don’t dismiss it because there is only one audio stream. That stream may already contain the offending sound. Audition the voice dry, remove competing pitched effects and compare the **decoded export** with the intended stem. In the Mars sunrise cut, `sfx: "none"` means no cut sound; no score, event sounds or fallback speech should be audible.
 
+Hooks earn their seconds: open on the event itself (the explosion, the wheel spin) and land on a concrete payoff (the second footprint, the walk away), not on a lecture. When the brief is a fall or a race, give the viewer one decision to watch being made — here, picking a landing spot — and show each rejected option before the chosen one.
+
 ## Before delivery
 
 1. **Listen without picture.** Is the hook immediate? Is any word swallowed, any silence accidental, or any phrase conspicuously faster than the rest?

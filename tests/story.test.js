@@ -196,3 +196,16 @@ test("Mars sunrise mix schedules the dry take once, with no other layers", () =>
   assert.deepEqual(played, [ep.voiceover]);
   assert.equal(ep.shots.length, 39);
 });
+
+test("Plane freefall mix schedules the dry take once, with no other layers", () => {
+  const ep = validate(JSON.parse(readFileSync("episodes/plane.json"))),
+    played = [],
+    audio = new SfxEngine();
+  audio.ctx = { currentTime: 0 };
+  audio.sample = (url) => played.push(url);
+  audio.tone = (key) => played.push(key);
+  audio.musicBed = () => played.push("music");
+  audio.start(ep, 0);
+  assert.deepEqual(played, [ep.voiceover]);
+  assert.equal(ep.shots.length, 34);
+});

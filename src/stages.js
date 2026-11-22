@@ -1,4 +1,5 @@
 import { marsSet } from "./marsSurvival.js";
+import { fallSet } from "./fallScene.js";
 import { radioHall, phaseScope } from "./radioHall.js";
 import { platformThree, insideEye, carWindow } from "./platformThree.js";
 import { casinoRoom } from "./casinoRoom.js";
@@ -449,6 +450,7 @@ export function stage(name, shot) {
   if (name === "blizzard") weather = blizzard(s);
   else if (name === "mars_plain" || name === "mars_cabin")
     weather = marsSet(s, shot.mars, name === "mars_cabin");
+  else if (name === "fall_sky") weather = fallSet(s, shot.fall);
   else if (name === "radio_hall") weather = radioHall(s);
   else if (name === "phase_scope") weather = phaseScope(s);
   else if (name === "platform_three") weather = platformThree(s);

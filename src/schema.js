@@ -103,7 +103,7 @@ export function validate(e) {
     at = `shot ${i + 1}`;
     keys(
       s,
-      "title duration stage pov cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook radio mars",
+      "title duration stage pov cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook radio mars fall",
     );
     if (s.matchHook !== undefined)
       check(
@@ -205,6 +205,42 @@ export function validate(e) {
       check(
         (s.actors ?? []).every((a) => a.asset === "male.character_01"),
         "expected mission actor",
+      );
+    }
+    if (s.fall !== undefined || s.stage === "fall_sky") {
+      keys(s.fall, "cue status alt");
+      const m = s.fall;
+      check(
+        s.stage === "fall_sky" &&
+          [
+            "blast",
+            "debris",
+            "fall",
+            "thin",
+            "blackout",
+            "wake",
+            "tumble",
+            "scan",
+            "river",
+            "trees",
+            "rocks",
+            "steer",
+            "farm",
+            "low",
+            "brace",
+            "land",
+            "alive",
+          ].includes(m.cue) &&
+          Number.isInteger(m.alt) &&
+          m.alt >= 0 &&
+          m.alt <= 3 &&
+          str(m.status) &&
+          m.status.length <= 28,
+        "invalid fall state",
+      );
+      check(
+        (s.actors ?? []).every((a) => a.asset === "male.character_01"),
+        "expected the falling actor",
       );
     }
     check(has(stages, s.stage), "unknown stage");
@@ -339,9 +375,13 @@ export function validate(e) {
     );
     const hasSubject =
       ids.size > 0 ||
-      ["phase_scope", "casino_room", "mars_plain", "mars_cabin"].includes(
-        s.stage,
-      );
+      [
+        "phase_scope",
+        "casino_room",
+        "mars_plain",
+        "mars_cabin",
+        "fall_sky",
+      ].includes(s.stage);
     for (const ev of s.events ?? []) {
       check(obj(ev), "invalid event");
       if (ev.type === "sound") {

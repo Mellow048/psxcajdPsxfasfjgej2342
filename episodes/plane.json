@@ -1,0 +1,1888 @@
+{
+  "version": 3,
+  "title": "What if your plane blew up?",
+  "series": "Freefall / Pick Your Landing",
+  "narration": "Your plane just blew up. One second you are cruising at thirty thousand feet, the next there is nothing but sky between you and the ground, and no parachute. First thing that happens: the air up here is so thin, there is not enough oxygen, your vision narrows, and you pass out. Cold, dark, done. But here is the weird part. As you fall, the air gets thicker, and around ten thousand feet, you wake back up. Now you are wide awake, tumbling at about a hundred and twenty miles per hour, wind screaming, and you get to pick where this ends. Look down. You have got a river, a forest, a rocky field, and a plowed farm. The river looks soft and inviting. At this speed, water hits like concrete. Trees can break your fall, if you are lucky with the branches. Rocks are just rocks. So you arch your back and steer for the farm. Spread your arms, slow your spin, and aim for the softest ground you can see. Five thousand feet. Two thousand. Five hundred. Feet first, knees bent, and roll. He rolls into the wheat, gets up, brushes off his jacket, and walks away. So, next time, take the train.",
+  "voiceover": "episodes/plane-voice.wav",
+  "pacing": "burst",
+  "shots": [
+    {
+      "title": "The explosion",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "blast",
+        "status": "PLANE GONE  /  30000 FT",
+        "alt": 0
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_pull",
+      "focus": [
+        2.4,
+        3.0,
+        -7
+      ],
+      "pov": {
+        "eye": [
+          7.5,
+          6.5,
+          -14
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.6,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.5333333333333334,
+      "captions": [
+        {
+          "time": 0.09,
+          "text": "your plane just",
+          "highlight": "plane"
+        },
+        {
+          "time": 0.75,
+          "text": "blew up one",
+          "highlight": "blew"
+        }
+      ]
+    },
+    {
+      "title": "Cruising",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "debris",
+        "status": "30000 FT  /  SKY ONLY",
+        "alt": 0
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "focus": [
+        2.4,
+        2.8,
+        -6.5
+      ],
+      "pov": {
+        "eye": [
+          2.2,
+          2.2,
+          -4.0
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            2.0,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.466666666666667,
+      "captions": [
+        {
+          "time": 0,
+          "text": "blew up one",
+          "highlight": "blew"
+        },
+        {
+          "time": 0.24,
+          "text": "second you are",
+          "highlight": "second"
+        },
+        {
+          "time": 0.78,
+          "text": "cruising at thirty",
+          "highlight": "cruising"
+        },
+        {
+          "time": 1.65,
+          "text": "thousand feet the",
+          "highlight": "thousand"
+        }
+      ]
+    },
+    {
+      "title": "Nothing left",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "debris",
+        "status": "NOTHING BUT SKY",
+        "alt": 0
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [
+        0,
+        1.2,
+        0
+      ],
+      "pov": {
+        "eye": [
+          -1.6,
+          1.8,
+          2.8
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.4,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.3333333333333335,
+      "captions": [
+        {
+          "time": 0,
+          "text": "thousand feet the",
+          "highlight": "thousand"
+        },
+        {
+          "time": 0.19,
+          "text": "next there is",
+          "highlight": "there"
+        },
+        {
+          "time": 0.71,
+          "text": "nothing but sky",
+          "highlight": "nothing"
+        },
+        {
+          "time": 1.6,
+          "text": "between you and",
+          "highlight": "between"
+        },
+        {
+          "time": 2.27,
+          "text": "the ground and",
+          "highlight": "ground"
+        }
+      ]
+    },
+    {
+      "title": "Sky, then no parachute",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "fall",
+        "status": "NO PARACHUTE",
+        "alt": 0
+      },
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "orbit_drift",
+      "focus": [
+        0,
+        1.2,
+        0
+      ],
+      "pov": {
+        "eye": [
+          1.9,
+          1.9,
+          -3.0
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.3,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.7,
+      "captions": [
+        {
+          "time": 0,
+          "text": "the ground and",
+          "highlight": "ground"
+        },
+        {
+          "time": 0.78,
+          "text": "no parachute first",
+          "highlight": "parachute"
+        }
+      ]
+    },
+    {
+      "title": "First thing",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "thin",
+        "status": "AIR TOO THIN",
+        "alt": 0
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": [
+        0,
+        1.45,
+        0
+      ],
+      "pov": {
+        "eye": [
+          -0.5,
+          1.7,
+          2.2
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.45,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.433333333333333,
+      "captions": [
+        {
+          "time": 0,
+          "text": "no parachute first",
+          "highlight": "parachute"
+        },
+        {
+          "time": 0.28,
+          "text": "thing that happens",
+          "highlight": "happens"
+        },
+        {
+          "time": 1.28,
+          "text": "the air up",
+          "highlight": "the"
+        },
+        {
+          "time": 1.84,
+          "text": "here is so",
+          "highlight": "here"
+        }
+      ]
+    },
+    {
+      "title": "Not enough oxygen",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "thin",
+        "status": "NOT ENOUGH OXYGEN",
+        "alt": 0
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "handheld_bob",
+      "focus": [
+        0,
+        1.45,
+        0
+      ],
+      "pov": {
+        "eye": [
+          0.5,
+          1.6,
+          2.1
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.45,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.3666666666666667,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "thin there is",
+          "highlight": "there"
+        },
+        {
+          "time": 0.92,
+          "text": "not enough oxygen",
+          "highlight": "enough"
+        }
+      ]
+    },
+    {
+      "title": "Narrows, pass out",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "blackout",
+        "status": "VISION NARROWS",
+        "alt": 1
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_pull",
+      "focus": [
+        0,
+        1.4,
+        0
+      ],
+      "pov": {
+        "eye": [
+          -1.2,
+          1.6,
+          2.4
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.4,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.6,
+      "captions": [
+        {
+          "time": 0,
+          "text": "not enough oxygen",
+          "highlight": "enough"
+        },
+        {
+          "time": 0.71,
+          "text": "your vision narrows",
+          "highlight": "narrows"
+        },
+        {
+          "time": 1.89,
+          "text": "and you pass",
+          "highlight": "pass"
+        }
+      ]
+    },
+    {
+      "title": "Cold, dark, done",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "blackout",
+        "status": "COLD. DARK. DONE.",
+        "alt": 1
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "focus": [
+        0,
+        1.2,
+        0
+      ],
+      "pov": {
+        "eye": [
+          1.4,
+          1.7,
+          -2.6
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.2,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.3,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "out cold dark",
+          "highlight": "cold"
+        },
+        {
+          "time": 1.73,
+          "text": "done but here",
+          "highlight": "done"
+        }
+      ]
+    },
+    {
+      "title": "Weird part",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "blackout",
+        "status": "BLACKOUT",
+        "alt": 1
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_pull",
+      "focus": [
+        0,
+        1.1,
+        0
+      ],
+      "pov": {
+        "eye": [
+          -1.8,
+          1.9,
+          2.8
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.1,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 0.8666666666666667,
+      "captions": [
+        {
+          "time": 0,
+          "text": "done but here",
+          "highlight": "done"
+        },
+        {
+          "time": 0.35,
+          "text": "is the weird",
+          "highlight": "weird"
+        }
+      ]
+    },
+    {
+      "title": "As you fall",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "wake",
+        "status": "AIR GETS THICKER",
+        "alt": 1
+      },
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "handheld_bob",
+      "focus": [
+        0,
+        1.35,
+        0
+      ],
+      "pov": {
+        "eye": [
+          -0.4,
+          1.6,
+          2.3
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.35,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 0.9333333333333333,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "part as you",
+          "highlight": "part"
+        }
+      ]
+    },
+    {
+      "title": "Wake back up",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "wake",
+        "status": "10000 FT  /  WAKING UP",
+        "alt": 1
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "focus": [
+        0,
+        1.3,
+        0
+      ],
+      "pov": {
+        "eye": [
+          1.7,
+          1.8,
+          -2.8
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.3,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.7333333333333334,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "fall the air",
+          "highlight": "fall"
+        },
+        {
+          "time": 0.85,
+          "text": "gets thicker and",
+          "highlight": "thicker"
+        }
+      ]
+    },
+    {
+      "title": "Ten thousand feet",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "wake",
+        "status": "AWARE AGAIN",
+        "alt": 1
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
+      "focus": [
+        0,
+        1.3,
+        0
+      ],
+      "pov": {
+        "eye": [
+          0.0,
+          1.5,
+          2.2
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.3,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.2666666666666666,
+      "captions": [
+        {
+          "time": 0,
+          "text": "gets thicker and",
+          "highlight": "thicker"
+        },
+        {
+          "time": 0.15,
+          "text": "around ten thousand",
+          "highlight": "thousand"
+        },
+        {
+          "time": 1.1,
+          "text": "feet you wake",
+          "highlight": "feet"
+        },
+        {
+          "time": 1.97,
+          "text": "back up now",
+          "highlight": "back"
+        }
+      ]
+    },
+    {
+      "title": "Wide awake",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "tumble",
+        "status": "120 MPH  /  TUMBLING",
+        "alt": 1
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "handheld_bob",
+      "focus": [
+        0,
+        1.2,
+        0
+      ],
+      "pov": {
+        "eye": [
+          2.0,
+          2.0,
+          -3.4
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.2,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.8,
+      "captions": [
+        {
+          "time": 0,
+          "text": "back up now",
+          "highlight": "back"
+        },
+        {
+          "time": 0.71,
+          "text": "you are wide",
+          "highlight": "wide"
+        },
+        {
+          "time": 1.27,
+          "text": "awake tumbling at",
+          "highlight": "tumbling"
+        }
+      ]
+    },
+    {
+      "title": "120 mph, wind screaming",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "tumble",
+        "status": "WIND SCREAMING",
+        "alt": 1
+      },
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_pull",
+      "focus": [
+        0,
+        1.2,
+        0
+      ],
+      "pov": {
+        "eye": [
+          -1.9,
+          1.8,
+          2.9
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.2,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.566666666666667,
+      "captions": [
+        {
+          "time": 0,
+          "text": "awake tumbling at",
+          "highlight": "tumbling"
+        },
+        {
+          "time": 0.61,
+          "text": "about a hundred",
+          "highlight": "hundred"
+        },
+        {
+          "time": 1.23,
+          "text": "and twenty miles",
+          "highlight": "twenty"
+        },
+        {
+          "time": 1.88,
+          "text": "per hour wind",
+          "highlight": "hour"
+        }
+      ]
+    },
+    {
+      "title": "Wind screaming",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "scan",
+        "status": "YOU PICK THE ENDING",
+        "alt": 2
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_pull",
+      "focus": [
+        2,
+        -5,
+        8
+      ],
+      "pov": {
+        "eye": [
+          0,
+          5.5,
+          -6
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.0,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.2,
+      "captions": [
+        {
+          "time": 0,
+          "text": "per hour wind",
+          "highlight": "hour"
+        },
+        {
+          "time": 0.29,
+          "text": "screaming and you",
+          "highlight": "screaming"
+        }
+      ]
+    },
+    {
+      "title": "Pick where this ends",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "scan",
+        "status": "LOOK DOWN",
+        "alt": 2
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [
+        5,
+        -5,
+        10
+      ],
+      "pov": {
+        "eye": [
+          -3,
+          5.5,
+          -6
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.9,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.4666666666666666,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "get to pick",
+          "highlight": "pick"
+        },
+        {
+          "time": 0.5,
+          "text": "where this ends",
+          "highlight": "where"
+        }
+      ]
+    },
+    {
+      "title": "Look down",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "scan",
+        "status": "FOUR OPTIONS",
+        "alt": 2
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_pull",
+      "focus": [
+        0,
+        -6,
+        12
+      ],
+      "pov": {
+        "eye": [
+          -1,
+          6,
+          -7
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.8,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 0.8333333333333334,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "look down you",
+          "highlight": "look"
+        }
+      ]
+    },
+    {
+      "title": "River",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "river",
+        "status": "OPTION 1  /  RIVER",
+        "alt": 2
+      },
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_push",
+      "focus": [
+        -19.583172648174354,
+        -6,
+        -4
+      ],
+      "pov": {
+        "eye": [
+          -1,
+          5,
+          -5
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.8,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.0,
+      "captions": [
+        {
+          "time": 0,
+          "text": "look down you",
+          "highlight": "look"
+        },
+        {
+          "time": 0.11,
+          "text": "have got a",
+          "highlight": "have"
+        },
+        {
+          "time": 0.45,
+          "text": "river a forest",
+          "highlight": "forest"
+        }
+      ]
+    },
+    {
+      "title": "Rocky field, farm",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "scan",
+        "status": "FOREST / ROCKS / FARM",
+        "alt": 2
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [
+        8,
+        -6,
+        -2
+      ],
+      "pov": {
+        "eye": [
+          2,
+          5.5,
+          -6
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.8,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.1333333333333333,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "a rocky field",
+          "highlight": "rocky"
+        },
+        {
+          "time": 1.1,
+          "text": "and a plowed",
+          "highlight": "plowed"
+        },
+        {
+          "time": 1.62,
+          "text": "farm the river",
+          "highlight": "river"
+        }
+      ]
+    },
+    {
+      "title": "River looks soft",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "river",
+        "status": "RIVER LOOKS SOFT",
+        "alt": 2
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": [
+        -14.112600636303293,
+        -6,
+        2
+      ],
+      "pov": {
+        "eye": [
+          -1,
+          4.5,
+          -4
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.8,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.9666666666666666,
+      "captions": [
+        {
+          "time": 0,
+          "text": "farm the river",
+          "highlight": "river"
+        },
+        {
+          "time": 0.47,
+          "text": "looks soft and",
+          "highlight": "looks"
+        },
+        {
+          "time": 1.26,
+          "text": "inviting at this",
+          "highlight": "inviting"
+        }
+      ]
+    },
+    {
+      "title": "Hits like concrete",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "river",
+        "status": "WATER = CONCRETE",
+        "alt": 2
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "handheld_bob",
+      "focus": [
+        -10.25190483826465,
+        -6,
+        8
+      ],
+      "pov": {
+        "eye": [
+          0,
+          4,
+          -5
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.8,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.8,
+      "captions": [
+        {
+          "time": 0,
+          "text": "inviting at this",
+          "highlight": "inviting"
+        },
+        {
+          "time": 0.36,
+          "text": "speed water hits",
+          "highlight": "speed"
+        },
+        {
+          "time": 1.61,
+          "text": "like concrete trees",
+          "highlight": "concrete"
+        }
+      ]
+    },
+    {
+      "title": "Trees can cushion",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "trees",
+        "status": "TREES CAN CUSHION",
+        "alt": 2
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "focus": [
+        14,
+        0,
+        -8
+      ],
+      "pov": {
+        "eye": [
+          0,
+          5,
+          -9
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.8,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.1666666666666665,
+      "captions": [
+        {
+          "time": 0,
+          "text": "like concrete trees",
+          "highlight": "concrete"
+        },
+        {
+          "time": 1.03,
+          "text": "can break your",
+          "highlight": "break"
+        },
+        {
+          "time": 1.51,
+          "text": "fall if you",
+          "highlight": "fall"
+        }
+      ]
+    },
+    {
+      "title": "With the branches",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "trees",
+        "status": "LUCKY BRANCHES",
+        "alt": 3
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": [
+        16,
+        0.5,
+        -10
+      ],
+      "pov": {
+        "eye": [
+          -4,
+          3.5,
+          -8
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.8,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.7333333333333334,
+      "captions": [
+        {
+          "time": 0,
+          "text": "fall if you",
+          "highlight": "fall"
+        },
+        {
+          "time": 0.34,
+          "text": "are lucky with",
+          "highlight": "lucky"
+        },
+        {
+          "time": 0.85,
+          "text": "the branches rocks",
+          "highlight": "branches"
+        }
+      ]
+    },
+    {
+      "title": "Rocks are just rocks",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "rocks",
+        "status": "ROCKS ARE ROCKS",
+        "alt": 3
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "handheld_bob",
+      "focus": [
+        -9,
+        0,
+        13
+      ],
+      "pov": {
+        "eye": [
+          0,
+          4,
+          -8
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.8,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.6,
+      "captions": [
+        {
+          "time": 0,
+          "text": "the branches rocks",
+          "highlight": "branches"
+        },
+        {
+          "time": 0.41,
+          "text": "are just rocks",
+          "highlight": "rocks"
+        }
+      ]
+    },
+    {
+      "title": "Steer for the farm",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "steer",
+        "status": "STEER FOR THE FARM",
+        "alt": 2
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "focus": [
+        10,
+        -6,
+        15
+      ],
+      "pov": {
+        "eye": [
+          0,
+          5,
+          -6
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.0,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.9,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "so you arch",
+          "highlight": "arch"
+        },
+        {
+          "time": 0.66,
+          "text": "your back and",
+          "highlight": "your"
+        },
+        {
+          "time": 1.32,
+          "text": "steer for the",
+          "highlight": "steer"
+        }
+      ]
+    },
+    {
+      "title": "Spread your arms, spin",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "farm",
+        "status": "ARCH AND SPREAD",
+        "alt": 2
+      },
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_pull",
+      "focus": [
+        10,
+        -6,
+        15
+      ],
+      "pov": {
+        "eye": [
+          0,
+          4.5,
+          -5.5
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.0,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.2,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "farm spread your",
+          "highlight": "spread"
+        },
+        {
+          "time": 1.15,
+          "text": "arms slow your",
+          "highlight": "arms"
+        }
+      ]
+    },
+    {
+      "title": "Aim for softest ground",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "farm",
+        "status": "SOFTEST GROUND",
+        "alt": 2
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "focus": [
+        10,
+        -6,
+        16
+      ],
+      "pov": {
+        "eye": [
+          1,
+          5,
+          -6.5
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.0,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.433333333333333,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "spin and aim",
+          "highlight": "spin"
+        },
+        {
+          "time": 1.09,
+          "text": "for the softest",
+          "highlight": "softest"
+        },
+        {
+          "time": 1.85,
+          "text": "ground you can",
+          "highlight": "ground"
+        }
+      ]
+    },
+    {
+      "title": "Five thousand feet",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "low",
+        "status": "5000 FT",
+        "alt": 3
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "handheld_bob",
+      "focus": [
+        10,
+        0,
+        16
+      ],
+      "pov": {
+        "eye": [
+          0,
+          2.4,
+          -3.0
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.7,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.8,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "see five thousand",
+          "highlight": "thousand"
+        },
+        {
+          "time": 1.27,
+          "text": "feet two thousand",
+          "highlight": "thousand"
+        }
+      ]
+    },
+    {
+      "title": "Five hundred",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "low",
+        "status": "500 FT",
+        "alt": 3
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": [
+        10,
+        0,
+        16
+      ],
+      "pov": {
+        "eye": [
+          0,
+          1.6,
+          -2.2
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.4,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.9666666666666666,
+      "captions": [
+        {
+          "time": 0,
+          "text": "feet two thousand",
+          "highlight": "thousand"
+        },
+        {
+          "time": 0.87,
+          "text": "five hundred feet",
+          "highlight": "hundred"
+        }
+      ]
+    },
+    {
+      "title": "Brace: feet first",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "brace",
+        "status": "FEET FIRST",
+        "alt": 3
+      },
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "handheld_bob",
+      "focus": [
+        0,
+        0.8,
+        0
+      ],
+      "pov": {
+        "eye": [
+          1.8,
+          2.4,
+          3.4
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            1.4,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.6333333333333333,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "first knees bent",
+          "highlight": "first"
+        },
+        {
+          "time": 1.46,
+          "text": "and roll he",
+          "highlight": "roll"
+        }
+      ]
+    },
+    {
+      "title": "He rolls into the wheat",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "land",
+        "status": "ROLL",
+        "alt": 3
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [
+        0,
+        0.3,
+        0
+      ],
+      "pov": {
+        "eye": [
+          2.4,
+          2.0,
+          3.6
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0.5,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.7333333333333334,
+      "captions": [
+        {
+          "time": 0,
+          "text": "and roll he",
+          "highlight": "roll"
+        },
+        {
+          "time": 0.78,
+          "text": "rolls into the",
+          "highlight": "rolls"
+        },
+        {
+          "time": 1.32,
+          "text": "wheat gets up",
+          "highlight": "wheat"
+        }
+      ]
+    },
+    {
+      "title": "Gets up, brushes off",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "alive",
+        "status": "GETS UP",
+        "alt": 3
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "focus": [
+        0,
+        1.0,
+        0
+      ],
+      "pov": {
+        "eye": [
+          -1.8,
+          1.6,
+          2.8
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.066666666666667,
+      "captions": [
+        {
+          "time": 0,
+          "text": "wheat gets up",
+          "highlight": "wheat"
+        },
+        {
+          "time": 0.56,
+          "text": "brushes off his",
+          "highlight": "brushes"
+        },
+        {
+          "time": 1.36,
+          "text": "jacket and walks",
+          "highlight": "jacket"
+        }
+      ]
+    },
+    {
+      "title": "Walks away",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "alive",
+        "status": "WALKS AWAY",
+        "alt": 3
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_pull",
+      "focus": [
+        1.5,
+        1.0,
+        0
+      ],
+      "pov": {
+        "eye": [
+          -2.4,
+          1.8,
+          3.4
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 0.8666666666666667,
+      "captions": [
+        {
+          "time": 0,
+          "text": "jacket and walks",
+          "highlight": "jacket"
+        },
+        {
+          "time": 0.3,
+          "text": "away so next",
+          "highlight": "away"
+        }
+      ]
+    },
+    {
+      "title": "Take the train",
+      "stage": "fall_sky",
+      "fall": {
+        "cue": "alive",
+        "status": "NEXT TIME: THE TRAIN",
+        "alt": 3
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "focus": [
+        1.6,
+        0.9,
+        0
+      ],
+      "pov": {
+        "eye": [
+          0.2,
+          1.8,
+          4.2
+        ]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "faller",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.033333333333333,
+      "captions": [
+        {
+          "time": 0,
+          "text": "away so next",
+          "highlight": "away"
+        },
+        {
+          "time": 0.71,
+          "text": "time take the",
+          "highlight": "time"
+        },
+        {
+          "time": 1.5,
+          "text": "train",
+          "highlight": "train"
+        }
+      ]
+    }
+  ]
+}
