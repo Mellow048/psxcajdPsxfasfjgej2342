@@ -7,6 +7,11 @@ export const CONFIG = {
   psx: { grid: 160, gridHeight: 240, affine: 1, dither: 1, scale: 1 / 3 },
 };
 export const SCENE_PRESETS = {
+  mars_plain: { color: 0xd49a74, fog: 0xd49a74 },
+  fall_sky: { color: 0xcfe4f5, fog: 0xcfe4f5 },
+  mars_cabin: { color: 0x536165, fog: 0x687279 },
+  radio_hall: { color: 0x364851, fog: 0x536268 },
+  phase_scope: { color: 0x27353c, fog: 0x374451 },
   platform_three: { color: 0x192833, fog: 0x283b49 },
   retina_tunnel: { color: 0x371d36, fog: 0x382339 },
   signal_dark: { color: 0x05060c, fog: 0x05060c },
@@ -70,6 +75,7 @@ export const MUSIC_PRESETS = {
   },
 };
 export const SFX_MANIFEST = {
+  none: null,
   whoosh_fast: "synth",
   ui_pop: "synth",
   ding: "synth",

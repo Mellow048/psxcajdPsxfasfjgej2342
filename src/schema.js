@@ -87,18 +87,23 @@ export function validate(e) {
     "expected 1–60 shots",
   );
   check(
-    e.pacing === undefined || ["narrative", "micro"].includes(e.pacing),
+    e.pacing === undefined ||
+      ["narrative", "micro", "burst"].includes(e.pacing),
     "invalid pacing profile",
   );
   const maxShot =
-    e.pacing === "narrative" ? 15 : e.pacing === "micro" ? 3.2 : 3.5;
+    e.pacing === "narrative"
+      ? 15
+      : ["micro", "burst"].includes(e.pacing)
+        ? 3.2
+        : 3.5;
   let storyCount = 0,
     instanceCount = 0;
   for (const [i, s] of e.shots.entries()) {
     at = `shot ${i + 1}`;
     keys(
       s,
-      "title duration stage pov cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook",
+      "title duration stage pov cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook radio mars fall",
     );
     if (s.matchHook !== undefined)
       check(
@@ -118,7 +123,8 @@ export function validate(e) {
         ["center", "lower"].includes(s.captionPosition),
       "invalid captionPosition",
     );
-    const minShot = e.pacing === "micro" && i < 2 ? 1.7 : 2;
+    const minShot =
+      e.pacing === "burst" ? 0.8 : e.pacing === "micro" && i < 2 ? 1.7 : 2;
     check(str(s.title), "missing title");
     check(
       num(s.duration) &&
@@ -127,6 +133,114 @@ export function validate(e) {
         Math.abs(s.duration * 60 - Math.round(s.duration * 60)) < 1e-6,
       `duration must be ${minShot}–${maxShot}s on a 60 Hz tick`,
     );
+    if (
+      s.radio !== undefined ||
+      ["radio_hall", "phase_scope"].includes(s.stage)
+    ) {
+      keys(s.radio, "bars paths");
+      const v = s.radio.bars;
+      check(
+        ["radio_hall", "phase_scope"].includes(s.stage) &&
+          [0, 1, 2].includes(s.radio.paths) &&
+          Array.isArray(v) &&
+          v.length === 4 &&
+          v.every(num) &&
+          v.slice(0, 2).every((x) => Number.isInteger(x) && x >= 1 && x <= 4) &&
+          v[2] >= 0 &&
+          v[3] > v[2] &&
+          v[3] <= s.duration,
+        "invalid radio meter",
+      );
+      if (s.stage === "radio_hall")
+        check(
+          s.actors?.length === 1 &&
+            s.actors[0].asset === "male.character_01" &&
+            vec(s.actors[0].position),
+          "radio hall needs the phone carrier",
+        );
+    }
+    if (
+      s.mars !== undefined ||
+      ["mars_plain", "mars_cabin"].includes(s.stage)
+    ) {
+      keys(s.mars, "kit base cue status");
+      const m = s.mars;
+      check(
+        ["mars_plain", "mars_cabin"].includes(s.stage) &&
+          Number.isInteger(m.kit) &&
+          m.kit >= 0 &&
+          m.kit <= 4 &&
+          Number.isInteger(m.base) &&
+          m.base >= 0 &&
+          m.base <= 3 &&
+          (s.stage !== "mars_cabin" || m.base > 0) &&
+          str(m.status) &&
+          m.status.length <= 28 &&
+          [
+            "hold",
+            "readout",
+            "gas",
+            "fan_stop",
+            "sunset",
+            "second_print",
+            "step",
+            "prints",
+            "fall",
+            "lost",
+            "rewind",
+            "suit",
+            "tank",
+            "filter",
+            "coolant",
+            "hatch",
+            "pressure",
+            "unhelmet",
+            "solar",
+            "charge",
+            "night",
+            "shield",
+          ].includes(m.cue),
+        "invalid Mars loadout",
+      );
+      check(
+        (s.actors ?? []).every((a) => a.asset === "male.character_01"),
+        "expected mission actor",
+      );
+    }
+    if (s.fall !== undefined || s.stage === "fall_sky") {
+      keys(s.fall, "cue alt");
+      const m = s.fall;
+      check(
+        s.stage === "fall_sky" &&
+          [
+            "blast",
+            "debris",
+            "fall",
+            "thin",
+            "blackout",
+            "wake",
+            "tumble",
+            "scan",
+            "river",
+            "trees",
+            "rocks",
+            "steer",
+            "farm",
+            "low",
+            "brace",
+            "land",
+            "alive",
+          ].includes(m.cue) &&
+          Number.isInteger(m.alt) &&
+          m.alt >= 0 &&
+          m.alt <= 3,
+        "invalid fall state",
+      );
+      check(
+        (s.actors ?? []).every((a) => a.asset === "male.character_01"),
+        "expected the falling actor",
+      );
+    }
     check(has(stages, s.stage), "unknown stage");
     check(CAMERAS.includes(s.cameraPreset), "unknown cameraPreset");
     check(
@@ -140,10 +254,14 @@ export function validate(e) {
       "invalid distance",
     );
     if (s.pov !== undefined) {
-      keys(s.pov, "eye whipFrom recoil dollyTo");
+      keys(s.pov, "eye whipFrom recoil dollyTo lookTo");
       check(
         s.pov.dollyTo === undefined || vec(s.pov.dollyTo),
         "invalid dolly endpoint",
+      );
+      check(
+        s.pov.lookTo === undefined || vec(s.pov.lookTo),
+        "invalid tracked focus endpoint",
       );
       check(vec(s.pov.eye) && vec(s.focus), "POV needs eye and focus vectors");
       check(
@@ -164,7 +282,7 @@ export function validate(e) {
       for (const d of s[k] ?? []) {
         keys(
           d,
-          "id asset height yaw position motion motionSfx mesh clip text traits fadeOut fadeStyle",
+          "id asset height yaw position motion motionSfx mesh clip text traits fadeOut fadeStyle stride reach",
         );
         check(
           d.motionSfx === undefined ||
@@ -179,6 +297,28 @@ export function validate(e) {
               d.traits.every((tr) => has(MORPHS, tr)),
             "invalid starting traits",
           );
+        for (const [key, len] of [
+          ["stride", 2],
+          ["reach", 4],
+        ])
+          if (d[key] !== undefined) {
+            const v = d[key];
+            check(
+              (s.stage === "radio_hall" ||
+                (s.stage === "mars_plain" && key === "stride")) &&
+                k === "actors" &&
+                Array.isArray(v) &&
+                v.length === len &&
+                v.every(num) &&
+                (key === "stride"
+                  ? v[0] > 0 && v[0] <= 5 && v[1] > 0 && v[1] <= s.duration
+                  : v[2] >= 0 &&
+                    v[3] > v[2] &&
+                    v[3] <= s.duration &&
+                    v.slice(0, 2).every((x) => x >= 0 && x <= 0.65)),
+              "invalid " + key,
+            );
+          }
         if (d.fadeStyle !== undefined)
           check(
             d.fadeStyle === "scan" && d.fadeOut !== undefined,
@@ -231,7 +371,15 @@ export function validate(e) {
         (Array.isArray(s.events) && s.events.length <= 24),
       "events must be an array of at most 24 spawns",
     );
-    const hasSubject = ids.size > 0 || s.stage === "casino_room";
+    const hasSubject =
+      ids.size > 0 ||
+      [
+        "phase_scope",
+        "casino_room",
+        "mars_plain",
+        "mars_cabin",
+        "fall_sky",
+      ].includes(s.stage);
     for (const ev of s.events ?? []) {
       check(obj(ev), "invalid event");
       if (ev.type === "sound") {

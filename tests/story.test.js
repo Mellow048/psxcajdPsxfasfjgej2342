@@ -142,3 +142,73 @@ test("invisible: normal rays converge, transparent eye passes rays straight on",
     assert.throws(() => validate(bad), /fadeOut/);
   }
 });
+
+test("Mars: failed bare landing, cumulative suit, safe helmet removal and a shielded base", () => {
+  const e = validate(JSON.parse(readFileSync("episodes/mars.json")));
+  const shots = e.shots,
+    cues = shots.map((s) => s.mars.cue),
+    at = (c) => shots[cues.indexOf(c)];
+  assert.equal(
+    shots.reduce((n, s) => n + Math.round(s.duration * 30), 0),
+    2109,
+  );
+  assert.equal(shots[0].actors[0].asset, "male.character_01");
+  assert.equal(at("lost").mars.kit, 0);
+  const steps = [
+    "fall",
+    "lost",
+    "rewind",
+    "suit",
+    "tank",
+    "filter",
+    "coolant",
+    "hatch",
+    "unhelmet",
+    "solar",
+    "shield",
+  ];
+  assert.ok(
+    steps.every(
+      (c, i) => cues.indexOf(c) > (i ? cues.indexOf(steps[i - 1]) : -1),
+    ),
+  );
+  assert.deepEqual(
+    ["suit", "tank", "filter", "coolant"].map((c) => at(c).mars.kit),
+    [1, 2, 3, 4],
+  );
+  assert.equal(at("unhelmet").stage, "mars_cabin");
+  assert.equal(shots.at(-1).mars.kit, 4);
+  assert.equal(shots.at(-1).mars.base, 3);
+  const broken = structuredClone(e);
+  broken.shots[0].mars.kit = 5;
+  assert.throws(() => validate(broken), /loadout/);
+});
+
+test("Mars sunrise mix schedules the dry take once, with no other layers", () => {
+  const ep = validate(JSON.parse(readFileSync("episodes/mars.json"))),
+    played = [],
+    audio = new SfxEngine();
+  audio.ctx = { currentTime: 0 };
+  audio.sample = (url) => played.push(url);
+  audio.tone = (key) => played.push(key);
+  audio.musicBed = () => played.push("music");
+  audio.start(ep, 0);
+  assert.deepEqual(played, [ep.voiceover]);
+  assert.equal(ep.shots.length, 39);
+});
+
+test("Plane freefall mix schedules the dry take once, with no other layers", () => {
+  const ep = validate(JSON.parse(readFileSync("episodes/plane.json"))),
+    played = [],
+    audio = new SfxEngine();
+  audio.ctx = { currentTime: 0 };
+  audio.sample = (url) => played.push(url);
+  audio.tone = (key) => played.push(key);
+  audio.musicBed = (music) => played.push(music.track);
+  audio.start(ep, 0);
+  assert.deepEqual(
+    played.sort(),
+    [ep.voiceover, "episodes/tense-heartbeat.wav"].sort(),
+  );
+  assert.equal(ep.shots.length, 34);
+});
