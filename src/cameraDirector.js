@@ -26,10 +26,13 @@ export class CameraDirector {
       c.rotateX(0.025 * Math.sin(3.8 * t));
       c.rotateY(0.033 * Math.cos(3.8 * t));
     } else {
-      const delta =
-        mode === "slow_push"
-          ? -Math.min(0.5, c.position.distanceTo(this.focus) * 0.42)
-          : 0.5;
+      // Unrecognised motions hold position instead of silently dollying like
+      // slow_pull — schema rejects these, but never fail open on camera.
+      const delta = mode === "slow_push"
+        ? -Math.min(0.5, c.position.distanceTo(this.focus) * 0.42)
+        : mode === "slow_pull"
+          ? 0.5
+          : 0;
       c.translateZ(delta * u);
     }
     return c;

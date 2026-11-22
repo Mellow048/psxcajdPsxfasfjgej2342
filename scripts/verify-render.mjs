@@ -4,11 +4,21 @@ import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { validate } from "../src/schema.js";
 import { CONFIG } from "../src/config.js";
-const file = process.argv[2],
-  ep = validate(JSON.parse(readFileSync(file, "utf8")));
+const file = process.argv[2];
+const probe = process.env.FFPROBE_BIN || "ffprobe";
+try {
+  execFileSync(probe, ["-version"], { stdio: "ignore" });
+} catch {
+  console.error(
+    "ffprobe not found. Install FFmpeg, or set FFPROBE_BIN=/path/to/ffprobe " +
+      "(CI adds node_modules/@ffprobe-installer/linux-x64 to PATH; see README → Render on GitHub).",
+  );
+  process.exit(1);
+}
+const ep = validate(JSON.parse(readFileSync(file, "utf8")));
 const media = path.join("render-output", path.basename(file, ".json") + ".mp4");
 const { streams, format } = JSON.parse(
-  execFileSync("ffprobe", [
+  execFileSync(probe, [
     "-v",
     "error",
     "-show_streams",

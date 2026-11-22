@@ -72,9 +72,15 @@ function gestureTracks(bones, action, period) {
     const w = Math.sin((2 * Math.PI * i) / 24),
       beat = Math.cos((4 * Math.PI * i) / 24);
     times.push((period * i) / 24);
-    spine?.rotateX(0.055 * w + (action === "shocked" ? -0.14 : 0));
-    head?.rotateY((action === "thinking" ? 0.22 : 0.09) * w);
+    spine?.rotateX(
+      0.055 * w +
+        (action === "shocked" ? -0.14 : action === "freefall" ? -0.17 : 0),
+    );
+    head?.rotateY(
+      (action === "thinking" ? 0.22 : action === "freefall" ? 0.11 : 0.09) * w,
+    );
     head?.rotateZ(action === "thinking" ? -0.19 : 0.035 * beat);
+    if (action === "freefall") head?.rotateX(0.26 + 0.04 * beat);
     if (action === "place_bet" || action === "wince") {
       spine?.rotateX(0.12 + 0.025 * w);
       head?.rotateX(0.13 + 0.09 * beat);
@@ -111,6 +117,12 @@ function gestureTracks(bones, action, period) {
       if (action === "shocked") {
         upper = [side * 0.88, 0.34 + 0.18 * w, 0.2];
         lower = [side * 0.28, 0.84, 0.35];
+      }
+      if (action === "freefall") {
+        // Belly-to-earth spread eagle: arms out and swept back like an
+        // aerofoil, forearms cocked up, fluttering twice per beat.
+        upper = [side * 0.88, -0.42 + 0.13 * w, -0.36];
+        lower = [side * 0.38, 0.52 + 0.17 * beat, -0.22];
       }
       aim(arm, elbow, upper);
       aim(elbow, hand, lower);
@@ -168,7 +180,8 @@ export function pose({ node, def, mixer }, t) {
   let y = 0.035 * Math.sin(t * 3),
     a = 0.045 * Math.sin(t * 2),
     z = 0,
-    k = 1;
+    k = 1,
+    x = 0;
   switch (def.motion) {
     case "float_spin":
       y += 0.12 * Math.sin(t * 2.5);
@@ -187,13 +200,21 @@ export function pose({ node, def, mixer }, t) {
       k += 0.14 * Math.exp(-2 * t) * Math.sin(12 * t);
       y += 0.17 * Math.abs(Math.sin(t * 4));
       break;
+    case "freefall":
+      // Belly-to-earth pitch with a slow porpoising flutter and yaw wander.
+      // No floor contact: the 3 cm idle bob is replaced by air buffeting.
+      x = 1.15 + 0.1 * Math.sin(t * 1.7 + 1);
+      z = 0.3 * Math.sin(t * 2.1);
+      a += 0.35 * Math.sin(t * 1.1);
+      y = 0.06 * Math.sin(t * 2.6);
+      break;
     case "pop_in":
       k = Math.max(0.025, 1 - Math.exp(-7 * t) * Math.cos(t * 10));
       break;
   }
   node.position.fromArray(def.position ?? [0, 0, 0]);
   node.position.y += y;
-  node.rotation.set(0, (def.yaw ?? 0) + a, z);
+  node.rotation.set(x, (def.yaw ?? 0) + a, z);
   node.scale.set(k, k * (1 + 0.015 * Math.sin(3 * t)), k);
   mixer?.setTime(t);
 }

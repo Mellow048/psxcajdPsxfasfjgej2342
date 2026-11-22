@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gulliver — A Pelican Riding a Bike</title>
+<style>
+  :root{
+    --cream:#f7ead8;
+    --accent:#f4a83e;
+    --panel:rgba(12,21,29,.72);
+    --panel-edge:rgba(247,234,216,.16);
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    background: radial-gradient(1200px 700px at 50% -10%, #16232e 0%, #0b1016 55%, #070b10 100%);
+    display:flex; align-items:center; justify-content:center;
+    min-height:100vh;
+    font-family:"Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;
+    overflow:hidden;
+  }
+
+  .stage{
+    position:relative;
+    width:min(1180px,96vw);
+    aspect-ratio:16/9;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid var(--panel-edge);
+    box-shadow:0 40px 90px rgba(0,0,0,.6), 0 4px 18px rgba(0,0,0,.5), inset 0 0 0 1px rgba(0,0,0,.4);
+    cursor:pointer;
+    user-select:none;
+    -webkit-user-select:none;
+    background:#123b54;
+  }
+  .stage svg{ display:block; width:100%; height:100%; }
+
+  /* film grain / vignette */
+  .vignette{
+    position:absolute; inset:0; pointer-events:none;
+    background:
+      radial-gradient(130% 105% at 50% 42%, transparent 55%, rgba(5,10,14,.38) 100%),
+      linear-gradient(to bottom, rgba(5,10,14,.18), transparent 14%, transparent 88%, rgba(5,10,14,.3));
+    mix-blend-mode:multiply;
+  }
+
+  .hud{ position:absolute; pointer-events:none; color:var(--cream); }
+  .hud-tl{ top:clamp(10px,2.2vw,22px); left:clamp(12px,2.4vw,26px); }
+  .title{
+    font-weight:800;
+    font-size:clamp(19px,3vw,34px);
+    letter-spacing:.34em;
+    text-indent:.34em;
+    color:var(--cream);
+    text-shadow:0 2px 14px rgba(0,0,0,.45);
+    line-height:1;
+  }
+  .title em{ font-style:normal; color:var(--accent); }
+  .subtitle{
+    margin-top:6px;
+    font-size:clamp(7px,.95vw,10.5px);
+    letter-spacing:.28em; text-transform:uppercase;
+    color:rgba(247,234,216,.82);
+    text-shadow:0 1px 8px rgba(0,0,0,.5);
+  }
+
+  .hud-tr{
+    top:clamp(10px,2.2vw,22px); right:clamp(12px,2.4vw,26px);
+    text-align:right;
+    font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    text-shadow:0 1px 8px rgba(0,0,0,.55);
+  }
+  .odo-label{ font-size:clamp(6px,.8vw,9px); letter-spacing:.3em; color:rgba(247,234,216,.65); text-transform:uppercase; }
+  .odo{ font-size:clamp(15px,1.9vw,24px); font-weight:700; color:#ffe9ad; letter-spacing:.06em; }
+  .pace{ font-size:clamp(6px,.8vw,9px); letter-spacing:.24em; color:rgba(247,234,216,.75); text-transform:uppercase; margin-top:2px; }
+
+  .hud-bl{
+    bottom:clamp(56px,7.4vw,84px); left:clamp(12px,2.4vw,26px);
+    font-size:clamp(7px,.85vw,10px); letter-spacing:.14em;
+    color:rgba(247,234,216,.6); text-transform:uppercase;
+    text-shadow:0 1px 6px rgba(0,0,0,.6);
+  }
+  kbd{
+    font-family:inherit; border:1px solid rgba(247,234,216,.4); border-bottom-width:2px;
+    border-radius:4px; padding:0 5px; font-size:.92em; color:var(--cream);
+    background:rgba(0,0,0,.35);
+  }
+
+  .controls{
+    position:absolute; bottom:clamp(8px,1.6vw,18px); left:50%; transform:translateX(-50%);
+    display:flex; align-items:center; gap:clamp(8px,1.4vw,18px);
+    background:var(--panel);
+    border:1px solid var(--panel-edge);
+    border-radius:999px;
+    padding:clamp(6px,.9vw,10px) clamp(12px,1.8vw,22px);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px rgba(0,0,0,.45);
+    pointer-events:auto;
+  }
+  .pace-wrap{ display:flex; align-items:center; gap:10px; }
+  .pace-wrap label{
+    font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:rgba(247,234,216,.78);
+  }
+  .pace-ends{ font-size:9px; color:rgba(247,234,216,.45); letter-spacing:.08em; white-space:nowrap; }
+  input[type=range]{
+    -webkit-appearance:none; appearance:none;
+    width:clamp(120px,17vw,220px); height:4px; border-radius:2px;
+    background:linear-gradient(90deg,#3f6a80,#f4a83e);
+    outline:none; cursor:pointer; accent-color:var(--accent);
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none; width:16px; height:16px; border-radius:50%;
+    background:var(--cream); border:2px solid var(--accent);
+    box-shadow:0 2px 6px rgba(0,0,0,.5); cursor:grab;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:14px; height:14px; border-radius:50%; background:var(--cream);
+    border:2px solid var(--accent); box-shadow:0 2px 6px rgba(0,0,0,.5); cursor:grab;
+  }
+  input[type=range]:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font:inherit; font-size:10px; letter-spacing:.22em; text-transform:uppercase; font-weight:700;
+    color:#1c130a; background:var(--accent);
+    border:none; border-radius:999px;
+    padding:9px 16px; cursor:pointer;
+    box-shadow:0 4px 14px rgba(244,168,62,.35);
+    transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{ transform:translateY(-2px); filter:brightness(1.06); box-shadow:0 8px 22px rgba(244,168,62,.45); }
+  .btn:active{ transform:translateY(0) scale(.97); }
+  .btn:focus-visible{ outline:2px solid var(--cream); outline-offset:3px; }
+  .btn.ghost{
+    background:transparent; color:var(--cream);
+    border:1px solid rgba(247,234,216,.35); box-shadow:none;
+  }
+  .btn.ghost:hover{ border-color:var(--accent); color:var(--accent); box-shadow:0 4px 16px rgba(0,0,0,.35); }
+  .btn svg{ width:13px; height:13px; display:block; }
+
+  /* bell ping animation on the dome itself */
+  .bell-ping{ animation:bellPing .5s ease-out; transform-box:fill-box; transform-origin:center; }
+  @keyframes bellPing{
+    0%{ transform:scale(1); } 30%{ transform:scale(1.6); }
+    55%{ transform:scale(.85); } 75%{ transform:scale(1.25); } 100%{ transform:scale(1); }
+  }
+
+  /* sea glitter + lighthouse + clouds */
+  .gl{ animation:glint 2.3s ease-in-out infinite alternate; }
+  @keyframes glint{ from{ opacity:.06; } to{ opacity:.75; } }
+  .blink{ animation:blink 2.7s steps(1,end) infinite; }
+  @keyframes blink{ 0%{opacity:1} 12%{opacity:.08} 24%{opacity:1} 100%{opacity:1} }
+  .cloud{ animation:cloudDrift linear infinite; }
+  @keyframes cloudDrift{ from{ transform:translateX(-420px); } to{ transform:translateX(1720px); } }
+
+  @media (max-width:640px){
+    .hud-bl{ display:none; }
+    .pace-ends{ display:none; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cloud,.gl,.blink{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<main class="stage" id="stage" role="img" aria-label="Gulliver, a white pelican with an orange beak, riding a red beach cruiser along a seaside road at golden hour. The wheels spin, he pedals, a red scarf flutters, and the scenery scrolls by.">
+
+  <!-- ════════════════════ THE SCENE ════════════════════ -->
+  <svg id="scene" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#10374f"/>
+        <stop offset=".42" stop-color="#2e617d"/>
+        <stop offset=".74" stop-color="#7fa8a8"/>
+        <stop offset=".93" stop-color="#e9b878"/>
+        <stop offset="1" stop-color="#f7cd8f"/>
+      </linearGradient>
+      <radialGradient id="sunGrad" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#fff6cc"/>
+        <stop offset=".62" stop-color="#ffd975"/>
+        <stop offset="1" stop-color="#ffb84d"/>
+      </radialGradient>
+      <radialGradient id="sunGlow" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#ffe9ad" stop-opacity=".85"/>
+        <stop offset=".45" stop-color="#ffd98a" stop-opacity=".28"/>
+        <stop offset="1" stop-color="#ffd98a" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="seaGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3f829e"/>
+        <stop offset=".35" stop-color="#2b5b76"/>
+        <stop offset="1" stop-color="#16384e"/>
+      </linearGradient>
+      <linearGradient id="sandGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#eed9a6"/>
+        <stop offset="1" stop-color="#d3b47e"/>
+      </linearGradient>
+      <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".55" stop-color="#f2f4f6"/>
+        <stop offset="1" stop-color="#ccd4da"/>
+      </linearGradient>
+      <linearGradient id="billGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ffc46b"/>
+        <stop offset=".55" stop-color="#f3923c"/>
+        <stop offset="1" stop-color="#d97a26"/>
+      </linearGradient>
+      <linearGradient id="pouchGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ffd97a"/>
+        <stop offset=".55" stop-color="#f0b04a"/>
+        <stop offset="1" stop-color="#d68c32"/>
+      </linearGradient>
+      <linearGradient id="fenderGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f2603a"/>
+        <stop offset="1" stop-color="#c33d22"/>
+      </linearGradient>
+      <clipPath id="basketClip"><path d="M740 448 L844 448 L826 518 L758 518 Z"/></clipPath>
+    </defs>
+
+    <!-- SKY -->
+    <rect x="0" y="0" width="1280" height="456" fill="url(#skyGrad)"/>
+    <circle cx="950" cy="408" r="185" fill="url(#sunGlow)"/>
+    <circle cx="950" cy="408" r="66" fill="url(#sunGrad)"/>
+
+    <!-- clouds -->
+    <g class="cloud" style="animation-duration:105s; animation-delay:-12s" opacity=".9" fill="#f4ede2">
+      <ellipse cx="180" cy="104" rx="58" ry="18"/><ellipse cx="222" cy="94" rx="46" ry="16"/><ellipse cx="140" cy="96" rx="34" ry="13"/>
+    </g>
+    <g class="cloud" style="animation-duration:140s; animation-delay:-70s" opacity=".75" fill="#e9e2d6">
+      <ellipse cx="600" cy="66" rx="72" ry="17"/><ellipse cx="650" cy="56" rx="44" ry="14"/><ellipse cx="552" cy="57" rx="36" ry="12"/>
+    </g>
+    <g class="cloud" style="animation-duration:90s; animation-delay:-40s" opacity=".6" fill="#ddd6cb">
+      <ellipse cx="1080" cy="150" rx="48" ry="13"/><ellipse cx="1116" cy="142" rx="32" ry="11"/>
+    </g>
+
+    <!-- distant headlands + lighthouse -->
+    <path d="M0 434 L86 398 L152 428 L214 410 L300 434 Z" fill="#1d3140"/>
+    <path d="M1280 434 L1182 404 L1098 432 L1008 418 L916 434 Z" fill="#1d3140"/>
+    <path d="M112 432 L121 348 L133 432 Z" fill="#243b49"/>
+    <rect x="118" y="372" width="18" height="5" fill="#243b49"/>
+    <circle class="blink" cx="127" cy="346" r="4" fill="#ffe9a8"/>
+    <line x1="0" y1="434" x2="1280" y2="434" stroke="#ffe9c0" stroke-opacity=".35" stroke-width="1.5"/>
+
+    <!-- gulls fly here (JS spawns) -->
+    <g id="gullLayer"></g>
+
+    <!-- SEA -->
+    <rect x="0" y="434" width="1280" height="112" fill="url(#seaGrad)"/>
+    <polygon points="950,440 872,544 1032,544" fill="#ffd98a" opacity=".14"/>
+    <g stroke="#ffe9ad" stroke-width="3" stroke-linecap="round">
+      <line class="gl" style="animation-delay:-.2s" x1="905" y1="462" x2="990" y2="462"/>
+      <line class="gl" style="animation-delay:-1.3s" x1="880" y1="482" x2="1015" y2="482"/>
+      <line class="gl" style="animation-delay:-.8s" x1="920" y1="500" x2="1000" y2="500"/>
+      <line class="gl" style="animation-delay:-1.9s" x1="845" y1="520" x2="1055" y2="520"/>
+      <line class="gl" style="animation-delay:-.5s" x1="180" y1="474" x2="240" y2="474"/>
+      <line class="gl" style="animation-delay:-1.1s" x1="420" y1="505" x2="505" y2="505"/>
+    </g>
+
+    <!-- SAND strip -->
+    <rect x="0" y="546" width="1280" height="24" fill="url(#sandGrad)"/>
+    <path d="M0 546 Q 160 528 330 546 T 700 546 T 1280 546 V 570 H 0 Z" fill="#e6cd97" opacity=".8"/>
+    <!-- passers-by on the sand (grass tufts, umbrellas) -->
+    <g id="backScenery"></g>
+
+    <!-- ROAD -->
+    <rect x="0" y="570" width="1280" height="150" fill="#25252c"/>
+    <line x1="0" y1="571.5" x2="1280" y2="571.5" stroke="#0e0e12" stroke-width="3" opacity=".7"/>
+    <line x1="0" y1="592" x2="1280" y2="592" stroke="#ffffff" stroke-opacity=".06" stroke-width="10"/>
+    <line x1="0" y1="700" x2="1280" y2="700" stroke="#ffffff" stroke-opacity=".05" stroke-width="14"/>
+    <line id="roadDashes" x1="-120" y1="663" x2="1400" y2="663" stroke="#f2e7c3" stroke-width="6"
+          stroke-linecap="round" stroke-dasharray="52 46" stroke-opacity=".85"/>
+
+    <!-- bike shadow -->
+    <ellipse id="bikeShadow" cx="622" cy="650" rx="212" ry="11" fill="#000000" opacity=".36"/>
+
+    <!-- ═══════════ BIKE + PELICAN ═══════════ -->
+    <g id="bikeWorld">
+
+      <!-- FAR leg (darker, behind everything mechanical) -->
+      <path id="legFar" d="M0 0 L0 0 L0 0" fill="none" stroke="#b85a2e" stroke-width="12"
+            stroke-linecap="round" stroke-linejoin="round" opacity=".95"/>
+      <g id="footFar">
+        <ellipse rx="13" ry="7" fill="#c96a30"/>
+        <path d="M9 -3 L21 -7 M11 1 L23 1 M9 5 L20 9" stroke="#a34d1d" stroke-width="2.4" stroke-linecap="round"/>
+      </g>
+      <!-- far crank -->
+      <line id="crankFar" x1="584" y1="552" x2="584" y2="582" stroke="#2c3036" stroke-width="9" stroke-linecap="round"/>
+      <line id="pedalFar" x1="572" y1="582" x2="596" y2="582" stroke="#1e2228" stroke-width="6" stroke-linecap="round"/>
+
+      <!-- WHEELS -->
+      <g id="rearWheel">
+        <circle cx="448" cy="574" r="62" fill="none" stroke="#1f232a" stroke-width="13"/>
+        <circle cx="448" cy="574" r="47" fill="none" stroke="#e9e4d6" stroke-width="4.5"/>
+        <g class="spokes" id="rearSpokes" stroke="#c9cdd4" stroke-width="3" stroke-linecap="round"></g>
+        <circle cx="448" cy="574" r="7.5" fill="#454b54"/>
+        <circle cx="448" cy="574" r="2.6" fill="#20242a"/>
+      </g>
+      <g id="frontWheel">
+        <circle cx="792" cy="574" r="62" fill="none" stroke="#1f232a" stroke-width="13"/>
+        <circle cx="792" cy="574" r="47" fill="none" stroke="#e9e4d6" stroke-width="4.5"/>
+        <g class="spokes" id="frontSpokes" stroke="#c9cdd4" stroke-width="3" stroke-linecap="round"></g>
+        <circle cx="792" cy="574" r="7.5" fill="#454b54"/>
+        <circle cx="792" cy="574" r="2.6" fill="#20242a"/>
+      </g>
+
+      <!-- CHAIN + RING -->
+      <line x1="448" y1="560.5" x2="584" y2="540" stroke="#17191e" stroke-width="4.5"/>
+      <line x1="448" y1="587.5" x2="584" y2="564.5" stroke="#17191e" stroke-width="4.5"/>
+      <circle cx="448" cy="574" r="11" fill="#2b2f36" stroke="#454b54" stroke-width="2.5"/>
+      <circle cx="584" cy="552" r="27" fill="#2f333a" stroke="#4a515b" stroke-width="3.5"/>
+      <circle cx="584" cy="552" r="15" fill="none" stroke="#565e68" stroke-width="2"/>
+      <g id="ringBolts" fill="#8b939e">
+        <circle cx="584" cy="534" r="2.8"/><circle cx="601.1" cy="546.5" r="2.8"/>
+        <circle cx="594.6" cy="567.6" r="2.8"/><circle cx="573.4" cy="567.6" r="2.8"/>
+        <circle cx="566.9" cy="546.5" r="2.8"/>
+      </g>
+
+      <!-- FRAME -->
+      <g stroke="#d8442c" stroke-width="12" stroke-linecap="round" fill="none">
+        <line x1="584" y1="552" x2="520" y2="422"/>   <!-- seat tube -->
+        <line x1="584" y1="552" x2="742" y2="456"/>   <!-- down tube -->
+        <line x1="512" y1="428" x2="730" y2="412"/>   <!-- top tube -->
+        <line x1="514" y1="430" x2="448" y2="574"/>   <!-- seat stay -->
+        <line x1="584" y1="552" x2="448" y2="574"/>   <!-- chain stay -->
+      </g>
+      <line x1="524" y1="416" x2="726" y2="401" stroke="#ff8a5f" stroke-width="2.5" opacity=".65" stroke-linecap="round"/>
+      <!-- fork -->
+      <line x1="730" y1="414" x2="792" y2="574" stroke="#b03a24" stroke-width="10" stroke-linecap="round"/>
+      <!-- fenders -->
+      <path d="M379 542 A76 76 0 0 1 517 542" fill="none" stroke="url(#fenderGrad)" stroke-width="7" stroke-linecap="round"/>
+      <path d="M723 542 A76 76 0 0 1 861 542" fill="none" stroke="url(#fenderGrad)" stroke-width="7" stroke-linecap="round"/>
+      <!-- seat -->
+      <line x1="517" y1="426" x2="511" y2="394" stroke="#9aa1a8" stroke-width="6" stroke-linecap="round"/>
+      <path d="M478 392 Q 511 380 548 392 Q 552 402 540 404 L 486 404 Q 472 401 478 392 Z" fill="#7a4a2b"/>
+      <path d="M486 393 Q 512 384 540 393" fill="none" stroke="#a5714a" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- handlebars (beach-cruiser swept back) -->
+      <line x1="726" y1="414" x2="710" y2="362" stroke="#cfd4d9" stroke-width="6.5" stroke-linecap="round"/>
+      <path d="M710 362 Q 702 350 676 354 Q 664 356 654 360" fill="none" stroke="#cfd4d9" stroke-width="6" stroke-linecap="round"/>
+      <line x1="676" y1="355" x2="649" y2="361" stroke="#7a4a2b" stroke-width="11" stroke-linecap="round"/>
+      <!-- bell -->
+      <g id="bellDome">
+        <path d="M697 349 a7 7 0 0 1 14 0 l1.5 3 h-17 Z" fill="#e8e2d2" stroke="#8f887a" stroke-width="1.2"/>
+        <circle cx="704" cy="340.5" r="1.6" fill="#8f887a"/>
+      </g>
+
+      <!-- BASKET with fish -->
+      <g id="basket">
+        <g clip-path="url(#basketClip)">
+          <rect x="736" y="444" width="112" height="78" fill="#9c6b33"/>
+          <g stroke="#6f4520" stroke-width="2.4">
+            <line x1="756" y1="444" x2="752" y2="522"/><line x1="775" y1="444" x2="772" y2="522"/>
+            <line x1="794" y1="444" x2="793" y2="522"/><line x1="813" y1="444" x2="815" y2="522"/>
+            <line x1="831" y1="444" x2="836" y2="522"/>
+            <line x1="736" y1="468" x2="848" y2="468"/><line x1="736" y1="489" x2="848" y2="489"/>
+            <line x1="736" y1="509" x2="848" y2="509"/>
+          </g>
+          <rect x="736" y="444" width="112" height="20" fill="#b5803f" opacity=".7"/>
+        </g>
+        <path d="M740 448 L844 448 L826 518 L758 518 Z" fill="none" stroke="#54331a" stroke-width="5" stroke-linejoin="round"/>
+        <line x1="730" y1="442" x2="850" y2="442" stroke="#54331a" stroke-width="6" stroke-linecap="round"/>
+        <!-- fish peeking out -->
+        <g id="basketFish">
+          <path d="M792 444 L 806 418 L 812 436 L 826 424 L 818 448 Z" fill="#e9b949" stroke="#b57e1e" stroke-width="2" stroke-linejoin="round"/>
+          <ellipse cx="797" cy="445" rx="14" ry="7" fill="#e9b949" stroke="#b57e1e" stroke-width="2"/>
+          <circle cx="806" cy="443" r="1.5" fill="#54331a"/>
+        </g>
+        <g id="basketFish2" opacity=".95">
+          <path d="M766 446 L 760 426 L 772 436 L 764 424 L 776 442 Z" fill="#d98e4a" stroke="#a55d22" stroke-width="2" stroke-linejoin="round"/>
+        </g>
+      </g>
+
+      <!-- NEAR leg + NEAR crank (in front of frame) -->
+      <path id="legNear" d="M0 0 L0 0 L0 0" fill="none" stroke="#e8703a" stroke-width="13"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <g id="footNear">
+        <ellipse rx="14" ry="7.5" fill="#ef8a3f"/>
+        <path d="M10 -3.5 L23 -8 M12 1 L25 1 M10 5.5 L22 10" stroke="#c9511f" stroke-width="2.6" stroke-linecap="round"/>
+      </g>
+      <line id="crankNear" x1="584" y1="552" x2="614" y2="552" stroke="#3f454e" stroke-width="10" stroke-linecap="round"/>
+      <line x1="584" y1="549.5" x2="606" y2="549" stroke="#5a626d" stroke-width="2.5" stroke-linecap="round" opacity=".8"/>
+      <line id="pedalNear" x1="602" y1="552" x2="626" y2="552" stroke="#262a31" stroke-width="6.5" stroke-linecap="round"/>
+
+      <!-- RIDER ARM reaching to the grip (world coords, set by JS) -->
+      <path id="armOuter" d="M0 0 Q0 0 0 0" fill="none" stroke="#dde3e7" stroke-width="16" stroke-linecap="round"/>
+      <path id="armInner" d="M0 0 Q0 0 0 0" fill="none" stroke="#f7f5ef" stroke-width="11" stroke-linecap="round"/>
+      <g id="armHand" fill="#e8703a">
+        <ellipse rx="10.5" ry="7" transform="rotate(-18)"/>
+        <path d="M6 -5 L16 -9 M8 0 L18 0 M6 5 L16 8" stroke="#c9511f" stroke-width="2.3" stroke-linecap="round" fill="none"/>
+      </g>
+
+      <!-- ══════════ PELICAN BODY (bobs) ══════════ -->
+      <g id="bodyBob">
+        <!-- tail feathers -->
+        <path d="M452 292 L380 264 L398 290 L368 288 L392 310 L372 330 L446 332 Z" fill="#e9edf0" stroke="#c9d0d6" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M440 302 L392 285 M442 316 L398 316" stroke="#c9d0d6" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- torso -->
+        <ellipse cx="508" cy="306" rx="86" ry="58" fill="url(#bodyGrad)" transform="rotate(-5 508 306)"/>
+        <ellipse cx="530" cy="282" rx="40" ry="20" fill="#ffffff" opacity=".55" transform="rotate(-12 530 282)"/>
+
+        <!-- folded near wing (flap = rotates about 548,282) -->
+        <g id="wingNear">
+          <path d="M470 262 C 522 240 576 252 594 300 C 566 338 482 350 446 330 C 440 300 446 276 470 262 Z"
+                fill="#eceff2" stroke="#cdd4da" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M468 296 Q 514 284 566 302 M464 318 Q 514 306 572 322" fill="none" stroke="#c4ccd3" stroke-width="2.4" stroke-linecap="round"/>
+          <!-- black primary wingtips -->
+          <path d="M470 336 C 452 348 443 360 441 373 C 458 369 479 360 495 349 Z" fill="#22262c"/>
+          <path d="M496 343 C 483 356 477 368 476 381 C 492 375 508 366 521 355 Z" fill="#22262c"/>
+          <path d="M522 345 C 512 358 508 370 508 382 C 523 376 535 367 546 357 Z" fill="#22262c"/>
+          <path d="M547 345 C 539 356 536 366 537 376 C 549 370 558 363 566 353 Z" fill="#22262c"/>
+        </g>
+
+        <!-- neck -->
+        <path d="M556 264 C 560 214 598 208 624 178" fill="none" stroke="#dde3e7" stroke-width="49" stroke-linecap="round"/>
+        <path d="M556 264 C 560 214 598 208 624 178" fill="none" stroke="#f7f5ef" stroke-width="38" stroke-linecap="round"/>
+
+        <!-- POUCH (spring-squashes on swallow / clap) -->
+        <g id="pouchGroup">
+          <path d="M660 176 Q 738 254 828 203 L 832 194 Q 740 240 664 168 Z" fill="url(#pouchGrad)"/>
+          <path d="M672 190 Q 738 228 818 199" fill="none" stroke="#c9822e" stroke-width="2.4" stroke-opacity=".65" stroke-linecap="round"/>
+        </g>
+
+        <!-- head -->
+        <g id="headGroup">
+          <ellipse cx="634" cy="165" rx="31" ry="23.5" fill="#f7f5ef" transform="rotate(-8 634 165)"/>
+          <ellipse cx="664" cy="170" rx="15" ry="9.5" fill="#f2b34e" opacity=".85" transform="rotate(-6 664 170)"/>
+          <!-- upper mandible -->
+          <path d="M646 152 C 728 154 797 173 838 190 C 846 193 846 200 838 201 C 786 197 713 191 648 177 Z" fill="url(#billGrad)"/>
+          <path d="M833 189 L 856 198 L 837 204 Z" fill="#c96f1e"/>
+          <path d="M662 160 L 824 189" stroke="#b45f1e" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
+          <!-- bandit stripe, then eye on top -->
+          <path d="M624 150 Q 660 151 692 157.5" fill="none" stroke="#23262c" stroke-width="5.5" stroke-linecap="round" stroke-opacity=".85"/>
+          <circle cx="657" cy="156" r="5" fill="#1d2126"/>
+          <circle cx="658.7" cy="154.3" r="1.5" fill="#ffffff"/>
+          <!-- throat tuft -->
+          <path d="M656 196 q 4 8 -1 14 M666 200 q 4 8 -1 14 M646 199 q 3 7 -1 12" stroke="#e3e8ec" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        </g>
+      </g><!-- /bodyBob -->
+
+      <!-- SCARF (world coords, ribbon built by JS) -->
+      <g id="scarfGroup">
+        <polygon id="scarfRibbon" fill="#d33b2f" points="0,0 0,0 0,0"/>
+        <polygon id="scarfTip" fill="#f4e3b2" points="0,0 0,0 0,0"/>
+        <circle id="scarfKnot" cx="584" cy="240" r="7.5" fill="#b53025"/>
+        <path id="scarfKnotFold" d="M584 240 l-12 12 l6 -15 Z" fill="#d33b2f"/>
+      </g>
+    </g><!-- /bikeWorld -->
+
+    <!-- foreground fence posts whipping by (JS) -->
+    <g id="foreScenery"></g>
+  </svg>
+
+  <div class="vignette"></div>
+
+  <!-- HUD -->
+  <div class="hud hud-tl">
+    <h1 class="title">GUL<em>LI</em>VER</h1>
+    <p class="subtitle">Coastal courier · pedals &amp; pouch</p>
+  </div>
+  <div class="hud hud-tr">
+    <div class="odo-label">Distance</div>
+    <div class="odo" id="odo">0.00 km</div>
+    <div class="pace" id="paceWord">Cruising</div>
+  </div>
+  <div class="hud hud-bl"><kbd>Space</kbd> flap &nbsp;·&nbsp; <kbd>B</kbd> bell &nbsp;·&nbsp; click the scene to clap</div>
+
+  <!-- Controls -->
+  <div class="controls" id="controls">
+    <div class="pace-wrap">
+      <span class="pace-ends">Chill</span>
+      <input type="range" id="pace" min="0.35" max="2" step="0.01" value="1" aria-label="Pace — how fast Gulliver rides">
+      <span class="pace-ends">Send&nbsp;it</span>
+    </div>
+    <button class="btn ghost" id="flapBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 13c4-6 9-8 18-8-2 4-3 7-8 9l7 2c-6 3-13 2-17-3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      Flap
+    </button>
+    <button class="btn" id="bellBtn" type="button">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3a6 6 0 0 0-6 6v4l-2 4h16l-2-4V9a6 6 0 0 0-6-6z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 20a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      Ring bell
+    </button>
+  </div>
+</main>
+
+<script>
+(() => {
+  'use strict';
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const $ = (id) => document.getElementById(id);
+
+  /* ── fixed geometry (viewBox units) ─────────────────────────── */
+  const BB        = { x: 584, y: 552 };   // bottom bracket / crank centre
+  const CRANK_R   = 30;                   // crank arm length
+  const HIP_NEAR  = { x: 530, y: 376 };
+  const HIP_FAR   = { x: 501, y: 378 };
+  const THIGH     = 100, SHIN = 120;      // long pelican legs
+  const GRIP      = { x: 652, y: 359 };   // handlebar grip — hand target
+  const SHOULDER  = { x: 572, y: 296 };
+  const WING_PIVOT  = { x: 548, y: 282 };
+  const POUCH_PIVOT = { x: 663, y: 172 };
+  const SCARF_KNOT  = { x: 585, y: 240 };
+  const REAR_HUB  = { x: 448, y: 574 };
+  const FRONT_HUB = { x: 792, y: 574 };
+  const WHEEL_R   = 66;
+
+  /* ── state ─────────────────────────────────────────────────── */
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const state = {
+    crank: 0.9,               // crank angle θ (rad)
+    wheel: 0,                 // wheel rotation (rad)
+    dist: 0,                  // pixels travelled (odometer)
+    speed: reduced ? 0 : 1,   // smoothed speed factor
+    targetSpeed: reduced ? 0 : 1,
+    pouchOff: 0, pouchVel: 0, // swallow / clap spring
+    wingAng: 0, wingVel: 0,   // flap spring (deg)
+    scarfPhase: 0,
+    dashOffset: 0,
+    gullTimer: 2.5, signTimer: 9, grassTimer: 0.6, umbTimer: 3.5, postTimer: 0.4,
+    swallowTimer: 3.5,
+  };
+
+  /* ── element refs ──────────────────────────────────────────── */
+  const el = {
+    stage: $('stage'),
+    bodyBob: $('bodyBob'), shadow: $('bikeShadow'),
+    legNear: $('legNear'), legFar: $('legFar'),
+    footNear: $('footNear'), footFar: $('footFar'),
+    crankNear: $('crankNear'), crankFar: $('crankFar'),
+    pedalNear: $('pedalNear'), pedalFar: $('pedalFar'),
+    rearSpokes: $('rearSpokes'), frontSpokes: $('frontSpokes'),
+    ringBolts: $('ringBolts'),
+    armOuter: $('armOuter'), armInner: $('armInner'), armHand: $('armHand'),
+    pouch: $('pouchGroup'), wing: $('wingNear'),
+    scarfRibbon: $('scarfRibbon'), scarfTip: $('scarfTip'),
+    scarfKnot: $('scarfKnot'), scarfKnotFold: $('scarfKnotFold'),
+    roadDashes: $('roadDashes'),
+    basketFish: $('basketFish'), basketFish2: $('basketFish2'),
+    bellDome: $('bellDome'),
+    gullLayer: $('gullLayer'), backLayer: $('backScenery'), foreLayer: $('foreScenery'),
+    odo: $('odo'), paceWord: $('paceWord'),
+    pace: $('pace'), bellBtn: $('bellBtn'), flapBtn: $('flapBtn'),
+  };
+  const stopProp = (e) => e.stopPropagation();
+
+  /* ── build wheel spokes once ───────────────────────────────── */
+  function buildSpokes(group, hub) {
+    for (let i = 0; i < 8; i++) {
+      const a = (i * Math.PI) / 4;
+      const x2 = hub.x + Math.cos(a) * 46, y2 = hub.y + Math.sin(a) * 46;
+      const ln = document.createElementNS(SVGNS, 'line');
+      ln.setAttribute('x1', hub.x); ln.setAttribute('y1', hub.y);
+      ln.setAttribute('x2', x2.toFixed(1)); ln.setAttribute('y2', y2.toFixed(1));
+      group.appendChild(ln);
+    }
+  }
+  buildSpokes(el.rearSpokes, REAR_HUB);
+  buildSpokes(el.frontSpokes, FRONT_HUB);
+
+  /* ── two-bone IK, knees bend forward (+x) ──────────────────── */
+  function solveKnee(h, f, L1, L2) {
+    let dx = f.x - h.x, dy = f.y - h.y;
+    let d = Math.hypot(dx, dy);
+    d = Math.min(Math.max(d, Math.abs(L1 - L2) + 0.5), L1 + L2 - 0.5);
+    const a = (L1 * L1 - L2 * L2 + d * d) / (2 * d);
+    const hLen = Math.sqrt(Math.max(0, L1 * L1 - a * a));
+    const xm = h.x + (dx * a) / d, ym = h.y + (dy * a) / d;
+    const px = (-dy / d) * hLen, py = (dx / d) * hLen;
+    const k1 = { x: xm + px, y: ym + py }, k2 = { x: xm - px, y: ym - py };
+    return k1.x >= k2.x ? k1 : k2;
+  }
+  const legD = (h, k, f) =>
+    `M${h.x.toFixed(1)} ${h.y.toFixed(1)} L${k.x.toFixed(1)} ${k.y.toFixed(1)} L${f.x.toFixed(1)} ${f.y.toFixed(1)}`;
+
+  /* ── scarf ribbon: polyline rebuilt each frame ─────────────── */
+  function buildScarf(knot, phase, liveliness) {
+    const N = 11, pts = [];
+    for (let i = 0; i <= N; i++) {
+      const t = i / N;
+      const x = knot.x - t * 148 - t * t * 46;
+      const droop = t * t * 30;
+      const y = knot.y + 4 + droop + Math.sin(t * 5.4 - phase) * (2 + t * 15) * liveliness;
+      pts.push({ x, y, t });
+    }
+    const top = [], bot = [];
+    for (let i = 0; i <= N; i++) {
+      const p = pts[i];
+      const q = pts[Math.min(i + 1, N)], o = pts[Math.max(i - 1, 0)];
+      let dx = q.x - o.x, dy = q.y - o.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const nx = -dy / len, ny = dx / len;
+      const w = 8.5 * (1 - p.t * 0.55);
+      top.push(`${(p.x + nx * w).toFixed(1)},${(p.y + ny * w).toFixed(1)}`);
+      bot.unshift(`${(p.x - nx * w).toFixed(1)},${(p.y - ny * w).toFixed(1)}`);
+    }
+    el.scarfRibbon.setAttribute('points', top.concat(bot).join(' '));
+    const tip = pts.slice(-3);
+    const tTop = [], tBot = [];
+    tip.forEach((p, i) => {
+      const q = tip[Math.min(i + 1, 2)], o = tip[Math.max(i - 1, 0)];
+      let dx = q.x - o.x, dy = q.y - o.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const nx = -dy / len, ny = dx / len;
+      const w = 8.5 * (1 - p.t * 0.55) + 0.5;
+      tTop.push(`${(p.x + nx * w).toFixed(1)},${(p.y + ny * w).toFixed(1)}`);
+      tBot.unshift(`${(p.x - nx * w).toFixed(1)},${(p.y - ny * w).toFixed(1)}`);
+    });
+    el.scarfTip.setAttribute('points', tTop.concat(tBot).join(' '));
+    el.scarfKnot.setAttribute('cx', knot.x); el.scarfKnot.setAttribute('cy', knot.y);
+    el.scarfKnotFold.setAttribute('d',
+      `M${knot.x} ${knot.y} l-13 13 l5 -16 Z M${knot.x} ${knot.y} l-16 2 l14 7 Z`);
+  }
+
+  /* ── passers-by pools ──────────────────────────────────────── */
+  const movers = []; // {node, x, factor, y, update?}
+  function spawnMover(layer, node, x, factor) {
+    layer.appendChild(node);
+    movers.push({ node, x, factor });
+  }
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+  function makeGrassTuft() {
+    const g = document.createElementNS(SVGNS, 'g');
+    const c = pick(['#3f5a3a', '#4a6540', '#35492f']);
+    g.innerHTML = `<path d="M0 0 Q -3 -12 -7 -17 M0 0 Q 0 -13 1 -19 M0 0 Q 4 -11 9 -16 M0 0 Q -7 -8 -12 -11 M0 0 Q 7 -8 13 -11"
+      stroke="${c}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+    return g;
+  }
+  function makeUmbrella() {
+    const g = document.createElementNS(SVGNS, 'g');
+    const canopy = pick(['#d8442c', '#f4a83e', '#3f829e', '#c96a8a']);
+    g.innerHTML = `<line x1="0" y1="0" x2="0" y2="-34" stroke="#6f5a3a" stroke-width="2.4"/>
+      <path d="M-24 -32 L0 -47 L24 -32 Q 12 -37 0 -32 Q -12 -27 -24 -32 Z" fill="${canopy}" stroke="#00000033" stroke-width="1.5"/>`;
+    return g;
+  }
+  function makePost() {
+    const g = document.createElementNS(SVGNS, 'g');
+    g.innerHTML = `<rect x="-5" y="-46" width="10" height="46" rx="1.5" fill="#4a3a26"/>
+      <rect x="-6.5" y="-50" width="13" height="6" rx="2" fill="#5d4c33"/>
+      <circle cx="0" cy="-36" r="2.2" fill="#f2e7c3" opacity=".9"/>`;
+    return g;
+  }
+  function makeSign() {
+    const g = document.createElementNS(SVGNS, 'g');
+    g.innerHTML = `<rect x="-3" y="-52" width="7" height="52" fill="#5b6068"/>
+      <path d="M0 -118 L30 -84 L0 -50 L-30 -84 Z" fill="#f4c542" stroke="#141414" stroke-width="3" stroke-linejoin="round"/>
+      <text y="-88" text-anchor="middle" font-size="9.5" font-weight="800" fill="#141414" font-family="Avenir Next,Segoe UI,sans-serif" letter-spacing=".4">PELICAN</text>
+      <text y="-74" text-anchor="middle" font-size="9.5" font-weight="800" fill="#141414" font-family="Avenir Next,Segoe UI,sans-serif" letter-spacing=".4">XING</text>`;
+    return g;
+  }
+  function makeGull() {
+    const g = document.createElementNS(SVGNS, 'g');
+    g.innerHTML = `<path d="M0 0 Q 7 -7 14 0 Q 21 -7 28 0" stroke="#22333f" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+    return g;
+  }
+
+  /* ── audio (WebAudio, created on first gesture) ────────────── */
+  let actx = null;
+  const audio = () => {
+    if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === 'suspended') actx.resume();
+    return actx;
+  };
+  function ding(freq, when, dur, gain) {
+    const ctx = audio();
+    const t = ctx.currentTime + when;
+    [1, 2.01, 2.74].forEach((mult, i) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = freq * mult;
+      const amp = gain * [1, 0.45, 0.18][i];
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(amp, t + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur * (1 - i * 0.25));
+      o.connect(g).connect(ctx.destination);
+      o.start(t); o.stop(t + dur + 0.05);
+    });
+  }
+  function ringBell() {
+    ding(1568, 0, 1.5, 0.28);
+    ding(2093, 0.09, 1.1, 0.16);
+    el.bellDome.classList.remove('bell-ping');
+    void el.bellDome.getBoundingClientRect(); // force reflow so the animation retriggers
+    el.bellDome.classList.add('bell-ping');
+  }
+  function beakClap() {
+    const ctx = audio();
+    [0, 0.085].forEach((dt) => {
+      const t = ctx.currentTime + dt;
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'square'; o.frequency.setValueAtTime(950, t);
+      o.frequency.exponentialRampToValueAtTime(340, t + 0.045);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.22, t + 0.006);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
+      o.connect(g).connect(ctx.destination);
+      o.start(t); o.stop(t + 0.08);
+    });
+  }
+  function flapWing() { state.wingVel -= 9.5; }
+  function gulp() { state.pouchVel += 3.6; }
+  function clap() { beakClap(); flapWing(); state.pouchVel += 2.4; }
+
+  /* ── wiring UI ─────────────────────────────────────────────── */
+  el.pace.addEventListener('pointerdown', stopProp);
+  el.pace.addEventListener('input', () => {
+    state.targetSpeed = parseFloat(el.pace.value);
+    el.paceWord.textContent =
+      state.targetSpeed < 0.7 ? 'Strolling' : state.targetSpeed < 1.3 ? 'Cruising' : state.targetSpeed < 1.7 ? 'Brisk' : 'Sending it';
+  });
+  el.bellBtn.addEventListener('click', (e) => { e.stopPropagation(); ringBell(); });
+  el.flapBtn.addEventListener('click', (e) => { e.stopPropagation(); flapWing(); });
+  el.stage.addEventListener('pointerdown', () => clap());
+  window.addEventListener('keydown', (e) => {
+    if (e.repeat) return;
+    const tag = (e.target && e.target.tagName) || '';
+    const k = e.key.toLowerCase();
+    if (k === ' ') {
+      // let buttons/inputs keep their native space behavior
+      if (tag === 'INPUT' || tag === 'BUTTON' || tag === 'TEXTAREA') return;
+      e.preventDefault(); flapWing();
+    }
+    else if (k === 'b') ringBell();
+    else if (k === 'f') flapWing();
+  });
+
+  /* ── per-frame update ──────────────────────────────────────── */
+  const TAU = Math.PI * 2;
+  function tick(now) {
+    requestAnimationFrame(tick);
+    const dt = Math.min(0.05, (now - (tick.last || now)) / 1000);
+    tick.last = now;
+
+    // smooth speed
+    state.speed += (state.targetSpeed - state.speed) * Math.min(1, dt * 3.2);
+    const s = state.speed;
+    const v = 250 * s;                       // px per second
+    state.dist += v * dt;
+
+    // drivetrain
+    state.crank += (v / 205) * dt;
+    state.wheel += (v / WHEEL_R) * dt;
+    const th = state.crank;
+
+    // bob & shadow
+    const bob = Math.sin(2 * th) * 4.4 * (0.35 + 0.65 * Math.min(1, s + 0.25));
+    const lean = Math.sin(th) * 1.1;
+    el.bodyBob.setAttribute('transform',
+      `translate(0 ${bob.toFixed(2)}) rotate(${lean.toFixed(2)} 505 330)`);
+    el.shadow.setAttribute('rx', (212 - bob * 1.6).toFixed(1));
+    el.shadow.setAttribute('opacity', (0.34 + bob * 0.008).toFixed(3));
+
+    // pedals
+    const pedalN = { x: BB.x + Math.cos(th) * CRANK_R, y: BB.y + Math.sin(th) * CRANK_R };
+    const pedalF = { x: BB.x + Math.cos(th + Math.PI) * CRANK_R, y: BB.y + Math.sin(th + Math.PI) * CRANK_R };
+
+    // IK legs
+    const hipN = { x: HIP_NEAR.x, y: HIP_NEAR.y + bob };
+    const hipF = { x: HIP_FAR.x, y: HIP_FAR.y + bob };
+    const kneeN = solveKnee(hipN, pedalN, THIGH, SHIN);
+    const kneeF = solveKnee(hipF, pedalF, THIGH, SHIN);
+    el.legNear.setAttribute('d', legD(hipN, kneeN, pedalN));
+    el.legFar.setAttribute('d', legD(hipF, kneeF, pedalF));
+    const footAngN = Math.sin(th) * 10, footAngF = Math.sin(th + Math.PI) * 10;
+    el.footNear.setAttribute('transform', `translate(${pedalN.x.toFixed(1)} ${pedalN.y.toFixed(1)}) rotate(${footAngN.toFixed(1)})`);
+    el.footFar.setAttribute('transform', `translate(${pedalF.x.toFixed(1)} ${pedalF.y.toFixed(1)}) rotate(${footAngF.toFixed(1)})`);
+
+    // cranks & pedals stay horizontal
+    el.crankNear.setAttribute('x2', pedalN.x.toFixed(1)); el.crankNear.setAttribute('y2', pedalN.y.toFixed(1));
+    el.crankFar.setAttribute('x2', pedalF.x.toFixed(1)); el.crankFar.setAttribute('y2', pedalF.y.toFixed(1));
+    const setPedal = (p, pt) => {
+      p.setAttribute('x1', (pt.x - 12).toFixed(1)); p.setAttribute('x2', (pt.x + 12).toFixed(1));
+      p.setAttribute('y1', pt.y.toFixed(1)); p.setAttribute('y2', pt.y.toFixed(1));
+    };
+    setPedal(el.pedalNear, pedalN); setPedal(el.pedalFar, pedalF);
+
+    // wheels + chainring
+    const wheelDeg = (state.wheel * 180) / Math.PI;
+    el.rearSpokes.setAttribute('transform', `rotate(${(wheelDeg % 360).toFixed(2)} ${REAR_HUB.x} ${REAR_HUB.y})`);
+    el.frontSpokes.setAttribute('transform', `rotate(${(wheelDeg % 360).toFixed(2)} ${FRONT_HUB.x} ${FRONT_HUB.y})`);
+    el.ringBolts.setAttribute('transform', `rotate(${((th * 180) / Math.PI) % 360} ${BB.x} ${BB.y})`);
+
+    // road dashes
+    state.dashOffset = (state.dashOffset + v * dt) % 98;
+    el.roadDashes.setAttribute('stroke-dashoffset', state.dashOffset.toFixed(1));
+
+    // rider arm: shoulder (bobs) → grip (fixed), slight elbow back-bend
+    const sh = { x: SHOULDER.x, y: SHOULDER.y + bob };
+    const mid = { x: (sh.x + GRIP.x) / 2, y: (sh.y + GRIP.y) / 2 };
+    const dx = GRIP.x - sh.x, dy = GRIP.y - sh.y, len = Math.hypot(dx, dy) || 1;
+    const c = { x: mid.x - (dy / len) * 27, y: mid.y + (dx / len) * 27 - 8 };
+    const armD = `M${sh.x.toFixed(1)} ${sh.y.toFixed(1)} Q${c.x.toFixed(1)} ${c.y.toFixed(1)} ${GRIP.x} ${GRIP.y}`;
+    el.armOuter.setAttribute('d', armD);
+    el.armInner.setAttribute('d', armD);
+    el.armHand.setAttribute('transform', `translate(${GRIP.x} ${GRIP.y})`);
+
+    // pouch spring (swallow gulps + claps)
+    state.pouchVel += (-46 * state.pouchOff - 6.5 * state.pouchVel) * dt;
+    state.pouchOff += state.pouchVel * dt;
+    const sy = Math.max(0.72, Math.min(1.38, 1 + state.pouchOff));
+    el.pouch.setAttribute('transform',
+      `translate(${POUCH_PIVOT.x} ${POUCH_PIVOT.y}) scale(1 ${sy.toFixed(3)}) translate(${-POUCH_PIVOT.x} ${-POUCH_PIVOT.y})`);
+    state.swallowTimer -= dt;
+    if (state.swallowTimer <= 0) { gulp(); state.swallowTimer = rand(4, 8); }
+
+    // wing flap spring
+    state.wingVel += (-52 * state.wingAng - 7.5 * state.wingVel) * dt;
+    state.wingAng += state.wingVel * dt;
+    el.wing.setAttribute('transform', `rotate(${Math.max(-52, Math.min(14, state.wingAng)).toFixed(2)} ${WING_PIVOT.x} ${WING_PIVOT.y})`);
+
+    // scarf
+    state.scarfPhase += dt * (5 + s * 6.5);
+    buildScarf({ x: SCARF_KNOT.x, y: SCARF_KNOT.y + bob }, state.scarfPhase, 0.55 + 0.45 * Math.min(1, s));
+
+    // basket fish wiggle
+    el.basketFish.setAttribute('transform',
+      `rotate(${(Math.sin(now / 260 + 1) * 9).toFixed(2)} 797 446)`);
+    el.basketFish2.setAttribute('transform',
+      `rotate(${(Math.sin(now / 300) * 11 + 4).toFixed(2)} 769 444)`);
+
+    /* spawners */
+    state.grassTimer -= dt;
+    if (state.grassTimer <= 0) { spawnMover(el.backLayer, makeGrassTuft(), 1330, 0.55); state.grassTimer = rand(0.9, 2.4); }
+    state.umbTimer -= dt;
+    if (state.umbTimer <= 0) { spawnMover(el.backLayer, makeUmbrella(), 1330, 0.5); state.umbTimer = rand(6, 12); }
+    state.postTimer -= dt;
+    if (state.postTimer <= 0) { spawnMover(el.foreLayer, makePost(), 1330, 1.28); state.postTimer = rand(0.8, 1.7); }
+    state.signTimer -= dt;
+    if (state.signTimer <= 0) { spawnMover(el.foreLayer, makeSign(), 1330, 1.05); state.signTimer = rand(17, 28); }
+    state.gullTimer -= dt;
+    if (state.gullTimer <= 0) {
+      const g = makeGull();
+      g.setAttribute('opacity', '.85');
+      spawnMover(el.gullLayer, g, 1330, 0);
+      movers[movers.length - 1].own = rand(38, 78);
+      movers[movers.length - 1].baseY = rand(78, 225);
+      movers[movers.length - 1].bobPhase = rand(0, TAU);
+      movers[movers.length - 1].gull = true;
+      state.gullTimer = rand(4.5, 9);
+    }
+
+    /* move & cull passers-by */
+    for (let i = movers.length - 1; i >= 0; i--) {
+      const m = movers[i];
+      if (m.gull) {
+        m.x -= (m.own + v * 0.18) * dt;
+        m.bobPhase += dt * 3;
+        const y = m.baseY + Math.sin(m.bobPhase) * 9;
+        m.node.setAttribute('transform', `translate(${m.x.toFixed(1)} ${y.toFixed(1)}) scale(${(0.8 + 0.3 * Math.sin(m.bobPhase * 0.7)).toFixed(2)})`);
+      } else {
+        m.x -= v * m.factor * dt;
+        const gy = m.factor < 0.7 ? 564 : 716;
+        m.node.setAttribute('transform', `translate(${m.x.toFixed(1)} ${gy})`);
+      }
+      if (m.x < -160) { m.node.remove(); movers.splice(i, 1); }
+    }
+
+    // odometer
+    el.odo.textContent = (state.dist / 22000).toFixed(2) + ' km';
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

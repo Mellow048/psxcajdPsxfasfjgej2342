@@ -70,7 +70,7 @@ try {
   server.listen(0, "127.0.0.1");
   await once(server, "listening");
   browser = await puppeteer.launch({
-    executablePath: process.env.CHROME_BIN || "/usr/bin/google-chrome",
+    executablePath: findChrome(),
     headless: true,
     args: [
       "--use-gl=angle",

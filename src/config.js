@@ -96,6 +96,7 @@ export const MOTIONS = [
   "shiver",
   "grumpy",
   "shocked",
+  "freefall",
   "float_spin",
   "pop_in",
 ];
