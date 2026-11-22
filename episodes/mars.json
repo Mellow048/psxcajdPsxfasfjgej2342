@@ -1,0 +1,1701 @@
+{
+  "version": 3,
+  "title": "What if you stepped onto Mars?",
+  "series": "Mars / Make It to Sunrise",
+  "narration": "One footprint. That's all you get on Mars in a T-shirt. You reach for a second breath, black out, and without rescue, you die. Rewind. Let's get this guy to sunrise. First, seal the suit. Mars barely has any air pressing on you, so the suit holds pressure around your body. Plug in an oxygen tank and take a breath. Better? Now breathe out. See the problem? That carbon dioxide is stuck in your helmet. You could have a full tank and still be in trouble. Snap a scrubber into the loop. It catches the carbon dioxide before the air comes back around. Now climb that ridge. Cold planet, sweaty astronaut. Where's all that body heat supposed to go? Water tubes under the suit carry it to the pack, which dumps the heat outside. Look at the sun. You've got enough kit for a walk, not a night. Get inside. Shut the outer hatch. Bring the pressure up. Now you can crack the helmet. Water on the shelf, food beside it, fan on the wall. Unplug that fan and the air stops circulating. So what powers it when the sun goes down? Panels charge a battery by day. At night, the battery takes over. For a longer stay, pile Martian soil over the shelter to cut the radiation dose. Morning. Same dust, same guy. This time he gets to leave that second footprint.",
+  "voiceover": "episodes/mars-voice.wav",
+  "shots": [
+    {
+      "title": "First print",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 0,
+        "cue": "step",
+        "status": "ONE FOOTPRINT"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [-0.47, 0.09, 0.1],
+      "pov": {
+        "eye": [-0.69, 0.34, 0.79],
+        "dollyTo": [-0.52, 0.36, 0.94]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [-0.72, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 1.57,
+          "stride": [0.42, 0.91]
+        }
+      ],
+      "duration": 1.0666666666666667,
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "One footprint.",
+          "highlight": "footprint."
+        }
+      ]
+    },
+    {
+      "title": "Street clothes",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 0,
+        "cue": "hold",
+        "status": "NO SUIT"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [0, 1.1, 0],
+      "pov": {
+        "eye": [-0.58, 1.31, 2.65]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "talking",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.1,
+      "captions": [
+        {
+          "time": 0.043,
+          "text": "That's all",
+          "highlight": "That's"
+        },
+        {
+          "time": 0.533,
+          "text": "you get",
+          "highlight": "you"
+        },
+        {
+          "time": 0.833,
+          "text": "on Mars",
+          "highlight": "Mars"
+        },
+        {
+          "time": 1.283,
+          "text": "in a T-shirt.",
+          "highlight": "T-shirt."
+        }
+      ]
+    },
+    {
+      "title": "Reach for air",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 0,
+        "cue": "hold",
+        "status": "NO USABLE OXYGEN"
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": [0, 1.55, 0],
+      "pov": {
+        "eye": [0.43, 1.63, 1.83]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "thinking",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.3666666666666667,
+      "captions": [
+        {
+          "time": 0.043,
+          "text": "You reach for",
+          "highlight": "reach"
+        },
+        {
+          "time": 0.553,
+          "text": "a second breath,",
+          "highlight": "breath,"
+        }
+      ]
+    },
+    {
+      "title": "Blackout",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 0,
+        "cue": "fall",
+        "status": "NO RESCUE"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [0.93, 0.66, 0],
+      "pov": {
+        "eye": [1.03, 1.56, 4.1]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.8333333333333333,
+      "captions": [
+        {
+          "time": 0.047,
+          "text": "black out,",
+          "highlight": "black"
+        },
+        {
+          "time": 0.787,
+          "text": "and without rescue,",
+          "highlight": "without"
+        }
+      ]
+    },
+    {
+      "title": "Lost",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 0,
+        "cue": "lost",
+        "status": "ATTEMPT 01  /  LOST"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_pull",
+      "focus": [0.86, 0.18, 0],
+      "pov": {
+        "eye": [0.87, 2.9, 3.42]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 0.8666666666666667,
+      "captions": [
+        {
+          "time": 0,
+          "text": "and without rescue,",
+          "highlight": "without"
+        },
+        {
+          "time": 0.113,
+          "text": "you die.",
+          "highlight": "die."
+        },
+        {
+          "time": 0.863,
+          "text": "Rewind.",
+          "highlight": "Rewind."
+        }
+      ]
+    },
+    {
+      "title": "Back to the same step",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 0,
+        "cue": "rewind",
+        "status": "REWIND"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [0.57, 0.84, 0],
+      "pov": {
+        "eye": [0.39, 1.44, 3.56]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.6333333333333333,
+      "captions": [
+        {
+          "time": 0,
+          "text": "Rewind.",
+          "highlight": "Rewind."
+        },
+        {
+          "time": 0.877,
+          "text": "Let's get",
+          "highlight": "Let's"
+        },
+        {
+          "time": 1.247,
+          "text": "this guy",
+          "highlight": "this"
+        },
+        {
+          "time": 1.617,
+          "text": "to sunrise.",
+          "highlight": "sunrise."
+        }
+      ]
+    },
+    {
+      "title": "The deadline",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 0,
+        "cue": "sunset",
+        "status": "GOAL  /  REACH SUNRISE"
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "focus": [0.16, 1.19, -0.2],
+      "pov": {
+        "eye": [-0.61, 0.52, 2.45]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 0.9666666666666667,
+      "captions": [
+        {
+          "time": 0,
+          "text": "to sunrise.",
+          "highlight": "sunrise."
+        },
+        {
+          "time": 0.923,
+          "text": "First, seal",
+          "highlight": "First,"
+        }
+      ]
+    },
+    {
+      "title": "Suit lock",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 1,
+        "base": 0,
+        "cue": "suit",
+        "status": "01  /  PRESSURE SUIT"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [0, 1.23, 0],
+      "pov": {
+        "eye": [0.42, 1.39, 2.66]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.5666666666666667,
+      "captions": [
+        {
+          "time": 0,
+          "text": "First, seal",
+          "highlight": "First,"
+        },
+        {
+          "time": 0.857,
+          "text": "the suit.",
+          "highlight": "suit."
+        },
+        {
+          "time": 1.507,
+          "text": "Mars barely has",
+          "highlight": "barely"
+        }
+      ]
+    },
+    {
+      "title": "Atmosphere comparison",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 0,
+        "cue": "readout",
+        "status": "<1% OF EARTH PRESSURE"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [0.73, 0.91, 0.56],
+      "pov": {
+        "eye": [0.93, 1.16, 2.83]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.2333333333333334,
+      "captions": [
+        {
+          "time": 0,
+          "text": "Mars barely has",
+          "highlight": "barely"
+        },
+        {
+          "time": 0.86,
+          "text": "any air",
+          "highlight": "any"
+        },
+        {
+          "time": 1.33,
+          "text": "pressing on you,",
+          "highlight": "pressing"
+        }
+      ]
+    },
+    {
+      "title": "Pressure lock",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 1,
+        "base": 0,
+        "cue": "hold",
+        "status": "SUIT SEALED"
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": [0, 1.5, 0],
+      "pov": {
+        "eye": [-0.45, 1.7, 1.58]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.2,
+      "captions": [
+        {
+          "time": 0.077,
+          "text": "so the suit",
+          "highlight": "suit"
+        },
+        {
+          "time": 0.677,
+          "text": "holds pressure",
+          "highlight": "pressure"
+        },
+        {
+          "time": 1.327,
+          "text": "around your body.",
+          "highlight": "around"
+        }
+      ]
+    },
+    {
+      "title": "Tank clicks into the back plate",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 2,
+        "base": 0,
+        "cue": "tank",
+        "status": "02  /  OXYGEN + REGULATOR"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [0, 1.22, -0.16],
+      "pov": {
+        "eye": [0.46, 1.48, -1.93]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.2333333333333334,
+      "captions": [
+        {
+          "time": 0.097,
+          "text": "Plug in",
+          "highlight": "Plug"
+        },
+        {
+          "time": 0.457,
+          "text": "an oxygen tank",
+          "highlight": "oxygen"
+        },
+        {
+          "time": 1.407,
+          "text": "and take",
+          "highlight": "take"
+        },
+        {
+          "time": 1.757,
+          "text": "a breath.",
+          "highlight": "breath."
+        }
+      ]
+    },
+    {
+      "title": "Try exhaling",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 2,
+        "base": 0,
+        "cue": "hold",
+        "status": "INHALE  /  EXHALE"
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
+      "focus": [0, 1.53, 0.02],
+      "pov": {
+        "eye": [-0.51, 1.66, 1.72]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.466666666666667,
+      "captions": [
+        {
+          "time": 0.023,
+          "text": "Better?",
+          "highlight": "Better?"
+        },
+        {
+          "time": 0.713,
+          "text": "Now breathe out.",
+          "highlight": "breathe"
+        },
+        {
+          "time": 1.673,
+          "text": "See the problem?",
+          "highlight": "problem?"
+        }
+      ]
+    },
+    {
+      "title": "Waste gas trapped",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 2,
+        "base": 0,
+        "cue": "gas",
+        "status": "CO2 BUILDUP"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [-0.14, 1.39, 0.08],
+      "pov": {
+        "eye": [-0.59, 1.46, 1.2]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.6,
+      "captions": [
+        {
+          "time": 0,
+          "text": "See the problem?",
+          "highlight": "problem?"
+        },
+        {
+          "time": 0.147,
+          "text": "That carbon dioxide",
+          "highlight": "dioxide"
+        },
+        {
+          "time": 1.277,
+          "text": "is stuck",
+          "highlight": "stuck"
+        },
+        {
+          "time": 1.877,
+          "text": "in your helmet.",
+          "highlight": "helmet."
+        }
+      ]
+    },
+    {
+      "title": "Full tank, bad air",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 2,
+        "base": 0,
+        "cue": "hold",
+        "status": "TANK FULL   /   CO2 HIGH"
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
+      "focus": [0, 1.29, -0.28],
+      "pov": {
+        "eye": [-0.46, 1.54, -1.47]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.433333333333333,
+      "captions": [
+        {
+          "time": 0.067,
+          "text": "You could have",
+          "highlight": "could"
+        },
+        {
+          "time": 0.487,
+          "text": "a full tank",
+          "highlight": "full"
+        },
+        {
+          "time": 1.237,
+          "text": "and still be",
+          "highlight": "still"
+        },
+        {
+          "time": 1.787,
+          "text": "in trouble.",
+          "highlight": "trouble."
+        }
+      ]
+    },
+    {
+      "title": "Snap the filter in",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 3,
+        "base": 0,
+        "cue": "filter",
+        "status": "03  /  CO2 SCRUBBER"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [-0.14, 1.25, -0.26],
+      "pov": {
+        "eye": [-0.76, 1.46, -1.44]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.7333333333333334,
+      "captions": [
+        {
+          "time": 0.043,
+          "text": "Snap a scrubber",
+          "highlight": "scrubber"
+        },
+        {
+          "time": 0.943,
+          "text": "into the loop.",
+          "highlight": "loop."
+        },
+        {
+          "time": 1.693,
+          "text": "It catches",
+          "highlight": "catches"
+        }
+      ]
+    },
+    {
+      "title": "Trace the return line",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 3,
+        "base": 0,
+        "cue": "gas",
+        "status": "FILTER IN THE LOOP"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [-0.17, 1.36, -0.14],
+      "pov": {
+        "eye": [-0.79, 1.46, -0.99]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.9333333333333333,
+      "captions": [
+        {
+          "time": 0,
+          "text": "It catches",
+          "highlight": "catches"
+        },
+        {
+          "time": 0.62,
+          "text": "the carbon dioxide",
+          "highlight": "dioxide"
+        },
+        {
+          "time": 1.63,
+          "text": "before the air",
+          "highlight": "before"
+        }
+      ]
+    },
+    {
+      "title": "Clean return",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 3,
+        "base": 0,
+        "cue": "hold",
+        "status": "AIR RECIRCULATING"
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": [0, 1.5, 0],
+      "pov": {
+        "eye": [-0.45, 1.7, 1.58]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.4333333333333333,
+      "captions": [
+        {
+          "time": 0,
+          "text": "before the air",
+          "highlight": "before"
+        },
+        {
+          "time": 0.257,
+          "text": "comes back around.",
+          "highlight": "around."
+        }
+      ]
+    },
+    {
+      "title": "A walk on Mars",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 3,
+        "base": 0,
+        "cue": "hold",
+        "status": "LIFE SUPPORT ONLINE"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [-0.11, 0.9, 0],
+      "pov": {
+        "eye": [-1.1, 1.27, 3.05]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [-0.78, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 1.3,
+          "stride": [0.82, 1.2]
+        }
+      ],
+      "duration": 1.3666666666666667,
+      "captions": [
+        {
+          "time": 0.033,
+          "text": "Now climb",
+          "highlight": "climb"
+        },
+        {
+          "time": 0.563,
+          "text": "that ridge.",
+          "highlight": "ridge."
+        },
+        {
+          "time": 1.353,
+          "text": "Cold planet,",
+          "highlight": "planet,"
+        }
+      ]
+    },
+    {
+      "title": "Heat spike",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 3,
+        "base": 0,
+        "cue": "hold",
+        "status": "SUIT TEMPERATURE RISING"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [0, 1.29, 0],
+      "pov": {
+        "eye": [0.83, 1.39, 1.86]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "wince",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.2666666666666666,
+      "captions": [
+        {
+          "time": 0,
+          "text": "Cold planet,",
+          "highlight": "planet,"
+        },
+        {
+          "time": 1.047,
+          "text": "sweaty astronaut.",
+          "highlight": "astronaut."
+        }
+      ]
+    },
+    {
+      "title": "Where does heat go?",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 3,
+        "base": 0,
+        "cue": "hold",
+        "status": "BODY HEAT RISING"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [0.02, 1.24, 0.11],
+      "pov": {
+        "eye": [0.23, 1.45, 1.33]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "wince",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.9666666666666666,
+      "captions": [
+        {
+          "time": 0.04,
+          "text": "Where's all",
+          "highlight": "Where's"
+        },
+        {
+          "time": 0.44,
+          "text": "that body heat",
+          "highlight": "that"
+        },
+        {
+          "time": 1.1,
+          "text": "supposed to go?",
+          "highlight": "supposed"
+        }
+      ]
+    },
+    {
+      "title": "Add a cooling garment",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 4,
+        "base": 0,
+        "cue": "coolant",
+        "status": "04  /  COOLING LOOP"
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
+      "focus": [0, 1.18, 0.17],
+      "pov": {
+        "eye": [0.2, 1.29, 1.76]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.1666666666666665,
+      "captions": [
+        {
+          "time": 0.033,
+          "text": "Water tubes",
+          "highlight": "Water"
+        },
+        {
+          "time": 0.613,
+          "text": "under the suit",
+          "highlight": "under"
+        },
+        {
+          "time": 1.223,
+          "text": "carry it",
+          "highlight": "carry"
+        },
+        {
+          "time": 1.613,
+          "text": "to the pack,",
+          "highlight": "pack,"
+        }
+      ]
+    },
+    {
+      "title": "Heat leaves the pack",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 4,
+        "base": 0,
+        "cue": "hold",
+        "status": "HEAT OUT"
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "focus": [0, 1.19, -0.34],
+      "pov": {
+        "eye": [0.59, 1.44, -1.64]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.8,
+      "captions": [
+        {
+          "time": 0.057,
+          "text": "which dumps",
+          "highlight": "which"
+        },
+        {
+          "time": 0.717,
+          "text": "the heat outside.",
+          "highlight": "outside."
+        }
+      ]
+    },
+    {
+      "title": "Setting sun",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 4,
+        "base": 0,
+        "cue": "sunset",
+        "status": "DAYLIGHT RUNNING OUT"
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "focus": [0.28, 1.28, -0.43],
+      "pov": {
+        "eye": [-0.75, 0.91, 3.08]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.466666666666667,
+      "captions": [
+        {
+          "time": 0.047,
+          "text": "Look at",
+          "highlight": "Look"
+        },
+        {
+          "time": 0.327,
+          "text": "the sun.",
+          "highlight": "sun."
+        },
+        {
+          "time": 1.017,
+          "text": "You've got",
+          "highlight": "You've"
+        },
+        {
+          "time": 1.337,
+          "text": "enough kit",
+          "highlight": "enough"
+        },
+        {
+          "time": 1.817,
+          "text": "for a walk,",
+          "highlight": "walk,"
+        }
+      ]
+    },
+    {
+      "title": "Sprint for shelter",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 4,
+        "base": 1,
+        "cue": "hold",
+        "status": "05  /  HABITAT"
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "focus": [-1.54, 0.9, -1.21],
+      "pov": {
+        "eye": [-0.05, 1.57, 2.8]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [-0.75, 0, -0.41],
+          "motion": "idle_breathe",
+          "yaw": -1.95,
+          "stride": [1.36, 2.0]
+        }
+      ],
+      "duration": 2.1666666666666665,
+      "captions": [
+        {
+          "time": 0,
+          "text": "for a walk,",
+          "highlight": "walk,"
+        },
+        {
+          "time": 0.19,
+          "text": "not a night.",
+          "highlight": "night."
+        },
+        {
+          "time": 1.09,
+          "text": "Get inside.",
+          "highlight": "inside."
+        },
+        {
+          "time": 2.15,
+          "text": "Shut the",
+          "highlight": "Shut"
+        }
+      ]
+    },
+    {
+      "title": "Hatch shuts",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 1,
+        "cue": "hatch",
+        "status": "HATCH  /  SEALING"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [-2.17, 0.85, -0.7],
+      "pov": {
+        "eye": [-1.56, 1.42, 2.26]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "duration": 1.2,
+      "captions": [
+        {
+          "time": 0,
+          "text": "Shut the",
+          "highlight": "Shut"
+        },
+        {
+          "time": 0.393,
+          "text": "outer hatch.",
+          "highlight": "hatch."
+        }
+      ]
+    },
+    {
+      "title": "Fill the airlock",
+      "stage": "mars_cabin",
+      "mars": {
+        "kit": 4,
+        "base": 1,
+        "cue": "pressure",
+        "status": "REPRESSURIZING"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [-1.57, 1.2, -1.0],
+      "pov": {
+        "eye": [-1.16, 1.3, 0.3]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.1666666666666667,
+      "captions": [
+        {
+          "time": 0.013,
+          "text": "Bring the",
+          "highlight": "Bring"
+        },
+        {
+          "time": 0.363,
+          "text": "pressure up.",
+          "highlight": "pressure"
+        }
+      ]
+    },
+    {
+      "title": "Helmet release",
+      "stage": "mars_cabin",
+      "mars": {
+        "kit": 4,
+        "base": 1,
+        "cue": "unhelmet",
+        "status": "CABIN PRESSURIZED"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [-1.57, 1.26, -0.98],
+      "pov": {
+        "eye": [-1.36, 1.4, 0.86]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.5666666666666667,
+      "captions": [
+        {
+          "time": 0.047,
+          "text": "Now you can",
+          "highlight": "Now"
+        },
+        {
+          "time": 0.567,
+          "text": "crack the helmet.",
+          "highlight": "helmet."
+        },
+        {
+          "time": 1.537,
+          "text": "Water on",
+          "highlight": "Water"
+        }
+      ]
+    },
+    {
+      "title": "Water and rations",
+      "stage": "mars_cabin",
+      "mars": {
+        "kit": 0,
+        "base": 1,
+        "cue": "hold",
+        "status": "WATER  +  FOOD"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [0.96, 1.13, -0.86],
+      "pov": {
+        "eye": [0.88, 1.49, 1.31]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "duration": 2.066666666666667,
+      "captions": [
+        {
+          "time": 0,
+          "text": "Water on",
+          "highlight": "Water"
+        },
+        {
+          "time": 0.4,
+          "text": "the shelf,",
+          "highlight": "shelf,"
+        },
+        {
+          "time": 1.15,
+          "text": "food beside it,",
+          "highlight": "beside"
+        }
+      ]
+    },
+    {
+      "title": "Power to the fan",
+      "stage": "mars_cabin",
+      "mars": {
+        "kit": 0,
+        "base": 1,
+        "cue": "hold",
+        "status": "AIR CIRCULATION"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [1.16, 1.89, -1.06],
+      "pov": {
+        "eye": [1.48, 2.0, 0.96]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "duration": 1.1666666666666667,
+      "captions": [
+        {
+          "time": 0.043,
+          "text": "fan on",
+          "highlight": "fan"
+        },
+        {
+          "time": 0.503,
+          "text": "the wall.",
+          "highlight": "wall."
+        },
+        {
+          "time": 1.153,
+          "text": "Unplug that fan",
+          "highlight": "Unplug"
+        }
+      ]
+    },
+    {
+      "title": "Cut the power",
+      "stage": "mars_cabin",
+      "mars": {
+        "kit": 0,
+        "base": 1,
+        "cue": "fan_stop",
+        "status": "AIRFLOW LOST"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [1.36, 1.82, -1.02],
+      "pov": {
+        "eye": [1.62, 1.89, 0.25]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "duration": 2.6666666666666665,
+      "captions": [
+        {
+          "time": 0,
+          "text": "Unplug that fan",
+          "highlight": "Unplug"
+        },
+        {
+          "time": 1.127,
+          "text": "and the air",
+          "highlight": "and"
+        },
+        {
+          "time": 1.617,
+          "text": "stops circulating.",
+          "highlight": "circulating."
+        }
+      ]
+    },
+    {
+      "title": "Beat the sunset",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 1,
+        "cue": "sunset",
+        "status": "WHAT POWERS THE NIGHT?"
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "focus": [-1.86, 1.17, -2.33],
+      "pov": {
+        "eye": [-2.8, 0.86, 1.67]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "duration": 2.3666666666666667,
+      "captions": [
+        {
+          "time": 0,
+          "text": "stops circulating.",
+          "highlight": "circulating."
+        },
+        {
+          "time": 0.13,
+          "text": "So what",
+          "highlight": "what"
+        },
+        {
+          "time": 0.56,
+          "text": "powers it",
+          "highlight": "powers"
+        },
+        {
+          "time": 1.12,
+          "text": "when the sun",
+          "highlight": "when"
+        },
+        {
+          "time": 1.59,
+          "text": "goes down?",
+          "highlight": "down?"
+        }
+      ]
+    },
+    {
+      "title": "Harvest daylight",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 2,
+        "cue": "solar",
+        "status": "06  /  SOLAR POWER"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [1.14, 0.77, -1.73],
+      "pov": {
+        "eye": [2.0, 1.91, 1.39]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "duration": 1.9,
+      "captions": [
+        {
+          "time": 0.073,
+          "text": "Panels charge",
+          "highlight": "Panels"
+        },
+        {
+          "time": 0.733,
+          "text": "a battery",
+          "highlight": "battery"
+        },
+        {
+          "time": 1.173,
+          "text": "by day.",
+          "highlight": "day."
+        }
+      ]
+    },
+    {
+      "title": "Battery at night",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 2,
+        "cue": "night",
+        "status": "NIGHT POWER ONLINE"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [1.24, 0.33, -1.12],
+      "pov": {
+        "eye": [1.62, 0.66, 0.57]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "duration": 1.9333333333333333,
+      "captions": [
+        {
+          "time": 0.053,
+          "text": "At night,",
+          "highlight": "night,"
+        },
+        {
+          "time": 0.643,
+          "text": "the battery",
+          "highlight": "battery"
+        },
+        {
+          "time": 1.113,
+          "text": "takes over.",
+          "highlight": "takes"
+        }
+      ]
+    },
+    {
+      "title": "Fan back on",
+      "stage": "mars_cabin",
+      "mars": {
+        "kit": 0,
+        "base": 2,
+        "cue": "hold",
+        "status": "AIRFLOW RESTORED"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "focus": [1.16, 1.89, -1.06],
+      "pov": {
+        "eye": [1.48, 2.0, 0.96]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "duration": 0.9666666666666667,
+      "captions": [
+        {
+          "time": 0.02,
+          "text": "For a longer",
+          "highlight": "longer"
+        },
+        {
+          "time": 0.56,
+          "text": "stay,",
+          "highlight": "stay,"
+        }
+      ]
+    },
+    {
+      "title": "Cover the module",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 0,
+        "base": 3,
+        "cue": "shield",
+        "status": "07  /  REGOLITH SHIELD"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [-2.23, 1.03, -2.4],
+      "pov": {
+        "eye": [-0.41, 2.33, 1.64]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "duration": 2.1333333333333333,
+      "captions": [
+        {
+          "time": 0.023,
+          "text": "pile Martian soil",
+          "highlight": "Martian"
+        },
+        {
+          "time": 1.273,
+          "text": "over the shelter",
+          "highlight": "shelter"
+        },
+        {
+          "time": 2.013,
+          "text": "to cut",
+          "highlight": "cut"
+        }
+      ]
+    },
+    {
+      "title": "Shielded until dawn",
+      "stage": "mars_cabin",
+      "mars": {
+        "kit": 0,
+        "base": 3,
+        "cue": "hold",
+        "status": "RADIATION DOSE REDUCED"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [-0.12, 1.4, 0],
+      "pov": {
+        "eye": [0.74, 1.56, 2.69]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [0, 0, 0],
+          "motion": "thinking",
+          "yaw": 0
+        }
+      ],
+      "duration": 1.4,
+      "captions": [
+        {
+          "time": 0,
+          "text": "to cut",
+          "highlight": "cut"
+        },
+        {
+          "time": 0.17,
+          "text": "the radiation dose.",
+          "highlight": "radiation"
+        }
+      ]
+    },
+    {
+      "title": "Sunrise",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 4,
+        "base": 3,
+        "cue": "hold",
+        "status": "SOL 02  /  ALIVE"
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "focus": [-0.95, 1.0, -1.2],
+      "pov": {
+        "eye": [1.42, 2.3, 4.92],
+        "dollyTo": [1.72, 2.6, 5.32]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [-0.25, 0, -0.25],
+          "motion": "talking",
+          "yaw": 0
+        }
+      ],
+      "duration": 2.466666666666667,
+      "captions": [
+        {
+          "time": 0.01,
+          "text": "Morning.",
+          "highlight": "Morning."
+        },
+        {
+          "time": 0.65,
+          "text": "Same dust,",
+          "highlight": "dust,"
+        },
+        {
+          "time": 1.63,
+          "text": "same guy.",
+          "highlight": "same"
+        }
+      ]
+    },
+    {
+      "title": "Back on the surface",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 4,
+        "base": 3,
+        "cue": "hold",
+        "status": "BACK OUTSIDE"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "focus": [-0.33, 0.17, 0.04],
+      "pov": {
+        "eye": [-0.7, 0.48, 1.02]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "actors": [
+        {
+          "id": "traveler",
+          "asset": "male.character_01",
+          "height": 1.78,
+          "position": [-0.72, 0, 0],
+          "motion": "idle_breathe",
+          "yaw": 1.57,
+          "stride": [0.42, 0.96]
+        }
+      ],
+      "duration": 1.0,
+      "captions": [
+        {
+          "time": 0.023,
+          "text": "This time",
+          "highlight": "This"
+        },
+        {
+          "time": 0.503,
+          "text": "he gets to",
+          "highlight": "gets"
+        },
+        {
+          "time": 0.923,
+          "text": "leave that",
+          "highlight": "leave"
+        }
+      ]
+    },
+    {
+      "title": "Second print",
+      "stage": "mars_plain",
+      "mars": {
+        "kit": 4,
+        "base": 3,
+        "cue": "second_print",
+        "status": "TWO FOOTPRINTS"
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_pull",
+      "focus": [-0.39, 0.02, 0.055],
+      "pov": {
+        "eye": [-0.5, 1.06, 0.88],
+        "dollyTo": [-0.48, 1.1, 0.91]
+      },
+      "captionPosition": "lower",
+      "sfx": "none",
+      "duration": 1.4333333333333333,
+      "captions": [
+        {
+          "time": 0,
+          "text": "leave that",
+          "highlight": "leave"
+        },
+        {
+          "time": 0.363,
+          "text": "second footprint.",
+          "highlight": "footprint."
+        }
+      ]
+    }
+  ],
+  "pacing": "burst"
+}

@@ -42,6 +42,12 @@ for (const [name, mutate] of Object.entries({
     assert.throws(() => validate(d), /shot 1/);
   });
 }
+test("accepts the freefall motion on an actor", () => {
+  const d = structuredClone(demo);
+  for (const s of d.shots)
+    for (const a of s.actors ?? []) a.motion = "freefall";
+  validate(d);
+});
 test("all indexed paths and texture filenames exist on disk", () => {
   for (const p of [...TEXTURES, ...Object.values(MODELS).map((m) => m.path)])
     assert.ok(fs.existsSync(p), p);

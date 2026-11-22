@@ -19,6 +19,12 @@ Write the hook, the physical cause, and the payoff in a sentence each. Start on 
 - Show contact and consequences. Slide the chips under a hand; let the train pass behind the *same* space as the disappearing face. Inspect real meshes and rigs before assigning them. Preserve positions and screen direction across cuts. Reserve the biggest camera move for the reveal.
 - Give the location a sound. Keep music and ambience below the voice; place accents on meaningful events rather than every word. A deliberate dropout on the loss of vision is storytelling, not a license to leave dead air after the final line.
 
+For a survival challenge, show the consequence before listing equipment. Give the viewer one question to carry across the cuts (for Mars: “does he make it to sunrise?”). Let an upgrade visibly change something: a fan stops, a battery takes over, a second print appears beside the first. A faster synthetic read over the same static shots is not a pacing fix.
+
+When someone reports a robotic layer, don’t dismiss it because there is only one audio stream. That stream may already contain the offending sound. Audition the voice dry, remove competing pitched effects and compare the **decoded export** with the intended stem. In the Mars sunrise cut, `sfx: "none"` means no cut sound; no score, event sounds or fallback speech should be audible.
+
+Hooks earn their seconds: open on the event itself (the explosion, the wheel spin) and land on a concrete payoff (the second footprint, the walk away), not on a lecture. When the brief is a fall or a race, give the viewer one decision to watch being made — here, picking a landing spot — and show each rejected option before the chosen one.
+
 ## Before delivery
 
 1. **Listen without picture.** Is the hook immediate? Is any word swallowed, any silence accidental, or any phrase conspicuously faster than the rest?

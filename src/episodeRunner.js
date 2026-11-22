@@ -1,3 +1,5 @@
+import { bindMarsExplorer } from "./marsSurvival.js";
+import { bindFaller } from "./fallScene.js";
 import { createScreen } from "./uiDirector.js";
 import { createMass } from "./particleEscalation.js";
 import { createBoard } from "./dataViz.js";
@@ -6,7 +8,12 @@ import { CONFIG, SCENE_PRESETS } from "./config.js";
 import { validate } from "./schema.js";
 import { Pipeline, patchTree } from "./psxShader.js";
 import { AssetLoader } from "./assetLoader.js";
-import { bindPerformance, bindChipPush, pose } from "./animationLibrary.js";
+import {
+  bindHallWalk,
+  bindPerformance,
+  bindChipPush,
+  pose,
+} from "./animationLibrary.js";
 import { createSpawn, sampleSpawn } from "./comedyProps.js";
 import { stage } from "./stages.js";
 import { CameraDirector } from "./cameraDirector.js";
@@ -37,7 +44,7 @@ export class EpisodeRunner {
     try {
       for (const s of e.shots) {
         const f = {
-          ...stage(s.stage),
+          ...stage(s.stage, s),
           items: [],
           spawns: [],
           panels: [],
@@ -112,6 +119,15 @@ export class EpisodeRunner {
               (s.events ?? []).filter((ev) => ev.target === def.id),
             );
           else item.mixer = bindPerformance(node, clip, def.motion, take);
+          if (
+            (s.stage === "radio_hall" || (s.mars && def.stride)) &&
+            s.actors?.includes(def)
+          )
+            item.hallWalk = bindHallWalk(item);
+          if (s.mars && s.actors?.includes(def))
+            item.explorer = bindMarsExplorer(item, f.scene, s.mars);
+          if (s.fall && s.actors?.includes(def))
+            item.faller = bindFaller(item, f.scene, s.fall);
           if (!f.observer && s.actors?.includes(def)) f.observer = item;
           f.items.push(item);
           const opacity = SCENE_PRESETS[s.stage].reflection;
@@ -214,10 +230,13 @@ export class EpisodeRunner {
       : t;
     for (const i of f.items) {
       pose(i, rigTime);
+      i.hallWalk?.(rigTime, s);
+      i.explorer?.(rigTime);
+      i.faller?.(rigTime);
       i.fade?.(rigTime);
       i.morph?.(rigTime, i.def.motion);
     }
-    f.weather?.(rigTime, f.start / CONFIG.hz + rigTime);
+    f.weather?.(rigTime, f.start / CONFIG.hz + rigTime, f, s);
     for (const spawn of f.spawns) {
       sampleSpawn(spawn, t);
       spawn.pushChips?.(t);
@@ -231,12 +250,25 @@ export class EpisodeRunner {
           f.spawns.find((p) => p.ev.id === s.focus).node.position,
         );
       else {
-        this.focus.copy(o.node.position);
-        this.focus.y +=
-          (o.def.height ?? 1.6) *
-          (s.cameraPreset === "macro_closeup" && s.actors?.includes(o.def)
-            ? 0.87
-            : 0.51);
+        const boneName =
+          s.stage === "fall_sky"
+            ? "mixamorigHead"
+            : s.cameraPreset === "macro_closeup"
+              ? "mixamorigHead"
+              : "mixamorigSpine2",
+          bone =
+            s.stage === "fall_sky" && s.actors?.includes(o.def)
+              ? o.node.getObjectByName(boneName)
+              : null;
+        if (bone) this.focus.copy(bone.getWorldPosition(new T.Vector3()));
+        else {
+          this.focus.copy(o.node.position);
+          this.focus.y +=
+            (o.def.height ?? 1.6) *
+            (s.cameraPreset === "macro_closeup" && s.actors?.includes(o.def)
+              ? 0.87
+              : 0.51);
+        }
       }
     } else this.focus.fromArray(s.focus ?? [0, 1, 0]);
     if (s.matchHook) {

@@ -26,10 +26,13 @@ export class CameraDirector {
       c.rotateX(0.025 * Math.sin(3.8 * t));
       c.rotateY(0.033 * Math.cos(3.8 * t));
     } else {
-      const delta =
-        mode === "slow_push"
-          ? -Math.min(0.5, c.position.distanceTo(this.focus) * 0.42)
-          : 0.5;
+      // Unrecognised motions hold position instead of silently dollying like
+      // slow_pull — schema rejects these, but never fail open on camera.
+      const delta = mode === "slow_push"
+        ? -Math.min(0.5, c.position.distanceTo(this.focus) * 0.42)
+        : mode === "slow_pull"
+          ? 0.5
+          : 0;
       c.translateZ(delta * u);
     }
     return c;
@@ -49,6 +52,11 @@ export class CameraDirector {
     if (s.pov) {
       const turn = Math.min(1, t / 0.36),
         kick = 1 - Math.exp(-8 * t);
+      if (s.pov.lookTo)
+        this.focus.lerp(
+          this.offset.fromArray(s.pov.lookTo),
+          u * u * (3 - 2 * u),
+        );
       c.position.fromArray(s.pov.eye);
       if (s.pov.dollyTo)
         c.position.lerp(
@@ -87,8 +95,11 @@ export class CameraDirector {
       case "over_shoulder": {
         // For a real observer anchor the lens behind and beside their shoulder.
         if (actor) {
-          const shoulder = this.offset.copy(actor.node.position);
-          shoulder.y += (actor.def.height ?? 1.6) * 0.87;
+          const head = actor.node.getObjectByName?.("mixamorigHead");
+          const shoulder = head
+            ? head.getWorldPosition(this.offset.set(0, 0, 0))
+            : this.offset.copy(actor.node.position);
+          if (!head) shoulder.y += (actor.def.height ?? 1.6) * 0.87;
           const dx = shoulder.x - target.x,
             dz = shoulder.z - target.z;
           const bearing = Math.hypot(dx, dz) > 0.08 ? Math.atan2(dx, dz) : a;

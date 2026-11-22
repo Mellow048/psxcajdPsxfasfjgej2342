@@ -18,8 +18,33 @@ import { spawn } from "node:child_process";
 import { pipeline } from "node:stream/promises";
 import { Readable } from "node:stream";
 import puppeteer from "puppeteer-core";
+import { accessSync, constants } from "node:fs";
 import { CONFIG } from "../src/config.js";
 import { validate } from "../src/schema.js";
+
+function findChrome() {
+  const fromPath = (process.env.PATH ?? "")
+    .split(path.delimiter)
+    .flatMap((dir) => ["google-chrome", "google-chrome-stable", "chromium", "chromium-browser"]
+      .map((name) => path.join(dir, name)));
+  const candidates = [
+    process.env.CHROME_BIN,
+    ...fromPath,
+    "/usr/bin/google-chrome",
+    "/usr/bin/google-chrome-stable",
+    "/usr/bin/chromium",
+    "/usr/bin/chromium-browser",
+    "/opt/google/chrome/chrome",
+  ].filter(Boolean);
+  for (const candidate of candidates)
+    try {
+      accessSync(candidate, constants.X_OK);
+      return candidate;
+    } catch {}
+  throw Error(
+    "Could not find a Chrome/Chromium executable. Set CHROME_BIN to its absolute path.",
+  );
+}
 
 const file = process.argv[2] ?? "episodes/night-window.json";
 if (!/^episodes\/[a-zA-Z0-9_/-]+\.json$/.test(file))
@@ -70,7 +95,7 @@ try {
   server.listen(0, "127.0.0.1");
   await once(server, "listening");
   browser = await puppeteer.launch({
-    executablePath: process.env.CHROME_BIN || "/usr/bin/google-chrome",
+    executablePath: findChrome(),
     headless: true,
     args: [
       "--use-gl=angle",

@@ -1,0 +1,628 @@
+{
+  "version": 3,
+  "title": "What if you could see Wi-Fi?",
+  "series": "Field Study / The Dead Spot",
+  "pacing": "micro",
+  "narration": "You walk closer to the router and somehow your Wi-Fi gets worse. Look at your feet. You just stepped into a dead spot. If you could see Wi-Fi, you'd see one wave coming straight from the router to your phone. But that metal cabinet bounces another copy your way. Same signal, longer trip. Right here, the peak of one wave meets the dip of the other, so they partly cancel. Now slide your phone a few inches. The waves line up differently and the signal climbs. You didn't fix the router. You just moved your hand.",
+  "voiceover": "episodes/wifi-voice.wav",
+  "music": {
+    "track": "episodes/wifi-score.wav",
+    "volume": 0.37
+  },
+  "shots": [
+    {
+      "title": "Cross the floor marks",
+      "duration": 1.9333333333333333,
+      "stage": "radio_hall",
+      "radio": {
+        "paths": 0,
+        "bars": [4, 4, 0, 1]
+      },
+      "focus": [-1.52, 0.89, -0.12],
+      "pov": {
+        "eye": [-4.49, 1.6, 2.29],
+        "dollyTo": [-3.43, 1.55, 2.12],
+        "lookTo": [-0.49, 0.91, -0.1]
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.0,
+          "text": "You walk closer",
+          "highlight": "closer"
+        },
+        {
+          "time": 0.88,
+          "text": "to the router",
+          "highlight": "router"
+        },
+        {
+          "time": 1.45,
+          "text": "and somehow",
+          "highlight": "somehow"
+        }
+      ],
+      "actors": [
+        {
+          "id": "tester",
+          "asset": "male.character_01",
+          "height": 1.77,
+          "position": [-2.36, 0, 0],
+          "yaw": 1.5707963267948966,
+          "motion": "idle_breathe",
+          "stride": [1.64, 1.93]
+        }
+      ],
+      "events": [
+        {
+          "type": "sound",
+          "time": 0.22,
+          "sfx": "click"
+        },
+        {
+          "type": "sound",
+          "time": 0.65,
+          "sfx": "click"
+        },
+        {
+          "type": "sound",
+          "time": 1.1,
+          "sfx": "click"
+        },
+        {
+          "type": "sound",
+          "time": 1.58,
+          "sfx": "click"
+        }
+      ]
+    },
+    {
+      "title": "One last pace",
+      "duration": 2.0,
+      "stage": "radio_hall",
+      "radio": {
+        "paths": 0,
+        "bars": [4, 1, 0.28, 0.87]
+      },
+      "focus": [-0.37, 1.43, 0.25],
+      "pov": {
+        "eye": [-1.16, 1.65, 0.94],
+        "dollyTo": [-0.69, 1.62, 1.04],
+        "lookTo": [0, 1.46, 0.25]
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.04,
+          "text": "your Wi-Fi",
+          "highlight": "Wi-Fi"
+        },
+        {
+          "time": 0.66,
+          "text": "gets worse.",
+          "highlight": "worse."
+        },
+        {
+          "time": 1.46,
+          "text": "Look at",
+          "highlight": "Look"
+        },
+        {
+          "time": 1.72,
+          "text": "your feet.",
+          "highlight": "feet."
+        }
+      ],
+      "actors": [
+        {
+          "id": "tester",
+          "asset": "male.character_01",
+          "height": 1.77,
+          "position": [-0.72, 0, 0],
+          "yaw": 1.5707963267948966,
+          "motion": "idle_breathe",
+          "stride": [0.42, 0.91]
+        }
+      ],
+      "events": [
+        {
+          "type": "sound",
+          "time": 0.87,
+          "sfx": "click"
+        }
+      ]
+    },
+    {
+      "title": "Replay the final footfall",
+      "duration": 2.1333333333333333,
+      "stage": "radio_hall",
+      "radio": {
+        "paths": 0,
+        "bars": [1, 1, 0, 1]
+      },
+      "focus": [-0.4, 0.17, 0.1],
+      "pov": {
+        "eye": [-1.23, 0.58, 1.38]
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_pull",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "your feet.",
+          "highlight": "feet."
+        },
+        {
+          "time": 0.41,
+          "text": "You just stepped",
+          "highlight": "stepped"
+        },
+        {
+          "time": 1.0,
+          "text": "into a",
+          "highlight": "into"
+        },
+        {
+          "time": 1.25,
+          "text": "dead spot.",
+          "highlight": "spot."
+        },
+        {
+          "time": 2.11,
+          "text": "If you could",
+          "highlight": "could"
+        }
+      ],
+      "actors": [
+        {
+          "id": "tester",
+          "asset": "male.character_01",
+          "height": 1.77,
+          "position": [-0.72, 0, 0],
+          "yaw": 1.5707963267948966,
+          "motion": "idle_breathe",
+          "stride": [0.42, 0.92]
+        }
+      ]
+    },
+    {
+      "title": "Switch on field vision",
+      "duration": 2.066666666666667,
+      "stage": "radio_hall",
+      "radio": {
+        "paths": 1,
+        "bars": [1, 1, 0, 1]
+      },
+      "focus": [0.45, 1.23, -0.35],
+      "pov": {
+        "eye": [-1.8, 1.92, 2.57]
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "If you could",
+          "highlight": "could"
+        },
+        {
+          "time": 0.38,
+          "text": "see Wi-Fi,",
+          "highlight": "Wi-Fi,"
+        },
+        {
+          "time": 1.32,
+          "text": "you'd see",
+          "highlight": "you'd"
+        },
+        {
+          "time": 1.68,
+          "text": "one wave",
+          "highlight": "wave"
+        }
+      ],
+      "actors": [
+        {
+          "id": "tester",
+          "asset": "male.character_01",
+          "height": 1.77,
+          "position": [-0.3, 0, 0],
+          "yaw": 1.5707963267948966,
+          "motion": "idle_breathe"
+        }
+      ]
+    },
+    {
+      "title": "Follow the direct wave",
+      "duration": 2.2,
+      "stage": "radio_hall",
+      "radio": {
+        "paths": 1,
+        "bars": [1, 1, 0, 1]
+      },
+      "focus": [1.28, 1.26, -0.46],
+      "pov": {
+        "eye": [2.18, 1.6, 0.82],
+        "lookTo": [0.67, 1.29, -0.15]
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "one wave",
+          "highlight": "wave"
+        },
+        {
+          "time": 0.17,
+          "text": "coming straight",
+          "highlight": "straight"
+        },
+        {
+          "time": 0.74,
+          "text": "from the router",
+          "highlight": "router"
+        },
+        {
+          "time": 1.32,
+          "text": "to your phone.",
+          "highlight": "phone."
+        },
+        {
+          "time": 2.19,
+          "text": "But that",
+          "highlight": "that"
+        }
+      ],
+      "actors": [
+        {
+          "id": "tester",
+          "asset": "male.character_01",
+          "height": 1.77,
+          "position": [-0.3, 0, 0],
+          "yaw": 1.5707963267948966,
+          "motion": "idle_breathe"
+        }
+      ]
+    },
+    {
+      "title": "Off the cabinet",
+      "duration": 2.6,
+      "stage": "radio_hall",
+      "radio": {
+        "paths": 2,
+        "bars": [1, 1, 0, 1]
+      },
+      "focus": [0.79, 1.4, -1.04],
+      "pov": {
+        "eye": [-1.17, 1.81, 1.54]
+      },
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_pull",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "But that",
+          "highlight": "that"
+        },
+        {
+          "time": 0.32,
+          "text": "metal cabinet",
+          "highlight": "cabinet"
+        },
+        {
+          "time": 1.09,
+          "text": "bounces another copy",
+          "highlight": "bounces"
+        },
+        {
+          "time": 2.1,
+          "text": "your way.",
+          "highlight": "your"
+        }
+      ],
+      "actors": [
+        {
+          "id": "tester",
+          "asset": "male.character_01",
+          "height": 1.77,
+          "position": [-0.3, 0, 0],
+          "yaw": 1.5707963267948966,
+          "motion": "idle_breathe"
+        }
+      ]
+    },
+    {
+      "title": "Two routes to one phone",
+      "duration": 2.1666666666666665,
+      "stage": "radio_hall",
+      "radio": {
+        "paths": 2,
+        "bars": [1, 1, 0, 1]
+      },
+      "focus": [0.47, 1.13, -0.5],
+      "pov": {
+        "eye": [-0.37, 3.67, 0.77]
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "your way.",
+          "highlight": "your"
+        },
+        {
+          "time": 0.19,
+          "text": "Same signal,",
+          "highlight": "signal,"
+        },
+        {
+          "time": 1.18,
+          "text": "longer trip.",
+          "highlight": "longer"
+        },
+        {
+          "time": 2.04,
+          "text": "Right here,",
+          "highlight": "Right"
+        }
+      ],
+      "actors": [
+        {
+          "id": "tester",
+          "asset": "male.character_01",
+          "height": 1.77,
+          "position": [-0.3, 0, 0],
+          "yaw": 1.5707963267948966,
+          "motion": "idle_breathe"
+        }
+      ]
+    },
+    {
+      "title": "Peak against dip",
+      "duration": 2.1,
+      "stage": "phase_scope",
+      "radio": {
+        "paths": 0,
+        "bars": [1, 1, 0, 1]
+      },
+      "focus": [0, 1.45, 0],
+      "pov": {
+        "eye": [-0.19, 1.64, 3.64]
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "Right here,",
+          "highlight": "Right"
+        },
+        {
+          "time": 0.57,
+          "text": "the peak",
+          "highlight": "peak"
+        },
+        {
+          "time": 0.9,
+          "text": "of one wave",
+          "highlight": "wave"
+        },
+        {
+          "time": 1.57,
+          "text": "meets the dip",
+          "highlight": "meets"
+        }
+      ]
+    },
+    {
+      "title": "The smaller sum",
+      "duration": 2.1,
+      "stage": "phase_scope",
+      "radio": {
+        "paths": 0,
+        "bars": [1, 1, 0, 1]
+      },
+      "focus": [0, 1.22, 0.08],
+      "pov": {
+        "eye": [0.05, 1.32, 2.9]
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_pull",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.02,
+          "text": "of the other,",
+          "highlight": "other,"
+        },
+        {
+          "time": 0.79,
+          "text": "so they",
+          "highlight": "they"
+        },
+        {
+          "time": 1.07,
+          "text": "partly cancel.",
+          "highlight": "cancel."
+        },
+        {
+          "time": 2.07,
+          "text": "Now slide",
+          "highlight": "slide"
+        }
+      ]
+    },
+    {
+      "title": "Slide the handset",
+      "duration": 2.2,
+      "stage": "radio_hall",
+      "radio": {
+        "paths": 2,
+        "bars": [1, 4, 0.3, 1.67]
+      },
+      "focus": [0.06, 1.4, 0.245],
+      "pov": {
+        "eye": [-0.8, 1.55, 0.99]
+      },
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "orbit_drift",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "Now slide",
+          "highlight": "slide"
+        },
+        {
+          "time": 0.5,
+          "text": "your phone",
+          "highlight": "phone"
+        },
+        {
+          "time": 0.89,
+          "text": "a few inches.",
+          "highlight": "inches."
+        },
+        {
+          "time": 1.69,
+          "text": "The waves",
+          "highlight": "waves"
+        },
+        {
+          "time": 2.12,
+          "text": "line up",
+          "highlight": "line"
+        }
+      ],
+      "actors": [
+        {
+          "id": "tester",
+          "asset": "male.character_01",
+          "height": 1.77,
+          "position": [-0.3, 0, 0],
+          "yaw": 1.5707963267948966,
+          "motion": "idle_breathe",
+          "reach": [0, 0.36, 0.15, 1.6]
+        }
+      ]
+    },
+    {
+      "title": "The sum comes back",
+      "duration": 2.2,
+      "stage": "phase_scope",
+      "radio": {
+        "paths": 0,
+        "bars": [1, 4, 0.16, 1.01]
+      },
+      "focus": [0, 1.4, 0.07],
+      "pov": {
+        "eye": [0.18, 1.25, 3.16]
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0,
+          "text": "line up",
+          "highlight": "line"
+        },
+        {
+          "time": 0.26,
+          "text": "differently",
+          "highlight": "differently"
+        },
+        {
+          "time": 1.06,
+          "text": "and the signal",
+          "highlight": "signal"
+        },
+        {
+          "time": 1.58,
+          "text": "climbs.",
+          "highlight": "climbs."
+        }
+      ],
+      "events": [
+        {
+          "type": "sound",
+          "time": 1.34,
+          "sfx": "ding"
+        }
+      ]
+    },
+    {
+      "title": "Same box, different spot",
+      "duration": 2.3333333333333335,
+      "stage": "radio_hall",
+      "radio": {
+        "paths": 2,
+        "bars": [4, 4, 0, 1]
+      },
+      "focus": [0.34, 1.28, -0.11],
+      "pov": {
+        "eye": [-1.24, 1.67, 2.29]
+      },
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_pull",
+      "sfx": "whoosh_fast",
+      "captionPosition": "lower",
+      "captions": [
+        {
+          "time": 0.04,
+          "text": "You didn't fix",
+          "highlight": "didn't"
+        },
+        {
+          "time": 0.6,
+          "text": "the router.",
+          "highlight": "router."
+        },
+        {
+          "time": 1.25,
+          "text": "You just moved",
+          "highlight": "moved"
+        },
+        {
+          "time": 1.71,
+          "text": "your hand.",
+          "highlight": "hand."
+        }
+      ],
+      "actors": [
+        {
+          "id": "tester",
+          "asset": "male.character_01",
+          "height": 1.77,
+          "position": [-0.3, 0, 0],
+          "yaw": 1.5707963267948966,
+          "motion": "idle_breathe",
+          "reach": [0.36, 0.36, 0, 1]
+        }
+      ]
+    }
+  ]
+}
