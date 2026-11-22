@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A pelican on a bicycle</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 20px; background: #ecdfc9; color: #234547; font-family: system-ui, sans-serif; }
+  main { width: min(100%, 1060px); }
+  .scene { overflow: hidden; border: 1px solid #b7a38b; border-radius: 18px; box-shadow: 0 20px 60px #41352224; background: #fbefda; }
+  svg { width: 100%; height: auto; display: block; }
+  .controls { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 15px 18px; background: #fbefda; }
+  .label { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+  button { border: 1px solid #295150; border-radius: 100px; padding: 9px 16px; background: transparent; color: #234547; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+  button:hover { background: #234547; color: #fbefda; }
+  button:focus-visible { outline: 3px solid #db7b58; outline-offset: 3px; }
+  @media (max-width: 500px) { body { padding: 10px; } .label { font-size: 10px; } }
+</style>
+</head>
+<body>
+<main><div class="scene">
+<svg viewBox="0 0 960 620" role="img" aria-labelledby="title description" xmlns="http://www.w3.org/2000/svg">
+<title id="title">A pelican rides a bicycle by the sea</title>
+<desc id="description">A white pelican with a long orange bill pedals a teal bicycle along a seaside road. Its feet turn the pedals, the wheels spin and the landscape rolls past.</desc>
+<defs>
+  <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#aed8d5"/><stop offset="1" stop-color="#e9eee0"/></linearGradient>
+  <linearGradient id="sea" x2="0" y2="1"><stop stop-color="#69aaa8"/><stop offset="1" stop-color="#a6d0bf"/></linearGradient>
+  <pattern id="roadTexture" width="130" height="34" patternUnits="userSpaceOnUse"><path d="M15 10h18m65 15h9" stroke="#ccaa80" stroke-width="2" stroke-linecap="round"/></pattern>
+  <g id="spokes" stroke="#426361" stroke-width="2"><path d="M0 -82V82M-82 0H82M-58 -58L58 58M58 -58L-58 58M-31 -76L31 76M31 -76L-31 76M-76 -31L76 31M76 -31L-76 31"/></g>
+  <g id="rim"><circle r="88" fill="#f9e8c5" stroke="#244749" stroke-width="10"/><circle r="80" fill="none" stroke="#658a7f" stroke-width="3"/><use href="#spokes"/><circle r="7" fill="#f4c994" stroke="#244749" stroke-width="3"/></g>
+</defs>
+<!-- A seaside backdrop that moves independently of the cyclist -->
+<path fill="url(#sky)" d="M0 0h960v620H0z"/>
+<circle cx="755" cy="120" r="58" fill="#f5b58a"/>
+<g id="clouds" fill="#fff8e8" opacity=".8"><path d="M80 95q12-15 32-11 13-27 41-17 21-11 38 10 22-1 31 18z"/><path d="M595 64q10-13 28-9 10-20 31-13 16-9 29 8 20-1 27 14z"/><path d="M1050 95q12-15 32-11 13-27 41-17 21-11 38 10 22-1 31 18z"/></g>
+<path d="M0 283q90-37 170-9t173 3q76-28 168 5t178-3q126-43 271-6v69H0z" fill="#91bfb2"/>
+<path d="M0 300h960v154H0z" fill="url(#sea)"/>
+<g id="waves" fill="none" stroke="#d5e8d5" stroke-width="3" stroke-linecap="round" opacity=".8"><path d="M45 329h90m19 0h26m176 20h73m26 0h33m220-17h104m30 0h28M34 374h52m23 0h63m374 3h90m24 0h35m200-21h80M1005 329h90m19 0h26"/></g>
+<path d="M0 405q180-24 360-7 200 20 400-4 105-11 200 1v225H0z" fill="#e2c394"/>
+<path d="M0 444q250-10 480 0t480-4v180H0z" fill="#efd5aa"/>
+<rect id="road" y="449" width="960" height="171" fill="url(#roadTexture)"/>
+<path d="M0 558h960" stroke="#d1b084" stroke-width="2" opacity=".5"/>
+<ellipse cx="471" cy="557" rx="309" ry="10" fill="#715f4e" opacity=".2"/>
+<!-- Bicycle, facing right -->
+<g transform="translate(275 465)"><g id="rearWheel"><use href="#rim"/></g></g>
+<g transform="translate(665 465)"><g id="frontWheel"><use href="#rim"/></g></g>
+<!-- Far leg goes behind the bicycle frame -->
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path id="farLeg" stroke="#a95e37" stroke-width="13" d="M405 329L440 391 474 428"/><path id="farFoot" stroke="#b9733e" stroke-width="12" d="M474 428l21 0"/></g>
+<g fill="none" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M182 448a94 94 0 0 1 170-35m220 19a94 94 0 0 1 179-8" stroke="#254747" stroke-width="8"/>
+  <path d="M182 448a94 94 0 0 1 170-35m220 19a94 94 0 0 1 179-8" stroke="#f2d6a6" stroke-width="4"/>
+  <path d="M275 465l127-112 61 96-188 16m127-112 199-20-138 116m128-137 18 52 56 101" stroke="#244749" stroke-width="15"/>
+  <path d="M275 465l127-112 61 96-188 16m127-112 199-20-138 116m128-137 18 52 56 101" stroke="#4caa9b" stroke-width="8"/>
+  <path d="M402 353l-5-27m194-14-8-27 23-8q15-5 12-15t-18-8l-11 4" stroke="#244749" stroke-width="8"/>
+  <path d="M589 258l15-5" stroke="#9a6043" stroke-width="10"/>
+  <path d="M371 324q4-5 18-3l33 3q11 1 9 6-2 5-15 5l-21-2q-19 4-24-2z" fill="#9c6348" stroke="#244749" stroke-width="3"/>
+</g>
+<!-- Crank rotates together with both feet -->
+<g transform="translate(463 449)"><circle r="25" fill="#efd5a5" stroke="#244749" stroke-width="3"/><g id="crank" stroke="#244749" stroke-linecap="round"><path d="M-30 0h60" stroke-width="5"/><path d="M-38 0h16M22 0h16" stroke-width="7"/></g><circle r="5" fill="#244749"/></g>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round"><path id="nearLeg" stroke="#e59a5d" stroke-width="15" d="M397 331L440 395 493 449"/><path id="nearFoot" stroke="#e59a5d" stroke-width="12" d="M493 449l21 0"/><path id="toe" stroke="#a95e37" stroke-width="2" d="M501 449h9"/></g>
+<!-- Pelican: tail, rounded body, neck, pouch, bill and wing resting on handlebar -->
+<g stroke="#264b49" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M263 264l41 8q36-25 80-22 39 3 50-19 6-15 3-39-5-28 11-44 15-15 36-12 25 3 31 27l-4 19q-24 6-29 27-2 14 7 36 12 34-13 60-23 25-73 30-61 3-95-32l-25-26-22-8 22-1z" fill="#fff7e3"/>
+  <path d="M285 283q28 17 45 27 36 27 81 23 36-4 59-24-16 34-66 36-57 2-91-31z" fill="#e3ddc5" stroke="none"/>
+  <path d="M497 177q45 3 135 25-10 16-50 29-46 15-70-2-13-11-19-32z" fill="#e99d5b"/>
+  <path d="M512 193q7 21 19 27m-9-25q8 20 19 25m-8-23q8 17 18 21" fill="none" stroke="#c17745" stroke-width="2"/>
+  <path d="M491 170q17-7 34-3l104 25q15 3 11 12l-6 7-3-9-111-14-30-8z" fill="#f8c987"/>
+  <circle cx="489" cy="163" r="8" fill="#ebc786" stroke-width="2"/><circle cx="491" cy="163" r="3.8" fill="#244749" stroke="none"/><circle cx="492" cy="161.5" r="1.2" fill="white" stroke="none"/>
+  <path d="M443 222q-24-13-44-8-31 7-54-9l9 17-17 3q28 15 56 5 28-7 47 5z" fill="#d8644c"/>
+  <path d="M438 216q20 13 45 6l1 13q-26 7-48-7z" fill="#c95541"/>
+  <path d="M328 281q32-27 69-17 29 9 50 21 40 15 79 10l70-13q13-3 13 4-1 5-16 10 10-1 9 4-4 8-30 11-31 12-82 11-64 6-112-10-34-11-50-31z" fill="#fbf0d8"/>
+  <path d="M361 285q43 23 106 27m-77-29q39 19 103 22m-65-21q36 13 78 14" fill="none" stroke="#bdc7b1" stroke-width="2.5"/>
+</g>
+<!-- Tiny finishing details -->
+<path d="M41 49h55m-55 9h32" stroke="#fff7e4" stroke-width="3" stroke-linecap="round" opacity=".65"/>
+<text x="914" y="586" text-anchor="end" font-family="Georgia,serif" font-size="16" font-style="italic" fill="#947758">a little seaside ride</text>
+</svg>
+<div class="controls"><span class="label">A pelican &amp; his bicycle</span><button id="toggle" type="button" aria-pressed="false">Pause animation</button></div>
+</div></main>
+<script>
+(() => {
+  const byId = id => document.getElementById(id);
+  const rear = byId('rearWheel'), front = byId('frontWheel'), crank = byId('crank');
+  const nearLeg = byId('nearLeg'), farLeg = byId('farLeg'), nearFoot = byId('nearFoot'), farFoot = byId('farFoot'), toe = byId('toe');
+  const toggle = byId('toggle');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let running = !reduced.matches, elapsed = 0, last = null;
+  // A knee is the upper of the two possible joints connecting hip and pedal.
+  function knee(hx, hy, px, py, upper, lower) {
+    const dx = px - hx, dy = py - hy, d = Math.hypot(dx, dy) || 1;
+    const along = (upper * upper - lower * lower + d * d) / (2 * d);
+    const height = Math.sqrt(Math.max(0, upper * upper - along * along));
+    return [hx + dx * along / d + dy * height / d, hy + dy * along / d - dx * height / d];
+  }
+  function draw(t) {
+    const a = t * Math.PI * 2 / 1.5, degrees = a * 180 / Math.PI;
+    rear.setAttribute('transform', `rotate(${degrees * 1.5})`);
+    front.setAttribute('transform', `rotate(${degrees * 1.5})`);
+    crank.setAttribute('transform', `rotate(${degrees})`);
+    function leg(path, foot, hipX, hipY, angle, isNear) {
+      const x = 463 + 30 * Math.cos(angle), y = 449 + 30 * Math.sin(angle);
+      const [kx, ky] = knee(hipX, hipY, x, y, 84, 75);
+      path.setAttribute('d', `M${hipX} ${hipY} L${kx.toFixed(2)} ${ky.toFixed(2)} L${x.toFixed(2)} ${y.toFixed(2)}`);
+      foot.setAttribute('d', `M${(x-5).toFixed(2)} ${y.toFixed(2)} l25 0`);
+      if (isNear) toe.setAttribute('d', `M${(x+8).toFixed(2)} ${(y-2).toFixed(2)}h8`);
+    }
+    leg(nearLeg, nearFoot, 397, 331, a, true);
+    leg(farLeg, farFoot, 405, 329, a + Math.PI, false);
+    byId('road').setAttribute('transform', `translate(${-((t * 90) % 130)} 0)`);
+    // The texture is wider than the viewport after translating it.
+    byId('road').setAttribute('width', 1090);
+    byId('clouds').setAttribute('transform', `translate(${-((t * 7) % 960)} 0)`);
+    byId('waves').setAttribute('transform', `translate(${-((t * 18) % 960)} 0)`);
+  }
+  function frame(now) {
+    if (running) { if (last !== null) elapsed += Math.min((now - last) / 1000, .05); draw(elapsed); }
+    last = running ? now : null;
+    requestAnimationFrame(frame);
+  }
+  function updateButton() { toggle.textContent = running ? 'Pause animation' : 'Play animation'; toggle.setAttribute('aria-pressed', String(!running)); }
+  toggle.addEventListener('click', () => { running = !running; last = null; updateButton(); });
+  updateButton(); draw(0); requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
