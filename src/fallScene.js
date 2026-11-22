@@ -344,62 +344,65 @@ export function bindFaller(item, scene, m) {
     const p = m.cue;
     actor.position.x = base[0];
     actor.position.z = base[2];
+    // Belly-down freefall: pitch the body flat and roll about the long axis,
+    // never upright circling.
     let y = base[1],
-      rx = -1.35,
-      spin = t * 1.4,
-      arm = 1.35,
-      leg = 0.12,
+      pitch = -Math.PI / 2,
+      roll = t * 1.6,
+      arm = 1.45,
+      leg = 0.18,
       head = 0;
     if (p === "blast" || p === "debris") {
-      spin = t * 2.6;
-      rx = -1.1 + 0.3 * Math.sin(t * 3);
+      roll = t * 2.4;
+      pitch = -1.15 + 0.25 * Math.sin(t * 3);
       arm = 1.0 + 0.5 * Math.sin(t * 6);
     } else if (p === "thin") {
-      spin = t * 0.5;
-      rx = -1.0;
+      roll = t * 0.45;
+      pitch = -1.05;
       arm = 0.5;
-      head = 0.5 * ease(t, 0.2, 2.6);
+      head = 0.55 * ease(t, 0.2, 2.4);
     } else if (p === "blackout") {
-      spin = t * 0.25;
-      rx = -0.9;
-      arm = 0.35;
-      head = 0.9;
+      roll = t * 0.18;
+      pitch = -0.9;
+      arm = 0.3;
+      head = 0.95;
     } else if (p === "wake") {
-      spin = (1 - ease(t, 0.2, 1.6)) * 2.2;
-      rx = -1.45;
-      arm = 0.6 + 0.9 * ease(t, 0.3, 1.8);
-      head = 0.9 - 0.9 * ease(t, 0.3, 1.4);
-    } else if (p === "tumble" || p === "fall") {
-      spin = t * 2.0;
-      rx = -1.35 + 0.25 * Math.sin(t * 4);
-      arm = 1.2 + 0.2 * Math.sin(t * 5);
-    } else if (p === "scan" || p === "steer" || p === "farm" || p === "low") {
-      spin = 0.4 * Math.sin(t * 1.5);
-      rx = -0.55;
-      arm = 1.5;
-      actor.rotation.z;
+      roll = (1 - ease(t, 0.2, 1.6)) * 2.0;
+      pitch = -1.5;
+      arm = 0.6 + 1.0 * ease(t, 0.3, 1.8);
+      head = 0.95 - 0.95 * ease(t, 0.3, 1.4);
+    } else if (p === "fall" || p === "tumble") {
+      roll = t * 1.7;
+      pitch = -1.45 + 0.18 * Math.sin(t * 4);
+      arm = 1.25 + 0.2 * Math.sin(t * 5);
+      leg = 0.22;
+    } else if (["scan", "steer", "farm", "low"].includes(p)) {
+      roll = 0.35 * Math.sin(t * 1.4);
+      pitch = -1.0;
+      arm = 1.55;
+      leg = 0.25;
     } else if (p === "brace") {
-      spin = 0;
-      rx = -1.5;
-      arm = 0.25;
+      roll = 0;
+      pitch = -1.55;
+      arm = 0.15;
       leg = 0.02;
     } else if (p === "land") {
       const hit = ease(t, 0.42, 0.62);
       y = base[1] * (1 - hit) + 0.06 * hit;
-      rx = -1.45 + hit * (1.45 + Math.PI * 0.9);
-      spin = hit * 4;
-      arm = 1.4;
+      pitch = -Math.PI / 2 + hit * (Math.PI / 2 + Math.PI * 0.85);
+      roll = hit * 3.5;
+      arm = 1.3;
+      leg = 0.1;
     } else if (p === "alive") {
       const stand = ease(t, 0.1, 0.7);
       y = 0.02 + 0.05 * Math.sin(t * 6);
-      rx = -Math.PI / 2 + stand * (Math.PI / 2);
-      spin = 0;
-      arm = 0.35 + stand * 0.15;
+      pitch = -Math.PI / 2 + stand * (Math.PI / 2);
+      roll = 0;
+      arm = 0.3 + stand * 0.2;
       actor.position.x = base[0] + stand * t * 0.55;
     }
     actor.position.y = y;
-    actor.rotation.x = rx;
-    actor.rotation.y = spin;
+    actor.rotation.set(pitch, 0, roll);
     if (L && R) {
       L.rotation.z = arm;
       R.rotation.z = -arm;

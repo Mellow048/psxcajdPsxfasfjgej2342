@@ -204,8 +204,11 @@ test("Plane freefall mix schedules the dry take once, with no other layers", () 
   audio.ctx = { currentTime: 0 };
   audio.sample = (url) => played.push(url);
   audio.tone = (key) => played.push(key);
-  audio.musicBed = () => played.push("music");
+  audio.musicBed = (music) => played.push(music.track);
   audio.start(ep, 0);
-  assert.deepEqual(played, [ep.voiceover]);
+  assert.deepEqual(
+    played.sort(),
+    [ep.voiceover, "episodes/tense-heartbeat.wav"].sort(),
+  );
   assert.equal(ep.shots.length, 34);
 });

@@ -208,7 +208,7 @@ export function validate(e) {
       );
     }
     if (s.fall !== undefined || s.stage === "fall_sky") {
-      keys(s.fall, "cue status alt");
+      keys(s.fall, "cue alt");
       const m = s.fall;
       check(
         s.stage === "fall_sky" &&
@@ -233,9 +233,7 @@ export function validate(e) {
           ].includes(m.cue) &&
           Number.isInteger(m.alt) &&
           m.alt >= 0 &&
-          m.alt <= 3 &&
-          str(m.status) &&
-          m.status.length <= 28,
+          m.alt <= 3,
         "invalid fall state",
       );
       check(
