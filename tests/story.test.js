@@ -197,7 +197,10 @@ test("Mars sunrise mix schedules the dry take once, with no other layers", () =>
   assert.equal(ep.shots.length, 39);
 });
 
-test("Plane freefall mix schedules the dry take once, with no other layers", () => {
+test("Plane freefall mix: one dry take, heartbeat bed, sanctioned cut cues", () => {
+  // The mars cut legitimately mixes voice alone; the plane cut is the
+  // counter-example: one continuous take + the heartbeat bed + the designed
+  // cut cues (and nothing else — no stray ambience, no duplicate take).
   const ep = validate(JSON.parse(readFileSync("episodes/plane.json"))),
     played = [],
     audio = new SfxEngine();
@@ -207,8 +210,21 @@ test("Plane freefall mix schedules the dry take once, with no other layers", () 
   audio.musicBed = (music) => played.push(music.track);
   audio.start(ep, 0);
   assert.deepEqual(
-    played.sort(),
-    [ep.voiceover, "episodes/tense-heartbeat.wav"].sort(),
+    played.filter((k) => k === ep.voiceover),
+    [ep.voiceover],
   );
-  assert.equal(ep.shots.length, 34);
+  assert.deepEqual(
+    played.filter((k) => k === "episodes/tense-heartbeat.wav"),
+    ["episodes/tense-heartbeat.wav"],
+  );
+  const cues = played.filter(
+    (k) => k !== ep.voiceover && k !== "episodes/tense-heartbeat.wav",
+  );
+  for (const k of cues)
+    assert.ok(
+      ["whoosh", "whoosh_fast", "riser", "click", "heavy_thud"].includes(k),
+      "unexpected layer in the mix: " + k,
+    );
+  assert.ok(cues.length > 0, "cut cues should be scheduled, not silenced");
+  assert.equal(ep.shots.length, 20);
 });
