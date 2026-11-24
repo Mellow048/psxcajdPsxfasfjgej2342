@@ -116,7 +116,70 @@ export function createSpawn(ev) {
     });
     return { ...mass, ev };
   }
-  if (kind === "particle_stream_yellow") {
+  if (kind === "laser_beam") {
+    const color = new T.Color(ev.color ?? 0x38bdf8);
+    const radius = ev.radius ?? 0.026;
+    const from = new T.Vector3(...ev.from);
+    const to = new T.Vector3(...ev.to);
+    const via = ev.via ? new T.Vector3(...ev.via) : null;
+    const pts = via ? [from, via, to] : [from, to];
+    const offsets = ev.dual ? [-0.055, 0.055] : [0];
+    const coreMat = new T.MeshBasicMaterial({ color: 0xffffff });
+    const glowMat = new T.MeshBasicMaterial({
+      color,
+      transparent: true,
+      opacity: 0.72,
+      blending: T.AdditiveBlending,
+      depthWrite: false,
+    });
+    const up = new T.Vector3(0, 1, 0);
+    const segs = [];
+    for (const off of offsets) {
+      for (let i = 0; i < pts.length - 1; i++) {
+        const a = pts[i].clone();
+        const b = pts[i + 1].clone();
+        if (off !== 0) {
+          const dir = new T.Vector3().subVectors(b, a).normalize();
+          const side = new T.Vector3().crossVectors(dir, up);
+          if (side.lengthSq() < 1e-4) side.set(1, 0, 0);
+          side.normalize().multiplyScalar(off);
+          a.add(side);
+          b.add(side);
+        }
+        const len = Math.max(0.001, a.distanceTo(b));
+        const g = new T.Group();
+        const core = new T.Mesh(new T.CylinderGeometry(radius * 0.45, radius * 0.45, 1, 6), coreMat);
+        const glow = new T.Mesh(new T.CylinderGeometry(radius * 1.65, radius * 1.65, 1, 8), glowMat);
+        core.position.y = 0.5;
+        glow.position.y = 0.5;
+        g.add(core, glow);
+        g.position.copy(a);
+        g.quaternion.setFromUnitVectors(up, new T.Vector3().subVectors(b, a).normalize());
+        node.add(g);
+        segs.push({ g, len, segIdx: i, segCount: pts.length - 1 });
+      }
+    }
+    const travel = ev.travel ?? 0.35;
+    return {
+      node,
+      ev,
+      sample(shotTime) {
+        const t = shotTime - ev.time;
+        node.visible = t >= 0;
+        if (t < 0) return;
+        const p = Math.min(1, t / Math.max(0.01, travel));
+        const pulse = 0.85 + 0.25 * Math.sin(t * 28);
+        for (const s of segs) {
+          const segStart = s.segIdx / s.segCount;
+          const segEnd = (s.segIdx + 1) / s.segCount;
+          const local = Math.max(0, Math.min(1, (p - segStart) / (segEnd - segStart)));
+          s.g.visible = local > 0.001;
+          s.g.scale.set(pulse, Math.max(0.001, s.len * local), pulse);
+        }
+      },
+    };
+  }
+    if (kind === "particle_stream_yellow") {
     const geo = new T.OctahedronGeometry(0.075),
       mat = luminous(0xffdf2d, 1.3);
     const from = new T.Vector3(...ev.from),

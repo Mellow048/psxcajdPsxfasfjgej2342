@@ -68,24 +68,48 @@ export class Pipeline {
         uniforms: {
           image: { value: this.target.texture },
           dither: { value: 0 },
+          xrayMode: { value: 0 },
+          blackoutMode: { value: 0 },
         },
         vertexShader: "void main(){gl_Position=vec4(position.xy,0.,1.);}",
-        fragmentShader: `uniform sampler2D image;uniform float dither;
- void main(){ivec2 p=ivec2(gl_FragCoord.xy);vec3 c=texelFetch(image,p,0).rgb;
- c=mix(12.92*c,1.055*pow(max(c,vec3(0.)),vec3(1./2.4))-.055,step(vec3(.0031308),c));
- const int b[16]=int[16](0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5);
- float n=(float(b[(p.y%4)*4+p.x%4])+.5)/16.-.5;gl_FragColor=vec4(clamp(floor(c*31.+.5+n*dither)/31.,0.,1.),1.);}`,
+        fragmentShader: `uniform sampler2D image;uniform float dither;uniform float xrayMode;uniform float blackoutMode;
+ float luma(vec3 v){return dot(v,vec3(0.299,0.587,0.114));}
+ void main(){
+   if(blackoutMode > 0.5){gl_FragColor=vec4(0.0,0.0,0.0,1.0);return;}
+   ivec2 p=ivec2(gl_FragCoord.xy);
+   vec3 c=texelFetch(image,p,0).rgb;
+   if(xrayMode > 0.01){
+     ivec2 sz=textureSize(image,0)-ivec2(1);
+     float tl=luma(texelFetch(image,clamp(p+ivec2(-1,1),ivec2(0),sz),0).rgb);
+     float tr=luma(texelFetch(image,clamp(p+ivec2(1,1),ivec2(0),sz),0).rgb);
+     float bl=luma(texelFetch(image,clamp(p+ivec2(-1,-1),ivec2(0),sz),0).rgb);
+     float br=luma(texelFetch(image,clamp(p+ivec2(1,-1),ivec2(0),sz),0).rgb);
+     float gx=(tr+br)-(tl+bl);
+     float gy=(tl+tr)-(bl+br);
+     float edge=clamp(length(vec2(gx,gy))*3.2,0.0,1.0);
+     vec3 xcol=vec3(0.04,0.36,1.0)*edge + vec3(0.18,0.75,1.0)*pow(edge,2.5);
+     c=mix(c,xcol,xrayMode);
+   }
+   c=mix(12.92*c,1.055*pow(max(c,vec3(0.)),vec3(1./2.4))-.055,step(vec3(.0031308),c));
+   const int b[16]=int[16](0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5);
+   float n=(float(b[(p.y%4)*4+p.x%4])+.5)/16.-.5;
+   gl_FragColor=vec4(clamp(floor(c*31.+.5+n*dither)/31.,0.,1.),1.);
+ }`,
       }),
     );
     this.post.add(this.quad);
   }
-  render(scene, cam) {
+  render(scene, cam, opts = {}) {
     const p = CONFIG.psx,
       w = 9 * Math.round((CONFIG.width * p.scale) / 9),
       h = (w / 9) * 16;
     grid.value.set(p.grid, p.gridHeight);
     affine.value = p.affine;
     this.quad.material.uniforms.dither.value = p.dither;
+    const vm = opts.visionMode || "normal";
+    const xm = opts.xrayMix !== undefined ? opts.xrayMix : vm === "xray" ? 1 : 0;
+    this.quad.material.uniforms.xrayMode.value = xm;
+    this.quad.material.uniforms.blackoutMode.value = vm === "blackout" ? 1 : 0;
     if (this.target.width !== w || this.target.height !== h) {
       this.renderer.setSize(w, h, false);
       this.target.setSize(w, h);

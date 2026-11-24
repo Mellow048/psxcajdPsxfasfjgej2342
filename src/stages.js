@@ -25,7 +25,7 @@ function rod(p, a, b, r, m, r2 = r) {
 function rand(seed) {
   return () => (seed = (1664525 * seed + 1013904223) >>> 0) / 4294967296;
 }
-export function makeProp(key, text = "NOTE") {
+export function makeProp(key, text = "NOTE", def = null) {
   const p = new T.Group();
   const dark = () => lit(0x24233b);
   if (key === "car_window") carWindow(p);
@@ -198,6 +198,103 @@ export function makeProp(key, text = "NOTE") {
       0.2,
       0,
     );
+  } else if (key === "wooden_puppet") {
+    const wood = lit(0xd9a86c);
+    const joint = lit(0xb8844c);
+    mesh(p, new T.CylinderGeometry(0.18, 0.21, 0.04, 10), joint, 0, 0.02, 0);
+    for (const sx of [-0.075, 0.075]) {
+      mesh(p, new T.CylinderGeometry(0.032, 0.028, 0.24, 6), wood, sx, 0.15, 0);
+      mesh(p, new T.SphereGeometry(0.034, 6, 5), joint, sx, 0.28, 0);
+      mesh(p, new T.CylinderGeometry(0.038, 0.032, 0.22, 6), wood, sx, 0.4, 0);
+    }
+    mesh(p, new T.BoxGeometry(0.22, 0.1, 0.12), joint, 0, 0.53, 0);
+    mesh(p, new T.CylinderGeometry(0.12, 0.095, 0.28, 8), wood, 0, 0.72, 0);
+    mesh(p, new T.SphereGeometry(0.04, 6, 5), joint, -0.15, 0.82, 0);
+    const lArm = mesh(p, new T.CylinderGeometry(0.028, 0.025, 0.28, 6), wood, -0.19, 0.69, 0);
+    lArm.rotation.z = -0.2;
+    mesh(p, new T.SphereGeometry(0.04, 6, 5), joint, 0.15, 0.82, 0);
+    const rArm = mesh(p, new T.CylinderGeometry(0.028, 0.025, 0.28, 6), wood, 0.23, 0.94, 0);
+    rArm.rotation.z = -0.65;
+    mesh(p, new T.CylinderGeometry(0.035, 0.035, 0.06, 6), joint, 0, 0.89, 0);
+    mesh(p, new T.SphereGeometry(0.11, 8, 6), wood, 0, 1.01, 0);
+  } else if (key === "xray_detector") {
+    const pcb = lit(0x1f7a3f);
+    const chip = lit(0x1e242b);
+    const gold = lit(0xeab308);
+    const led = basic(0x38bdf8);
+    box(p, 0.42, 0.55, 0.035, pcb, 0, 0.35, 0);
+    box(p, 0.14, 0.14, 0.055, chip, -0.06, 0.42, 0.015);
+    box(p, 0.1, 0.16, 0.05, chip, 0.1, 0.28, 0.015);
+    for (let i = 0; i < 4; i++)
+      box(p, 0.32, 0.014, 0.04, gold, 0, 0.18 + i * 0.1, 0.005);
+    mesh(p, new T.CylinderGeometry(0.014, 0.014, 0.22, 6), gold, 0.14, 0.72, 0);
+    mesh(p, new T.SphereGeometry(0.032, 6, 5), led, -0.13, 0.54, 0.025);
+  } else if (key === "xray_monitor") {
+    const casing = lit(0x282d38);
+    box(p, 0.45, 0.06, 0.32, casing, 0, 0.03, 0);
+    box(p, 0.12, 0.22, 0.1, casing, 0, 0.16, -0.04);
+    box(p, 0.96, 0.68, 0.12, casing, 0, 0.58, 0);
+    const c = document.createElement("canvas");
+    c.width = 256;
+    c.height = 180;
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = "#030712";
+    ctx.fillRect(0, 0, 256, 180);
+    ctx.strokeStyle = "#38bdf8";
+    ctx.lineWidth = 4;
+    ctx.shadowColor = "#38bdf8";
+    ctx.shadowBlur = 10;
+    ctx.beginPath();
+    ctx.arc(128, 44, 18, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.strokeRect(108, 66, 40, 48);
+    ctx.beginPath();
+    ctx.moveTo(108, 76); ctx.lineTo(82, 104);
+    ctx.moveTo(148, 76); ctx.lineTo(174, 52);
+    ctx.moveTo(118, 114); ctx.lineTo(114, 158);
+    ctx.moveTo(138, 114); ctx.lineTo(142, 158);
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = "#7dd3fc";
+    ctx.font = "bold 12px monospace";
+    ctx.fillText("X-RAY DETECTOR FEED", 12, 18);
+    const map = new T.CanvasTexture(c);
+    map.colorSpace = T.SRGBColorSpace;
+    mesh(
+      p,
+      new T.PlaneGeometry(0.84, 0.56),
+      new T.MeshBasicMaterial({ map }),
+      0,
+      0.58,
+      0.065,
+    );
+  } else if (key === "custom" && Array.isArray(def?.parts)) {
+    for (const partDef of def.parts) {
+      const sz = partDef.size ?? [0.4, 0.4, 0.4];
+      let geo;
+      if (partDef.shape === "sphere")
+        geo = new T.SphereGeometry(sz[0] ?? 0.25, 10, 8);
+      else if (partDef.shape === "cylinder")
+        geo = new T.CylinderGeometry(sz[0] ?? 0.15, sz[1] ?? sz[0] ?? 0.15, sz[2] ?? 0.5, 8);
+      else if (partDef.shape === "cone")
+        geo = new T.ConeGeometry(sz[0] ?? 0.2, sz[1] ?? 0.5, 8);
+      else if (partDef.shape === "torus")
+        geo = new T.TorusGeometry(sz[0] ?? 0.25, sz[1] ?? 0.06, 6, 12);
+      else
+        geo = new T.BoxGeometry(sz[0] ?? 0.4, sz[1] ?? 0.4, sz[2] ?? 0.4);
+      const col = new T.Color(partDef.color ?? 0xcccccc);
+      const mat = partDef.emissive
+        ? new T.MeshStandardMaterial({
+            color: col,
+            emissive: new T.Color(partDef.emissive),
+            emissiveIntensity: 0.85,
+            flatShading: true,
+          })
+        : lit(col);
+      const [px = 0, py = 0, pz = 0] = partDef.pos ?? [];
+      const m = mesh(p, geo, mat, px, py, pz);
+      if (partDef.rot) m.rotation.set(partDef.rot[0] ?? 0, partDef.rot[1] ?? 0, partDef.rot[2] ?? 0);
+    }
   } else if (key === "rays") {
     for (let i = 0; i < 3; i++) {
       const x = -0.7 + i * 0.19;
@@ -434,6 +531,34 @@ function windowRoom(s, night) {
     s.add(light);
   }
 }
+function streetDay(s) {
+  box(s, 28, 0.16, 26, lit(0x6b7280), 0, -0.08, -2);
+  box(s, 28, 0.22, 4.5, lit(0xcbd5e1), 0, 0.02, -4.6);
+  box(s, 28, 0.22, 4.5, lit(0xcbd5e1), 0, 0.02, 4.8);
+  for (let i = -5; i <= 5; i++)
+    box(s, 1.2, 0.02, 0.16, lit(0xe2e8f0), i * 2.4, 0.01, 0.1);
+  const facades = [
+    [-7.5, 0xd97757, 0x991b1b],
+    [-2.5, 0xe2c799, 0x1d4ed8],
+    [2.5, 0xc4a484, 0x047857],
+    [7.5, 0xd6b49c, 0xb45309],
+  ];
+  for (const [x, wallCol, awningCol] of facades) {
+    box(s, 4.6, 5.2, 3.2, lit(wallCol), x, 2.6, -7.8);
+    box(s, 3.4, 1.8, 0.15, basic(0xbae6fd), x, 1.35, -6.15);
+    box(s, 3.8, 0.45, 0.9, lit(awningCol), x, 2.45, -5.85);
+    box(s, 1.1, 1.1, 0.15, basic(0xe0f2fe), x - 1.0, 3.85, -6.15);
+    box(s, 1.1, 1.1, 0.15, basic(0xe0f2fe), x + 1.0, 3.85, -6.15);
+  }
+  for (const x of [-5.0, 0.0, 5.0]) {
+    mesh(s, new T.CylinderGeometry(0.06, 0.09, 3.6, 6), lit(0x334155), x, 1.8, -3.2);
+    mesh(s, new T.SphereGeometry(0.22, 8, 6), basic(0xfef08a), x, 3.7, -3.2);
+  }
+  for (const x of [-9.5, 9.5]) {
+    mesh(s, new T.CylinderGeometry(0.18, 0.24, 1.4, 6), lit(0x78350f), x, 0.7, -3.4);
+    mesh(s, new T.ConeGeometry(1.05, 2.4, 7), lit(0x22c55e), x, 2.4, -3.4);
+  }
+}
 export function stage(name) {
   const s = new T.Scene(),
     p = SCENE_PRESETS[name];
@@ -452,6 +577,7 @@ export function stage(name) {
     /* The detector POV has no environmental signal. */
   } else if (p.reflection) windowRoom(s, name === "window_night");
   else if (name === "graveyard") cemetery(s);
+  else if (name === "street_day") streetDay(s);
   else {
     const back = name === "backstage";
     box(s, 25, 0.16, 24, lit(back ? 0x50374c : 0x2b3546), 0, -0.1, -3);

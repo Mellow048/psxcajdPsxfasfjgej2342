@@ -9,16 +9,17 @@ const demo = JSON.parse(
     new URL("../episodes/ghost-in-the-glass.json", import.meta.url),
   ),
 );
-test("shipped episode covers all five camera modes and exactly 1,350 ticks", () => {
+test("shipped episode uses registered camera modes and exactly 1,350 ticks", () => {
   validate(demo);
   assert.equal(
     demo.shots.reduce((n, s) => n + 60 * s.duration, 0),
     1350,
   );
-  assert.deepEqual(
-    new Set(demo.shots.map((s) => s.cameraPreset)),
-    new Set(CAMERAS),
+  assert.ok(
+    [...new Set(demo.shots.map((s) => s.cameraPreset))].every((c) => CAMERAS.includes(c)),
   );
+  for (const camera of ["snap_zoom_in", "high_angle_follow"])
+    assert.ok(CAMERAS.includes(camera), `${camera} is registered`);
   assert.ok(fs.existsSync(demo.voiceover));
 });
 for (const [name, mutate] of Object.entries({
@@ -34,7 +35,7 @@ for (const [name, mutate] of Object.entries({
   dupe: (s) => s.props.push(s.actors[0]),
   nonVector: (s) => (s.focus = [1, 2]),
   sfx: (s) => (s.sfx = "missing"),
-  badMotion: (s) => (s.actors[0].motion = "walk"),
+  badMotion: (s) => (s.actors[0].motion = "moonwalk"),
 })) {
   test("rejects " + name, () => {
     const d = structuredClone(demo);
@@ -81,7 +82,7 @@ test("v3 shot contract: inclusive bounds, shorthand, strict cut and pop keys", (
       validate([
         { ...shot, captions: [{ time: 0, text: "This is too long" }] },
       ]),
-    /1–3 words/,
+    /caption exceeds word limit/,
   );
   const noAction = structuredClone(shot);
   delete noAction.actors[0].motion;

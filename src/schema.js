@@ -37,10 +37,11 @@ export function validate(e) {
   if (Array.isArray(e)) e = { version: 3, title: "Untitled Short", shots: e };
   keys(
     e,
-    "version title series pacing narration voiceover speechRate narratorStyle beat music bgMusic shots",
+    "version title series style pacing narration voiceover speechRate narratorStyle beat music bgMusic shots",
   );
   check(e.version === 3 && str(e.title), "version: 3 and a title required");
   check(e.series === undefined || str(e.series), "invalid series");
+  check(e.style === undefined || ["field_study", "lowpoly_shorts"].includes(e.style), "invalid style");
   check(
     e.beat === undefined || typeof e.beat === "boolean",
     "beat must be boolean",
@@ -83,22 +84,22 @@ export function validate(e) {
     "speechRate must be 0.75–1.5",
   );
   check(
-    Array.isArray(e.shots) && e.shots.length > 0 && e.shots.length <= 60,
-    "expected 1–60 shots",
+    Array.isArray(e.shots) && e.shots.length > 0 && e.shots.length <= (e.pacing === "viral_shorts" ? 80 : 60),
+    "expected 1–80 shots",
   );
   check(
-    e.pacing === undefined || ["narrative", "micro"].includes(e.pacing),
+    e.pacing === undefined || ["narrative", "micro", "viral_shorts"].includes(e.pacing),
     "invalid pacing profile",
   );
   const maxShot =
-    e.pacing === "narrative" ? 15 : e.pacing === "micro" ? 3.2 : 3.5;
+    e.pacing === "narrative" ? 15 : e.pacing === "viral_shorts" ? 4.5 : e.pacing === "micro" ? 3.2 : 3.5;
   let storyCount = 0,
     instanceCount = 0;
   for (const [i, s] of e.shots.entries()) {
     at = `shot ${i + 1}`;
     keys(
       s,
-      "title duration stage pov cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook",
+      "title duration stage pov cameraPreset cameraMotion events distance angle pan focus actors props captions captionPosition sfx matchHook visionMode titleCard portalMask",
     );
     if (s.matchHook !== undefined)
       check(
@@ -118,7 +119,21 @@ export function validate(e) {
         ["center", "lower"].includes(s.captionPosition),
       "invalid captionPosition",
     );
-    const minShot = e.pacing === "micro" && i < 2 ? 1.7 : 2;
+    const minShot = e.pacing === "viral_shorts" ? 0.75 : e.pacing === "micro" && i < 2 ? 1.7 : 2;
+    check(
+      s.visionMode === undefined || ["normal", "xray", "xray_in", "xray_out", "blackout"].includes(s.visionMode),
+      "invalid visionMode",
+    );
+    if (s.titleCard !== undefined) {
+      keys(s.titleCard, "text time duration color");
+      check(str(s.titleCard.text) && s.titleCard.text.length <= 40, "invalid titleCard text");
+      check(s.titleCard.time === undefined || (num(s.titleCard.time) && s.titleCard.time >= 0), "invalid titleCard time");
+      check(s.titleCard.duration === undefined || (num(s.titleCard.duration) && s.titleCard.duration > 0), "invalid titleCard duration");
+    }
+    if (s.portalMask !== undefined) {
+      keys(s.portalMask, "x y r rEnd brick wallColor");
+      check(s.portalMask.r === undefined || (num(s.portalMask.r) && s.portalMask.r > 20), "invalid portalMask radius");
+    }
     check(str(s.title), "missing title");
     check(
       num(s.duration) &&
@@ -164,7 +179,7 @@ export function validate(e) {
       for (const d of s[k] ?? []) {
         keys(
           d,
-          "id asset height yaw position motion motionSfx mesh clip text traits fadeOut fadeStyle",
+          "id asset height yaw position motion motionSfx mesh clip text traits fadeOut fadeStyle moveTo moveWindow fallAt eyeGlow radiationTint parts",
         );
         check(
           d.motionSfx === undefined ||
@@ -211,6 +226,26 @@ export function validate(e) {
           "height must be positive",
         );
         check(d.yaw === undefined || num(d.yaw), "invalid yaw");
+        check(d.moveTo === undefined || vec(d.moveTo), "moveTo must be [x,y,z]");
+        check(
+          d.moveWindow === undefined ||
+            (Array.isArray(d.moveWindow) && d.moveWindow.length === 2 && d.moveWindow.every(num) && d.moveWindow[1] > d.moveWindow[0]),
+          "invalid moveWindow",
+        );
+        check(d.fallAt === undefined || (num(d.fallAt) && d.fallAt >= 0 && d.fallAt < s.duration), "invalid fallAt");
+        check(d.eyeGlow === undefined || typeof d.eyeGlow === "boolean" || str(d.eyeGlow), "invalid eyeGlow");
+        check(
+          d.radiationTint === undefined ||
+            typeof d.radiationTint === "boolean" ||
+            (Array.isArray(d.radiationTint) && d.radiationTint.length === 2 && d.radiationTint.every(num)),
+          "invalid radiationTint",
+        );
+        if (d.asset === "custom" || d.parts !== undefined) {
+          check(
+            d.asset === "custom" && Array.isArray(d.parts) && d.parts.length >= 1 && d.parts.length <= 24,
+            "custom assets require 1–24 parts (and parts is only for custom assets)",
+          );
+        }
         check(d.mesh === undefined || str(d.mesh), "invalid mesh");
         check(
           d.text === undefined ||
@@ -231,7 +266,7 @@ export function validate(e) {
         (Array.isArray(s.events) && s.events.length <= 24),
       "events must be an array of at most 24 spawns",
     );
-    const hasSubject = ids.size > 0 || s.stage === "casino_room";
+    const hasSubject = ids.size > 0 || s.stage === "casino_room" || s.visionMode === "blackout" || s.titleCard !== undefined;
     for (const ev of s.events ?? []) {
       check(obj(ev), "invalid event");
       if (ev.type === "sound") {
@@ -307,7 +342,8 @@ export function validate(e) {
         bet = kind === "bet_stack",
         stream = kind === "particle_stream_yellow",
         bulb = kind === "3D_Lightbulb",
-        arrow = kind === "3D_Arrow";
+        arrow = kind === "3D_Arrow",
+        laser = kind === "laser_beam";
       check(!(ev.spawn_prop && ev.asset), "choose spawn_prop or asset");
       keys(
         ev,
@@ -316,6 +352,8 @@ export function validate(e) {
             ? "count position placedBy slideFrom"
             : stream
               ? "from via to travel"
+              : laser
+                ? "from via to travel color radius dual"
               : arrow
                 ? "from to travel"
                 : bulb
@@ -367,7 +405,7 @@ export function validate(e) {
             ev.animationSfx === "click",
           "bulb requires position and a click-cued pulse",
         );
-      } else if (arrow || stream) {
+      } else if (arrow || stream || laser) {
         check(ev.via === undefined || vec(ev.via), "invalid stream bend");
         check(
           vec(ev.from) && vec(ev.to) && ev.from.some((v, i) => v !== ev.to[i]),
@@ -407,8 +445,8 @@ export function validate(e) {
         "caption times must increase within shot",
       );
       check(
-        str(c.text) && c.text.trim().split(/\s+/).length <= 3,
-        "use 1–3 words per caption",
+        str(c.text) && c.text.trim().split(/\s+/).length <= (e.style === "lowpoly_shorts" || e.pacing === "viral_shorts" ? 6 : 3),
+        "caption exceeds word limit",
       );
       check(
         c.highlight === undefined ||

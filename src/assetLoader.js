@@ -137,8 +137,10 @@ export class AssetLoader {
     }
     const model =
       def.asset === "label"
-        ? makeProp("label", def.text)
-        : clone((await this.template(def.asset)).root);
+        ? makeProp("label", def.text, def)
+        : def.asset === "custom"
+          ? makeProp("custom", def.text, def)
+          : clone((await this.template(def.asset)).root);
     const extracted = def.mesh
       ? (model.getObjectByName(def.mesh) ??
         model

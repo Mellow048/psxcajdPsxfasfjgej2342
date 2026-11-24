@@ -1,0 +1,1314 @@
+{
+  "version": 3,
+  "title": "Why You Don't Want X-Ray Vision",
+  "series": "Low Poly Shorts",
+  "style": "lowpoly_shorts",
+  "pacing": "viral_shorts",
+  "narratorStyle": "urgent",
+  "speechRate": 1.48,
+  "narration": "If you had x-ray vision, you'd think you could see through walls and stuff, but you'd actually be better off without it for many reasons. The moment it happens, you'd just see black. See, your boring old eyes only work cause light bounces off objects and into them. But nothing around you gives off x-rays, so there'd be nothing to see. But what if instead of looking at the x-rays around you, you could shoot the x-rays from your eyes and detect them? Well, unlike a normal light that bounces around, most x-rays would go right through the object you're trying to see without bouncing back, so you'd only see black again. Not to mention that if you looked at someone long enough, you'd give them cancer. But there's a solution for this too: you'll just need to get a friend that can stand on the other side of whatever you're trying to look at, pointing an x-ray detector at your face all day, every day. But then your friend's the one who'd get to see, not you.",
+  "shots": [
+    {
+      "title": "0:00 Hook \u2014 Glowing Cyan X-Ray Eyes",
+      "duration": 1.5,
+      "stage": "street_day",
+      "cameraPreset": "snap_zoom_in",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh_fast",
+      "focus": "hero",
+      "actors": [
+        {
+          "id": "hero",
+          "asset": "male.character_01",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "yaw": 0,
+          "motion": "idle_breathe",
+          "eyeGlow": "#7dd3fc"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "if you had x-ray vision"
+        }
+      ]
+    },
+    {
+      "title": "0:01.5 Expanding Brick Portal \u2014 See Through Walls",
+      "duration": 2.0,
+      "stage": "street_day",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "sfx": "ui_pop",
+      "focus": "shopper1",
+      "portalMask": {
+        "x": 270,
+        "y": 420,
+        "r": 145,
+        "rEnd": 245,
+        "brick": true,
+        "wallColor": "#c9a66b"
+      },
+      "actors": [
+        {
+          "id": "shopper1",
+          "asset": "female.character_female_01",
+          "position": [
+            -0.65,
+            0,
+            -0.4
+          ],
+          "yaw": 0.2,
+          "motion": "talking"
+        },
+        {
+          "id": "shopper2",
+          "asset": "male.character_03",
+          "position": [
+            0.65,
+            0,
+            -0.3
+          ],
+          "yaw": -0.3,
+          "motion": "pointing"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "see through walls"
+        }
+      ]
+    },
+    {
+      "title": "0:03.5 Montage 1 \u2014 Police Arrest",
+      "duration": 1.0,
+      "stage": "street_day",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "handheld_bob",
+      "sfx": "click",
+      "focus": "cop",
+      "actors": [
+        {
+          "id": "cop",
+          "asset": "male.character_17_police",
+          "position": [
+            -0.45,
+            0,
+            0
+          ],
+          "yaw": 0.5,
+          "motion": "pointing"
+        },
+        {
+          "id": "suspect",
+          "asset": "male.character_04",
+          "position": [
+            0.45,
+            0,
+            0.1
+          ],
+          "yaw": -0.5,
+          "motion": "shocked"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "and stuff"
+        }
+      ]
+    },
+    {
+      "title": "0:04.5 Montage 2 \u2014 Dark Red Eyes Close-Up",
+      "duration": 1.0,
+      "stage": "street_day",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "sfx": "ding",
+      "focus": "hero_red",
+      "actors": [
+        {
+          "id": "hero_red",
+          "asset": "male.character_01",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "yaw": 0,
+          "motion": "shocked",
+          "eyeGlow": "#b91c1c"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "but you'd actually be"
+        }
+      ]
+    },
+    {
+      "title": "0:05.5 Montage 3 \u2014 Crowd Outdoors",
+      "duration": 1.0,
+      "stage": "street_day",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "sfx": "click",
+      "focus": "crowd1",
+      "actors": [
+        {
+          "id": "crowd1",
+          "asset": "male.character_05",
+          "position": [
+            -0.8,
+            0,
+            0
+          ],
+          "yaw": 0.4,
+          "motion": "idle_breathe"
+        },
+        {
+          "id": "crowd2",
+          "asset": "female.character_female_02",
+          "position": [
+            0.7,
+            0,
+            0.3
+          ],
+          "yaw": -0.6,
+          "motion": "talking"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "better off without it"
+        }
+      ]
+    },
+    {
+      "title": "0:06.5 Montage 4 \u2014 Wooden Puppet Wave",
+      "duration": 1.0,
+      "stage": "optics_lab",
+      "cameraPreset": "whip_pan_to_prop",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh",
+      "focus": "puppet_intro",
+      "props": [
+        {
+          "id": "puppet_intro",
+          "asset": "wooden_puppet",
+          "position": [
+            0,
+            0.75,
+            0
+          ],
+          "height": 0.85
+        },
+        {
+          "id": "table_intro",
+          "asset": "custom",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "height": 0.75,
+          "parts": [
+            {
+              "shape": "box",
+              "size": [
+                1.8,
+                0.08,
+                1.0
+              ],
+              "pos": [
+                0,
+                0.72,
+                0
+              ],
+              "color": "#b45309"
+            },
+            {
+              "shape": "box",
+              "size": [
+                0.08,
+                0.7,
+                0.08
+              ],
+              "pos": [
+                -0.8,
+                0.35,
+                -0.4
+              ],
+              "color": "#78350f"
+            },
+            {
+              "shape": "box",
+              "size": [
+                0.08,
+                0.7,
+                0.08
+              ],
+              "pos": [
+                0.8,
+                0.35,
+                -0.4
+              ],
+              "color": "#78350f"
+            },
+            {
+              "shape": "box",
+              "size": [
+                0.08,
+                0.7,
+                0.08
+              ],
+              "pos": [
+                -0.8,
+                0.35,
+                0.4
+              ],
+              "color": "#78350f"
+            },
+            {
+              "shape": "box",
+              "size": [
+                0.08,
+                0.7,
+                0.08
+              ],
+              "pos": [
+                0.8,
+                0.35,
+                0.4
+              ],
+              "color": "#78350f"
+            }
+          ]
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "for many reasons"
+        }
+      ]
+    },
+    {
+      "title": "0:07.5 Title Card Slam \u2014 Low Poly Shorts",
+      "duration": 1.25,
+      "stage": "street_day",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_pull",
+      "sfx": "riser",
+      "focus": "walker",
+      "titleCard": {
+        "text": "Low\nPoly\nShorts",
+        "time": 0,
+        "duration": 1.2,
+        "color": "#facc15"
+      },
+      "actors": [
+        {
+          "id": "walker",
+          "asset": "male.character_01",
+          "position": [
+            -1.2,
+            0,
+            0
+          ],
+          "moveTo": [
+            0.5,
+            0,
+            0
+          ],
+          "moveWindow": [
+            0,
+            1.25
+          ],
+          "yaw": 1.57,
+          "motion": "walk"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "the moment it happens"
+        }
+      ]
+    },
+    {
+      "title": "0:08.75 Twist \u2014 Pure Blackout",
+      "duration": 1.25,
+      "stage": "signal_dark",
+      "visionMode": "blackout",
+      "cameraPreset": "macro_closeup",
+      "cameraMotion": "slow_push",
+      "sfx": "click",
+      "focus": [
+        0,
+        1,
+        0
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "you'd just see black"
+        }
+      ]
+    },
+    {
+      "title": "0:10.0 Floating Eyeball + Floor Lamp Bounce",
+      "duration": 4.5,
+      "stage": "optics_lab",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "orbit_drift",
+      "sfx": "whoosh",
+      "focus": "puppet_bounce",
+      "props": [
+        {
+          "id": "lamp_1",
+          "asset": "custom",
+          "position": [
+            -0.7,
+            0,
+            0
+          ],
+          "height": 1.9,
+          "parts": [
+            {
+              "shape": "cylinder",
+              "size": [
+                0.22,
+                0.25,
+                0.06
+              ],
+              "pos": [
+                0,
+                0.03,
+                0
+              ],
+              "color": "#64748b"
+            },
+            {
+              "shape": "cylinder",
+              "size": [
+                0.03,
+                0.03,
+                1.65
+              ],
+              "pos": [
+                0,
+                0.86,
+                0
+              ],
+              "color": "#94a3b8"
+            },
+            {
+              "shape": "sphere",
+              "size": [
+                0.18
+              ],
+              "pos": [
+                0,
+                1.75,
+                0
+              ],
+              "color": "#fef08a",
+              "emissive": "#facc15"
+            }
+          ]
+        },
+        {
+          "id": "puppet_bounce",
+          "asset": "wooden_puppet",
+          "position": [
+            0.85,
+            0.75,
+            0
+          ],
+          "height": 0.85
+        },
+        {
+          "id": "eyeball_1",
+          "asset": "eye",
+          "position": [
+            -1.85,
+            1.35,
+            0
+          ],
+          "height": 0.55,
+          "yaw": 1.57
+        }
+      ],
+      "events": [
+        {
+          "id": "yellow_bounce_1",
+          "type": "spawn_prop",
+          "spawn_prop": "laser_beam",
+          "time": 1.4,
+          "from": [
+            -0.7,
+            1.72,
+            0
+          ],
+          "via": [
+            0.85,
+            1.15,
+            0
+          ],
+          "to": [
+            -1.65,
+            1.35,
+            0
+          ],
+          "travel": 1.4,
+          "color": "#facc15",
+          "radius": 0.032,
+          "sfx": "whoosh"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "your boring old eyes"
+        },
+        {
+          "time": 1.3,
+          "text": "only work cause light"
+        },
+        {
+          "time": 2.4,
+          "text": "bounces off objects"
+        },
+        {
+          "time": 3.5,
+          "text": "and into them"
+        }
+      ]
+    },
+    {
+      "title": "0:14.5 X-Ray Edge Glow Crossfading Into Lit Room",
+      "duration": 3.0,
+      "stage": "house_corner",
+      "visionMode": "xray_out",
+      "cameraPreset": "high_angle_follow",
+      "cameraMotion": "slow_push",
+      "sfx": "ding",
+      "focus": "room_walker",
+      "actors": [
+        {
+          "id": "room_walker",
+          "asset": "male.character_01",
+          "position": [
+            -0.5,
+            0,
+            -0.5
+          ],
+          "moveTo": [
+            0.6,
+            0,
+            -0.5
+          ],
+          "moveWindow": [
+            0,
+            3.0
+          ],
+          "yaw": 1.57,
+          "motion": "walk"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "but nothing around you"
+        },
+        {
+          "time": 1.0,
+          "text": "gives off x-rays"
+        },
+        {
+          "time": 2.0,
+          "text": "so there'd be nothing to see"
+        }
+      ]
+    },
+    {
+      "title": "0:17.5 Over-Shoulder Into X-Ray Room",
+      "duration": 3.0,
+      "stage": "house_corner",
+      "visionMode": "xray",
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh",
+      "focus": "xray_target",
+      "actors": [
+        {
+          "id": "obs_xray",
+          "asset": "male.character_01",
+          "position": [
+            -0.8,
+            0,
+            1.0
+          ],
+          "yaw": 3.14,
+          "motion": "idle_breathe"
+        }
+      ],
+      "props": [
+        {
+          "id": "xray_target",
+          "asset": "wooden_puppet",
+          "position": [
+            0,
+            0.75,
+            -1.2
+          ],
+          "height": 0.85
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "but what if"
+        },
+        {
+          "time": 0.9,
+          "text": "instead of looking at"
+        },
+        {
+          "time": 1.9,
+          "text": "the x-rays around you"
+        }
+      ]
+    },
+    {
+      "title": "0:20.5 Tap Temple \u2014 Shoot X-Rays From Your Eyes",
+      "duration": 3.0,
+      "stage": "signal_dark",
+      "cameraPreset": "snap_zoom_in",
+      "cameraMotion": "slow_push",
+      "sfx": "ui_pop",
+      "focus": "hero_shoot",
+      "actors": [
+        {
+          "id": "hero_shoot",
+          "asset": "male.character_01",
+          "position": [
+            -0.5,
+            0,
+            0
+          ],
+          "yaw": 0.8,
+          "motion": "thinking",
+          "eyeGlow": "#38bdf8"
+        }
+      ],
+      "events": [
+        {
+          "id": "eye_blast_dark",
+          "type": "spawn_prop",
+          "spawn_prop": "laser_beam",
+          "time": 1.5,
+          "from": [
+            -0.35,
+            1.42,
+            0.1
+          ],
+          "to": [
+            2.2,
+            1.2,
+            0.8
+          ],
+          "travel": 0.45,
+          "color": "#38bdf8",
+          "radius": 0.03,
+          "dual": true,
+          "sfx": "whoosh"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "you could shoot"
+        },
+        {
+          "time": 1.0,
+          "text": "the x-rays"
+        },
+        {
+          "time": 1.9,
+          "text": "from your eyes"
+        }
+      ]
+    },
+    {
+      "title": "0:23.5 Physics Part 1 \u2014 Normal Light Bounces Back",
+      "duration": 3.0,
+      "stage": "optics_lab",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh",
+      "focus": "puppet_cmp1",
+      "actors": [
+        {
+          "id": "hero_cmp1",
+          "asset": "male.character_01",
+          "position": [
+            -1.4,
+            0,
+            0
+          ],
+          "yaw": 1.57,
+          "motion": "idle_breathe"
+        }
+      ],
+      "props": [
+        {
+          "id": "puppet_cmp1",
+          "asset": "wooden_puppet",
+          "position": [
+            0.85,
+            0.75,
+            0
+          ],
+          "height": 0.85
+        }
+      ],
+      "events": [
+        {
+          "id": "lamp_to_hero",
+          "type": "spawn_prop",
+          "spawn_prop": "laser_beam",
+          "time": 0.35,
+          "from": [
+            -0.25,
+            1.75,
+            0
+          ],
+          "via": [
+            0.85,
+            1.15,
+            0
+          ],
+          "to": [
+            -1.25,
+            1.42,
+            0
+          ],
+          "travel": 1.0,
+          "color": "#facc15",
+          "radius": 0.03,
+          "sfx": "whoosh"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "well"
+        },
+        {
+          "time": 0.7,
+          "text": "a normal light"
+        },
+        {
+          "time": 1.8,
+          "text": "that bounces around"
+        }
+      ]
+    },
+    {
+      "title": "0:26.5 Physics Part 2 \u2014 X-Rays Go Straight Through",
+      "duration": 4.0,
+      "stage": "optics_lab",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "orbit_drift",
+      "sfx": "whoosh_fast",
+      "focus": "puppet_cmp2",
+      "actors": [
+        {
+          "id": "hero_cmp2",
+          "asset": "male.character_01",
+          "position": [
+            -1.4,
+            0,
+            0
+          ],
+          "yaw": 1.57,
+          "motion": "idle_breathe",
+          "eyeGlow": "#38bdf8"
+        }
+      ],
+      "props": [
+        {
+          "id": "puppet_cmp2",
+          "asset": "wooden_puppet",
+          "position": [
+            0.65,
+            0.75,
+            0
+          ],
+          "height": 0.85
+        }
+      ],
+      "events": [
+        {
+          "id": "xray_pierce_2",
+          "type": "spawn_prop",
+          "spawn_prop": "laser_beam",
+          "time": 0.2,
+          "from": [
+            -1.25,
+            1.42,
+            0
+          ],
+          "to": [
+            2.4,
+            0.15,
+            0
+          ],
+          "travel": 0.6,
+          "color": "#38bdf8",
+          "radius": 0.032,
+          "dual": true,
+          "sfx": "whoosh"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "most x-rays would go"
+        },
+        {
+          "time": 1.2,
+          "text": "right through the object"
+        },
+        {
+          "time": 2.4,
+          "text": "you're trying to see"
+        },
+        {
+          "time": 3.2,
+          "text": "without bouncing back"
+        }
+      ]
+    },
+    {
+      "title": "0:30.5 Slapstick \u2014 Blind Street Collision & Fall",
+      "duration": 2.0,
+      "stage": "street_day",
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "handheld_bob",
+      "sfx": "whoosh",
+      "focus": "bumper1",
+      "actors": [
+        {
+          "id": "bumper1",
+          "asset": "male.character_01",
+          "position": [
+            -1.4,
+            0,
+            0
+          ],
+          "moveTo": [
+            -0.25,
+            0,
+            0
+          ],
+          "moveWindow": [
+            0,
+            0.9
+          ],
+          "fallAt": 0.95,
+          "yaw": 1.57,
+          "motion": "walk"
+        },
+        {
+          "id": "bumper2",
+          "asset": "male.character_05",
+          "position": [
+            1.4,
+            0,
+            0
+          ],
+          "moveTo": [
+            0.25,
+            0,
+            0
+          ],
+          "moveWindow": [
+            0,
+            0.9
+          ],
+          "fallAt": 1.0,
+          "yaw": -1.57,
+          "motion": "shocked"
+        }
+      ],
+      "events": [
+        {
+          "type": "sound",
+          "time": 0.95,
+          "sfx": "heavy_thud"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "so you'd only see"
+        },
+        {
+          "time": 1.0,
+          "text": "black again"
+        }
+      ]
+    },
+    {
+      "title": "0:32.5 Consequence \u2014 Radioactive Cancer Glow",
+      "duration": 3.0,
+      "stage": "street_day",
+      "cameraPreset": "dutch_tilt_push",
+      "cameraMotion": "slow_push",
+      "sfx": "riser",
+      "focus": "victim",
+      "actors": [
+        {
+          "id": "shooter",
+          "asset": "male.character_01",
+          "position": [
+            -1.5,
+            0,
+            0
+          ],
+          "yaw": 1.57,
+          "motion": "pointing",
+          "eyeGlow": "#38bdf8"
+        },
+        {
+          "id": "victim",
+          "asset": "female.character_female_02",
+          "position": [
+            0.85,
+            0,
+            0
+          ],
+          "yaw": -1.57,
+          "motion": "wince",
+          "radiationTint": [
+            0.6,
+            2.0
+          ]
+        }
+      ],
+      "events": [
+        {
+          "id": "cancer_beams",
+          "type": "spawn_prop",
+          "spawn_prop": "laser_beam",
+          "time": 0.2,
+          "from": [
+            -1.35,
+            1.42,
+            0
+          ],
+          "to": [
+            0.85,
+            1.25,
+            0
+          ],
+          "travel": 0.35,
+          "color": "#38bdf8",
+          "radius": 0.032,
+          "dual": true,
+          "sfx": "ding"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "not to mention that"
+        },
+        {
+          "time": 1.0,
+          "text": "if you looked at someone"
+        },
+        {
+          "time": 2.0,
+          "text": "you'd give them cancer"
+        }
+      ]
+    },
+    {
+      "title": "0:35.5 Solution Setup \u2014 Beams Through Puppet",
+      "duration": 2.0,
+      "stage": "optics_lab",
+      "cameraPreset": "whip_pan_to_prop",
+      "cameraMotion": "slow_pull",
+      "sfx": "ui_pop",
+      "focus": "puppet_sol",
+      "props": [
+        {
+          "id": "puppet_sol",
+          "asset": "wooden_puppet",
+          "position": [
+            0,
+            0.75,
+            0
+          ],
+          "height": 0.85
+        }
+      ],
+      "events": [
+        {
+          "id": "sol_beams",
+          "type": "spawn_prop",
+          "spawn_prop": "laser_beam",
+          "time": 0.1,
+          "from": [
+            0.8,
+            2.1,
+            0
+          ],
+          "to": [
+            -0.8,
+            0.05,
+            0
+          ],
+          "travel": 0.3,
+          "color": "#38bdf8",
+          "radius": 0.03,
+          "dual": true,
+          "sfx": "whoosh"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "but there's a solution"
+        },
+        {
+          "time": 1.0,
+          "text": "for this too"
+        }
+      ]
+    },
+    {
+      "title": "0:37.5 Escalation 1 \u2014 Friend Holding Green Detector",
+      "duration": 3.5,
+      "stage": "street_day",
+      "cameraPreset": "wide_orbit",
+      "cameraMotion": "slow_pull",
+      "sfx": "whoosh",
+      "focus": "friend_det",
+      "actors": [
+        {
+          "id": "hero_walk",
+          "asset": "male.character_01",
+          "position": [
+            -1.3,
+            0,
+            0
+          ],
+          "moveTo": [
+            -0.3,
+            0,
+            0
+          ],
+          "moveWindow": [
+            0,
+            3.5
+          ],
+          "yaw": 1.57,
+          "motion": "walk"
+        },
+        {
+          "id": "rad_mid",
+          "asset": "male.character_05",
+          "position": [
+            -0.2,
+            0,
+            0
+          ],
+          "moveTo": [
+            0.8,
+            0,
+            0
+          ],
+          "moveWindow": [
+            0,
+            3.5
+          ],
+          "yaw": -1.57,
+          "motion": "walk",
+          "radiationTint": true
+        },
+        {
+          "id": "friend_det",
+          "asset": "male.character_02",
+          "position": [
+            0.9,
+            0,
+            0
+          ],
+          "moveTo": [
+            1.9,
+            0,
+            0
+          ],
+          "moveWindow": [
+            0,
+            3.5
+          ],
+          "yaw": -1.57,
+          "motion": "walk_backwards"
+        }
+      ],
+      "props": [
+        {
+          "id": "detector_pcb",
+          "asset": "xray_detector",
+          "position": [
+            0.65,
+            0.95,
+            0
+          ],
+          "moveTo": [
+            1.65,
+            0.95,
+            0
+          ],
+          "moveWindow": [
+            0,
+            3.5
+          ],
+          "height": 0.55,
+          "yaw": 1.57
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "you'll just need to get"
+        },
+        {
+          "time": 1.1,
+          "text": "a friend that can stand"
+        },
+        {
+          "time": 2.3,
+          "text": "on the other side"
+        }
+      ]
+    },
+    {
+      "title": "0:41.0 Escalation 2 \u2014 High-Angle Follow Down Street",
+      "duration": 2.5,
+      "stage": "street_day",
+      "cameraPreset": "high_angle_follow",
+      "cameraMotion": "orbit_drift",
+      "sfx": "click",
+      "focus": "friend_high",
+      "actors": [
+        {
+          "id": "hero_high",
+          "asset": "male.character_01",
+          "position": [
+            -0.9,
+            0,
+            0
+          ],
+          "moveTo": [
+            0.3,
+            0,
+            0
+          ],
+          "moveWindow": [
+            0,
+            2.5
+          ],
+          "yaw": 1.57,
+          "motion": "walk"
+        },
+        {
+          "id": "friend_high",
+          "asset": "male.character_02",
+          "position": [
+            0.7,
+            0,
+            0
+          ],
+          "moveTo": [
+            1.9,
+            0,
+            0
+          ],
+          "moveWindow": [
+            0,
+            2.5
+          ],
+          "yaw": -1.57,
+          "motion": "walk_backwards"
+        }
+      ],
+      "props": [
+        {
+          "id": "detector_high",
+          "asset": "xray_detector",
+          "position": [
+            0.45,
+            0.95,
+            0
+          ],
+          "moveTo": [
+            1.65,
+            0.95,
+            0
+          ],
+          "moveWindow": [
+            0,
+            2.5
+          ],
+          "height": 0.55,
+          "yaw": 1.57
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "pointing"
+        },
+        {
+          "time": 0.9,
+          "text": "an x-ray detector"
+        }
+      ]
+    },
+    {
+      "title": "0:43.5 Escalation 3 \u2014 All Day Every Day Under Table",
+      "duration": 2.0,
+      "stage": "optics_lab",
+      "cameraPreset": "over_shoulder",
+      "cameraMotion": "slow_push",
+      "sfx": "whoosh",
+      "focus": "puppet_end",
+      "actors": [
+        {
+          "id": "hero_end",
+          "asset": "male.character_01",
+          "position": [
+            -1.2,
+            0,
+            0
+          ],
+          "yaw": 1.57,
+          "motion": "idle_breathe",
+          "eyeGlow": "#38bdf8"
+        },
+        {
+          "id": "friend_low",
+          "asset": "male.character_02",
+          "position": [
+            0.8,
+            0,
+            -0.3
+          ],
+          "yaw": -1.57,
+          "motion": "lie_down"
+        }
+      ],
+      "props": [
+        {
+          "id": "puppet_end",
+          "asset": "wooden_puppet",
+          "position": [
+            0,
+            0.75,
+            0
+          ],
+          "height": 0.85
+        },
+        {
+          "id": "det_end",
+          "asset": "xray_detector",
+          "position": [
+            0.4,
+            0.55,
+            0
+          ],
+          "height": 0.5,
+          "yaw": 1.57
+        }
+      ],
+      "events": [
+        {
+          "id": "end_beams",
+          "type": "spawn_prop",
+          "spawn_prop": "laser_beam",
+          "time": 0.1,
+          "from": [
+            -1.05,
+            1.42,
+            0
+          ],
+          "to": [
+            0.4,
+            0.65,
+            0
+          ],
+          "travel": 0.25,
+          "color": "#38bdf8",
+          "radius": 0.03,
+          "dual": true,
+          "sfx": "whoosh"
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "all day"
+        },
+        {
+          "time": 1.0,
+          "text": "every day"
+        }
+      ]
+    },
+    {
+      "title": "0:45.5 Payoff \u2014 X-Ray Monitor Close-Up",
+      "duration": 2.5,
+      "stage": "optics_lab",
+      "cameraPreset": "snap_zoom_in",
+      "cameraMotion": "slow_push",
+      "sfx": "ding",
+      "focus": "monitor_payoff",
+      "props": [
+        {
+          "id": "monitor_payoff",
+          "asset": "xray_monitor",
+          "position": [
+            0,
+            0.8,
+            0
+          ],
+          "height": 0.95
+        }
+      ],
+      "captions": [
+        {
+          "time": 0,
+          "text": "the one who'd get to see"
+        },
+        {
+          "time": 1.5,
+          "text": "not you"
+        }
+      ]
+    }
+  ]
+}

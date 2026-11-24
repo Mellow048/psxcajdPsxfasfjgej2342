@@ -59,6 +59,62 @@ export class EpisodeRunner {
             : await loader.instance(def);
           f.scene.add(node);
           const item = { def, node };
+          if (def.eyeGlow) {
+            const glowCol = new T.Color(typeof def.eyeGlow === "string" ? def.eyeGlow : 0x38bdf8);
+            const eyeMat = new T.MeshBasicMaterial({ color: glowCol });
+            const haloMat = new T.MeshBasicMaterial({
+              color: glowCol,
+              transparent: true,
+              opacity: 0.45,
+              blending: T.AdditiveBlending,
+              depthWrite: false,
+            });
+            const h = def.height ?? 1.6;
+            const eyeGroup = new T.Group();
+            eyeGroup.position.set(0, h * 0.89, 0.13);
+            for (const sx of [-0.055, 0.055]) {
+              const core = new T.Mesh(new T.SphereGeometry(0.026, 8, 6), eyeMat);
+              core.position.set(sx, 0, 0);
+              const halo = new T.Mesh(new T.SphereGeometry(0.052, 8, 6), haloMat);
+              halo.position.set(sx, 0, 0);
+              eyeGroup.add(core, halo);
+            }
+            node.add(eyeGroup);
+            item.eyeGlowGroup = eyeGroup;
+          }
+          if (def.radiationTint) {
+            const mats = [];
+            const cloneMat = (m) => {
+              const c = m.clone();
+              delete c.userData.psx;
+              if (c.color) c.userData._origColor = c.color.clone();
+              mats.push(c);
+              return c;
+            };
+            node.traverse((o) => {
+              if (o.isMesh && o.material) {
+                o.material = Array.isArray(o.material)
+                  ? o.material.map(cloneMat)
+                  : cloneMat(o.material);
+              }
+            });
+            const radColor = new T.Color(0xbef264);
+            const [rStart, rEnd] = Array.isArray(def.radiationTint)
+              ? def.radiationTint
+              : [0, Math.min(0.6, s.duration)];
+            item.radiate = (t) => {
+              const k = T.MathUtils.smoothstep(t, rStart, rEnd);
+              for (const m of mats) {
+                if (m.userData._origColor && m.color) {
+                  m.color.copy(m.userData._origColor).lerp(radColor, k * 0.65);
+                }
+                if (m.emissive) {
+                  m.emissive.copy(radColor);
+                  m.emissiveIntensity = k * 0.95;
+                }
+              }
+            };
+          }
           if (def.fadeOut) {
             const materials = new Set();
             node.traverse((o) => {
@@ -214,6 +270,33 @@ export class EpisodeRunner {
       : t;
     for (const i of f.items) {
       pose(i, rigTime);
+      if (i.def.moveTo) {
+        const [m0, m1] = i.def.moveWindow ?? [0, s.duration];
+        const p = T.MathUtils.clamp((rigTime - m0) / Math.max(0.01, m1 - m0), 0, 1);
+        const startPos = i.def.position ?? [0, 0, 0];
+        const bobY = i.node.position.y - startPos[1];
+        i.node.position.set(
+          T.MathUtils.lerp(startPos[0], i.def.moveTo[0], p),
+          T.MathUtils.lerp(startPos[1], i.def.moveTo[1], p) + bobY,
+          T.MathUtils.lerp(startPos[2], i.def.moveTo[2], p),
+        );
+      }
+      if (i.def.fallAt !== undefined) {
+        const ft = rigTime - i.def.fallAt;
+        if (ft >= 0) {
+          const p = Math.min(1, ft / 0.25);
+          const ease = 1 - (1 - p) * (1 - p);
+          i.node.rotation.x = -ease * (Math.PI / 2);
+          i.node.position.y = Math.max(0.12, (i.def.position?.[1] ?? 0) + (1 - ease) * 0.08);
+        } else {
+          i.node.rotation.x = 0;
+        }
+      }
+      if (i.eyeGlowGroup) {
+        const pulse = 0.85 + 0.25 * Math.sin(rigTime * 14);
+        i.eyeGlowGroup.scale.setScalar(pulse);
+      }
+      i.radiate?.(rigTime);
       i.fade?.(rigTime);
       i.morph?.(rigTime, i.def.motion);
     }
@@ -234,7 +317,7 @@ export class EpisodeRunner {
         this.focus.copy(o.node.position);
         this.focus.y +=
           (o.def.height ?? 1.6) *
-          (s.cameraPreset === "macro_closeup" && s.actors?.includes(o.def)
+          ((s.cameraPreset === "macro_closeup" || s.cameraPreset === "snap_zoom_in") && s.actors?.includes(o.def)
             ? 0.87
             : 0.51);
       }
@@ -267,14 +350,26 @@ export class EpisodeRunner {
     for (const panel of f.panels) sampleStatUI(panel, t, this.director.camera);
   }
   draw() {
-    const f = this.frames[this.index];
+    const f = this.frames[this.index],
+      s = this.episode.shots[this.index],
+      t = (this.tick - f.start) / CONFIG.hz,
+      vm = s.visionMode || "normal",
+      u = Math.min(1, Math.max(0, t / Math.max(0.01, s.duration))),
+      xrayMix =
+        vm === "xray"
+          ? 1
+          : vm === "xray_out"
+            ? 1 - u * u * (3 - 2 * u)
+            : vm === "xray_in"
+              ? u * u * (3 - 2 * u)
+              : 0;
     composite(
       this.ctx,
-      this.pipeline.render(f.scene, this.director.camera),
+      this.pipeline.render(f.scene, this.director.camera, { visionMode: vm, xrayMix }),
       this.episode,
-      this.episode.shots[this.index],
+      s,
       this.index,
-      (this.tick - f.start) / CONFIG.hz,
+      t,
     );
     this.onframe?.();
   }

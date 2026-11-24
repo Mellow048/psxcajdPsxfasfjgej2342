@@ -8,6 +8,8 @@ const LENS = {
   macro_closeup: 29,
   over_shoulder: 47,
   whip_pan_to_prop: 61,
+  snap_zoom_in: 33,
+  high_angle_follow: 50,
 };
 export class CameraDirector {
   camera = new T.PerspectiveCamera(42, 9 / 16, 0.05, 100);
@@ -83,6 +85,18 @@ export class CameraDirector {
         d *= 0.62;
         a += side * (-0.19 + 0.44 * u);
         h = 0.08;
+        break;
+      case "snap_zoom_in": {
+        const z = 1 - Math.exp(-5.5 * u);
+        d *= 1.05 - 0.5 * z;
+        a += side * (0.08 * u);
+        h = 0.06;
+        break;
+      }
+      case "high_angle_follow":
+        d *= 1.15;
+        a += side * (-0.28 + 0.36 * u);
+        h = 2.05;
         break;
       case "over_shoulder": {
         // For a real observer anchor the lens behind and beside their shoulder.

@@ -61,9 +61,16 @@ function gestureTracks(bones, action, period) {
       bones.get(side + "hand") ?? bones.get(short + "hand"),
     ];
   });
-  const joints = [spine, head, ...arms.flatMap((a) => a.slice(0, 2))].filter(
-    Boolean,
-  );
+  const legs = ["right", "left"].map((side) => [
+    bones.get(side + "upleg"),
+    bones.get(side + "leg"),
+  ]);
+  const joints = [
+    spine,
+    head,
+    ...arms.flatMap((a) => a.slice(0, 2)),
+    ...legs.flatMap((l) => l),
+  ].filter(Boolean);
   const rest = joints.map((b) => b.quaternion.clone()),
     values = joints.map(() => []),
     times = [];
@@ -112,9 +119,29 @@ function gestureTracks(bones, action, period) {
         upper = [side * 0.88, 0.34 + 0.18 * w, 0.2];
         lower = [side * 0.28, 0.84, 0.35];
       }
+      if (action === "walk" || action === "walk_backwards") {
+        const dir = action === "walk_backwards" ? -1 : 1;
+        const swing = (j === 0 ? 1 : -1) * w * 0.45 * dir;
+        upper = [side * 0.25, -0.92, 0.15 + swing];
+        lower = [side * 0.12, -0.78, 0.35 + swing * 0.8];
+      }
       aim(arm, elbow, upper);
       aim(elbow, hand, lower);
     });
+    if (action === "walk" || action === "walk_backwards") {
+      const dir = action === "walk_backwards" ? -1 : 1;
+      legs.forEach(([thigh, shin], j) => {
+        const phase = (j === 0 ? 1 : -1) * w * dir;
+        thigh?.rotateX(phase * 0.52);
+        shin?.rotateX(Math.max(0, -phase) * 0.65);
+      });
+    } else if (action === "kneel") {
+      spine?.rotateX(0.18);
+      legs.forEach(([thigh, shin]) => {
+        thigh?.rotateX(-0.95);
+        shin?.rotateX(1.55);
+      });
+    }
     joints.forEach((b, j) => values[j].push(...b.quaternion.toArray()));
   }
   joints.forEach((b, j) => b.quaternion.copy(rest[j]));
@@ -190,10 +217,21 @@ export function pose({ node, def, mixer }, t) {
     case "pop_in":
       k = Math.max(0.025, 1 - Math.exp(-7 * t) * Math.cos(t * 10));
       break;
+    case "walk":
+    case "walk_backwards":
+      y = 0.045 * Math.abs(Math.sin(t * 6));
+      a = 0.03 * Math.sin(t * 6);
+      break;
+    case "kneel":
+      y = -0.42;
+      break;
+    case "lie_down":
+      y = 0.14;
+      break;
   }
   node.position.fromArray(def.position ?? [0, 0, 0]);
   node.position.y += y;
-  node.rotation.set(0, (def.yaw ?? 0) + a, z);
+  node.rotation.set(def.motion === "lie_down" ? -Math.PI / 2 : 0, (def.yaw ?? 0) + a, z);
   node.scale.set(k, k * (1 + 0.015 * Math.sin(3 * t)), k);
   mixer?.setTime(t);
 }

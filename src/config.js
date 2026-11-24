@@ -17,6 +17,7 @@ export const SCENE_PRESETS = {
   backstage: { color: 0x342842, fog: 0x40304c },
   optics_lab: { color: 0x203646, fog: 0x284453 },
   void: { color: 0x262433, fog: 0x2c2939 },
+  street_day: { color: 0x5ba3e0, fog: 0x8bc1ee },
   window_day: { color: 0x92bada, fog: 0xa8c3d9, reflection: 0.1 },
   window_night: { color: 0x172642, fog: 0x27304b, reflection: 0.68 },
   house_corner: {
@@ -56,6 +57,10 @@ export const BUILTINS = [
   "arrow",
   "rays",
   "label",
+  "wooden_puppet",
+  "xray_detector",
+  "xray_monitor",
+  "custom",
 ];
 export const ASSET_MANIFEST = {
   ...MODELS,
@@ -84,6 +89,8 @@ export const CAMERAS = [
   "macro_closeup",
   "over_shoulder",
   "whip_pan_to_prop",
+  "snap_zoom_in",
+  "high_angle_follow",
 ];
 export const MOTIONS = [
   "idle_breathe",
@@ -98,6 +105,10 @@ export const MOTIONS = [
   "shocked",
   "float_spin",
   "pop_in",
+  "walk",
+  "walk_backwards",
+  "kneel",
+  "lie_down",
 ];
 
 export const CAMERA_MOTIONS = [

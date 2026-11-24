@@ -25,3 +25,23 @@ Write the hook, the physical cause, and the payoff in a sentence each. Start on 
 2. **Watch muted at phone size.** Can you follow cause and effect? Check silhouettes, contact, clipping, text contrast and whether the final image pays off the opening. Then play the *rendered MP4* with sound to check cue sync and the ending.
 3. Run `npm test`, `npm run render -- episodes/<name>.json`, and `node scripts/verify-render.mjs episodes/<name>.json` (see [setup](README.md#render-on-github--no-local-gpu-required)). Technical checks don't replace the two playback passes.
 4. Deliver the MP4 and link the editable JSON. Keep routine exports in `render-output/`. When a cut is **approved as a reference**, preserve that exact MP4 under `examples/`, link its sources from the README, and merge via PR rather than pushing straight to `main`.
+
+---
+
+## Low Poly Shorts 1:1 One-Shot Playbook (v2)
+
+When asked to produce a high-retention **Low Poly Shorts** explainer (modeled 1:1 on *Why You Don't Want X-Ray Vision*):
+
+1. **Episode Header**: Always set `"style": "lowpoly_shorts"` (clean yellow lower-third subtitles, no HUD chrome) and `"pacing": "viral_shorts"` (unlocks `0.75s–4.5s` micro-cuts, up to 80 shots, 1–6 word captions).
+2. **Hook + Montage + Title Slam (0–9s)**:
+   - Shot 1 (`<= 1.5s`): `snap_zoom_in` or `macro_closeup` with an immediate caption at `t: 0` and visual hook (`eyeGlow` or `portalMask`).
+   - Rapid 1.0–1.5s visual cuts (`dutch_tilt_push`, `whip_pan_to_prop`), followed by a `titleCard` spring-pop slam (`{ "text": "Low Poly\nShorts", "color": "#facc15" }`).
+3. **Show the Physics / Comedy (Never Static Talking Heads)**:
+   - Use `visionMode: "blackout"` for punchy twist cuts and `visionMode: "xray"` for electric-blue edge-glow views.
+   - Use `spawn_prop: "laser_beam"` (with optional `via` bounce and `dual: true` for dual eye beams).
+   - Use actor `moveTo` + `moveWindow`, `fallAt`, `eyeGlow`, and `radiationTint` for physical comedy and visual escalation.
+   - Need a prop that isn't in `Assets/`? Use `"asset": "custom"` with a `"parts"` array (`box`, `cylinder`, `sphere`, `cone`, `torus`) directly in JSON—never stop to edit engine JS.
+4. **One-Shot Command**:
+   - Validate first: `npm run oneshot -- episodes/<slug>.json --dry-run`
+   - Full render + verify: `npm run oneshot -- episodes/<slug>.json`
+   - Reference blueprint: `episodes/why-you-dont-want-xray-vision.json`
